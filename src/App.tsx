@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {FunctionComponent, useState} from 'react';
+import Button from "@material-ui/core/Button";
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// import Goals from "./components/goals/Goals";
+import Goal from "./components/goals/Goal.model";
+// import Copyright from "./components/Copyright";
+import Login from "./components/login/Login";
+
+const TestGoals: Goal[] = [
+    {id: 1, name: 'test'},
+    {id: 2, name: 'test 1'},
+    {id: 3, name: 'test 2'},
+];
+
+const App: FunctionComponent<{}> = () => {
+    const [goals, setGoals] = useState(TestGoals);
+
+    /*return (
+        <>
+            <header className="App-header">Header</header>
+            <Goals goals={goals}/>
+            <Button variant="contained" color="primary">
+                Test Button
+            </Button>
+            <Copyright/>
+        </>
+    );*/
+
+    return (
+        <>
+            <Login/>
+        </>
+    )
+};
 
 export default App;
