@@ -15,7 +15,8 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
-import Copyright from "../Copyright";
+import Copyright from "./Copyright";
+import {IUser, IUserSingIn} from "../models";
 
 const useStyles = makeStyles((theme: Theme) => ({
     paper: {
@@ -37,32 +38,33 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-const Login: FunctionComponent<{}> = () => {
+interface ISingIn {
+    email?: string;
+    password?: string;
+    remember?: boolean;
+}
+
+interface ISignInProps {
+    onSubmit(user: IUser): void
+}
+
+const SignIn: FunctionComponent<ISignInProps> = ({onSubmit}) => {
     const classes = useStyles();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [remember, setRemember] = useState(false);
+    const [signInData, setSignInData] = useState<IUserSingIn|null>(null);
 
     const handleSubmit = (event: MouseEvent) => {
         event.preventDefault();
-        let login = {email, password, remember};
-        console.log('login submit', login);
-    };
+        console.log('data', signInData)
 
-    const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-        console.log('handle email change');
-        setEmail(event.target.value);
+        let user: IUser = {
+            id: 1,
+            firstName: 'User',
+            lastName: 'Test',
+            email: (signInData && signInData.email ? signInData.email : '') as string,
+        };
+        console.log('user logged', user)
+        onSubmit(user);
     };
-
-    const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-        console.log('handle password change');
-        setPassword(event.target.value);
-    };
-
-    const handleRemember = (event: ChangeEvent<HTMLInputElement>) => {
-        console.log('handle remember', event.target.checked)
-        setRemember(event.target.checked);
-    }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -85,7 +87,7 @@ const Login: FunctionComponent<{}> = () => {
                         name="email"
                         autoComplete="email"
                         autoFocus
-                        onChange={handleEmailChange}
+                        onChange={e => setSignInData({...signInData, email: e.target.value})}
                     />
                     <TextField
                         variant="outlined"
@@ -97,10 +99,16 @@ const Login: FunctionComponent<{}> = () => {
                         type="password"
                         id="password"
                         autoComplete="current-password"
-                        onChange={handlePasswordChange}
+                        onChange={e => setSignInData({...signInData, password: e.target.value})}
                     />
                     <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" onChange={handleRemember}/>}
+                        control={
+                            <Checkbox
+                                value="remember"
+                                color="primary"
+                                onChange={e => setSignInData({...signInData, remember: e.target.checked})}
+                            />
+                        }
                         label="Remember me"
                     />
                     <Button
@@ -130,4 +138,4 @@ const Login: FunctionComponent<{}> = () => {
     );
 };
 
-export default Login;
+export default SignIn;

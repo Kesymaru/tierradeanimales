@@ -12,6 +12,7 @@ const Goals:FunctionComponent<GoalsProps> = ({goals:initGoals = []}) => {
 
     return <section>
         <article>
+            Goals
             {goals.map(goal => <GoalList {...goal} key={goal.id} />)}
         </article>
     </section>
