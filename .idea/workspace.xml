@@ -2,21 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Dashboard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Navigation.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SignUp.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/constants/roles.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/constants/routes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/user.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/GoalEdit.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/GoalsList.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants/regex.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/goals/actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/goals/reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/goals/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/account/Account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Account.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/goals/Goals.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/goals/Goals.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/login/ForgotPassword.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ForgotPassword.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignIn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignIn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/goals/Goal.model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/goals/GoalList.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/goals/Goals.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +47,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TypeScript" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.12.0" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -54,7 +62,8 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="sshConsole" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
@@ -102,7 +111,8 @@
       <option name="presentableId" value="Default" />
       <updated>1576691538500</updated>
       <workItem from="1576691539746" duration="23574000" />
-      <workItem from="1576817200524" duration="698000" />
+      <workItem from="1576817200524" duration="958000" />
+      <workItem from="1576963346713" duration="33006000" />
     </task>
     <task id="LOCAL-00001" summary="Init porject&#10;Added login page">
       <created>1576713729121</created>
@@ -111,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576713729121</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added Sign In and Sign Up components&#10;Added toolbar and drawer for Navigation.tsx">
+      <created>1576818110287</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1576818110287</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,74 +149,83 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Init porject&#10;Added login page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Init porject&#10;Added login page" />
+    <MESSAGE value="Added Sign In and Sign Up components&#10;Added toolbar and drawer for Navigation.tsx" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Sign In and Sign Up components&#10;Added toolbar and drawer for Navigation.tsx" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1360" y="-75" key="#Inspections" timestamp="1576817948911">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1360" y="-75" key="#Inspections/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576817948911" />
+    <state x="-1360" y="-75" key="#Notifications" timestamp="1576963575587">
+      <screen x="-1920" y="-280" width="1920" height="1080" />
+    </state>
+    <state x="-1360" y="-75" key="#Notifications/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576963575587" />
     <state x="-1246" y="59" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1576702877525">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1246" y="59" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576702877525" />
-    <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1576709810801">
+    <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1577117701118">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576709810801" />
-    <state x="-1372" y="-229" key="CommitChangelistDialog2" timestamp="1576818062420">
+    <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577117701118" />
+    <state x="-1372" y="-229" key="CommitChangelistDialog2" timestamp="1576818109805">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1372" y="-229" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576818062420" />
-    <state width="506" height="952" key="GridCell.Tab.0.bottom" timestamp="1576817438021">
+    <state x="-1372" y="-229" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576818109805" />
+    <state width="1920" height="316" key="GridCell.Tab.0.bottom" timestamp="1577138321871">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="506" height="952" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576817438021" />
+    <state width="1920" height="316" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577138321871" />
     <state width="1280" height="261" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1576731842392" />
-    <state width="506" height="952" key="GridCell.Tab.0.center" timestamp="1576817438020">
+    <state width="1920" height="316" key="GridCell.Tab.0.center" timestamp="1577138321871">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="506" height="952" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576817438020" />
+    <state width="1920" height="316" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577138321871" />
     <state width="1280" height="261" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1576731842391" />
-    <state width="506" height="952" key="GridCell.Tab.0.left" timestamp="1576817438019">
+    <state width="1920" height="316" key="GridCell.Tab.0.left" timestamp="1577138321870">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="506" height="952" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576817438019" />
+    <state width="1920" height="316" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577138321870" />
     <state width="1280" height="261" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1576731842390" />
-    <state width="506" height="952" key="GridCell.Tab.0.right" timestamp="1576817438020">
+    <state width="1920" height="316" key="GridCell.Tab.0.right" timestamp="1577138321871">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="506" height="952" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576817438020" />
+    <state width="1920" height="316" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577138321871" />
     <state width="1280" height="261" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1576731842391" />
-    <state x="-1565" y="-186" width="1203" height="875" key="SettingsEditor" timestamp="1576817996191">
+    <state x="-1571" y="-198" width="1203" height="875" key="SettingsEditor" timestamp="1577032390123">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1565" y="-186" width="1203" height="875" key="SettingsEditor/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576817996191" />
+    <state x="-1571" y="-198" width="1203" height="875" key="SettingsEditor/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577032390123" />
     <state x="134" y="27" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1576727555828" />
     <state x="-1197" y="111" key="cloudConfig.SelfSettingsDialog" timestamp="1576817894168">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1197" y="111" key="cloudConfig.SelfSettingsDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576817894168" />
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1577035987350">
+      <screen x="-1920" y="-280" width="1920" height="1080" />
+    </state>
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577035987350" />
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576727526871">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.800@0.0.1280.800" timestamp="1576727526871" />
-    <state x="-1299" y="6" width="678" height="508" key="find.popup" timestamp="1576803416785">
+    <state x="-1299" y="6" width="680" height="518" key="find.popup" timestamp="1577138658127">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1299" y="6" width="678" height="508" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576803416785" />
-    <state width="600" height="440" key="javadoc.popup" timestamp="1576803739108">
+    <state x="-1299" y="6" width="680" height="518" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577138658127" />
+    <state width="600" height="440" key="javadoc.popup" timestamp="1577139325390">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="600" height="440" key="javadoc.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576803739108" />
+    <state width="600" height="440" key="javadoc.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577139325390" />
     <state x="305" y="185" key="run.anything.popup" timestamp="1576727535405">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1462" y="-113" width="1005" height="913" key="search.everywhere.popup" timestamp="1576801117003">
+    <state x="-1462" y="-113" width="1005" height="913" key="search.everywhere.popup" timestamp="1577036670793">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1462" y="-113" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576801117003" />
+    <state x="-1462" y="-113" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577036670793" />
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1576731608589" />
   </component>
 </project>
