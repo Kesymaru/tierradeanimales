@@ -11,7 +11,7 @@ import {
     CssBaseline
 } from "@material-ui/core";
 
-import {IGoalsState, SelectGoalAction, TAppState} from "../store";
+import {IGoal, IGoalsState, SelectGoalAction, TAppState} from "../store";
 import GoalEdit from "./GoalEdit";
 
 interface IGoalsProps extends IGoalsState{};
@@ -46,9 +46,12 @@ const GoalsList: FunctionComponent<IGoalsProps> = ({goals, selected}: IGoalsProp
     );
 };
 
-const mapStateToProps = (state: TAppState) => ({
-    goals: state.goals,
-    selected: state.selected,
-});
+const mapStateToProps = (state: TAppState) => {
+    const {goals} = state;
+    return {
+        goals: goals.goals,
+        selected: goals.selected,
+    };
+};
 
 export default connect(mapStateToProps)(GoalsList)

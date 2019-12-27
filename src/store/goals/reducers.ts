@@ -1,6 +1,6 @@
 import {ADD_GOAL, DELETE_GOAL, IGoalsState, SELECT_GOAL, TGoalsActions, UPDATE_GOAL} from "./types";
 
-const initialState: IGoalsState = {
+const InitState: IGoalsState = {
     goals: [{
         id: 1,
         name: 'Redux test',
@@ -11,9 +11,9 @@ const initialState: IGoalsState = {
     selected: null
 };
 
-export function goalsReducers (
-    state = initialState,
-    action: TGoalsActions) {
+export function GoalsReducers (
+    state: IGoalsState = InitState,
+    action: TGoalsActions): IGoalsState {
 
     switch (action.type) {
         case ADD_GOAL:

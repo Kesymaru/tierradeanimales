@@ -7,8 +7,8 @@ export interface IGoal {
 }
 
 export interface IGoalsState {
-    goals: IGoal[]
-    selected: IGoal|null
+    goals: IGoal[];
+    selected: IGoal|null;
 }
 
 // Describing the different ACTION NAMES available
