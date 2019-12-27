@@ -3,10 +3,7 @@ import {ISystemState, TSystemActions, UPDATE_SESSION} from "./types";
 const InitState: ISystemState = {
     loggedIn: false,
     session: '',
-    user: {
-        name: '',
-        email: ''
-    }
+    user: null
 };
 
 export function SystemReducers (

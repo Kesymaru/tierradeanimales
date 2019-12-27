@@ -4,7 +4,7 @@ export interface IUser {
 }
 
 export interface ISystemState {
-    user: IUser;
+    user: IUser|null;
     loggedIn: boolean;
     session: string;
 }

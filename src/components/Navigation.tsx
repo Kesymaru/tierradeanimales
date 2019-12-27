@@ -1,4 +1,5 @@
 import React, {FunctionComponent, useState} from "react";
+import {connect} from "react-redux";
 import clsx from "clsx";
 import {
     CssBaseline,
@@ -23,7 +24,7 @@ import {
     Dashboard as DashboardIcon,
 } from '@material-ui/icons';
 
-import {IUser} from "../models";
+import {ISystemState, TAppState} from "../store";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
@@ -79,17 +80,15 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-interface INavigationProps {
-    user?: IUser|null;
-};
+interface INavigationProps extends ISystemState{};
 
-const Navigation: FunctionComponent<INavigationProps> = ({user = null}) => {
+const Navigation: FunctionComponent<INavigationProps> = ({user, loggedIn }: INavigationProps) => {
     const classes = useStyles();
     const [openDrawer, setOpenDrawer] = useState<boolean>(false);
 
     let menuButton;
     let drawer;
-    if (user) {
+    if (loggedIn) {
         menuButton =
             <IconButton edge="start"
                         className={classes.menuButton}
@@ -142,4 +141,6 @@ const Navigation: FunctionComponent<INavigationProps> = ({user = null}) => {
     );
 };
 
-export default Navigation;
+const mapStateToProps = (state: TAppState) => ({...state.system});
+
+export default connect(mapStateToProps)(Navigation);

@@ -1,4 +1,5 @@
 import React, {FunctionComponent, useState, ChangeEvent, FormEvent} from "react";
+import {useDispatch} from "react-redux";
 import {
     Container,
     CssBaseline,
@@ -15,8 +16,9 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
+import {ISystemState, UpdateSessionAction} from "../store";
+
 import Copyright from "./Copyright";
-import {IUser} from "../models";
 import {EMAIL_REGEX} from "../constants";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -39,27 +41,29 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-interface ISignInProps {
-    onSubmit(user: IUser): void
-};
-
-const SignIn: FunctionComponent<ISignInProps> = ({onSubmit}) => {
+const SignIn: FunctionComponent<{}> = () => {
     const classes = useStyles();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [remember, setRemember] = useState<boolean>(false);
     const [emailError, setEmailError] = useState<string>('');
     const [passwordError, setPasswordError] = useState<string>('');
+    const dispatch = useDispatch();
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
         console.log('data', email, password, remember);
-        onSubmit({
-            id: 1,
-            firstName: 'User',
-            lastName: 'Test',
-            email,
-        });
+
+        const session: ISystemState =  {
+            user: {
+                name: 'Sytem User',
+                email,
+            },
+            loggedIn: true,
+            session: 'session tbd'
+        };
+
+        dispatch(UpdateSessionAction(session));
     };
 
     const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {

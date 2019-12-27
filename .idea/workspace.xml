@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/store/system/actions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/system/reducers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/system/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GoalsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GoalsList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/goals/reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/goals/reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/goals/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/goals/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignIn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/system/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/system/actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/system/reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/system/reducers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/system/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/system/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +98,7 @@
       <updated>1576691538500</updated>
       <workItem from="1576691539746" duration="23574000" />
       <workItem from="1576817200524" duration="958000" />
-      <workItem from="1576963346713" duration="34983000" />
+      <workItem from="1576963346713" duration="35777000" />
     </task>
     <task id="LOCAL-00001" summary="Init porject&#10;Added login page">
       <created>1576713729121</created>
@@ -122,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577396059210</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added new state reducer, types and actions for system">
+      <created>1577470250503</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1577470250503</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,7 +151,8 @@
     <MESSAGE value="Init porject&#10;Added login page" />
     <MESSAGE value="Added Sign In and Sign Up components&#10;Added toolbar and drawer for Navigation.tsx" />
     <MESSAGE value="Added redux, actions reducers and types" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added redux, actions reducers and types" />
+    <MESSAGE value="added new state reducer, types and actions for system" />
+    <option name="LAST_COMMIT_MESSAGE" value="added new state reducer, types and actions for system" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1360" y="-75" key="#Inspections" timestamp="1576817948911">
@@ -164,10 +171,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577117701118" />
-    <state x="-1372" y="-229" key="CommitChangelistDialog2" timestamp="1577470242651">
+    <state x="-1372" y="-229" key="CommitChangelistDialog2" timestamp="1577470250208">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1372" y="-229" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577470242651" />
+    <state x="-1372" y="-229" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577470250208" />
     <state width="1920" height="316" key="GridCell.Tab.0.bottom" timestamp="1577470242685">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -217,10 +224,10 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1462" y="-113" width="1005" height="913" key="search.everywhere.popup" timestamp="1577396209134">
+    <state x="-1462" y="-113" width="1005" height="913" key="search.everywhere.popup" timestamp="1577470264206">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1462" y="-113" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577396209134" />
+    <state x="-1462" y="-113" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577470264206" />
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1576731608589" />
   </component>
 </project>
