@@ -1,19 +1,40 @@
-export interface IUser {
-    name: string;
+export interface ICredentials {
     email: string;
+    password: string;
+}
+
+export interface IUser extends ICredentials{
+    name?: string;
+    uid?: string;
+}
+
+export interface ISignIn extends ICredentials {
+    remember?: boolean
 }
 
 export interface ISystemState {
     user: IUser|null;
     loggedIn: boolean;
-    session: string;
+    loading: boolean;
 }
 
-export const UPDATE_SESSION = 'UPDATE_SESSION';
+export const SIGN_UP = 'SIGN_UP';
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_OUT = 'SIGN_OUT';
 
-interface IUpdateSessionAction {
-    type: typeof UPDATE_SESSION;
-    payload: ISystemState;
+interface ISignUpAction {
+    type: typeof SIGN_UP;
+    payload: ICredentials;
 }
 
-export type TSystemActions = IUpdateSessionAction;
+interface ISignInAction {
+    type: typeof SIGN_IN;
+    payload: ISignIn;
+}
+interface ISignOutAction {
+    type: typeof SIGN_OUT;
+    payload?: any;
+}
+
+export type TSystemActions = ISignUpAction | ISignInAction | ISignOutAction;
+

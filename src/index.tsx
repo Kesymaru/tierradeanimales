@@ -6,8 +6,10 @@ import App from "./App";
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import configureStore from "./store";
+import Firebase from "./constants/firebase";
 
 const store = configureStore();
+const firebase = new Firebase();
 
 const AppRoot: FunctionComponent = () => (
     <Provider store={store}>

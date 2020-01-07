@@ -1,4 +1,5 @@
 import React, {FunctionComponent, useState} from "react";
+import {useRouteMatch} from "react-router-dom"
 import {connect} from "react-redux";
 import clsx from "clsx";
 import {
@@ -85,19 +86,24 @@ interface INavigationProps extends ISystemState{};
 const Navigation: FunctionComponent<INavigationProps> = ({user, loggedIn }: INavigationProps) => {
     const classes = useStyles();
     const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+    const match = useRouteMatch();
 
-    let menuButton;
-    let drawer;
+    console.log('navigation', match);
+
+    let menuButton = null;
+    let drawer = null;
     if (loggedIn) {
         menuButton =
-            <IconButton edge="start"
-                        className={classes.menuButton}
-                        color="inherit"
-                        aria-label="menu"
-                        onClick={() => setOpenDrawer(!openDrawer)}
+            <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="menu"
+                onClick={() => setOpenDrawer(!openDrawer)}
             >
                 <MenuIcon/>
-            </IconButton>
+            </IconButton>;
+
         drawer =
             <Drawer
                 variant="permanent"
@@ -123,17 +129,19 @@ const Navigation: FunctionComponent<INavigationProps> = ({user, loggedIn }: INav
             </Drawer>
     }
 
-    console.log('render navigation', user);
-
     return (
         <>
-            <AppBar position="absolute" className={clsx(classes.appBar, openDrawer && classes.appBarShift)}>
+            <AppBar
+                position="absolute"
+                className={clsx(classes.appBar, openDrawer && classes.appBarShift)}>
                 <Toolbar>
                     { menuButton }
                     <Typography variant="h6" className={classes.title}>
                         Goals App
                     </Typography>
-                    <Button color="inherit">SignIn</Button>
+                    <Button color="inherit">
+                        SignIn
+                    </Button>
                 </Toolbar>
             </AppBar>
             { drawer }

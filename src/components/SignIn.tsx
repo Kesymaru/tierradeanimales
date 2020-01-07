@@ -16,7 +16,8 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
-import {ISystemState, UpdateSessionAction} from "../store";
+import {SignInAction} from "../store";
+import ROUTES from "../constants/routes";
 
 import Copyright from "./Copyright";
 import {EMAIL_REGEX} from "../constants";
@@ -50,20 +51,11 @@ const SignIn: FunctionComponent<{}> = () => {
     const [passwordError, setPasswordError] = useState<string>('');
     const dispatch = useDispatch();
 
-    const handleSubmit = (event: FormEvent) => {
+    const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
         console.log('data', email, password, remember);
 
-        const session: ISystemState =  {
-            user: {
-                name: 'Sytem User',
-                email,
-            },
-            loggedIn: true,
-            session: 'session tbd'
-        };
-
-        dispatch(UpdateSessionAction(session));
+        dispatch(SignInAction(email, password, remember));
     };
 
     const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -158,12 +150,12 @@ const SignIn: FunctionComponent<{}> = () => {
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2">
+                                <Link href={ROUTES.passwordForget} variant="body2">
                                     Forgot password?
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link href={ROUTES.signup} variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>

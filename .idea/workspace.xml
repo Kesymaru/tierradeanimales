@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
+    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="added new state reducer, types and actions for system">
+      <change afterPath="$PROJECT_DIR$/src/constants/firebase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/development.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Account.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignIn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/roles.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/user.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/system/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/system/actions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/system/reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/system/reducers.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/system/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/system/types.ts" afterDir="false" />
@@ -99,6 +112,7 @@
       <workItem from="1576691539746" duration="23574000" />
       <workItem from="1576817200524" duration="958000" />
       <workItem from="1576963346713" duration="35777000" />
+      <workItem from="1577568811282" duration="10134000" />
     </task>
     <task id="LOCAL-00001" summary="Init porject&#10;Added login page">
       <created>1576713729121</created>
@@ -167,33 +181,33 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1246" y="59" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576702877525" />
-    <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1577117701118">
+    <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1577572673279">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577117701118" />
-    <state x="-1372" y="-229" key="CommitChangelistDialog2" timestamp="1577470250208">
+    <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577572673279" />
+    <state x="-1372" y="-229" key="CommitChangelistDialog2" timestamp="1578325230341">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1372" y="-229" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577470250208" />
-    <state width="1920" height="316" key="GridCell.Tab.0.bottom" timestamp="1577470242685">
+    <state x="-1372" y="-229" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1578325230341" />
+    <state width="1920" height="316" key="GridCell.Tab.0.bottom" timestamp="1578436264405">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="316" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577470242685" />
+    <state width="1920" height="316" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1578436264405" />
     <state width="1280" height="261" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1576731842392" />
-    <state width="1920" height="316" key="GridCell.Tab.0.center" timestamp="1577470242684">
+    <state width="1920" height="316" key="GridCell.Tab.0.center" timestamp="1578436264403">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="316" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577470242684" />
+    <state width="1920" height="316" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1578436264403" />
     <state width="1280" height="261" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1576731842391" />
-    <state width="1920" height="316" key="GridCell.Tab.0.left" timestamp="1577470242684">
+    <state width="1920" height="316" key="GridCell.Tab.0.left" timestamp="1578436264402">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="316" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577470242684" />
+    <state width="1920" height="316" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1578436264402" />
     <state width="1280" height="261" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1576731842390" />
-    <state width="1920" height="316" key="GridCell.Tab.0.right" timestamp="1577470242684">
+    <state width="1920" height="316" key="GridCell.Tab.0.right" timestamp="1578436264404">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="316" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577470242684" />
+    <state width="1920" height="316" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1578436264404" />
     <state width="1280" height="261" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1576731842391" />
     <state x="-1571" y="-198" width="1203" height="875" key="SettingsEditor" timestamp="1577032390123">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -212,22 +226,22 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.800@0.0.1280.800" timestamp="1576727526871" />
-    <state x="-1299" y="6" width="680" height="518" key="find.popup" timestamp="1577138658127">
+    <state x="-1299" y="6" width="680" height="518" key="find.popup" timestamp="1578440496587">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1299" y="6" width="680" height="518" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577138658127" />
-    <state width="600" height="440" key="javadoc.popup" timestamp="1577469526541">
+    <state x="-1299" y="6" width="680" height="518" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1578440496587" />
+    <state width="600" height="440" key="javadoc.popup" timestamp="1577573956421">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="600" height="440" key="javadoc.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577469526541" />
+    <state width="600" height="440" key="javadoc.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577573956421" />
     <state x="305" y="185" key="run.anything.popup" timestamp="1576727535405">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1462" y="-113" width="1005" height="913" key="search.everywhere.popup" timestamp="1577470264206">
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1578439570780">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1462" y="-113" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577470264206" />
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1578439570780" />
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1576731608589" />
   </component>
 </project>

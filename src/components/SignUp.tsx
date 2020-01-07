@@ -16,8 +16,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
 import Copyright from "./Copyright";
-import {IUserSignUp} from "../models";
 import {EMAIL_REGEX} from "../constants";
+import {useDispatch} from "react-redux";
+import {SingUpAction} from "../store";
 
 const useStyles = makeStyles((theme: Theme) => ({
     paper: {
@@ -39,9 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-const USED_EMAILS = [
-    'andreyalfaro@gmail.com'
-];
+const USED_EMAILS = [];
 
 const SignUp: FunctionComponent<{}> = () => {
     const classes = useStyles();
@@ -55,10 +54,13 @@ const SignUp: FunctionComponent<{}> = () => {
     const [emailError, setEmailError] = useState<string>('');
     const [passwordError, setPasswordError] = useState<string>('');
     const [termsError, setTermsError] = useState<string>('');
+    const [formError, setFormError] = useState<string>('');
+    const dispatch = useDispatch();
 
-    const handleSubmit = (event: FormEvent) => {
+    const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
-        console.log('submit', firstName, lastName, email, password);
+
+        dispatch(SingUpAction(email, password));
     };
 
     const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -127,7 +129,7 @@ const SignUp: FunctionComponent<{}> = () => {
                     <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign up
+                    Sign Up
                 </Typography>
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
@@ -214,6 +216,9 @@ const SignUp: FunctionComponent<{}> = () => {
                                 : null}
                         </Grid>
                     </Grid>
+                    {formError
+                        ? <FormHelperText>{formError}</FormHelperText>
+                        : null}
                     <Button
                         type="submit"
                         fullWidth

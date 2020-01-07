@@ -1,8 +1,10 @@
-export const LANDING = '/';
-export const SIGN_UP = '/signup';
-export const SIGN_IN = '/signin';
-export const HOME = '/home';
-export const GOALS = '/GoalsList';
-export const ACCOUNT = '/account';
-export const ADMIN = '/admin';
-export const PASSWORD_FORGET = '/pw-forget';
+const ROUTES = {
+    home: '/',
+    signup: '/signup',
+    signin: '/signin',
+    passwordForget: '/pw-forget',
+    goals: '/goals',
+    account: '/account',
+};
+
+export default ROUTES;

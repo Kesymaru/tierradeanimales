@@ -1,6 +1,10 @@
 import React, {FunctionComponent} from "react";
 
-const Account: FunctionComponent<{}> = () => <div>Account goes here</div>;
+const Account: FunctionComponent<{}> = () => (
+    <>
+        <p>here gos the account component</p>
+    </>
+)
 
 export default Account;
 
