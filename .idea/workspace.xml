@@ -1,27 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="added new state reducer, types and actions for system">
-      <change afterPath="$PROJECT_DIR$/src/constants/firebase.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/development.env" afterDir="false" />
+    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Account.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignIn.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignUp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/roles.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/user.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/system/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/system/actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/firebase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/system/reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/system/reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/system/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/system/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +96,7 @@
       <workItem from="1576691539746" duration="23574000" />
       <workItem from="1576817200524" duration="958000" />
       <workItem from="1576963346713" duration="35777000" />
-      <workItem from="1577568811282" duration="10134000" />
+      <workItem from="1577568811282" duration="10698000" />
     </task>
     <task id="LOCAL-00001" summary="Init porject&#10;Added login page">
       <created>1576713729121</created>
@@ -142,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577470250503</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="integrated basic firebase auth for email and password&#10;added redux actions to sign in, up and out">
+      <created>1578441327751</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1578441327751</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,7 +157,8 @@
     <MESSAGE value="Added Sign In and Sign Up components&#10;Added toolbar and drawer for Navigation.tsx" />
     <MESSAGE value="Added redux, actions reducers and types" />
     <MESSAGE value="added new state reducer, types and actions for system" />
-    <option name="LAST_COMMIT_MESSAGE" value="added new state reducer, types and actions for system" />
+    <MESSAGE value="integrated basic firebase auth for email and password&#10;added redux actions to sign in, up and out" />
+    <option name="LAST_COMMIT_MESSAGE" value="integrated basic firebase auth for email and password&#10;added redux actions to sign in, up and out" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1360" y="-75" key="#Inspections" timestamp="1576817948911">
@@ -185,10 +177,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577572673279" />
-    <state x="-1372" y="-229" key="CommitChangelistDialog2" timestamp="1578325230341">
+    <state x="-1372" y="-229" key="CommitChangelistDialog2" timestamp="1578441327101">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1372" y="-229" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1578325230341" />
+    <state x="-1372" y="-229" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1578441327101" />
     <state width="1920" height="316" key="GridCell.Tab.0.bottom" timestamp="1578436264405">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>

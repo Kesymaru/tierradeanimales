@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-const USED_EMAILS = [];
+const USED_EMAILS: string[] = [];
 
 const SignUp: FunctionComponent<{}> = () => {
     const classes = useStyles();

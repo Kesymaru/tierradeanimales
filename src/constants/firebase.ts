@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-import {ICredentials} from "../store";
+import {ICredentials, ISignIn} from "../store";
 
 interface IFirebaseConfig {
     apiKey: string;
@@ -66,20 +66,12 @@ class Firebase {
         return user;
     }
 
-    signIn(email: string, password: string) {
-        console.log("signIn");
+    signIn(credentials: ISignIn): Promise<firebase.auth.UserCredential> {
+        let {email, password} = credentials;
+        console.log("signIn", email, password);
 
-        firebase.auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(response => {
-                console.log('signIn response', response);
-                return response;
-            })
-            .catch(error => {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-        });
+        return firebase.auth()
+            .signInWithEmailAndPassword(email, password);
     }
 }
 

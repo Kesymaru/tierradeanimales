@@ -1,4 +1,4 @@
-import {ISystemState, TSystemActions, SIGN_UP, SIGN_OUT} from "./types";
+import {ISystemState, SIGN_IN, SIGN_OUT, SIGN_UP, TSystemActions} from "./types";
 import Firebase from "../../constants/firebase";
 
 const InitState: ISystemState = {
@@ -7,14 +7,18 @@ const InitState: ISystemState = {
     loading: false,
 };
 
+const firebase = new Firebase();
+
 export function SystemReducers (
     state: ISystemState = InitState,
     action: TSystemActions): ISystemState {
 
     switch (action.type) {
         case SIGN_UP: {
-            let firebase = new Firebase();
-            firebase.signUp(action.payload);
+            firebase.signUp(action.payload)
+                .then(user => {
+                    console.log('sing up action ', user)
+                });
 
             return {
                 ...state,
@@ -22,7 +26,11 @@ export function SystemReducers (
             };
         }
 
-        case SIGN_UP: {
+        case SIGN_IN: {
+            firebase.signIn(action.payload)
+                .then(user => {
+                    console.log('sign in response', user)
+                });
             return {
                 ...state,
                 loading: true
