@@ -1,7 +1,9 @@
 import firebase from 'firebase'
-import {ICredentials, ISignIn} from "../store";
 
-interface IFirebaseConfig {
+import {IUser} from "../store";
+import functions from "firebase";
+
+export interface IFirebaseConfig {
     apiKey: string;
     appId: string;
     projectId: string;
@@ -12,38 +14,31 @@ interface IFirebaseConfig {
     measurementId?: string;
 }
 
-const DEFAULT_CONFIG: IFirebaseConfig = {
-    apiKey: "AIzaSyCHHJ0dpe8h5cfisKgOLsIKppZNrFbuRQk",
-    appId: "app-id",
-    projectId: "mywod-1c55e",
-    authDomain: "project-id.firebaseapp.com",
-    databaseURL: "https://project-id.firebaseio.com",
-    storageBucket: "project-id.appspot.com",
-    messagingSenderId: "sender-id",
-    measurementId: "G-measurement-id",
-};
-
-let instance: Firebase|null = null;
-
-/**
- * Firebase class singleton
- */
 class Firebase {
-    constructor(private config: IFirebaseConfig = DEFAULT_CONFIG) {
-        console.log('firebase contructor', config, instance);
+    private static config: IFirebaseConfig;
+    private static auth: firebase.auth.Auth;
 
-        if(instance) return instance = this;
-        instance = this;
+    private constructor() {}
 
-        firebase.initializeApp(this.config);
+    public static get user(){
+        console.log('get user', Firebase.auth.currentUser);
+        return Firebase.auth.currentUser;
     }
 
-    async signUp(credentials: ICredentials): Promise<firebase.auth.UserCredential> {
-        let {email, password} = credentials;
-        let user = null;
+    public static configure(config: IFirebaseConfig): void {
+        Firebase.config = config;
+        firebase.initializeApp(Firebase.config);
+        Firebase.auth = firebase.auth();
+    }
+
+    public static onAuth(callback: Function) {
+        Firebase.auth.onAuthStateChanged(user => callback(user));
+    }
+
+    public static signUp(email: string, password: string): Promise<firebase.auth.UserCredential> {
+        /*let user = null;
         try {
-            user = firebase.auth()
-                .createUserWithEmailAndPassword(email, password)
+            user = await Firebase.auth.createUserWithEmailAndPassword(email, password);
 
             console.log('signUp response', user);
         } catch (error) {
@@ -61,17 +56,36 @@ class Firebase {
                 default:
                     throw error;
             }
-        }
+        }*/
 
-        return user;
+        return Firebase.auth.createUserWithEmailAndPassword(email, password);
     }
 
-    signIn(credentials: ISignIn): Promise<firebase.auth.UserCredential> {
-        let {email, password} = credentials;
-        console.log("signIn", email, password);
+    public static signIn(email: string, password: string): Promise<firebase.auth.UserCredential> {
+        return Firebase.auth.signInWithEmailAndPassword(email, password);
+    }
 
-        return firebase.auth()
-            .signInWithEmailAndPassword(email, password);
+    public static async signOut(): Promise<void> {
+        Firebase.auth.signOut();
+    }
+
+    public static updatePassword (password: string): Promise<void> {
+        if(!Firebase.auth.currentUser)
+            return Promise.reject('There is no current user logged.');
+        return Firebase.auth.currentUser.updatePassword(password);
+    }
+
+    public static resetPassword(email: string): Promise<void> {
+        return Firebase.auth.sendPasswordResetEmail(email);
+    }
+
+    public static updateProfile(uid: string, value: any) {
+        let user = Firebase.auth.currentUser;
+        if(!user) return;
+        return user.updateProfile({
+            displayName: "Jane Q. user",
+            photoURL: "https://example.com/jane-q-user/profile.jpg"
+        })
     }
 }
 

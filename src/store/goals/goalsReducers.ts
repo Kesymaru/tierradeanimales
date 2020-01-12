@@ -1,17 +1,11 @@
-import {ADD_GOAL, DELETE_GOAL, IGoalsState, SELECT_GOAL, TGoalsActions, UPDATE_GOAL} from "./types";
+import {ADD_GOAL, DELETE_GOAL, IGoalsState, SELECT_GOAL, TGoalsActions, UPDATE_GOAL} from "./goalsTypes";
 
 const InitState: IGoalsState = {
-    goals: [{
-        id: 1,
-        name: 'Redux test',
-        description: 'description here',
-        createdDate: (new Date()),
-        updatedDate: (new Date()),
-    }],
+    goals: [],
     selected: null
 };
 
-export function GoalsReducers (
+function GoalsReducers (
     state: IGoalsState = InitState,
     action: TGoalsActions): IGoalsState {
 
@@ -19,8 +13,12 @@ export function GoalsReducers (
         case ADD_GOAL:
             return {
                 ...state,
-                goals: [...state.goals, action.payload],
+                goals: [
+                    ...state.goals,
+                    action.payload
+                ],
             };
+
         case DELETE_GOAL:
             return {
                 ...state,
@@ -28,6 +26,7 @@ export function GoalsReducers (
                     .filter(goal => goal.id !== action.payload.id),
                 selected: null,
             };
+
         case UPDATE_GOAL:
             return {
                 ...state,
@@ -36,13 +35,16 @@ export function GoalsReducers (
                         ? {...goal, ...action.payload}
                         : goal),
             };
+
         case SELECT_GOAL:
             return {
                 ...state,
                 selected: {...action.payload}
             };
+
         default:
             return state;
     }
 }
 
+export default GoalsReducers;

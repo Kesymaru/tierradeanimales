@@ -2,12 +2,7 @@ import React, {ChangeEvent, FunctionComponent, SyntheticEvent, useEffect, useSta
 import {useDispatch} from "react-redux";
 import {Button, TextField} from "@material-ui/core";
 
-import {
-    IGoal,
-    UpdateGoalAction,
-    AddGoalAction,
-    DeleteGoalAction
-} from "../store";
+import {IGoal, GoalsActions} from "../store";
 
 interface IEditGoalProps {
     goal: IGoal | null;
@@ -44,9 +39,9 @@ const GoalEdit: FunctionComponent<IEditGoalProps> = ({goal}: IEditGoalProps) => 
         // update existing goal
         if (goal && goal.id) {
             newGoal.id = goal.id;
-            return dispatch(UpdateGoalAction(newGoal))
+            return dispatch(GoalsActions.Update(newGoal))
         }
-        return dispatch(AddGoalAction(newGoal));
+        return dispatch(GoalsActions.Add(newGoal));
     };
 
     const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -93,7 +88,7 @@ const GoalEdit: FunctionComponent<IEditGoalProps> = ({goal}: IEditGoalProps) => 
                 goal && goal.id
                     ? (<Button
                             color="secondary"
-                            onClick={() => dispatch(DeleteGoalAction(goal))}
+                            onClick={() => dispatch(GoalsActions.Delete(goal))}
                         >
                             Delete
                     </Button>)

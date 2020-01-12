@@ -5,14 +5,37 @@ import {Provider} from "react-redux";
 import App from "./App";
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import configureStore from "./store";
+import configureStore, {AuthActions} from "./store";
+import AppStore from "./store";
 import Firebase from "./constants/firebase";
+import LocalStorage from "./constants/localStorage";
 
-const store = configureStore();
-const firebase = new Firebase();
+// ------------------------------------
+// Configure App
+// ------------------------------------
+// const store = configureStore();
+AppStore.configure();
+
+LocalStorage.configure({
+    keys: [{
+        key: 'token',
+        path: 'system.auth.token'
+    }]
+});
+
+Firebase.configure({
+    apiKey: "AIzaSyCHHJ0dpe8h5cfisKgOLsIKppZNrFbuRQk",
+    appId: "app-id",
+    projectId: "mywod-1c55e",
+    authDomain: "project-id.firebaseapp.com",
+    databaseURL: "https://project-id.firebaseio.com",
+    storageBucket: "project-id.appspot.com",
+    messagingSenderId: "sender-id",
+    measurementId: "G-measurement-id",
+});
 
 const AppRoot: FunctionComponent = () => (
-    <Provider store={store}>
+    <Provider store={AppStore.store}>
         <App/>
     </Provider>
 );

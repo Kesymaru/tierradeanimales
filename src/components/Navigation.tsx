@@ -1,6 +1,6 @@
 import React, {FunctionComponent, useState} from "react";
-import {useRouteMatch} from "react-router-dom"
-import {connect} from "react-redux";
+import {useLocation, useHistory} from "react-router-dom"
+import {connect, useDispatch} from "react-redux";
 import clsx from "clsx";
 import {
     CssBaseline,
@@ -25,7 +25,8 @@ import {
     Dashboard as DashboardIcon,
 } from '@material-ui/icons';
 
-import {ISystemState, TAppState} from "../store";
+import {TAppState, AuthActions} from "../store";
+import ROUTES from "../constants/routes";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
@@ -81,18 +82,25 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-interface INavigationProps extends ISystemState{};
+interface INavigationProps{
+    user: any;
+    logged: boolean;
+};
 
-const Navigation: FunctionComponent<INavigationProps> = ({user, loggedIn }: INavigationProps) => {
+const Navigation: FunctionComponent<INavigationProps> = ({user, logged }: INavigationProps) => {
     const classes = useStyles();
     const [openDrawer, setOpenDrawer] = useState<boolean>(false);
-    const match = useRouteMatch();
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const history = useHistory();
 
-    console.log('navigation', match);
+    console.log('navigation', location, user, logged);
 
     let menuButton = null;
     let drawer = null;
-    if (loggedIn) {
+    let button = null;
+
+    if (logged) {
         menuButton =
             <IconButton
                 edge="start"
@@ -126,7 +134,26 @@ const Navigation: FunctionComponent<INavigationProps> = ({user, loggedIn }: INav
                         <ListItemText primary="Dashboard"/>
                     </ListItem>
                 </List>
-            </Drawer>
+            </Drawer>;
+
+        button =
+            <Button
+                color="inherit"
+                onClick={() => dispatch(AuthActions.SingOut())}
+            >
+                SignOut
+            </Button>;
+    } else {
+        button = location.pathname === ROUTES.signin
+            ? null
+            : (
+                <Button
+                    color="inherit"
+                    onClick={() => history.push('/signin')}
+                >
+                    SignIn
+                </Button>
+            );
     }
 
     return (
@@ -139,9 +166,7 @@ const Navigation: FunctionComponent<INavigationProps> = ({user, loggedIn }: INav
                     <Typography variant="h6" className={classes.title}>
                         Goals App
                     </Typography>
-                    <Button color="inherit">
-                        SignIn
-                    </Button>
+                    { button }
                 </Toolbar>
             </AppBar>
             { drawer }
@@ -149,6 +174,8 @@ const Navigation: FunctionComponent<INavigationProps> = ({user, loggedIn }: INav
     );
 };
 
-const mapStateToProps = (state: TAppState) => ({...state.system});
-
+const mapStateToProps = (state: TAppState): INavigationProps => ({
+    logged: state.auth.logged,
+    user: state.user.user,
+});
 export default connect(mapStateToProps)(Navigation);

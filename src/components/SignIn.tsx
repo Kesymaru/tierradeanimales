@@ -1,22 +1,10 @@
 import React, {FunctionComponent, useState, ChangeEvent, FormEvent} from "react";
-import {useDispatch} from "react-redux";
-import {
-    Container,
-    CssBaseline,
-    Avatar,
-    Button,
-    Typography,
-    TextField,
-    FormControlLabel,
-    Grid,
-    Link,
-    Box,
-    Checkbox
-} from "@material-ui/core";
+import {connect, useDispatch} from "react-redux";
+import {Container, CssBaseline, Avatar, Button, Typography, TextField, FormControlLabel, Grid, Link, Box, Checkbox, LinearProgress} from "@material-ui/core";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
-import {SignInAction} from "../store";
+import {AuthActions, TAppState} from "../store";
 import ROUTES from "../constants/routes";
 
 import Copyright from "./Copyright";
@@ -38,11 +26,18 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginTop: theme.spacing(1),
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        margin: theme.spacing(3, 0, 0),
+    },
+    grid: {
+        margin: theme.spacing(3, 0, 3),
     },
 }));
 
-const SignIn: FunctionComponent<{}> = () => {
+interface ISignInProps {
+    loading: boolean;
+}
+
+const SignIn: FunctionComponent<ISignInProps> = ({loading}) => {
     const classes = useStyles();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -53,9 +48,7 @@ const SignIn: FunctionComponent<{}> = () => {
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
-        console.log('data', email, password, remember);
-
-        dispatch(SignInAction(email, password, remember));
+        dispatch(AuthActions.SignIn(email, password, remember));
     };
 
     const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -111,6 +104,7 @@ const SignIn: FunctionComponent<{}> = () => {
                             helperText={emailError}
                             onChange={handleEmailChange}
                             onBlur={() => validateEmail(email)}
+                            disabled={loading}
                         />
                         <TextField
                             variant="outlined"
@@ -127,6 +121,7 @@ const SignIn: FunctionComponent<{}> = () => {
                             helperText={passwordError}
                             onChange={handlePasswordChange}
                             onBlur={() => validatePassword(password)}
+                            disabled={loading}
                         />
                         <FormControlLabel
                             control={
@@ -134,6 +129,7 @@ const SignIn: FunctionComponent<{}> = () => {
                                     value="remember"
                                     color="primary"
                                     onChange={e => setRemember(e.target.checked)}
+                                    disabled={loading}
                                 />
                             }
                             label="Remember me"
@@ -144,11 +140,12 @@ const SignIn: FunctionComponent<{}> = () => {
                             variant="contained"
                             color="primary"
                             className={classes.submit}
-                            disabled={ !!emailError || !!passwordError }
+                            disabled={ loading || !!emailError || !!passwordError }
                         >
-                            Sign In
+                            { loading ? 'Loading' : 'Sign In' }
                         </Button>
-                        <Grid container>
+                        { loading ? <LinearProgress color="primary" /> : null}
+                        <Grid container className={classes.grid}>
                             <Grid item xs>
                                 <Link href={ROUTES.passwordForget} variant="body2">
                                     Forgot password?
@@ -170,4 +167,5 @@ const SignIn: FunctionComponent<{}> = () => {
     );
 };
 
-export default SignIn;
+const mapStateToProps = (state: TAppState) => ({loading: state.system.loading});
+export default connect(mapStateToProps)(SignIn);

@@ -1,24 +1,12 @@
 import React, {FunctionComponent, useState, ChangeEvent, FormEvent} from "react";
-import {
-    Container,
-    CssBaseline,
-    Avatar,
-    Typography,
-    Grid,
-    TextField,
-    FormControlLabel,
-    Checkbox,
-    Button,
-    Link,
-    Box, FormHelperText
-} from "@material-ui/core";
+import {Container, CssBaseline, Avatar, Typography, Grid, TextField, FormControlLabel, Checkbox, Button, Link, Box, FormHelperText} from "@material-ui/core";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
 import Copyright from "./Copyright";
 import {EMAIL_REGEX} from "../constants";
 import {useDispatch} from "react-redux";
-import {SingUpAction} from "../store";
+import {AuthActions} from "../store";
 
 const useStyles = makeStyles((theme: Theme) => ({
     paper: {
@@ -59,8 +47,7 @@ const SignUp: FunctionComponent<{}> = () => {
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
-
-        dispatch(SingUpAction(email, password));
+        dispatch(AuthActions.SingUp(email, password));
     };
 
     const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
