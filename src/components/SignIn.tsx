@@ -147,13 +147,13 @@ const SignIn: FunctionComponent<ISignInProps> = ({loading}) => {
                         { loading ? <LinearProgress color="primary" /> : null}
                         <Grid container className={classes.grid}>
                             <Grid item xs>
-                                <Link href={ROUTES.passwordForget} variant="body2">
+                                <Link href={ROUTES.forgotPassword.path} variant="body2">
                                     Forgot password?
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href={ROUTES.signup} variant="body2">
-                                    {"Don't have an account? Sign Up"}
+                                <Link href={ROUTES.signUp.path} variant="body2">
+                                    {"Don't have an ACCOUNT_ROUTE? Sign Up"}
                                 </Link>
                             </Grid>
                         </Grid>

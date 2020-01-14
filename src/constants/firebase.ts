@@ -1,8 +1,5 @@
 import firebase from 'firebase'
 
-import {IUser} from "../store";
-import functions from "firebase";
-
 export interface IFirebaseConfig {
     apiKey: string;
     appId: string;

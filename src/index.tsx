@@ -5,7 +5,6 @@ import {Provider} from "react-redux";
 import App from "./App";
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import configureStore, {AuthActions} from "./store";
 import AppStore from "./store";
 import Firebase from "./constants/firebase";
 import LocalStorage from "./constants/localStorage";

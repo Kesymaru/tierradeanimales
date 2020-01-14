@@ -10,10 +10,6 @@ import AuthReducers from "./auth/authReducers";
 import UserReducers from "./user/userReducers";
 import GoalsReducers from "./goals/goalsReducers";
 
-import AuthMiddleware from "./auth/authMiddleware";
-
-import LocalStorage from "../constants/localStorage";
-
 const RootReducer = combineReducers({
     system: SystemReducers,
     auth: AuthReducers,
@@ -24,7 +20,7 @@ const RootReducer = combineReducers({
 export type TAppState = ReturnType<typeof RootReducer>;
 
 // export default function configureStore() {
-function configureStore() {
+/*function configureStore() {
     const middlewares = [thunkMiddleware];
     const middleWareEnhancer = applyMiddleware(...middlewares);
 
@@ -37,7 +33,7 @@ function configureStore() {
     store.subscribe(() => LocalStorage.saveStore(store.getState()));
 
     return store;
-}
+}*/
 
 class AppStore {
     public static store: Store;

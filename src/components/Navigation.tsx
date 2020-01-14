@@ -94,7 +94,7 @@ const Navigation: FunctionComponent<INavigationProps> = ({user, logged }: INavig
     const location = useLocation();
     const history = useHistory();
 
-    console.log('navigation', location, user, logged);
+    // console.log('navigation', location, user, logged);
 
     let menuButton = null;
     let drawer = null;
@@ -144,12 +144,12 @@ const Navigation: FunctionComponent<INavigationProps> = ({user, logged }: INavig
                 SignOut
             </Button>;
     } else {
-        button = location.pathname === ROUTES.signin
+        button = location.pathname === ROUTES.signIn.path
             ? null
             : (
                 <Button
                     color="inherit"
-                    onClick={() => history.push('/signin')}
+                    onClick={() => history.push(ROUTES.signIn.path)}
                 >
                     SignIn
                 </Button>
