@@ -11,14 +11,11 @@ import Router from "./wrappers/Router";
 import Copyright from "./components/Copyright";
 import Notify from "./components/Notify";
 
-
 interface IAppProps extends Pick<IAuthState, 'logged'> {}
-
 const App: FunctionComponent<IAppProps> = ({logged}: IAppProps) => {
     const dispatch = useDispatch();
 
-    // load the logged user
-    Firebase.onAuth((user: IUser) => dispatch(UserActions.ReceiveUser(user)));
+    Firebase.onAuth((user: IUser) => user ? dispatch(UserActions.ReceiveUser(user)) : null);
 
     return (<>
         <BrowserRouter>
@@ -26,10 +23,9 @@ const App: FunctionComponent<IAppProps> = ({logged}: IAppProps) => {
             <Router logged={logged} routes={ROUTES_ARRAY}/>
         </BrowserRouter>
         <Copyright/>
-        <Notify></Notify>
+        <Notify/>
     </>);
 };
-
 
 const mapStateToProps = (state: TAppState): IAppProps => ({
     logged: state.auth.logged,

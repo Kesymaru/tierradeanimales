@@ -5,7 +5,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 import {Link as RouterLink} from 'react-router-dom';
 
-import {AuthActions, TAppState} from "../store";
+import {AuthActions, ISystemState, TAppState} from "../store";
 import {FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE} from "../constants/routes";
 
 import {EMAIL_REGEX} from "../constants";
@@ -33,10 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-interface ISignInProps {
-    loading: boolean;
-}
-
+interface ISignInProps extends Pick<ISystemState, 'loading'>{}
 const SignIn: FunctionComponent<ISignInProps> = ({loading}) => {
     const classes = useStyles();
     const [email, setEmail] = useState<string>('');
