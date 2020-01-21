@@ -2,29 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Navbar/NavbarMenu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Navbar/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Notify.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navbar/UserMenu.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Account.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignIn.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignUp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/firebase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/auth/authActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/auth/auth.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/auth/authMiddleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/auth/auth.middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/auth/authReducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/auth/auth.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/auth/authTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/auth/auth.types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/system/systemActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/system/system.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/system/systemReducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/system/system.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/system/systemTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/system/system.types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/user/userActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/user/user.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/user/userReducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/user/user.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/user/userTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/user/user.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbar/NavbarMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/NavbarMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Notify.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Notify.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +99,7 @@
       <workItem from="1576817200524" duration="958000" />
       <workItem from="1576963346713" duration="35777000" />
       <workItem from="1577568811282" duration="99053000" />
-      <workItem from="1579564004625" duration="2175000" />
+      <workItem from="1579564004625" duration="5293000" />
     </task>
     <task id="LOCAL-00001" summary="Init porject&#10;Added login page">
       <created>1576713729121</created>
@@ -175,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579032352926</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="improved actions, types and reducers for redux&#10;improved firebase integration, added support to upload user profile img&#10;improved the Navbar component&#10;improved the routing order and config">
+      <created>1579566326301</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1579566326301</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,7 +192,8 @@
     <MESSAGE value="aync actions for firebase integration on redux" />
     <MESSAGE value="added auth" />
     <MESSAGE value="added configurable router&#10;created wrapper components for router and route &#10;added auth routers&#10;added support for nesting routes" />
-    <option name="LAST_COMMIT_MESSAGE" value="added configurable router&#10;created wrapper components for router and route &#10;added auth routers&#10;added support for nesting routes" />
+    <MESSAGE value="improved actions, types and reducers for redux&#10;improved firebase integration, added support to upload user profile img&#10;improved the Navbar component&#10;improved the routing order and config" />
+    <option name="LAST_COMMIT_MESSAGE" value="improved actions, types and reducers for redux&#10;improved firebase integration, added support to upload user profile img&#10;improved the Navbar component&#10;improved the routing order and config" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1360" y="-75" key="#Inspections" timestamp="1576817948911">
@@ -222,10 +212,14 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577572673279" />
-    <state x="-1372" y="-229" key="CommitChangelistDialog2" timestamp="1579032352569">
+    <state x="-1372" y="-253" key="CommitChangelistDialog2" timestamp="1579566325929">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1372" y="-229" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579032352569" />
+    <state x="-1372" y="-253" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579566325929" />
+    <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog" timestamp="1579623733816">
+      <screen x="-1920" y="-280" width="1920" height="1080" />
+    </state>
+    <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579623733816" />
     <state width="1899" height="316" key="GridCell.Tab.0.bottom" timestamp="1579564789078">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -263,18 +257,18 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579020900978" />
-    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1579125050967">
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1579622694226">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579125050967" />
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579622694226" />
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576727526871">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.800@0.0.1280.800" timestamp="1576727526871" />
-    <state x="-1299" y="6" width="828" height="582" key="find.popup" timestamp="1579565943450">
+    <state x="-1299" y="6" width="828" height="582" key="find.popup" timestamp="1579622574034">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1299" y="6" width="828" height="582" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579565943450" />
+    <state x="-1299" y="6" width="828" height="582" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579622574034" />
     <state width="600" height="440" key="javadoc.popup" timestamp="1579565183027">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -284,10 +278,10 @@
     </state>
     <state x="-1462" y="-30" key="run.anything.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579205041963" />
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1579564975754">
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1579622983143">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579564975754" />
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579622983143" />
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1576731608589" />
   </component>
   <component name="XDebuggerManager">

@@ -4,14 +4,9 @@ import {Snackbar, Button, IconButton} from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 
 import {INotification, ISystemState, SystemActions, TAppState} from "../store";
-import {strict} from "assert";
 
-interface INotifyProps extends Pick<ISystemState, 'notifications'> {
-}
-
+interface INotifyProps extends Pick<ISystemState, 'notifications'> {}
 const Notify: FunctionComponent<INotifyProps> = ({notifications}) => {
-    console.log('notifications', notifications);
-
     const dispatch = useDispatch();
 
     const handleClose = (item: INotification) => (event: SyntheticEvent, reason?: string) => {
@@ -19,7 +14,9 @@ const Notify: FunctionComponent<INotifyProps> = ({notifications}) => {
     };
 
     return (<>
-        {notifications.map(item => (
+        {notifications
+            .filter(({open}) => open)
+            .map(item => (
             <Snackbar
                 anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
                 open={item.open}
