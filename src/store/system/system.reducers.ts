@@ -1,4 +1,4 @@
-import {ERROR, ISystemState, LOADING, NOTIFICATION, TSystemActions} from "./systemTypes";
+import {CLOSE_NOTIFICATION, ERROR, ISystemState, LOADING, NOTIFY, TSystemActions} from "./system.types";
 
 const InitState: ISystemState = {
     notifications: [],
@@ -27,13 +27,19 @@ function SystemReducers (
                 ],
             };
 
-        case NOTIFICATION:
+        case NOTIFY:
             return {
                 ...state,
                 notifications: [
                     ...state.notifications,
                     action.payload
                 ]
+            };
+
+        case CLOSE_NOTIFICATION:
+            return {
+                ...state,
+                notifications: state.notifications.map(n => (n === action.payload ? {...n, open: false}: n))
             };
 
         default:

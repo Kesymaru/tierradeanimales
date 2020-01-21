@@ -1,13 +1,13 @@
 import React, {FunctionComponent, useState, ChangeEvent, FormEvent} from "react";
 import {connect, useDispatch} from "react-redux";
-import {Container, CssBaseline, Avatar, Button, Typography, TextField, FormControlLabel, Grid, Link, Box, Checkbox, LinearProgress} from "@material-ui/core";
+import {Container, CssBaseline, Avatar, Button, Typography, TextField, FormControlLabel, Grid, Link, Checkbox, LinearProgress} from "@material-ui/core";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles, Theme} from '@material-ui/core/styles';
+import {Link as RouterLink} from 'react-router-dom';
 
 import {AuthActions, TAppState} from "../store";
-import ROUTES from "../constants/routes";
+import {FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE} from "../constants/routes";
 
-import Copyright from "./Copyright";
 import {EMAIL_REGEX} from "../constants";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -147,21 +147,26 @@ const SignIn: FunctionComponent<ISignInProps> = ({loading}) => {
                         { loading ? <LinearProgress color="primary" /> : null}
                         <Grid container className={classes.grid}>
                             <Grid item xs>
-                                <Link href={ROUTES.forgotPassword.path} variant="body2">
+                                <Link
+                                    component={RouterLink}
+                                    variant="body2"
+                                    to={FORGOT_PASSWORD_ROUTE.path}
+                                >
                                     Forgot password?
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href={ROUTES.signUp.path} variant="body2">
-                                    {"Don't have an ACCOUNT_ROUTE? Sign Up"}
+                                <Link
+                                    component={RouterLink}
+                                    variant="body2"
+                                    to={SIGN_UP_ROUTE.path}
+                                >
+                                    {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
                         </Grid>
                     </form>
                 </div>
-                <Box mt={8}>
-                    <Copyright/>
-                </Box>
             </Container>
         </Container>
     );

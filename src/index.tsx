@@ -28,7 +28,7 @@ Firebase.configure({
     projectId: "mywod-1c55e",
     authDomain: "project-id.firebaseapp.com",
     databaseURL: "https://project-id.firebaseio.com",
-    storageBucket: "project-id.appspot.com",
+    storageBucket: "gs://mywod-1c55e.appspot.com",
     messagingSenderId: "sender-id",
     measurementId: "G-measurement-id",
 });

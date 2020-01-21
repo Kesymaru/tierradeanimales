@@ -1,4 +1,7 @@
-import {ComponentClass, FunctionComponent} from "react";
+import {ComponentClass, ComponentType, FunctionComponent} from "react";
+
+import ListIcon from '@material-ui/icons/List';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 // ------------------------------------
 // Components
@@ -18,6 +21,7 @@ export interface IAppRoute {
     component: FunctionComponent<any> | ComponentClass<any>;
     exact?: boolean;
     auth?: boolean;
+    icon?: ComponentType<any>;
 }
 
 export interface IAppRoutes {
@@ -70,6 +74,7 @@ export const GOALS_ROUTE: IAppRoute = {
     path: '/goals',
     auth: true,
     component: GoalsList,
+    icon: ListIcon,
 };
 
 // ------------------------------------
@@ -78,7 +83,9 @@ export const GOALS_ROUTE: IAppRoute = {
 export const ACCOUNT_ROUTE: IAppRoute = {
     name: 'Account',
     path: '/account',
+    auth: true,
     component: Account,
+    icon: AccountBoxIcon,
 };
 export const EDIT_ACCOUNT_ROUTE: IAppRoute = {
     name: 'Edit Account',
@@ -124,5 +131,13 @@ export const ROUTES_ARRAY: IAppRoute[] = keys(ROUTES)
 function keys<O extends object>(obj: O): Array<keyof O> {
     return Object.keys(obj) as Array<keyof O>;
 }
+
+// ------------------------------------
+// Menu routes
+// ------------------------------------
+export const MENU_ROUTES: IAppRoute[] = [
+    ACCOUNT_ROUTE,
+    GOALS_ROUTE
+];
 
 export default ROUTES;

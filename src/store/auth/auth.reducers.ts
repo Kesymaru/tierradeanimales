@@ -7,7 +7,7 @@ import {
     RECEIVE_SIGN_OUT,
     REFRESH_TOKEN,
     TAuthActions
-} from "./authTypes";
+} from "./auth.types";
 
 import LocalStorage from "../../constants/localStorage";
 

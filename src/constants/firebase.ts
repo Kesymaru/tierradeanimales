@@ -1,4 +1,8 @@
-import firebase from 'firebase'
+import * as firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/storage";
+
+import {IUser} from "../store";
 
 export interface IFirebaseConfig {
     apiKey: string;
@@ -14,6 +18,7 @@ export interface IFirebaseConfig {
 class Firebase {
     private static config: IFirebaseConfig;
     private static auth: firebase.auth.Auth;
+    private static storage: firebase.storage.Storage;
 
     private constructor() {}
 
@@ -25,7 +30,9 @@ class Firebase {
     public static configure(config: IFirebaseConfig): void {
         Firebase.config = config;
         firebase.initializeApp(Firebase.config);
+
         Firebase.auth = firebase.auth();
+        Firebase.storage = firebase.storage();
     }
 
     public static onAuth(callback: Function) {
@@ -62,8 +69,8 @@ class Firebase {
         return Firebase.auth.signInWithEmailAndPassword(email, password);
     }
 
-    public static async signOut(): Promise<void> {
-        Firebase.auth.signOut();
+    public static signOut(): Promise<void> {
+        return Firebase.auth.signOut();
     }
 
     public static updatePassword (password: string): Promise<void> {
@@ -76,13 +83,24 @@ class Firebase {
         return Firebase.auth.sendPasswordResetEmail(email);
     }
 
-    public static updateProfile(uid: string, value: any) {
+    public static updateProfile(profile: IUser): Promise<void|string> {
         let user = Firebase.auth.currentUser;
-        if(!user) return;
-        return user.updateProfile({
-            displayName: "Jane Q. user",
-            photoURL: "https://example.com/jane-q-user/profile.jpg"
-        })
+        if(!user) return Promise.reject('User not logged');
+
+        return user.updateProfile(profile);
+    }
+
+    public static saveFile(id: string, file: File, name: string = ""): Promise<firebase.storage.UploadTaskSnapshot> {
+        if(name === "") name = file.name;
+        let userRef = Firebase.storage.ref().child(`${id}/${name}`);
+
+        return userRef.put(file)
+            .then((snapshot) => snapshot);
+    }
+
+    public static saveAndDownloadFile(id: string, file: File, name: string = ""): Promise<string> {
+        return Firebase.saveFile(id, file, name)
+            .then(snapshot => snapshot.ref.getDownloadURL())
     }
 }
 

@@ -3,7 +3,6 @@ import {useLocation, useHistory} from "react-router-dom"
 import {connect, useDispatch} from "react-redux";
 import clsx from "clsx";
 import {
-    CssBaseline,
     AppBar,
     Toolbar,
     IconButton,
@@ -25,8 +24,9 @@ import {
     Dashboard as DashboardIcon,
 } from '@material-ui/icons';
 
-import {TAppState, AuthActions} from "../store";
-import ROUTES from "../constants/routes";
+import {TAppState, AuthActions, IUserState, IAuthState} from "../../store";
+import ROUTES from "../../constants/routes";
+import NavbarMenu from "./NavbarMenu";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
@@ -82,12 +82,8 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-interface INavigationProps{
-    user: any;
-    logged: boolean;
-};
-
-const Navigation: FunctionComponent<INavigationProps> = ({user, logged }: INavigationProps) => {
+interface INavbarProps extends Pick<IUserState, 'user'>, Pick<IAuthState, 'logged'>{};
+const Navbar: FunctionComponent<INavbarProps> = ({user, logged }) => {
     const classes = useStyles();
     const [openDrawer, setOpenDrawer] = useState<boolean>(false);
     const dispatch = useDispatch();
@@ -97,7 +93,6 @@ const Navigation: FunctionComponent<INavigationProps> = ({user, logged }: INavig
     // console.log('navigation', location, user, logged);
 
     let menuButton = null;
-    let drawer = null;
     let button = null;
 
     if (logged) {
@@ -112,7 +107,7 @@ const Navigation: FunctionComponent<INavigationProps> = ({user, logged }: INavig
                 <MenuIcon/>
             </IconButton>;
 
-        drawer =
+        /*drawer =
             <Drawer
                 variant="permanent"
                 classes={{
@@ -134,7 +129,7 @@ const Navigation: FunctionComponent<INavigationProps> = ({user, logged }: INavig
                         <ListItemText primary="Dashboard"/>
                     </ListItem>
                 </List>
-            </Drawer>;
+            </Drawer>;*/
 
         button =
             <Button
@@ -169,13 +164,16 @@ const Navigation: FunctionComponent<INavigationProps> = ({user, logged }: INavig
                     { button }
                 </Toolbar>
             </AppBar>
-            { drawer }
+            { logged
+                ? <NavbarMenu open={openDrawer} setOpen={setOpenDrawer}/>
+                : null
+            }
         </>
     );
 };
 
-const mapStateToProps = (state: TAppState): INavigationProps => ({
+const mapStateToProps = (state: TAppState): INavbarProps => ({
     logged: state.auth.logged,
-    user: state.user.user,
+    user: state.user.user || null,
 });
-export default connect(mapStateToProps)(Navigation);
+export default connect(mapStateToProps)(Navbar);

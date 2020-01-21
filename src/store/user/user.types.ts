@@ -1,8 +1,15 @@
+export interface IUserAvatar {
+    img: string;
+    file: File;
+}
+
 export interface IUser {
-    uid?: string;
-    displayName?: string;
+    uid: string;
+    displayName: string;
+    email: string;
+    photoURL: string;
+    avatar?: IUserAvatar;
     refreshToken?: string;
-    photoURL?: string;
 }
 
 export interface IUserErrors {

@@ -2,9 +2,10 @@ import React, {FunctionComponent, useState, ChangeEvent, FormEvent} from "react"
 import {Container, CssBaseline, Avatar, Typography, Grid, TextField, FormControlLabel, Checkbox, Button, Link, Box, FormHelperText} from "@material-ui/core";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles, Theme} from '@material-ui/core/styles';
+import {Link as RouterLink} from 'react-router-dom';
 
 import Copyright from "./Copyright";
-import {EMAIL_REGEX} from "../constants";
+import {EMAIL_REGEX, SIGN_IN_ROUTE} from "../constants";
 import {useDispatch} from "react-redux";
 import {AuthActions} from "../store";
 
@@ -218,16 +219,17 @@ const SignUp: FunctionComponent<{}> = () => {
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link
+                                variant="body2"
+                                component={RouterLink}
+                                to={SIGN_IN_ROUTE.path}
+                            >
                                 Already have an account? Sign in
                             </Link>
                         </Grid>
                     </Grid>
                 </form>
             </div>
-            <Box mt={5}>
-                <Copyright/>
-            </Box>
         </Container>
     );
 };

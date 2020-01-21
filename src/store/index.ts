@@ -5,9 +5,9 @@ import {combineReducers, createStore, applyMiddleware, Store} from "redux";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import SystemReducers from "./system/systemReducers";
-import AuthReducers from "./auth/authReducers";
-import UserReducers from "./user/userReducers";
+import SystemReducers from "./system/system.reducers";
+import AuthReducers from "./auth/auth.reducers";
+import UserReducers from "./user/user.reducers";
 import GoalsReducers from "./goals/goalsReducers";
 
 const RootReducer = combineReducers({
@@ -63,12 +63,12 @@ class AppStore {
 // ------------------------------------
 export default AppStore;
 
-export * from './system/systemTypes';
-export * from './auth/authTypes';
-export * from './user/userTypes';
+export * from './system/system.types';
+export * from './auth/auth.types';
+export * from './user/user.types';
 export * from './goals/goalsTypes';
 
-export {default as SystemActions} from "./system/systemActions";
-export {default as AuthActions} from "./auth/authActions";
-export {default as UserActions} from "./user/userActions";
+export {default as SystemActions} from "./system/system.actions";
+export {default as AuthActions} from "./auth/auth.actions";
+export {default as UserActions} from "./user/user.actions";
 export {default as GoalsActions} from "./goals/goalsActions";

@@ -6,12 +6,13 @@ import {
     RECEIVE_SIGN_IN,
     RECEIVE_SIGN_OUT,
     TAuthActions
-} from "./authTypes";
+} from "./auth.types";
 import {Dispatch} from "redux";
 
 import Firebase from "../../constants/firebase";
-import SystemActions from "../system/systemActions";
-import UserActions from "../user/userActions";
+import SystemActions from "../system/system.actions";
+import UserActions from "../user/user.actions";
+import {IUser} from "..";
 
 /**
  * Auth Action creator
@@ -27,7 +28,7 @@ class AuthActions {
                 .then(({user}) => {
                     if(user) {
                         dispatch(AuthActions.ReceiveSingIn( user.refreshToken));
-                        dispatch(UserActions.ReceiveUser(user));
+                        dispatch(UserActions.ReceiveUser(user as IUser));
                     }
                 })
                 .catch(error => dispatch(AuthActions.ErrorSingIn(error)))
