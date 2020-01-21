@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignIn.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +96,7 @@
       <workItem from="1576817200524" duration="958000" />
       <workItem from="1576963346713" duration="35777000" />
       <workItem from="1577568811282" duration="99053000" />
-      <workItem from="1579564004625" duration="5771000" />
+      <workItem from="1579564004625" duration="6185000" />
     </task>
     <task id="LOCAL-00001" summary="Init porject&#10;Added login page">
       <created>1576713729121</created>
@@ -169,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579623845694</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Improved the integration for firebase auth">
+      <created>1579625824853</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1579625824853</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,7 +205,8 @@
     <MESSAGE value="added configurable router&#10;created wrapper components for router and route &#10;added auth routers&#10;added support for nesting routes" />
     <MESSAGE value="improved actions, types and reducers for redux&#10;improved firebase integration, added support to upload user profile img&#10;improved the Navbar component&#10;improved the routing order and config" />
     <MESSAGE value="Created the user menu component to display the user profile image and menu related to the user profile on the top app bar&#10;improved the navbar component styles and moved logic to the new user menu component" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created the user menu component to display the user profile image and menu related to the user profile on the top app bar&#10;improved the navbar component styles and moved logic to the new user menu component" />
+    <MESSAGE value="Improved the integration for firebase auth" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved the integration for firebase auth" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1360" y="-75" key="#Inspections" timestamp="1576817948911">
@@ -218,10 +225,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577572673279" />
-    <state x="-1372" y="-253" key="CommitChangelistDialog2" timestamp="1579623845300">
+    <state x="-1510" y="-253" key="CommitChangelistDialog2" timestamp="1579625824670">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1372" y="-253" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579623845300" />
+    <state x="-1510" y="-253" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579625824670" />
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog" timestamp="1579623733816">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -284,10 +291,10 @@
     </state>
     <state x="-1462" y="-30" key="run.anything.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579205041963" />
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1579625618790">
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1579626284726">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579625618790" />
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579626284726" />
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1576731608589" />
   </component>
   <component name="XDebuggerManager">

@@ -3,10 +3,10 @@ import {connect, useDispatch} from "react-redux";
 import {Container, CssBaseline, Avatar, Button, Typography, TextField, FormControlLabel, Grid, Link, Checkbox, LinearProgress} from "@material-ui/core";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import {Link as RouterLink} from 'react-router-dom';
+import {Link as RouterLink, Redirect} from 'react-router-dom';
 
-import {AuthActions, ISystemState, TAppState} from "../store";
-import {FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE} from "../constants/routes";
+import {AuthActions, IAuthState, ISystemState, TAppState} from "../store";
+import {FORGOT_PASSWORD_ROUTE, HOME_ROUTE, SIGN_UP_ROUTE} from "../constants/routes";
 
 import {EMAIL_REGEX} from "../constants";
 
@@ -33,8 +33,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-interface ISignInProps extends Pick<ISystemState, 'loading'>{}
-const SignIn: FunctionComponent<ISignInProps> = ({loading}) => {
+interface ISignInProps extends Pick<ISystemState, 'loading'>, Pick<IAuthState, 'logged'> {
+}
+
+const SignIn: FunctionComponent<ISignInProps> = ({loading, logged}) => {
     const classes = useStyles();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -61,17 +63,21 @@ const SignIn: FunctionComponent<ISignInProps> = ({loading}) => {
     };
 
     const validateEmail = (value: string) => {
-        if(!value) return setEmailError('Email is required');
+        if (!value) return setEmailError('Email is required');
         EMAIL_REGEX.test(value)
             ? setEmailError('')
             : setEmailError('Invalid Email');
     };
 
     const validatePassword = (value: string) => {
-        if(!value.length) return setPasswordError('Password is required');
-        if(value.length < 6) return setPasswordError('Invalid Password');
+        if (!value.length) return setPasswordError('Password is required');
+        if (value.length < 6) return setPasswordError('Invalid Password');
         setPasswordError('');
     };
+
+    if (logged) {
+        return (<Redirect to={HOME_ROUTE.path}/>);
+    }
 
     return (
         <Container maxWidth="lg">
@@ -137,11 +143,11 @@ const SignIn: FunctionComponent<ISignInProps> = ({loading}) => {
                             variant="contained"
                             color="primary"
                             className={classes.submit}
-                            disabled={ loading || !!emailError || !!passwordError }
+                            disabled={loading || !!emailError || !!passwordError}
                         >
-                            { loading ? 'Loading' : 'Sign In' }
+                            {loading ? 'Loading' : 'Sign In'}
                         </Button>
-                        { loading ? <LinearProgress color="primary" /> : null}
+                        {loading ? <LinearProgress color="primary"/> : null}
                         <Grid container className={classes.grid}>
                             <Grid item xs>
                                 <Link
@@ -169,5 +175,8 @@ const SignIn: FunctionComponent<ISignInProps> = ({loading}) => {
     );
 };
 
-const mapStateToProps = (state: TAppState) => ({loading: state.system.loading});
+const mapStateToProps = (state: TAppState) => ({
+    loading: state.system.loading,
+    logged: state.auth.logged,
+});
 export default connect(mapStateToProps)(SignIn);
