@@ -1,9 +1,9 @@
 import React, {FunctionComponent, SyntheticEvent} from "react";
 import {connect, useDispatch} from "react-redux";
-import {Snackbar, Button, IconButton} from "@material-ui/core";
+import {Snackbar, IconButton} from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 
-import {INotification, ISystemState, SystemActions, TAppState} from "../store";
+import {INotification, ISystemState, SystemActions, IAppState} from "../store";
 
 interface INotifyProps extends Pick<ISystemState, 'notifications'> {}
 const Notify: FunctionComponent<INotifyProps> = ({notifications}) => {
@@ -38,7 +38,7 @@ const Notify: FunctionComponent<INotifyProps> = ({notifications}) => {
     </>);
 };
 
-const mapStateToProps = (state: TAppState): INotifyProps => ({
+const mapStateToProps = (state: IAppState): INotifyProps => ({
     notifications: state.system.notifications,
 });
 export default connect(mapStateToProps)(Notify);

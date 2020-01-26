@@ -2,7 +2,7 @@ import React, {FunctionComponent} from "react";
 import {connect, useDispatch} from "react-redux";
 import {Paper, Typography, List, ListItem, ListItemText, Divider, Container, CssBaseline} from "@material-ui/core";
 
-import {IGoalsState, GoalsActions, TAppState} from "../store";
+import {IGoalsState, GoalsActions, IAppState} from "../store";
 import GoalEdit from "./GoalEdit";
 
 interface IGoalsProps extends IGoalsState{};
@@ -39,5 +39,5 @@ const GoalsList: FunctionComponent<IGoalsProps> = ({goals, selected}: IGoalsProp
     );
 };
 
-const mapStateToProps = (state: TAppState): IGoalsProps => ({...state.goals});
+const mapStateToProps = (state: IAppState): IGoalsProps => ({...state.goals});
 export default connect(mapStateToProps)(GoalsList)

@@ -1,10 +1,9 @@
 import React, {FunctionComponent, useState, ChangeEvent, FormEvent} from "react";
-import {Container, CssBaseline, Avatar, Typography, Grid, TextField, FormControlLabel, Checkbox, Button, Link, Box, FormHelperText} from "@material-ui/core";
+import {Container, CssBaseline, Avatar, Typography, Grid, TextField, FormControlLabel, Checkbox, Button, Link, FormHelperText} from "@material-ui/core";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 import {Link as RouterLink} from 'react-router-dom';
 
-import Copyright from "./Copyright";
 import {EMAIL_REGEX, SIGN_IN_ROUTE} from "../constants";
 import {useDispatch} from "react-redux";
 import {AuthActions} from "../store";
@@ -43,7 +42,6 @@ const SignUp: FunctionComponent<{}> = () => {
     const [emailError, setEmailError] = useState<string>('');
     const [passwordError, setPasswordError] = useState<string>('');
     const [termsError, setTermsError] = useState<string>('');
-    const [formError, setFormError] = useState<string>('');
     const dispatch = useDispatch();
 
     const handleSubmit = async (event: FormEvent) => {
@@ -204,9 +202,6 @@ const SignUp: FunctionComponent<{}> = () => {
                                 : null}
                         </Grid>
                     </Grid>
-                    {formError
-                        ? <FormHelperText>{formError}</FormHelperText>
-                        : null}
                     <Button
                         type="submit"
                         fullWidth

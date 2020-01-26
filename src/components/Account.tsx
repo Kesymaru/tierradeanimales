@@ -1,38 +1,21 @@
 import React, {ChangeEvent, FormEvent, FunctionComponent, useEffect, useRef, useState} from "react";
-import {Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typography} from "@material-ui/core";
+import {Avatar, Button, Container, CssBaseline, Grid, TextField, Typography} from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
-import {IUser, IUserAvatar, TAppState, UserActions} from "../store";
+import {IUser, IUserState, IAppState, UserActions} from "../store";
 import {connect, useDispatch} from "react-redux";
-import Firebase from "../constants/firebase";
 
-interface AccountProps {
-    user: any
-}
-
-interface AccountErrors {
-    email: string;
-    password: string;
-}
-
+interface AccountProps extends Pick<IUserState, 'user'>{}
 const Account: FunctionComponent<AccountProps> = ({user}) => {
     const [touched, setTouched] = useState<boolean>(false);
     const [userData, setUserData] = useState<IUser | null>(user);
     const [password, setPassword] = useState<string>('');
     const fileInput = useRef<HTMLInputElement>(null);
-    const [errors, setErrors] = useState<AccountErrors>({
-        email: '',
-        password: '',
-    });
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         if (!user) return;
-
-        console.log('use effect', user);
-        console.log('userData', userData);
-
         setUserData(user);
     }, [user]);
 
@@ -103,6 +86,7 @@ const Account: FunctionComponent<AccountProps> = ({user}) => {
                     {
                         userData && (userData.photoURL || userData.avatar)
                             ? <img
+                                alt={userData.displayName || 'avatar'}
                                 style={{height: '100%'}}
                                 src={userData?.avatar ? userData.avatar.img : userData?.photoURL}/>
                             : <LockOutlinedIcon/>
@@ -177,7 +161,7 @@ const Account: FunctionComponent<AccountProps> = ({user}) => {
     );
 };
 
-const mapStateToProps = (state: TAppState) => ({
+const mapStateToProps = (state: IAppState) => ({
     user: state.user.user,
 });
 export default connect(mapStateToProps)(Account);
