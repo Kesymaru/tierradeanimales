@@ -1,15 +1,7 @@
-import {
-    DELAY_REFRESH_TOKEN,
-    ERROR_SIGN_IN,
-    ERROR_SIGN_OUT,
-    ERROR_SIGN_UP,
-    RECEIVE_SIGN_IN,
-    RECEIVE_SIGN_OUT,
-    TAuthActions
-} from "./auth.types";
+import {DELAY_REFRESH_TOKEN, ERROR_SIGN_IN, ERROR_SIGN_OUT, ERROR_SIGN_UP, RECEIVE_SIGN_IN, RECEIVE_SIGN_OUT, TAuthActions} from "./auth.types";
 import {Dispatch} from "redux";
 
-import Firebase from "../../constants/firebase";
+import {Auth} from "../../constants/firebase";
 import SystemActions from "../system/system.actions";
 import UserActions from "../user/user.actions";
 import {IUser} from "..";
@@ -24,7 +16,7 @@ class AuthActions {
         return (dispatch: Dispatch) => {
             dispatch(SystemActions.Loading());
 
-            Firebase.signIn(email, password)
+            Auth.SignIn(email, password)
                 .then(({user}) => {
                     if(user) {
                         dispatch(AuthActions.ReceiveSingIn( user.refreshToken));
@@ -37,7 +29,6 @@ class AuthActions {
     }
 
     public static ReceiveSingIn(token: string, expire: Date = (new Date())): TAuthActions {
-        console.log('ReceiveSingInAction', token);
         return {
             type: RECEIVE_SIGN_IN,
             payload: { token, expire, },
@@ -55,7 +46,7 @@ class AuthActions {
         return (dispatch: Dispatch) => {
             dispatch(SystemActions.Loading());
 
-            Firebase.signUp(email, password)
+            Auth.SignUp(email, password)
                 .catch(error => dispatch(AuthActions.ErrorSignUp(error)));
         }
     }
@@ -71,7 +62,7 @@ class AuthActions {
         return (dispatch: Dispatch) => {
             dispatch(SystemActions.Loading());
 
-            Firebase.signOut()
+            Auth.SignOut()
                 .then(() => dispatch(AuthActions.ReceiveSingOut()))
                 .catch(error => dispatch(AuthActions.ErrorSignOut(error)))
                 .finally(() => dispatch(SystemActions.Loading(false)));
@@ -79,18 +70,14 @@ class AuthActions {
     }
 
     public static ReceiveSingOut(): TAuthActions {
-        return { type: RECEIVE_SIGN_OUT, }
+        return { type: RECEIVE_SIGN_OUT }
     }
 
     public static ErrorSignOut(payload: Error): TAuthActions {
-        return {
-            type: ERROR_SIGN_OUT,
-            payload,
-        }
+        return {type: ERROR_SIGN_OUT, payload}
     }
 
     public static DelayRefreshToken(delay: number = AuthActions.Expiration): TAuthActions {
-        console.log('delay refresh token action');
         return {
             type: DELAY_REFRESH_TOKEN,
             delay,
@@ -100,10 +87,7 @@ class AuthActions {
 
     public static RefresToken(): Function {
         return (dispatch: Dispatch) => {
-            console.log('refresh token!');
-
             let token = 'new test token';
-
             dispatch(AuthActions.ReceiveSingIn(token));
         }
     }

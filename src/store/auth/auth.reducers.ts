@@ -1,13 +1,4 @@
-import {
-    ERROR_SIGN_IN,
-    ERROR_SIGN_OUT,
-    ERROR_SIGN_UP,
-    IAuthState,
-    RECEIVE_SIGN_IN,
-    RECEIVE_SIGN_OUT,
-    REFRESH_TOKEN,
-    TAuthActions
-} from "./auth.types";
+import {ERROR_SIGN_IN, ERROR_SIGN_OUT, ERROR_SIGN_UP, IAuthState, RECEIVE_SIGN_IN, RECEIVE_SIGN_OUT, REFRESH_TOKEN, TAuthActions} from "./auth.types";
 
 import LocalStorage from "../../constants/localStorage";
 
