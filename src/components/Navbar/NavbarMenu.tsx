@@ -14,12 +14,13 @@ import {
 import {useHistory} from "react-router-dom";
 
 import {ChevronLeft, Dashboard} from "@material-ui/icons";
-import {ACCOUNT_ROUTE, GOALS_ROUTE, IAppRoute} from "../../constants";
+import {ACCOUNT_ROUTE, CHAT_LIST_ROUTE, GOALS_ROUTE, IAppRoute} from "../../constants";
 import clsx from "clsx";
 
 const MenuItems: IAppRoute[] = [
     ACCOUNT_ROUTE,
     GOALS_ROUTE,
+    CHAT_LIST_ROUTE,
 ];
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -51,11 +52,10 @@ interface NavbarMenuProps {
     open: boolean;
     setOpen: Function;
 }
+
 const NavbarMenu: FunctionComponent<NavbarMenuProps> = ({open, setOpen}) => {
     const classes = useStyles();
     const history = useHistory();
-
-    console.log('NavbarMenu', open);
 
     return (
         <Drawer

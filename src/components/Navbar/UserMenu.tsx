@@ -3,7 +3,7 @@ import {Avatar, Button, Menu, MenuItem} from "@material-ui/core";
 import {connect, useDispatch} from "react-redux";
 import {useHistory, useLocation} from "react-router-dom";
 
-import {AuthActions, IAuthState, IUserState, TAppState} from "../../store";
+import {AuthActions, IAuthState, IUserState, IAppState} from "../../store";
 import {ACCOUNT_ROUTE, SIGN_IN_ROUTE} from "../../constants/routes";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
@@ -20,7 +20,6 @@ const UserMenu: FunctionComponent<IUserMenuProps> = ({logged, user}) => {
     };
 
     const handleClose = (item: string | null) => (event: MouseEvent) => {
-        console.log('item selected', item);
         setAnchorEl(null);
 
         switch (item) {
@@ -43,6 +42,7 @@ const UserMenu: FunctionComponent<IUserMenuProps> = ({logged, user}) => {
             >
                 {user && user.photoURL
                     ? <img
+                        alt={user.displayName || "avatar"}
                         style={{height: '100%'}}
                         src={user.photoURL}/>
                     : <LockOutlinedIcon/>}
@@ -70,7 +70,7 @@ const UserMenu: FunctionComponent<IUserMenuProps> = ({logged, user}) => {
     );
 };
 
-const mapStateToProps = (state: TAppState): IUserMenuProps => ({
+const mapStateToProps = (state: IAppState): IUserMenuProps => ({
     logged: state.auth.logged,
     user: state.user.user,
 });

@@ -4,7 +4,7 @@ import clsx from "clsx";
 import {AppBar, Toolbar, IconButton, Typography, createStyles, makeStyles, Theme} from "@material-ui/core";
 import {Menu as MenuIcon} from '@material-ui/icons';
 
-import {TAppState, IAuthState} from "../../store";
+import {IAppState, IAuthState} from "../../store";
 import NavbarMenu from "./NavbarMenu";
 import UserMenu from "./UserMenu";
 
@@ -78,7 +78,7 @@ const Navbar: FunctionComponent<INavbarProps> = ({logged}) => {
     </>);
 };
 
-const mapStateToProps = (state: TAppState): INavbarProps => ({
+const mapStateToProps = (state: IAppState): INavbarProps => ({
     logged: state.auth.logged,
 });
 export default connect(mapStateToProps)(Navbar);
