@@ -5,9 +5,14 @@ export interface INotification {
     duration?: number;
 }
 
+export interface ISystemLoading {
+    [key: string]: boolean;
+}
+
 export interface ISystemState {
     notifications: INotification[];
     loading: boolean;
+    loadingStatus: ISystemLoading;
     errors?: Error[];
 }
 
@@ -17,7 +22,7 @@ export const LOADING = 'LOADING';
 
 interface ILoading {
     type: typeof LOADING;
-    payload: boolean;
+    payload: ISystemLoading;
 }
 
 // -------------------------

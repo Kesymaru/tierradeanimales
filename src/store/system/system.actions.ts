@@ -1,18 +1,17 @@
 import {CLOSE_NOTIFICATION, ERROR, INotification, LOADING, NOTIFY, TSystemActions} from "./system.types";
 
 class SystemActions {
-    public static Loading(loading: boolean = true): TSystemActions {
+    public static Loading(value: boolean = true, name: string = "system"): TSystemActions {
         return {
             type: LOADING,
-            payload: loading
+            payload: {
+                [`${name}`]: value
+            }
         }
     }
 
     public static Error(payload: Error): TSystemActions {
-        return {
-            type: ERROR,
-            payload,
-        }
+        return {type: ERROR, payload}
     }
 
     public static Notify(message: string, duration: number = 6000): TSystemActions {

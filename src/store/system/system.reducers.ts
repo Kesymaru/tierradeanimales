@@ -3,24 +3,27 @@ import {CLOSE_NOTIFICATION, ERROR, ISystemState, LOADING, NOTIFY, TSystemActions
 const InitState: ISystemState = {
     notifications: [],
     loading: false,
+    loadingStatus: {},
     errors: [],
 };
 
-function SystemReducers (
+function SystemReducers(
     state: ISystemState = InitState,
     action: TSystemActions): ISystemState {
 
     switch (action.type) {
-        case LOADING:
+        case LOADING: {
+            let loadingStatus = {...state.loadingStatus, ...action.payload};
             return {
                 ...state,
-                loading: action.payload,
+                loadingStatus,
+                loading: Object.keys(loadingStatus).some(k => loadingStatus[k]),
             };
+        }
 
         case ERROR:
             return {
                 ...state,
-                loading: false,
                 errors: [
                     ...(state.errors || []),
                     action.payload
@@ -39,7 +42,7 @@ function SystemReducers (
         case CLOSE_NOTIFICATION:
             return {
                 ...state,
-                notifications: state.notifications.map(n => (n === action.payload ? {...n, open: false}: n))
+                notifications: state.notifications.map(n => (n === action.payload ? {...n, open: false} : n))
             };
 
         default:
