@@ -14,6 +14,9 @@ import Account from "../components/Account";
 import EditAccount from "../components/EditAccount";
 import NotFound from "../components/NotFound";
 import DetailsAccount from "../components/DetailsAccount";
+import ChatList, {Chat} from "../components/Chat";
+import CreatChat from "../components/Chat/CreatChat";
+import {VersusAdmin, Versus} from "../components/versus"
 
 export interface IAppRoute {
     name: string;
@@ -99,6 +102,47 @@ export const DETAILS_ACCOUNT_ROUTE: IAppRoute = {
 };
 
 // ------------------------------------
+// Chat
+// ------------------------------------
+export const CHAT_LIST_ROUTE: IAppRoute = {
+    name: 'Chat List',
+    path: `/chat`,
+    auth: true,
+    component: ChatList
+};
+
+export const CREAT_CHAT_ROUTE: IAppRoute = {
+    name: 'Create Chat',
+    path: `${CHAT_LIST_ROUTE.path}/new`,
+    auth: true,
+    component: CreatChat,
+};
+
+export const CHAT_ROUTE: IAppRoute = {
+    name: 'Chat',
+    path: `${CHAT_LIST_ROUTE.path}/:id`,
+    auth: true,
+    component: Chat
+};
+
+// ------------------------------------
+// Versus
+// ------------------------------------
+const VERSUS_ADMIN_ROUTE: IAppRoute = {
+    name: 'Versus Admin',
+    path: 'admin/versus',
+    auth: true,
+    component: VersusAdmin
+};
+
+const VERSUS_ROUTE: IAppRoute = {
+    name: 'Versus',
+    path: '/versus/:id',
+    auth: false,
+    component: Versus
+};
+
+// ------------------------------------
 // 404 no match
 // ------------------------------------
 export const NOT_FOUND_ROUTE: IAppRoute = {
@@ -119,6 +163,11 @@ const ROUTES: IAppRoutes = {
     detailsAccount: DETAILS_ACCOUNT_ROUTE,
     editAccount: EDIT_ACCOUNT_ROUTE,
     account: ACCOUNT_ROUTE,
+    createChat: CREAT_CHAT_ROUTE,
+    chat: CHAT_ROUTE,
+    chatList: CHAT_LIST_ROUTE,
+    versusAdmin: VERSUS_ADMIN_ROUTE,
+    versus: VERSUS_ROUTE,
     notFound: NOT_FOUND_ROUTE,
 };
 
