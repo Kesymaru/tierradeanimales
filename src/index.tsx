@@ -6,14 +6,14 @@ import App from "./App";
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import AppStore from "./store";
-import Firebase from "./constants/firebase";
+import Firebase from "./constants/firebase/firebase";
 import LocalStorage from "./constants/localStorage";
 
 // ------------------------------------
 // Configure App
 // ------------------------------------
 // const store = configureStore();
-AppStore.configure();
+AppStore.Configure();
 
 LocalStorage.configure({
     keys: [{
@@ -22,12 +22,12 @@ LocalStorage.configure({
     }]
 });
 
-Firebase.configure({
+Firebase.Configure({
     apiKey: "AIzaSyCHHJ0dpe8h5cfisKgOLsIKppZNrFbuRQk",
     appId: "app-id",
     projectId: "mywod-1c55e",
     authDomain: "project-id.firebaseapp.com",
-    databaseURL: "https://project-id.firebaseio.com",
+    databaseURL: "https://mywod-1c55e.firebaseio.com/",
     storageBucket: "gs://mywod-1c55e.appspot.com",
     messagingSenderId: "sender-id",
     measurementId: "G-measurement-id",
