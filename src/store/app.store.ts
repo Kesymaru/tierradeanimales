@@ -9,6 +9,7 @@ import AuthReducers from "./auth/auth.reducers";
 import UserReducers from "./user/user.reducers";
 import GoalsReducers from "./goals/goalsReducers";
 import ChatReducers from "./chat/chat.reducers";
+import VersusReducers from "./versus/versus.reducers";
 
 class AppStore {
     public static store: Store;
@@ -21,6 +22,7 @@ class AppStore {
         user: UserReducers,
         goals: GoalsReducers,
         chats: ChatReducers,
+        versus: VersusReducers,
     };
     private static middlewares = [
         // AuthMiddleware,
