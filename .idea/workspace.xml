@@ -1,27 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="added a redirect into the sign in component in order to send the user to the home route when logged">
-      <change afterPath="$PROJECT_DIR$/src/components/versus/Versus.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/versus/VersusAdmin.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/versus/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/chat/chat.actions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/chat/chat.reducers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/chat/chat.types.ts" afterDir="false" />
+    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/versus/VersusConfig.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/versus/VersusParticipants.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/versus/VersusPreview.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Account.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GoalsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GoalsList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/NavbarMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/NavbarMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/UserMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/UserMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Notify.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Notify.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignIn.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/versus/VersusAdmin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/versus/VersusAdmin.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviceWorker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviceWorker.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +33,6 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TypeScript" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.12.0" />
@@ -116,7 +104,7 @@
       <workItem from="1576963346713" duration="35777000" />
       <workItem from="1577568811282" duration="99053000" />
       <workItem from="1579564004625" duration="40429000" />
-      <workItem from="1579733497168" duration="18579000" />
+      <workItem from="1579733497168" duration="34660000" />
     </task>
     <task id="LOCAL-00001" summary="Init porject&#10;Added login page">
       <created>1576713729121</created>
@@ -237,7 +225,70 @@
       <option name="project" value="LOCAL" />
       <updated>1580002943026</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="improved the chats and chat actions&#10;improved the chat store status">
+      <created>1580002984742</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1580002984742</updated>
+    </task>
+    <task id="LOCAL-00019" summary="added connected react router to support router on the redux store">
+      <created>1580003021567</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1580003021567</updated>
+    </task>
+    <task id="LOCAL-00020" summary="updated components">
+      <created>1580003044499</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1580003044499</updated>
+    </task>
+    <task id="LOCAL-00021" summary="added a redirect into the sign in component in order to send the user to the home route when logged">
+      <created>1580003105817</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1580003105817</updated>
+    </task>
+    <task id="LOCAL-00022" summary="modified the navbar to support menu and navigation based on the route config">
+      <created>1580003145459</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1580003145459</updated>
+    </task>
+    <task id="LOCAL-00023" summary="added new versus component for demo">
+      <created>1580003161430</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1580003161430</updated>
+    </task>
+    <task id="LOCAL-00024" summary="added admin route for the versus">
+      <created>1580161179667</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1580161179667</updated>
+    </task>
+    <task id="LOCAL-00025" summary="removed the refresh token on the user interface">
+      <created>1580161205541</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1580161205541</updated>
+    </task>
+    <task id="LOCAL-00026" summary="new store for versus">
+      <created>1580161245347</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1580161245347</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,7 +308,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Init porject&#10;Added login page" />
     <MESSAGE value="Added Sign In and Sign Up components&#10;Added toolbar and drawer for Navigation.tsx" />
     <MESSAGE value="Added redux, actions reducers and types" />
     <MESSAGE value="added new state reducer, types and actions for system" />
@@ -268,13 +318,22 @@
     <MESSAGE value="improved actions, types and reducers for redux&#10;improved firebase integration, added support to upload user profile img&#10;improved the Navbar component&#10;improved the routing order and config" />
     <MESSAGE value="Created the user menu component to display the user profile image and menu related to the user profile on the top app bar&#10;improved the navbar component styles and moved logic to the new user menu component" />
     <MESSAGE value="Improved the integration for firebase auth" />
-    <MESSAGE value="added a redirect into the sign in component in order to send the user to the home route when logged" />
     <MESSAGE value="improved the chat components" />
     <MESSAGE value="separated the integration with firebase services into different classes&#10;auth.ts, database.ts, firebase.ts and storage.ts" />
     <MESSAGE value="improved the store organization&#10;updated tha auth actions" />
     <MESSAGE value="updated the system and user on the store" />
     <MESSAGE value="update firebase.ts separate &#10;added more routes improved the auth on the routes.ts" />
-    <option name="LAST_COMMIT_MESSAGE" value="update firebase.ts separate &#10;added more routes improved the auth on the routes.ts" />
+    <MESSAGE value="improved the chats and chat actions&#10;improved the chat store status" />
+    <MESSAGE value="added connected react router to support router on the redux store" />
+    <MESSAGE value="updated components" />
+    <MESSAGE value="improved the configuration of the app" />
+    <MESSAGE value="added a redirect into the sign in component in order to send the user to the home route when logged" />
+    <MESSAGE value="modified the navbar to support menu and navigation based on the route config" />
+    <MESSAGE value="added new versus component for demo" />
+    <MESSAGE value="added admin route for the versus" />
+    <MESSAGE value="removed the refresh token on the user interface" />
+    <MESSAGE value="new store for versus" />
+    <option name="LAST_COMMIT_MESSAGE" value="new store for versus" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1360" y="-75" key="#Inspections" timestamp="1576817948911">
@@ -293,43 +352,43 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1577572673279" />
-    <state x="-1510" y="-253" key="CommitChangelistDialog2" timestamp="1580003145104">
+    <state x="-1510" y="-253" width="1037" height="955" key="CommitChangelistDialog2" timestamp="1580161313983">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1510" y="-253" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580003145104" />
+    <state x="-1510" y="-253" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580161313983" />
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog" timestamp="1579623733816">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579623733816" />
-    <state width="1899" height="316" key="GridCell.Tab.0.bottom" timestamp="1580002307727">
+    <state width="1899" height="316" key="GridCell.Tab.0.bottom" timestamp="1580158085924">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1899" height="316" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580002307727" />
+    <state width="1899" height="316" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580158085924" />
     <state width="1280" height="261" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1576731842392" />
-    <state width="1899" height="316" key="GridCell.Tab.0.center" timestamp="1580002307726">
+    <state width="1899" height="316" key="GridCell.Tab.0.center" timestamp="1580158085923">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1899" height="316" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580002307726" />
+    <state width="1899" height="316" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580158085923" />
     <state width="1280" height="261" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1576731842391" />
-    <state width="1899" height="316" key="GridCell.Tab.0.left" timestamp="1580002307726">
+    <state width="1899" height="316" key="GridCell.Tab.0.left" timestamp="1580158085923">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1899" height="316" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580002307726" />
+    <state width="1899" height="316" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580158085923" />
     <state width="1280" height="261" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1576731842390" />
-    <state width="1899" height="316" key="GridCell.Tab.0.right" timestamp="1580002307726">
+    <state width="1899" height="316" key="GridCell.Tab.0.right" timestamp="1580158085924">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1899" height="316" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580002307726" />
+    <state width="1899" height="316" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580158085924" />
     <state width="1280" height="261" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1576731842391" />
     <state x="-1571" y="-198" width="1203" height="875" key="SettingsEditor" timestamp="1579706599456">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1571" y="-198" width="1203" height="875" key="SettingsEditor/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579706599456" />
     <state x="134" y="27" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1576727555828" />
-    <state x="-1230" y="-1" width="540" height="540" key="StructurePopup" timestamp="1579914837345">
+    <state x="-1230" y="-1" width="567" height="540" key="StructurePopup" timestamp="1580009120712">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1230" y="-1" width="540" height="540" key="StructurePopup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579914837345" />
+    <state x="-1230" y="-1" width="567" height="540" key="StructurePopup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580009120712" />
     <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1580002944984">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -342,35 +401,35 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579020823979" />
-    <state x="-1820" y="-180" width="1720" height="880" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog" timestamp="1580001825060">
+    <state x="-1820" y="-180" width="1720" height="880" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog" timestamp="1580139638828">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1820" y="-180" width="1720" height="880" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580001825060" />
-    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1580002463330">
+    <state x="-1820" y="-180" width="1720" height="880" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580139638828" />
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1580006138593">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580002463330" />
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580006138593" />
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576727526871">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.800@0.0.1280.800" timestamp="1576727526871" />
-    <state x="-1299" y="6" width="828" height="582" key="find.popup" timestamp="1579711047614">
+    <state x="-1299" y="6" width="828" height="582" key="find.popup" timestamp="1580140690539">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1299" y="6" width="828" height="582" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579711047614" />
-    <state width="600" height="440" key="javadoc.popup" timestamp="1579672825678">
+    <state x="-1299" y="6" width="828" height="582" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580140690539" />
+    <state width="600" height="440" key="javadoc.popup" timestamp="1580145157568">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="600" height="440" key="javadoc.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579672825678" />
+    <state width="600" height="440" key="javadoc.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580145157568" />
     <state x="-1462" y="-30" key="run.anything.popup" timestamp="1579643145328">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1462" y="-30" key="run.anything.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1579643145328" />
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1580002232465">
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1580158049653">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580002232465" />
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580158049653" />
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1576731608589" />
   </component>
   <component name="XDebuggerManager">

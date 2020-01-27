@@ -1,6 +1,8 @@
 import React, {FunctionComponent} from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from "react-redux";
+import {MuiPickersUtilsProvider} from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
 
 import App from "./App";
 import './index.css';
@@ -12,7 +14,6 @@ import LocalStorage from "./constants/localStorage";
 // ------------------------------------
 // Configure App
 // ------------------------------------
-// const store = configureStore();
 AppStore.Configure();
 
 LocalStorage.configure({
@@ -35,7 +36,9 @@ Firebase.Configure({
 
 const AppRoot: FunctionComponent = () => (
     <Provider store={AppStore.store}>
-        <App/>
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+            <App/>
+        </MuiPickersUtilsProvider>
     </Provider>
 );
 
