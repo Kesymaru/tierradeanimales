@@ -6,7 +6,8 @@ export * from "./system/system.types";
 export * from "./auth/auth.types";
 export * from "./user/user.types";
 export * from "./goals/goalsTypes";
-export * from "./chat/chat.types"
+export * from "./chat/chat.types";
+export * from "./versus/versus.types";
 
 export {default as SystemActions} from "./system/system.actions";
 export {default as AuthActions} from "./auth/auth.actions";
