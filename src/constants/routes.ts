@@ -130,7 +130,7 @@ export const CHAT_ROUTE: IAppRoute = {
 // ------------------------------------
 const VERSUS_ADMIN_ROUTE: IAppRoute = {
     name: 'Versus Admin',
-    path: 'admin/versus',
+    path: '/admin/versus',
     auth: true,
     component: VersusAdmin
 };
@@ -166,8 +166,8 @@ const ROUTES: IAppRoutes = {
     createChat: CREAT_CHAT_ROUTE,
     chat: CHAT_ROUTE,
     chatList: CHAT_LIST_ROUTE,
-    versusAdmin: VERSUS_ADMIN_ROUTE,
     versus: VERSUS_ROUTE,
+    versusAdmin: VERSUS_ADMIN_ROUTE,
     notFound: NOT_FOUND_ROUTE,
 };
 
