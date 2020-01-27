@@ -9,7 +9,6 @@ export interface IUser {
     email: string;
     photoURL: string;
     avatar?: IUserAvatar;
-    refreshToken?: string;
 }
 
 export interface IUserErrors {
