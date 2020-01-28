@@ -1,7 +1,15 @@
-import {IVersusState, LOAD_VERSUS, TVersusActions} from "./versus.types";
+import {IVersusState, LOAD_ALL, LOAD_VERSUS, TVersusActions} from "./versus.types";
+import {TStatus} from "../app.types";
 
 const InitState: IVersusState = {
-    versus: []
+    all: {
+        status: TStatus.Empty,
+        data: [],
+    },
+    versus: {
+        status: TStatus.Empty,
+        data: null,
+    }
 };
 
 function VersusReducers(
@@ -12,7 +20,19 @@ function VersusReducers(
         case LOAD_VERSUS:
             return {
                 ...state,
-                versus: [...state.versus, action.payload]
+                versus: {
+                    status: TStatus.Loaded,
+                    data: action.payload
+                }
+            };
+
+        case LOAD_ALL:
+            return {
+                ...state,
+                all: {
+                    status: TStatus.Loaded,
+                    data: action.payload
+                }
             };
 
         default:

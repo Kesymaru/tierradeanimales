@@ -28,8 +28,6 @@ class ChatActions {
                 dispatch(SystemActions.Loading(true, 'chats'));
                 let chats = await Database.Read(`chats`, {key: 'userId', value: userId, toArray: true});
 
-                console.log('RequestChats', chats);
-
                 dispatch(ChatActions.LoadChats(chats));
             } catch (error) {
                 dispatch(SystemActions.Error(error));
