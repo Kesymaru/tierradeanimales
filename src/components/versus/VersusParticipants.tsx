@@ -13,7 +13,7 @@ import Divider from '@material-ui/core/Divider';
 import CardActions from "@material-ui/core/CardActions";
 import TextField from "@material-ui/core/TextField";
 
-import {IStudent, IVersus} from "../../store";
+import {INewVersus, IStudent} from "../../store";
 
 const STUDENTS: IStudent[] = [
     {
@@ -55,7 +55,7 @@ function union(a: IStudent[], b: IStudent[]): IStudent[] {
 }
 
 interface IVersusParticipantsProps {
-    versus: IVersus;
+    versus: INewVersus;
     setVersus: Function;
     setValid: Function;
 }

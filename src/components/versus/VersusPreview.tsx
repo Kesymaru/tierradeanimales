@@ -2,10 +2,10 @@ import React, {FunctionComponent} from "react";
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 
-import {IVersus} from "../../store";
+import {INewVersus} from "../../store";
 
 interface IVersusPreviewProps {
-    versus: IVersus;
+    versus: INewVersus;
 }
 
 const VersusPreview: FunctionComponent<IVersusPreviewProps> = () => {
@@ -13,7 +13,7 @@ const VersusPreview: FunctionComponent<IVersusPreviewProps> = () => {
         <Typography>
             Please fill the versus rounds
         </Typography>
-        <TextField id="total" label="Total Rounds" />
+        <TextField id="total" label="Total Rounds"/>
     </form>
 };
 

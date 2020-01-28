@@ -4,11 +4,11 @@ import TextField from '@material-ui/core/TextField';
 import Grid from "@material-ui/core/Grid";
 import {KeyboardDatePicker} from '@material-ui/pickers';
 
-import {IVersus} from "../../store";
+import {INewVersus} from "../../store";
 import {MaterialUiPickersDate} from "@material-ui/pickers/typings/date";
 
 interface IConfigVersusProps {
-    versus: IVersus;
+    versus: INewVersus;
     setVersus: Function;
     setValid: Function;
 }

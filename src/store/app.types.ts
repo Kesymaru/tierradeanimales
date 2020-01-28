@@ -5,6 +5,7 @@ import {IAuthState} from "./auth/auth.types";
 import {IUserState} from "./user/user.types";
 import {IGoalsState} from "./goals/goalsTypes";
 import {IChatState} from "./chat/chat.types";
+import {IVersusState} from "./versus/versus.types";
 
 export interface IAppState {
     system: ISystemState;
@@ -12,6 +13,7 @@ export interface IAppState {
     user: IUserState;
     goals: IGoalsState;
     chats: IChatState;
+    versus: IVersusState;
     router: RouterState;
 }
 

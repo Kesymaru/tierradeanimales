@@ -1,125 +1,67 @@
-import React, {FunctionComponent, useState} from 'react';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
+import React, {FunctionComponent, MouseEvent} from "react";
+import {connect, useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import Container from "@material-ui/core/Container";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
-import {IStep, IVersus} from "../../store";
-import VersusConfig from "./VersusConfig";
-import VersusParticipants from "./VersusParticipants";
-import VersusPreview from "./VersusPreview";
-import {Container} from "@material-ui/core";
+import {IAppState, IUserState, IVersus, IVersusState, TStatus} from "../../store";
+import VersusActions from "../../store/versus/versus.actions";
+import Breadcrumbs from "../Navbar/Breadcrumbs";
+import {VERSUS_EDIT_ADMIN_ROUTE} from "../../constants";
 
-const STEPS: IStep[] = [
-    {
-        index: 0,
-        label: 'Config',
-        component: VersusConfig,
-        completed: false,
-        optional: false,
-        valid: false,
-    },
-    {
-        index: 1,
-        label: 'Participants',
-        component: VersusParticipants,
-        completed: false,
-        optional: false,
-        valid: false,
-    },
-    {
-        index: 2,
-        label: 'Rounds',
-        component: VersusPreview,
-        completed: false,
-        optional: false,
-        valid: true,
-    },
-];
-
-interface VersusAdminProps {
+interface IVersusAdminProps extends Pick<IVersusState, 'all'>,
+    Pick<IUserState, 'user'> {
 }
 
-const VersusAdmin: FunctionComponent<VersusAdminProps> = () => {
-    const [steps, setSteps] = useState<IStep[]>([...STEPS]);
-    const [activeStep, _setActiveStep] = useState<IStep>(STEPS[0]);
-    const [data, setData] = useState<IVersus>({
-        name: '',
-        rounds: 1,
-        participants: [],
-        date: (new Date())
-    });
+const VersusAdmin: FunctionComponent<IVersusAdminProps> = ({all, user}) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-    function setActiveStep(step: IStep): void {
-        _setActiveStep(step);
-        setSteps(steps.map(s => s.label === step.label ? step : s));
+    console.log('admin versus');
+
+    function handleRowClick(item: IVersus) {
+        return (e: MouseEvent<HTMLTableRowElement>) =>
+            VERSUS_EDIT_ADMIN_ROUTE.getPath && history.push(VERSUS_EDIT_ADMIN_ROUTE.getPath(item));
     }
 
-    function handleNext(): void {
-        if (!activeStep.valid) return;
-        setActiveStep(steps[activeStep.index + 1]);
-    }
+    if (all.status === TStatus.Empty && user) dispatch(VersusActions.RequestAll(user.uid));
+    if (all.status === TStatus.Fetching) return <LinearProgress color="primary"/>;
 
-    function handleBack(): void {
-        console.log('handle back');
-        setActiveStep(steps[activeStep.index - 1]);
-    }
+    return <Container maxWidth="sm">
+        <Breadcrumbs/>
+        <TableContainer component={Paper}>
+            <Table aria-label="simple table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Name</TableCell>
+                        <TableCell align="right">Participants</TableCell>
+                        <TableCell align="right">Rounds</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {all.data.map(item => (
+                        <TableRow key={item.id} onClick={handleRowClick(item)}>
+                            <TableCell component="th" scope="row">{item.name}</TableCell>
+                            <TableCell align="right">{item.participants.length}</TableCell>
+                            <TableCell align="right">{item.rounds}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
 
-    function handleSkip(): void {
-        console.log('handle skip')
-    };
-
-    function handleReset(): void {
-        console.log('handle reset');
-        setSteps([...STEPS]);
-    }
-
-    function setValid(valid: boolean): void {
-        setActiveStep({...activeStep, ...{valid}})
-    }
-
-    return (<>
-        <Stepper
-            activeStep={activeStep.index}
-            alternativeLabel
-            orientation="horizontal"
-        >
-            {steps.map((step, index) =>
-                <Step key={step.label} completed={step.completed}>
-                    <StepLabel optional={step.optional}>
-                        {step.label}
-                    </StepLabel>
-                </Step>
-            )}
-        </Stepper>
-        <Container maxWidth="sm">
-            {<activeStep.component
-                versus={data}
-                setVersus={setData}
-                setValid={setValid}
-            />}
-
-            <pre>{JSON.stringify(data)}</pre>
-
-            {activeStep.index !== 0 ?
-                <Button onClick={handleBack}>
-                    Back
-                </Button>
-                : null}
-
-            {activeStep.optional ?
-                <Button onClick={handleSkip}>Skip</Button>
-                : null}
-
-            {activeStep.index !== steps.length - 1 ?
-                <Button
-                    disabled={!activeStep.valid}
-                    onClick={handleNext}>
-                    Next
-                </Button>
-                : null}
-        </Container>
-    </>);
+    </Container>;
 };
 
-export default VersusAdmin;
+const mapStateToProps = (state: IAppState): IVersusAdminProps => ({
+    all: state.versus.all,
+    user: state.user.user,
+});
+export default connect(mapStateToProps)(VersusAdmin);

@@ -1,3 +1,3 @@
 
-export {default as VersusAdmin} from "./VersusAdmin"
+export {default as EditVersus} from "./EditVersus"
 export {default as Versus} from "./Versus";
