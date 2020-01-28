@@ -1,4 +1,5 @@
 import {ComponentClass, ComponentType, FunctionComponent} from "react";
+import {generatePath} from "react-router";
 
 import ListIcon from '@material-ui/icons/List';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
@@ -19,6 +20,7 @@ import CreatChat from "../components/Chat/CreatChat";
 import EditVersus from "../components/versus/EditVersus";
 import Versus from "../components/versus/Versus";
 import VersusAdmin from "../components/versus/VersusAdmin";
+import {strict} from "assert";
 
 export interface IAppRoute {
     name: string;
@@ -28,6 +30,7 @@ export interface IAppRoute {
     auth?: boolean;
     icon?: ComponentType<any>;
     parent?: IAppRoute;
+    getPath?: Function;
 }
 
 // ------------------------------------
@@ -149,13 +152,24 @@ export const VERSUS_ADMIN: IAppRoute = {
     parent: HOME_ROUTE
 };
 
-export const EDIT_VERSUS_ADMIN_ROUTE: IAppRoute = {
+export const VERSUS_EDIT_ADMIN_ROUTE: IAppRoute = {
     name: 'Edit Versus',
     path: '/admin/versus/:id',
+    getPath: getPath('/admin/versus/:id', {id: 'new'}),
     auth: true,
     component: EditVersus,
     parent: VERSUS_ADMIN
 };
+
+interface IParam {
+    [paramName: string]: string | number | boolean | undefined;
+}
+function getPath(path: string, defaults?: IParam ): Function {
+    return (params?: IParam) => {
+        params = defaults ? {...defaults, ...(params||{})} : params;
+        return generatePath(path, params);
+    }
+}
 
 export const VERSUS_ROUTE: IAppRoute = {
     name: 'Versus',
@@ -165,7 +179,7 @@ export const VERSUS_ROUTE: IAppRoute = {
 };
 
 const VERSUS_ROUTES: IAppRoute[] = [
-    EDIT_VERSUS_ADMIN_ROUTE,
+    VERSUS_EDIT_ADMIN_ROUTE,
     VERSUS_ADMIN,
     VERSUS_ROUTE
 ];
@@ -209,6 +223,5 @@ export function getBreadcrumbs(path: string): IAppRoute[] {
     }
     return paths.reverse();
 }
-
 
 export default ROUTES;
