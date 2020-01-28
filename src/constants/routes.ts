@@ -16,7 +16,9 @@ import NotFound from "../components/NotFound";
 import DetailsAccount from "../components/DetailsAccount";
 import ChatList, {Chat} from "../components/Chat";
 import CreatChat from "../components/Chat/CreatChat";
-import {VersusAdmin, Versus} from "../components/versus"
+import EditVersus from "../components/versus/EditVersus";
+import Versus from "../components/versus/Versus";
+import VersusAdmin from "../components/versus/VersusAdmin";
 
 export interface IAppRoute {
     name: string;
@@ -25,10 +27,7 @@ export interface IAppRoute {
     exact?: boolean;
     auth?: boolean;
     icon?: ComponentType<any>;
-}
-
-export interface IAppRoutes {
-    [key: string]: IAppRoute;
+    parent?: IAppRoute;
 }
 
 // ------------------------------------
@@ -90,16 +89,24 @@ export const ACCOUNT_ROUTE: IAppRoute = {
     component: Account,
     icon: AccountBoxIcon,
 };
-export const EDIT_ACCOUNT_ROUTE: IAppRoute = {
+
+export const ACCOUNT_EDIT_ROUTE: IAppRoute = {
     name: 'Edit Account',
     path: `${ACCOUNT_ROUTE.path}/edit`,
     component: EditAccount
 };
-export const DETAILS_ACCOUNT_ROUTE: IAppRoute = {
+
+export const ACCOUNT_DETAILS_ROUTE: IAppRoute = {
     name: 'Details for Account',
-    path: `${EDIT_ACCOUNT_ROUTE.path}/details`,
+    path: `${ACCOUNT_EDIT_ROUTE.path}/details`,
     component: DetailsAccount,
 };
+
+const ACCOUNT_ROUTES: IAppRoute[] = [
+    ACCOUNT_ROUTE,
+    ACCOUNT_EDIT_ROUTE,
+    ACCOUNT_DETAILS_ROUTE,
+];
 
 // ------------------------------------
 // Chat
@@ -111,8 +118,8 @@ export const CHAT_LIST_ROUTE: IAppRoute = {
     component: ChatList
 };
 
-export const CREAT_CHAT_ROUTE: IAppRoute = {
-    name: 'Create Chat',
+export const CHAT_EDIT_ROUTE: IAppRoute = {
+    name: 'Edit Chat',
     path: `${CHAT_LIST_ROUTE.path}/new`,
     auth: true,
     component: CreatChat,
@@ -125,22 +132,43 @@ export const CHAT_ROUTE: IAppRoute = {
     component: Chat
 };
 
+const CHAT_ROUTES: IAppRoute[] = [
+    CHAT_LIST_ROUTE,
+    CHAT_EDIT_ROUTE,
+    CHAT_ROUTE
+];
+
 // ------------------------------------
 // Versus
 // ------------------------------------
-const VERSUS_ADMIN_ROUTE: IAppRoute = {
-    name: 'Versus Admin',
+export const VERSUS_ADMIN: IAppRoute = {
+    name: 'Versus',
     path: '/admin/versus',
     auth: true,
-    component: VersusAdmin
+    component: VersusAdmin,
+    parent: HOME_ROUTE
 };
 
-const VERSUS_ROUTE: IAppRoute = {
+export const EDIT_VERSUS_ADMIN_ROUTE: IAppRoute = {
+    name: 'Edit Versus',
+    path: '/admin/versus/:id',
+    auth: true,
+    component: EditVersus,
+    parent: VERSUS_ADMIN
+};
+
+export const VERSUS_ROUTE: IAppRoute = {
     name: 'Versus',
     path: '/versus/:id',
     auth: false,
     component: Versus
 };
+
+const VERSUS_ROUTES: IAppRoute[] = [
+    EDIT_VERSUS_ADMIN_ROUTE,
+    VERSUS_ADMIN,
+    VERSUS_ROUTE
+];
 
 // ------------------------------------
 // 404 no match
@@ -152,41 +180,35 @@ export const NOT_FOUND_ROUTE: IAppRoute = {
 };
 
 // ------------------------------------
-// Router dictionary
+// Routes Array
 // ------------------------------------
-const ROUTES: IAppRoutes = {
-    home: HOME_ROUTE,
-    signUp: SIGN_UP_ROUTE,
-    signIn: SIGN_IN_ROUTE,
-    forgotPassword: FORGOT_PASSWORD_ROUTE,
-    goals: GOALS_ROUTE,
-    detailsAccount: DETAILS_ACCOUNT_ROUTE,
-    editAccount: EDIT_ACCOUNT_ROUTE,
-    account: ACCOUNT_ROUTE,
-    createChat: CREAT_CHAT_ROUTE,
-    chat: CHAT_ROUTE,
-    chatList: CHAT_LIST_ROUTE,
-    versus: VERSUS_ROUTE,
-    versusAdmin: VERSUS_ADMIN_ROUTE,
-    notFound: NOT_FOUND_ROUTE,
-};
+const ROUTES: IAppRoute[] = [
+    HOME_ROUTE,
+    SIGN_UP_ROUTE,
+    SIGN_IN_ROUTE,
+    FORGOT_PASSWORD_ROUTE,
+    GOALS_ROUTE,
+    ...ACCOUNT_ROUTES,
+    ...CHAT_ROUTES,
+    ...VERSUS_ROUTES,
+    NOT_FOUND_ROUTE,
+];
 
-// ------------------------------------
-// Router Array config
-// ------------------------------------
-export const ROUTES_ARRAY: IAppRoute[] = keys(ROUTES)
-    .map(k => ROUTES[k]);
-
-function keys<O extends object>(obj: O): Array<keyof O> {
-    return Object.keys(obj) as Array<keyof O>;
+export function find(path: string): IAppRoute|undefined {
+    return ROUTES.find(route => route.path === path)
 }
 
-// ------------------------------------
-// Menu routes
-// ------------------------------------
-export const MENU_ROUTES: IAppRoute[] = [
-    ACCOUNT_ROUTE,
-    GOALS_ROUTE
-];
+export function getBreadcrumbs(path: string): IAppRoute[] {
+    let route = find(path);
+    if(!route) return [];
+
+    let paths = [route];
+    while (route && route.parent) {
+        route = route.parent;
+        paths.push(route);
+    }
+    return paths.reverse();
+}
+
 
 export default ROUTES;
