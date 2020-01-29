@@ -2,8 +2,6 @@ import React, {FunctionComponent} from "react";
 import {
     createStyles,
     Divider,
-    Drawer,
-    IconButton,
     List,
     ListItem,
     ListItemIcon,
@@ -12,39 +10,24 @@ import {
     Theme
 } from "@material-ui/core";
 import {useHistory} from "react-router-dom";
-
 import {ChevronLeft, Dashboard} from "@material-ui/icons";
-import {ACCOUNT_ROUTE, CHAT_LIST_ROUTE, GOALS_ROUTE, IAppRoute} from "../../constants";
-import clsx from "clsx";
 
-const MenuItems: IAppRoute[] = [
+import {ACCOUNT_ROUTE, CHAT_LIST_ROUTE, GOALS_ROUTE, IAppRoute, VERSUS_ADMIN} from "../../constants";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
+
+const ADMIN_ROUTES: IAppRoute[] = [
     ACCOUNT_ROUTE,
     GOALS_ROUTE,
     CHAT_LIST_ROUTE,
+    VERSUS_ADMIN,
 ];
+
+const PUBLIC_ROUTES: IAppRoute[] = [];
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        drawerPaper: {
-            position: 'relative',
-            whiteSpace: 'nowrap',
-            width: 250,
-            transition: theme.transitions.create('width', {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-        },
-        drawerPaperClose: {
-            overflowX: 'hidden',
-            transition: theme.transitions.create('width', {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.leavingScreen,
-            }),
-            width: theme.spacing(7),
-            [theme.breakpoints.up('sm')]: {
-                width: theme.spacing(9),
-            },
-        },
+        toolbar: theme.mixins.toolbar,
     }),
 );
 
@@ -57,35 +40,33 @@ const NavbarMenu: FunctionComponent<NavbarMenuProps> = ({open, setOpen}) => {
     const classes = useStyles();
     const history = useHistory();
 
-    return (
-        <Drawer
-            variant="permanent"
-            open={open}
-            classes={{
-                paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-            }}
-        >
-            <div>
-                <IconButton onClick={() => setOpen(!open)}>
-                    <ChevronLeft/>
-                </IconButton>
-            </div>
-            <Divider/>
-            <List>
-                {MenuItems.map((item, i) => (
-                    <ListItem
-                        key={i}
-                        button
-                        onClick={() => history.push(item.path)}>
-                        <ListItemIcon>
-                            {item.icon ? (<item.icon/>) : <Dashboard/>}
-                        </ListItemIcon>
-                        <ListItemText primary={item.name}/>
-                    </ListItem>
-                ))}
-            </List>
-        </Drawer>
-    );
+    function goTo(route: IAppRoute) {
+        history.push(route.getPath ? route.getPath() : route.path);
+        if(open) setOpen(!open);
+    }
+
+    return <div>
+        <div className={classes.toolbar}/>
+        {ADMIN_ROUTES.length && <Divider/>}
+        <List>
+            {ADMIN_ROUTES.map((route, index) =>
+                <ListItem button key={index} onClick={() => goTo(route)}>
+                    <ListItemIcon>
+                        {route.icon ? <route.icon/> : <InboxIcon/>}
+                    </ListItemIcon>
+                    <ListItemText primary={route.name}/>
+                </ListItem>)}
+        </List>
+        {/*<Divider/>
+        <List>
+            {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                <ListItem button key={text}>
+                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
+                    <ListItemText primary={text}/>
+                </ListItem>
+            ))}
+        </List>*/}
+    </div>;
 };
 
 export default NavbarMenu;

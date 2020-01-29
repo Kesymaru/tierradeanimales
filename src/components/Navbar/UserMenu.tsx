@@ -9,11 +9,10 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 interface IUserMenuProps extends Pick<IUserState, 'user'>, Pick<IAuthState, 'logged'> {}
 const UserMenu: FunctionComponent<IUserMenuProps> = ({logged, user}) => {
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
     const dispatch = useDispatch();
     const location = useLocation();
     const history = useHistory();
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
     const handleClick = (event: MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -35,7 +34,7 @@ const UserMenu: FunctionComponent<IUserMenuProps> = ({logged, user}) => {
     };
 
     if (logged) {
-        return (<>
+        return <div>
             <Avatar
                 style={{height: '40px', width: '40px', margin: '0 auto', cursor: 'pointer'}}
                 onClick={handleClick}
@@ -57,17 +56,15 @@ const UserMenu: FunctionComponent<IUserMenuProps> = ({logged, user}) => {
                 <MenuItem onClick={handleClose('Profile')}>Profile</MenuItem>
                 <MenuItem onClick={handleClose('SignOut')}>SignOut</MenuItem>
             </Menu>
-        </>);
+        </div>;
     } else if(location.pathname === SIGN_IN_ROUTE.path) return null;
 
-    return (
-        <Button
-            color="inherit"
-            onClick={() => history.push(SIGN_IN_ROUTE.path)}
-        >
-            SignIn
-        </Button>
-    );
+    return <Button
+        color="inherit"
+        onClick={() => history.push(SIGN_IN_ROUTE.path)}
+    >
+        SignIn
+    </Button>;
 };
 
 const mapStateToProps = (state: IAppState): IUserMenuProps => ({
