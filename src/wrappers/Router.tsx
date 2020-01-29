@@ -8,13 +8,13 @@ interface RoutesProps {
     routes: IAppRoute[];
     logged: boolean;
 }
+
 const Router: FunctionComponent<RoutesProps> = ({routes, logged = false}) => {
-    console.log('app router', logged, routes);
-    return (<Switch>
+    return <Switch>
         {routes.map((route: IAppRoute, i: number) => (
             <Route key={i} logged={logged} {...route}/>
         ))}
-    </Switch>)
+    </Switch>;
 };
 
 export default Router;
