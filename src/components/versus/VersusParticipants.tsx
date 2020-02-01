@@ -192,7 +192,7 @@ function CustomList({title, students, checked, handleToggleAll, numberOfChecked,
                     checked={numberOfChecked(students) === students.length && students.length !== 0}
                     indeterminate={numberOfChecked(students) !== students.length && numberOfChecked(students) !== 0}
                     disabled={students.length === 0}
-                    inputProps={{'aria-label': 'all items selected'}}
+                    inputProps={{'aria-label': 'all checked selected'}}
                 />
             }
             title={title}

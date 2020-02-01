@@ -8,12 +8,15 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Container from "@material-ui/core/Container";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import AddIcon from '@material-ui/icons/Add';
 
 import {IAppState, IUserState, IVersus, IVersusState, TStatus} from "../../store";
 import VersusActions from "../../store/versus/versus.actions";
-import Breadcrumbs from "../Navbar/Breadcrumbs";
 import {VERSUS_EDIT_ADMIN_ROUTE} from "../../constants";
 
 interface IVersusAdminProps extends Pick<IVersusState, 'all'>,
@@ -26,6 +29,10 @@ const VersusAdmin: FunctionComponent<IVersusAdminProps> = ({all, user}) => {
 
     console.log('admin versus');
 
+    function handleAdd() {
+        VERSUS_EDIT_ADMIN_ROUTE.getPath && history.push(VERSUS_EDIT_ADMIN_ROUTE.getPath());
+    }
+
     function handleRowClick(item: IVersus) {
         return (e: MouseEvent<HTMLTableRowElement>) =>
             VERSUS_EDIT_ADMIN_ROUTE.getPath && history.push(VERSUS_EDIT_ADMIN_ROUTE.getPath(item));
@@ -34,8 +41,24 @@ const VersusAdmin: FunctionComponent<IVersusAdminProps> = ({all, user}) => {
     if (all.status === TStatus.Empty && user) dispatch(VersusActions.RequestAll(user.uid));
     if (all.status === TStatus.Fetching) return <LinearProgress color="primary"/>;
 
-    return <Container maxWidth="sm">
-        <Breadcrumbs/>
+    return <>
+        {/*<AppBar color="inherit" position="static">
+            <Toolbar variant="dense">
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    endIcon={<AddIcon/>}
+                    onClick={handleAdd}>
+                    Add
+                </Button>
+            </Toolbar>
+        </AppBar>*/}
+        {/*<ButtonGroup color="primary" aria-label="outlined primary button group">
+            <Button>One</Button>
+            <Button>Two</Button>
+            <Button>Three</Button>
+        </ButtonGroup>*/}
+
         <TableContainer component={Paper}>
             <Table aria-label="simple table">
                 <TableHead>
@@ -56,8 +79,7 @@ const VersusAdmin: FunctionComponent<IVersusAdminProps> = ({all, user}) => {
                 </TableBody>
             </Table>
         </TableContainer>
-
-    </Container>;
+    </>;
 };
 
 const mapStateToProps = (state: IAppState): IVersusAdminProps => ({

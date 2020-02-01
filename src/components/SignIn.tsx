@@ -74,7 +74,7 @@ const SignIn: FunctionComponent<ISignInProps> = ({loading, logged}) => {
     };
 
     if (logged) {
-        return (<Redirect to={HOME_ROUTE.path}/>);
+        return <Redirect to={HOME_ROUTE.path}/>;
     }
 
     return (

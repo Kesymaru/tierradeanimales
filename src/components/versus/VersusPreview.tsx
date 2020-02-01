@@ -1,20 +1,18 @@
 import React, {FunctionComponent} from "react";
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
+import QRCode from"qrcode.react";
 
 import {INewVersus} from "../../store";
+import {VERSUS_ROUTE} from "../../constants";
 
 interface IVersusPreviewProps {
     versus: INewVersus;
 }
 
-const VersusPreview: FunctionComponent<IVersusPreviewProps> = () => {
-    return <form noValidate autoComplete="off">
-        <Typography>
-            Please fill the versus rounds
-        </Typography>
-        <TextField id="total" label="Total Rounds"/>
-    </form>
+const VersusPreview: FunctionComponent<IVersusPreviewProps> = ({versus}) => {
+    let url: string = VERSUS_ROUTE.path;
+    console.log('url', url, versus);
+
+    return <QRCode value={`http://myapp.com/${url}`} />
 };
 
 export default VersusPreview;

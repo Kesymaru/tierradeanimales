@@ -32,14 +32,14 @@ const STEPS: IStep[] = [
         optional: false,
         valid: false,
     },
-    /*{
+    {
         index: 2,
-        label: 'Rounds',
+        label: 'Preview',
         component: VersusPreview,
         completed: false,
         optional: false,
         valid: true,
-    },*/
+    },
 ];
 
 interface IEditVersusProps extends Pick<IVersusState, 'versus'>,
@@ -95,8 +95,7 @@ const EditVersus: FunctionComponent<IEditVersusProps> = ({user, versus}) => {
         else dispatch(VersusActions.Update(data));
     }
 
-    return (<Container maxWidth="sm">
-        <Breadcrumbs title={isNew ? 'New Versus' : 'Edit Versus'}/>
+    return <>
         <Stepper
             activeStep={activeStep.index}
             alternativeLabel
@@ -110,14 +109,12 @@ const EditVersus: FunctionComponent<IEditVersusProps> = ({user, versus}) => {
                 </Step>
             )}
         </Stepper>
-        <Container maxWidth="sm">
-            {<activeStep.component
+        <Container>
+            <activeStep.component
                 versus={data}
                 setVersus={setData}
                 setValid={setValid}
-            />}
-
-            <pre>{JSON.stringify(activeStep)}</pre>
+            />
 
             {activeStep.index !== 0 &&
             <Button onClick={handleBack}>
@@ -142,7 +139,7 @@ const EditVersus: FunctionComponent<IEditVersusProps> = ({user, versus}) => {
                 {isNew ? 'Save' : 'Update'}
             </Button>}
         </Container>
-    </Container>);
+    </>;
 };
 
 const mapStateToProps = (state: IAppState): IEditVersusProps => ({
