@@ -1,14 +1,12 @@
-export interface IUserAvatar {
-    img: string;
-    file: File;
-}
+import {IFile} from "../app.types";
 
 export interface IUser {
     uid: string;
     displayName: string;
     email: string;
     photoURL: string;
-    avatar?: IUserAvatar;
+
+    avatar?: IFile;
 }
 
 export interface IUserErrors {

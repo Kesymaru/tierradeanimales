@@ -17,23 +17,16 @@ class UserActions {
     }
 
     public static UpdateProfile(user: IUser): Function {
-        return (dispatch: Dispatch) => {
-            dispatch(SystemActions.Loading());
+        return async (dispatch: Dispatch) => {
+            try {
+                if (user.avatar)
+                    user.avatar = await Storage.Save(`users/${user.uid}`, user.avatar);
+                await Auth.UpdateUser(user);
 
-            let promise = null;
-            let updateUser = (userData: IUser) => Auth.UpdateUser(userData);
-
-            // update avatar img
-            if (user.avatar)
-                promise = Storage.SaveAndDownload(user.uid, user.avatar.file, 'avatar')
-                    .then(url => updateUser({...user, photoURL: url }));
-            else
-                promise = updateUser(user);
-
-            promise
-                .then(() => dispatch(SystemActions.Notify('Profile Updated')))
-                .catch(error => dispatch(SystemActions.Error(error)))
-                .finally(() => dispatch(SystemActions.Loading()))
+                dispatch(SystemActions.Notify('Profile Updated'));
+            } catch (error) {
+                dispatch(SystemActions.Error(error));
+            }
         }
     }
 
