@@ -1,69 +1,61 @@
 import React, {ChangeEvent, FormEvent, FunctionComponent, useEffect, useRef, useState} from "react";
-import {Avatar, Button, Container, CssBaseline, Grid, TextField, Typography} from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-
-import {IUser, IUserState, IAppState, UserActions} from "../store";
 import {connect, useDispatch} from "react-redux";
+
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+
+import {IUser, IUserState, IAppState, UserActions, IFileFactory, IFile} from "../store";
 
 interface AccountProps extends Pick<IUserState, 'user'> {
 }
 
-const Account: FunctionComponent<AccountProps> = ({user}) => {
+const Account: FunctionComponent<AccountProps> = (props) => {
     const [touched, setTouched] = useState<boolean>(false);
-    const [userData, setUserData] = useState<IUser | null>(user);
+    const [user, setUser] = useState<IUser | null>(props.user);
     const [password, setPassword] = useState<string>('');
+    const dispatch = useDispatch();
     const fileInput = useRef<HTMLInputElement>(null);
 
-    const dispatch = useDispatch();
-
     useEffect(() => {
-        if (!user) return;
-        setUserData(user);
-    }, [user]);
+        if (!props.user) return;
+        setUser(props.user);
+    }, [props.user]);
 
-    const handleSubmit = (event: FormEvent) => {
+    function handleSubmit(event: FormEvent) {
         event.preventDefault();
-        if (!userData || !touched) return;
+        if (!user || !touched) return;
 
-        dispatch(UserActions.UpdateProfile(userData));
+        dispatch(UserActions.UpdateProfile(user));
         if (password.length) dispatch(UserActions.UpdatePassword(password));
     };
 
-    const handleDisplayNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setUserData(Object.assign({}, userData, {
-            displayName: event.target.value,
-        }));
-        setTouched(true);
-    };
+    function handleUserChange(key: keyof IUser) {
+        return (event: ChangeEvent<HTMLInputElement>) => {
+            setUser({...user, [`${key}`]: event.target.value} as IUser);
+            setTouched(true);
+        }
+    }
 
-    const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setUserData(Object.assign({}, userData, {
-            email: event.target.value
-        }));
-        setTouched(true);
-    };
-
-    const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
         setPassword(event.target.value);
         setTouched(true);
-    };
+    }
 
     function handleAvatarChange(event: ChangeEvent<HTMLInputElement>) {
         if (!event || !event.target || !event.target.files || !event.target.files[0]) return;
 
-        let file = event.target.files[0];
-        let img = URL.createObjectURL(file);
-
-        setUserData(Object.assign({}, userData, {
-            avatar: {img, file}
-        }));
+        let avatar: IFile = IFileFactory({id: 0, file: event.target.files[0]});
+        setUser({...user, avatar} as IUser);
         setTouched(true);
     }
 
-    const handlerReset = (event: FormEvent) => {
-        setUserData(user);
+    function handlerReset(event: FormEvent) {
+        setUser(props.user);
         setTouched(false);
-    };
+    }
 
     const clickFileUpload = () => {
         if (fileInput && fileInput.current)
@@ -81,18 +73,11 @@ const Account: FunctionComponent<AccountProps> = ({user}) => {
         />
         <Avatar
             style={{height: '150px', width: '150px', margin: '0 auto', cursor: 'pointer'}}
+            src={user && user.avatar ? user.avatar.src : undefined}
             onClick={clickFileUpload}>
-            {
-                userData && (userData.photoURL || userData.avatar)
-                    ? <img
-                        alt={userData.displayName || 'avatar'}
-                        style={{height: '100%'}}
-                        src={userData?.avatar ? userData.avatar.img : userData?.photoURL}/>
-                    : <LockOutlinedIcon/>
-            }
         </Avatar>
         <Typography component="h1" variant="h5">
-            {userData ? userData.displayName : ''}
+            {user ? user.displayName : ''}
         </Typography>
         <form noValidate onSubmit={handleSubmit} onReset={handlerReset}>
             <Grid container spacing={2}>
@@ -106,8 +91,8 @@ const Account: FunctionComponent<AccountProps> = ({user}) => {
                         id="Name"
                         label="Name"
                         autoFocus
-                        value={userData ? userData.displayName : ''}
-                        onChange={handleDisplayNameChange}
+                        value={user ? user.displayName : ''}
+                        onChange={handleUserChange('displayName')}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -119,8 +104,8 @@ const Account: FunctionComponent<AccountProps> = ({user}) => {
                         label="Email Address"
                         name="email"
                         autoComplete="email"
-                        value={userData ? userData.email : ''}
-                        onChange={handleEmailChange}
+                        value={user ? user.email : ''}
+                        onChange={handleUserChange('email')}
                     />
                 </Grid>
                 <Grid item xs={12}>
