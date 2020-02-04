@@ -7,9 +7,7 @@ import {createBrowserHistory, History} from 'history'
 import SystemReducers from "./system/system.reducers";
 import AuthReducers from "./auth/auth.reducers";
 import UserReducers from "./user/user.reducers";
-import GoalsReducers from "./goals/goalsReducers";
-import ChatReducers from "./chat/chat.reducers";
-import VersusReducers from "./versus/versus.reducers";
+import DogsReducers from "./dogs/dogs.reducers";
 
 class AppStore {
     public static store: Store;
@@ -20,9 +18,7 @@ class AppStore {
         system: SystemReducers,
         auth: AuthReducers,
         user: UserReducers,
-        goals: GoalsReducers,
-        chats: ChatReducers,
-        versus: VersusReducers,
+        dogs: DogsReducers,
     };
     private static middlewares = [
         // AuthMiddleware,
