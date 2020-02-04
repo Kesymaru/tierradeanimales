@@ -1,26 +1,18 @@
 import React, {FunctionComponent} from "react";
-import {
-    createStyles,
-    Divider,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
-    makeStyles,
-    Theme
-} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
-import {ChevronLeft, Dashboard} from "@material-ui/icons";
-
-import {ACCOUNT_ROUTE, CHAT_LIST_ROUTE, GOALS_ROUTE, IAppRoute, VERSUS_ADMIN} from "../../constants";
+import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
+import Divider from "@material-ui/core/Divider";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon"
+import ListItemText from "@material-ui/core/ListItemText"
 import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+
+import {ACCOUNT_ROUTE, DOGS_ROUTE, IAppRoute} from "../../constants";
 
 const ADMIN_ROUTES: IAppRoute[] = [
     ACCOUNT_ROUTE,
-    GOALS_ROUTE,
-    CHAT_LIST_ROUTE,
-    VERSUS_ADMIN,
+    DOGS_ROUTE,
 ];
 
 const PUBLIC_ROUTES: IAppRoute[] = [];
@@ -59,7 +51,7 @@ const NavbarMenu: FunctionComponent<NavbarMenuProps> = ({open, setOpen}) => {
         </List>
         {/*<Divider/>
         <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
+            {['GetAll mail', 'Trash', 'Spam'].map((text, index) => (
                 <ListItem button key={text}>
                     <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
                     <ListItemText primary={text}/>

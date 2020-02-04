@@ -20,7 +20,7 @@ const Breadcrumbs: FunctionComponent<IBreadcrumbsProps> = ({paths, title, childr
 
     return <MaterialBreadcrumbs aria-label="breadcrumb">
         {/*{routes.map((route, index) => index === routes.length - 1
-            ? <Typography key={index} color="textPrimary">{title || route.name}</Typography>
+            ? <Typography key={index} color="textPrimary">{name || route.name}</Typography>
             : (<Link key={index} color="textPrimary" component={RouterLink} to={route.path}>
                 {route.name}
             </Link>)
