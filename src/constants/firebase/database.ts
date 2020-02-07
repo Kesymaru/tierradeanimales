@@ -1,12 +1,11 @@
 import * as firebase from "firebase/app";
 import "firebase/firestore";
-import {type} from "os";
 
-export interface IDataDefaults {
+export interface IDatabaseDefaults {
     _selected?: boolean;
 }
 
-export interface IData extends IDataDefaults {
+export interface IData extends IDatabaseDefaults {
     id: string;
 
     createdAt?: Date;
@@ -23,10 +22,22 @@ export interface IPagination {
     startAfter?: firebase.firestore.DocumentSnapshot;
 }
 
+export interface IDatabaseSubCollections {
+    key: string;
+    defaults: any;
+}
+
+export interface IDatabaseConfig {
+    name: string;
+    defaults?: IDatabaseDefaults,
+    subCollections?: IDatabaseSubCollections[];
+}
+
 class Database {
-    public defaultValues: IDataDefaults = {
+    public static defaults: IDatabaseDefaults = {
         _selected: false
     };
+    public static subCollections: IDatabaseSubCollections[] = [];
 
     public db: firebase.firestore.Firestore;
     public collection: firebase.firestore.CollectionReference;
@@ -36,9 +47,12 @@ class Database {
         total: 0,
     };
 
-    constructor(public readonly path: string) {
+    constructor(public readonly config: IDatabaseConfig) {
+        if(!this.config.defaults)
+            this.config.defaults = Database.defaults;
+
         this.db = firebase.firestore();
-        this.collection = this.db.collection(this.path);
+        this.collection = this.db.collection(this.config.name);
     }
 
     private async _add<T extends IData>(data: T): Promise<T> {
@@ -69,6 +83,7 @@ class Database {
             if(typeof _data[key] === 'object')
                 return _data[key] = this._sanitize(_data[key]);
         });
+
         return _data;
     }
 
@@ -83,8 +98,20 @@ class Database {
         return Object.assign(data, times);
     }
 
-    private _defaults<T extends IData>(data: T, extended: any = {}): T {
-        return Object.assign(data, this.defaultValues, extended);
+    private _defaults<T extends IData>(data: T, exten: any = {}): T {
+        let _data = {...data} as any;
+
+        if(this.config.subCollections){
+            this.config.subCollections.forEach(({key, defaults}) => {
+                if(Array.isArray(_data[key]))
+                    return _data[key].map((item: any) => Object.assign(item, defaults));
+                if(typeof _data[key] === 'object')
+                    return Object.assign(_data[key], defaults);
+            });
+        }
+
+        Object.assign(_data, this.config.defaults, exten);
+        return _data as T;
     }
 
     public async add<T extends IData>(data: T | T[]): Promise<T | T[]> {

@@ -2,22 +2,26 @@ import Firebase from "./firebase";
 import * as firebase from "firebase";
 import {v4 as uuid} from 'uuid';
 
-export interface IFileOptions {
+export interface IStorageDefaults {
     _file?: File|null;
     _selected?: boolean;
     _new?: boolean;
     _deleted?: boolean;
-    _avatar?: boolean;
 }
 
-export interface IFile extends IFileOptions {
+export interface IFile extends IStorageDefaults {
     id: string;
     name: string;
     src: string;
 }
 
+export interface IStorageConfig {
+    name: string;
+    defaults?: IStorageDefaults;
+}
+
 class Storage {
-    public static fileDefaults: IFileOptions = {
+    public static defaults: IStorageDefaults = {
         _file: null,
         _selected: false,
         _new: false,
@@ -26,11 +30,14 @@ class Storage {
 
     public storage: firebase.storage.Reference;
 
-    constructor(public readonly path: string) {
-        this.storage = Firebase.storage.ref(this.path);
+    constructor(public readonly config: IStorageConfig) {
+        if(!this.config.defaults)
+            this.config.defaults = Storage.defaults;
+
+        this.storage = Firebase.storage.ref(this.config.name);
     }
 
-    public static newFile(file: File, defaults: IFileOptions = Storage.fileDefaults): IFile {
+    public static newFile(file: File, defaults: IStorageDefaults = Storage.defaults): IFile {
         return {
             ...defaults,
             id: uuid(),
