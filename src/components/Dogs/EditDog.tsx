@@ -36,7 +36,7 @@ const InitDog: IDog = {
     name: '',
     age: 0,
     sex: 'male',
-    status: '',
+    status: 'rescued',
     description: '',
     public: false,
     start: false,
@@ -203,9 +203,11 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
                             value={dog.status}
                             onChange={handleStatusChange}
                         >
-                            <MenuItem value=""><em>None</em></MenuItem>
-                            <MenuItem value={'tes_status'}>status 1</MenuItem>
-                            <MenuItem value={'female'}>status 2</MenuItem>
+                            <MenuItem value={'rescued'}>Rescued</MenuItem>
+                            <MenuItem value={'hospitalized'}>Hospitalized</MenuItem>
+                            <MenuItem value={'foster home'}>Foster Home</MenuItem>
+                            <MenuItem value={'adopted'}>Adopted</MenuItem>
+                            <MenuItem value={'deceased'}>Deceased</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>

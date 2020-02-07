@@ -3,7 +3,7 @@ import {push} from "connected-react-router";
 
 import {IFile} from "../../constants/firebase/storage";
 import SystemActions from "../system/system.actions";
-import {IDog, LOAD_DOG, LOAD_DOGS, REQUEST_DOG, REQUEST_DOGS, TDogsActions} from "./dogs.types";
+import {DELETE_DOG, IDog, LOAD_DOG, LOAD_DOGS, REQUEST_DOG, REQUEST_DOGS, TDogsActions} from "./dogs.types";
 import {DOGS_ROUTE} from "../../constants";
 import Actions from "../actions";
 
@@ -102,6 +102,23 @@ class DogsActions extends Actions {
 
             }
         }
+    }
+
+    public static Delete(dog: IDog): Function {
+        return async (dispatch: Dispatch) => {
+            try {
+                await this.db.delete(dog);
+
+                dispatch(this.DeleteDog(dog));
+                dispatch(SystemActions.Notify(`Dog ${dog.name} deleted`));
+            } catch (error) {
+                console.error(error)
+            }
+        }
+    }
+
+    public static DeleteDog(payload: IDog): TDogsActions {
+        return {type: DELETE_DOG, payload};
     }
 }
 

@@ -70,7 +70,7 @@ function Dogs(props: IDogProps) {
     return <Paper>
         <AppTable
             data={dogs}
-            cells={['name', 'age']}
+            cells={['name', 'age', 'sex', 'status']}
             loading={loading}
             onSelect={selected => setDogs(selected)}
         >
@@ -97,7 +97,7 @@ function Dogs(props: IDogProps) {
                         title={`Delete Dog${selected.length ? 's' : ''}`}
                     >
                         <IconButton
-                            onClick={() => console.log('delete ->', selected)}>
+                            onClick={() => dispatch(DogsActions.Delete(selected[0]))}>
                             <DeleteIcon/>
                         </IconButton>
                     </Tooltip>

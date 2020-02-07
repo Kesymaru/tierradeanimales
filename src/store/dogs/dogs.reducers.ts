@@ -34,6 +34,16 @@ function DogsReducers(
                 dogs: InitState.dogs
             });
 
+        case "DELETE_DOG":
+            return {
+                ...state, ...{
+                    dogs: {
+                        ...state.dogs,
+                        data: state.dogs.data.filter(dog => dog.id !== action.payload.id)
+                    },
+                }
+            };
+
         case "REQUEST_DOGS":
             return Object.assign({}, state, {
                 dogs: {

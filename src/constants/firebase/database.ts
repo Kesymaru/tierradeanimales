@@ -1,15 +1,12 @@
 import * as firebase from "firebase/app";
 import "firebase/firestore";
-import {keys} from "@material-ui/core/styles/createBreakpoints";
 import {type} from "os";
 
-// import {IData} from "../../store";
-
-export interface IDataOptions {
+export interface IDataDefaults {
     _selected?: boolean;
 }
 
-export interface IData extends IDataOptions {
+export interface IData extends IDataDefaults {
     id: string;
 
     createdAt?: Date;
@@ -27,7 +24,7 @@ export interface IPagination {
 }
 
 class Database {
-    public defaultsOptions: IDataOptions = {
+    public defaultValues: IDataDefaults = {
         _selected: false
     };
 
@@ -46,14 +43,16 @@ class Database {
 
     private async _add<T extends IData>(data: T): Promise<T> {
         let _data = this._sanitize(data) as T;
+        _data = this._timestamp(_data, ['createdAt', 'updatedAt']);
         let ref = await this.collection.add(_data);
         let id = ref.id;
         await ref.update('id', id);
-        return Object.assign(_data, this.defaultsOptions, {id});
+        return this._defaults(data, {id});
     }
 
     private async _update<T extends IData>(data: T): Promise<T> {
         let _data = this._sanitize(data);
+        _data = this._timestamp(_data, ['updatedAt'], ['createdAt']);
         await this.collection.doc(_data.id).update(_data);
         return data;
     }
@@ -71,6 +70,21 @@ class Database {
                 return _data[key] = this._sanitize(_data[key]);
         });
         return _data;
+    }
+
+    private _timestamp<T extends IData, K extends keyof T>(data: T, adds: K[], remove: K[] = []): T {
+        let timestamp = firebase.firestore.FieldValue.serverTimestamp;
+        let times = adds.reduce((total, key) =>
+            ({...total, [`${key}`]: timestamp()}), {});
+
+        if(remove.length)
+            remove.forEach(key => delete data[key]);
+
+        return Object.assign(data, times);
+    }
+
+    private _defaults<T extends IData>(data: T, extended: any = {}): T {
+        return Object.assign(data, this.defaultValues, extended);
     }
 
     public async add<T extends IData>(data: T | T[]): Promise<T | T[]> {
@@ -91,17 +105,34 @@ class Database {
     public async get<T extends IData>(id: string | string[]): Promise<T | T[]> {
         let data: T | T[];
         if (Array.isArray(id)) {
-            data = await Promise.all(id.map(async i => {
+            /*data = await Promise.all(id.map(async i => {
                 let snapshot = await this.collection.doc(i).get();
                 return snapshot.data() as T;
-            }));
-            // data = data.filter(d => d);
+            }));*/
+            let snapshots = await this.collection.where('id', 'in', id).get();
+            data = snapshots.docs.map(item => this._defaults(item.data() as T));
         } else {
             let snapshot = await this.collection.doc(id).get();
-            data = snapshot.data() as T;
+            data = this._defaults(snapshot.data() as T);
         }
 
         return data;
+    }
+
+    public async delete<T extends IData>(data: string | T | T[]): Promise<void> {
+        if(Array.isArray(data)) {
+            let snapshots = await this.collection.where('id', 'in', data.map(item => item.id)).get();
+
+            let batch = this.db.batch();
+            snapshots.forEach(doc => batch.delete(doc.ref));
+            return batch.commit();
+        }
+
+        let id: string;
+        if(typeof data === 'string') id = data;
+        else id = data.id;
+
+        return this.collection.doc(id).delete();
     }
 
     public async all<T extends IData>(pagination: IPagination = this.pagination): Promise<T[]> {
@@ -111,6 +142,8 @@ class Database {
 
         if (pagination.orderBy)
             query = (query || collection).orderBy(pagination.orderBy, pagination.direction || 'desc');
+        else
+            query = (query || collection).orderBy('createdAt', 'desc');
         if (pagination.startAfter)
             query = (query || collection).startAfter(pagination.startAfter);
         if (pagination.limit)
@@ -124,11 +157,7 @@ class Database {
             this.pagination.startAfter = snapshots.docs[snapshots.docs.length - 1];
         }
 
-        /*let data: T[] = [];
-        snapshots.docs.forEach(item => data.push(item.data()));
-        return data;*/
-
-        return snapshots.docs.map(item => item.data() as T);
+        return snapshots.docs.map(item => this._defaults(item.data() as T));
     }
 }
 

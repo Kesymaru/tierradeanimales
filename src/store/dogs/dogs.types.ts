@@ -35,6 +35,12 @@ interface ILoadDog {
     payload: IDog;
 }
 
+export const DELETE_DOG = 'DELETE_DOG';
+interface IDeleteDog {
+    type: typeof DELETE_DOG;
+    payload: IDog;
+}
+
 // ------------------------------------
 // Dogs
 // ------------------------------------
@@ -53,6 +59,7 @@ interface ILoadDogs {
 export type TDogsActions =
     IRequestDog |
     ILoadDog |
+    IDeleteDog |
 
     IRequestDogs |
     ILoadDogs
