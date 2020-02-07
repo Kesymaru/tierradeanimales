@@ -1,8 +1,8 @@
 import {ComponentClass, ComponentType, FunctionComponent} from "react";
 import {generatePath, matchPath} from "react-router";
 import * as H from 'history';
+import {useLocation} from "react-router-dom";
 
-import ListIcon from '@material-ui/icons/List';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 // ------------------------------------
@@ -11,20 +11,12 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SignUp from "../components/SignUp";
 import SignIn from "../components/SignIn";
 import ForgotPassword from "../components/ForgotPassword";
-import GoalsList from "../components/GoalsList";
 import Account from "../components/Account";
-import EditAccount from "../components/EditAccount";
 import NotFound from "../components/NotFound";
-import DetailsAccount from "../components/DetailsAccount";
-import ChatList, {Chat} from "../components/Chat";
-import CreatChat from "../components/Chat/CreatChat";
-import EditVersus from "../components/versus/EditVersus";
-import Versus from "../components/versus/Versus";
-import VersusAdmin from "../components/versus/VersusAdmin";
-import {useLocation} from "react-router-dom";
-import Students from "../components/Students/Students";
-import EditStudent from "../components/Students/EditStudent";
+
 import Dogs from "../components/Dogs/Dogs";
+import EditDog from "../components/Dogs/EditDog";
+import AdminDashboard from "../components/admin/AdminDashboard";
 
 export interface IAppRoute {
     name: string;
@@ -68,8 +60,15 @@ export const HOME_ROUTE: IAppRoute = factory({
     name: 'Home',
     path: '/',
     exact: true,
-    component: GoalsList,
+    component: AdminDashboard
 });
+
+export const ADMIN_ROUTE: IAppRoute = factory({
+    name: 'Admin',
+    path: '/admin',
+    auth: true,
+    component: AdminDashboard
+})
 
 // ------------------------------------
 // Sign Up
@@ -99,17 +98,6 @@ export const FORGOT_PASSWORD_ROUTE: IAppRoute = factory({
 });
 
 // ------------------------------------
-// Goals
-// ------------------------------------
-export const GOALS_ROUTE: IAppRoute = factory({
-    name: 'Goals',
-    path: '/goals',
-    auth: true,
-    component: GoalsList,
-    icon: ListIcon,
-});
-
-// ------------------------------------
 // Account
 // ------------------------------------
 export const ACCOUNT_ROUTE: IAppRoute = factory({
@@ -120,122 +108,33 @@ export const ACCOUNT_ROUTE: IAppRoute = factory({
     icon: AccountBoxIcon,
 });
 
-export const ACCOUNT_EDIT_ROUTE: IAppRoute = factory({
-    name: 'Edit Account',
-    path: `${ACCOUNT_ROUTE.path}/edit`,
-    component: EditAccount,
-    parent: ACCOUNT_ROUTE
-});
-
-export const ACCOUNT_DETAILS_ROUTE: IAppRoute = factory({
-    name: 'Details for Account',
-    path: `${ACCOUNT_EDIT_ROUTE.path}/details`,
-    component: DetailsAccount,
-    parent: ACCOUNT_EDIT_ROUTE
-});
-
 const ACCOUNT_ROUTES: IAppRoute[] = [
     ACCOUNT_ROUTE,
-    ACCOUNT_EDIT_ROUTE,
-    ACCOUNT_DETAILS_ROUTE,
-];
-
-// ------------------------------------
-// Chat
-// ------------------------------------
-export const CHAT_LIST_ROUTE: IAppRoute = factory({
-    name: 'Chat List',
-    path: `/chat`,
-    auth: true,
-    component: ChatList
-});
-
-export const CHAT_EDIT_ROUTE: IAppRoute = factory({
-    name: 'Edit Chat',
-    path: `${CHAT_LIST_ROUTE.path}/new`,
-    auth: true,
-    component: CreatChat,
-});
-
-export const CHAT_ROUTE: IAppRoute = factory({
-    name: 'Chat',
-    path: `${CHAT_LIST_ROUTE.path}/:id`,
-    auth: true,
-    component: Chat
-});
-
-const CHAT_ROUTES: IAppRoute[] = [
-    CHAT_LIST_ROUTE,
-    CHAT_EDIT_ROUTE,
-    CHAT_ROUTE
 ];
 
 // ------------------------------------
 // Dogs
 // ------------------------------------
-const DOGS_ROUTE: IAppRoute = factory({
+export const DOGS_ROUTE: IAppRoute = factory({
     name: 'Dogs',
     path: '/admin/dogs',
     auth: true,
-    component: Dogs
-})
-
-// ------------------------------------
-// Versus
-// ------------------------------------
-export const VERSUS_ADMIN: IAppRoute = factory({
-    name: 'Versus',
-    path: '/admin/versus',
-    auth: true,
-    component: VersusAdmin,
-    parent: HOME_ROUTE
+    component: Dogs,
+    parent: ADMIN_ROUTE
 });
 
-export const VERSUS_EDIT_ADMIN_ROUTE: IAppRoute = factory({
-    name: 'Edit Versus',
-    path: '/admin/versus/:id',
+export const DOG_EDIT_ROUTE: IAppRoute = factory({
+    name: 'Edit Dog',
+    path: `${DOGS_ROUTE.path}/:id`,
     defaultParams: {id: 'new'},
     auth: true,
-    component: EditVersus,
-    parent: VERSUS_ADMIN
+    component: EditDog,
+    parent: DOGS_ROUTE
 });
 
-export const VERSUS_ROUTE: IAppRoute = factory({
-    name: 'Versus',
-    path: '/versus/:id',
-    defaultParams: {id: ''},
-    component: Versus
-});
-
-const VERSUS_ROUTES: IAppRoute[] = [
-    VERSUS_EDIT_ADMIN_ROUTE,
-    VERSUS_ADMIN,
-    VERSUS_ROUTE
-];
-
-// ------------------------------------
-// Students
-// ------------------------------------
-export const STUDENTS_ROUTE: IAppRoute = factory({
-    name: 'Students',
-    path: '/admin/students',
-    auth: true,
-    component: Students,
-    parent: HOME_ROUTE
-});
-
-export const STUDENTS_EDIT_ROUTE: IAppRoute = factory({
-    name: 'Edit Student',
-    path: '/admin/students/:id',
-    defaultParams: {id: 'new'},
-    auth: true,
-    component: EditStudent,
-    parent: STUDENTS_ROUTE
-});
-
-const STUDENTS_ROUTES: IAppRoute[] = [
-    STUDENTS_EDIT_ROUTE,
-    STUDENTS_ROUTE
+const DOGS_ROUTES: IAppRoute[] = [
+    DOG_EDIT_ROUTE,
+    DOGS_ROUTE,
 ];
 
 // ------------------------------------
@@ -251,16 +150,12 @@ export const NOT_FOUND_ROUTE: IAppRoute = factory({
 // Routes Array
 // ------------------------------------
 const ROUTES: IAppRoute[] = [
-    HOME_ROUTE,
     SIGN_UP_ROUTE,
     SIGN_IN_ROUTE,
     FORGOT_PASSWORD_ROUTE,
-    GOALS_ROUTE,
     ...ACCOUNT_ROUTES,
-    ...CHAT_ROUTES,
-    ...VERSUS_ROUTES,
-    ...STUDENTS_ROUTES,
-    DOGS_ROUTE,
+    ...DOGS_ROUTES,
+    ADMIN_ROUTE,
     NOT_FOUND_ROUTE,
 ];
 
