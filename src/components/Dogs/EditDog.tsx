@@ -1,10 +1,9 @@
-import React, {ChangeEvent, FormEvent, FunctionComponent, MouseEvent, useEffect, useRef, useState} from "react";
+import React, {ChangeEvent, FormEvent, FunctionComponent, MouseEvent, useEffect, useState} from "react";
 import {connect, useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
 
 import Zoom from "@material-ui/core/Zoom";
 import Fade from "@material-ui/core/Fade";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -50,22 +49,27 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
     const {id} = useParams();
     const isNew = id && id.toLowerCase() === 'new';
     const [dog, setDog] = useState<IDog>(InitDog);
-    const [loading, setLoading] = useState<boolean>(props.dog.status === TStatus.Fetching);
+    const [loading, setLoading] = useState<boolean>(_getLoading());
 
     useEffect(() => {
-        setLoading(props.dog.status === TStatus.Fetching);
-        if(props.dog.data) setDog(props.dog.data);
+        setLoading(_getLoading());
+        if (props.dog.data) setDog(props.dog.data);
     }, [props.dog]);
 
-    if (!isNew && id
-        && props.dog.status === TStatus.Empty
-        || (props.dog.data && props.dog.data.id !== id)) {
-        if(id) dispatch(DogsActions.GetOne(id));
+    if (!isNew && id && (
+        props.dog.status === TStatus.Empty
+        ||
+        props.dog.id && props.dog.id !== id
+    )) {
+        if (id) dispatch(DogsActions.Get(id));
+    }
+
+    function _getLoading(): boolean {
+        return props.dog.status === TStatus.Fetching
     }
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
-        console.log('submit', isNew);
         if (isNew) dispatch(DogsActions.Add(dog));
         else dispatch(DogsActions.Update(dog))
         setLoading(value => !value);
@@ -85,14 +89,12 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
         }
     }
 
-    function handleSexChange(event: ChangeEvent<{value: unknown}>) {
-        console.log('sex changed');
+    function handleSexChange(event: ChangeEvent<{ value: unknown }>) {
         let sex = event.target.value as ISex;
         setDog({...dog, sex});
     }
 
-    function handleStatusChange(event: ChangeEvent<{value: unknown}>) {
-        console.log('status changed');
+    function handleStatusChange(event: ChangeEvent<{ value: unknown }>) {
         let status = event.target.value as string;
         setDog({...dog, status});
     }

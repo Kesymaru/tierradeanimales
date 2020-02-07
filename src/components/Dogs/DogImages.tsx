@@ -32,19 +32,19 @@ interface IDogImagesProps {
     dog: IDog;
     loading: boolean;
     onImagesChange: (images: IFile[]) => void;
-    onSelectAvatar?: (image: IFile) => void;
+    onSelectAvatar?: (image: IFile|undefined) => void;
 }
 
 const DogImages: FunctionComponent<IDogImagesProps> = ({dog, loading, onImagesChange, onSelectAvatar}) => {
     const classes = useStyles();
     const [images, setImages] = useState<IFile[]>(dog.images || []);
-    const [avatar, setAvatar] = useState<IFile | null>(dog.avatar || null);
+    const [avatar, setAvatar] = useState<IFile | undefined>(dog.avatar);
 
     useEffect(() => {
         setImages(dog.images || []);
-        setAvatar(dog.avatar || null);
+        setAvatar(dog.avatar);
 
-        if (onSelectAvatar && !avatar && images.length)
+        if (onSelectAvatar && !avatar && images.filter(img => !img._deleted).length)
             onSelectAvatar(images[0]);
     }, [dog, loading]);
 
@@ -83,6 +83,11 @@ const DogImages: FunctionComponent<IDogImagesProps> = ({dog, loading, onImagesCh
             : img);
         setImages(_images);
         onImagesChange(_images);
+
+        if(_images.filter(img => img._deleted).length === _images.length && onSelectAvatar) {
+            setAvatar(undefined);
+            onSelectAvatar(undefined);
+        }
     }
 
     return <Grid container spacing={2}>
@@ -113,7 +118,7 @@ const DogImages: FunctionComponent<IDogImagesProps> = ({dog, loading, onImagesCh
               md={8}
               style={{display: 'flex', flexDirection: 'row-reverse'}}
         >
-            <Fade in={!!images.filter(i => i._selected).length}>
+            <Fade in={!!images.filter(i => i._selected && !i._deleted).length}>
                 <IconButton
                     color="secondary"
                     disabled={loading}
@@ -122,7 +127,7 @@ const DogImages: FunctionComponent<IDogImagesProps> = ({dog, loading, onImagesCh
                     <DeleteIcon/>
                 </IconButton>
             </Fade>
-            <Fade in={images.filter(i => i._selected).length === 1}>
+            <Fade in={images.filter(i => i._selected && !i._deleted).length === 1}>
                 <IconButton
                     color="primary"
                     disabled={loading}
@@ -135,7 +140,7 @@ const DogImages: FunctionComponent<IDogImagesProps> = ({dog, loading, onImagesCh
 
         {images.length
             ? <Grid item xs={12}>
-                <GridList cellHeight={150} cols={2}>
+                <GridList cellHeight={150} cols={3}>
                     {images.map((img, index) => (
                         <Zoom
                             in={!img._deleted}

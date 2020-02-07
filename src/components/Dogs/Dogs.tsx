@@ -29,19 +29,19 @@ function Dogs(props: IDogProps) {
     const [dogs, _setDogs] = useState<IDog[]>(props.dogs.data);
     const [selected, seSelected] = useState<IDog[]>([]);
     const [loading, setLoading] = useState<boolean>(_getLoading());
-    const [pagination, setPagination] = useState<IAppTableFooterProps>(_getPagination());
+    // const [pagination, setPagination] = useState<IAppTableFooterProps>(_getPagination());
 
     useEffect(() => {
         setDogs(props.dogs.data);
         setLoading(_getLoading());
-        setPagination(_getPagination());
+        // setPagination(_getPagination());
     }, [props.dogs]);
 
     function _getLoading(): boolean {
         return props.dogs.status === TStatus.Fetching
     }
 
-    function _getPagination(): IAppTableFooterProps {
+    /*function _getPagination(): IAppTableFooterProps {
         return {
             count: props.dogs.data.length,
             rowPerPage: 10,
@@ -49,7 +49,7 @@ function Dogs(props: IDogProps) {
             onChangePage,
             onChangeRowsPerPage,
         };
-    }
+    }*/
 
     function setDogs(_dogs: IDog[]) {
         seSelected(_dogs.filter(dog => dog._selected));
@@ -57,7 +57,7 @@ function Dogs(props: IDogProps) {
     }
 
     if (props.dogs.status === TStatus.Empty)
-        dispatch(DogsActions.GetAll());
+        dispatch(DogsActions.All());
 
     function onChangePage(event: unknown, page: number) {
         console.log('onChangePage', page)
