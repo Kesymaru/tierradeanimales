@@ -1,12 +1,25 @@
-import React, {FunctionComponent, useState, ChangeEvent, FormEvent} from "react";
-import {Container, CssBaseline, Avatar, Typography, Grid, TextField, FormControlLabel, Checkbox, Button, Link, FormHelperText} from "@material-ui/core";
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import {makeStyles, Theme} from '@material-ui/core/styles';
+import React, {ChangeEvent, FormEvent, FunctionComponent, useState} from "react";
+import {useDispatch} from "react-redux";
 import {Link as RouterLink} from 'react-router-dom';
 
-import {EMAIL_REGEX, SIGN_IN_ROUTE} from "../constants";
-import {useDispatch} from "react-redux";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import Checkbox from "@material-ui/core/Checkbox";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import {makeStyles, Theme} from '@material-ui/core/styles';
+
+import {SIGN_IN_ROUTE} from "../constants/routes";
 import {AuthActions} from "../store";
+
+const EMAIL_REGEX: RegExp = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const useStyles = makeStyles((theme: Theme) => ({
     paper: {

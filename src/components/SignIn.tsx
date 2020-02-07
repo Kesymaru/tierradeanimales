@@ -1,14 +1,25 @@
-import React, {FunctionComponent, useState, ChangeEvent, FormEvent} from "react";
+import React, {ChangeEvent, FormEvent, FunctionComponent, useState} from "react";
 import {connect, useDispatch} from "react-redux";
-import {Container, CssBaseline, Avatar, Button, Typography, TextField, FormControlLabel, Grid, Link, Checkbox, LinearProgress} from "@material-ui/core";
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import {makeStyles, Theme} from '@material-ui/core/styles';
 import {Link as RouterLink, Redirect} from 'react-router-dom';
 
-import {AuthActions, IAuthState, ISystemState, IAppState} from "../store";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import Checkbox from "@material-ui/core/Checkbox";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Grid from "@material-ui/core/Grid";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import Link from "@material-ui/core/Link";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import {makeStyles, Theme} from '@material-ui/core/styles';
+
+import {AuthActions, IAppState, IAuthState, ISystemState} from "../store";
 import {FORGOT_PASSWORD_ROUTE, HOME_ROUTE, SIGN_UP_ROUTE} from "../constants/routes";
 
-import {EMAIL_REGEX} from "../constants";
+const EMAIL_REGEX: RegExp = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const useStyles = makeStyles((theme: Theme) => ({
     paper: {
@@ -73,9 +84,7 @@ const SignIn: FunctionComponent<ISignInProps> = ({loading, logged}) => {
         setPasswordError('');
     };
 
-    if (logged) {
-        return <Redirect to={HOME_ROUTE.path}/>;
-    }
+    if (logged) return <Redirect to={HOME_ROUTE.path}/>;
 
     return (
         <Container maxWidth="lg">
