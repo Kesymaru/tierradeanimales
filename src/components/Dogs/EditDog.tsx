@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FormEvent, FunctionComponent, MouseEvent, useEffect, useState} from "react";
+import React, {ChangeEvent, FormEvent, FunctionComponent, MouseEvent, useEffect, useRef, useState} from "react";
 import {connect, useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
 
@@ -14,21 +14,29 @@ import Switch from '@material-ui/core/Switch';
 import IconButton from "@material-ui/core/IconButton";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
+import Container from "@material-ui/core/Container";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
 import StarIcon from '@material-ui/icons/Star';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import SendIcon from "@material-ui/icons/Send"
 import SaveIcon from '@material-ui/icons/Save';
 import RotateRightIcon from '@material-ui/icons/RotateRight';
 
-import {IDog, IDogState} from "../../store/dogs/dogs.types";
+import {IDog, IDogState, ISex} from "../../store/dogs/dogs.types";
 import DogsActions from "../../store/dogs/dogs.actions";
 import {IAppState, TStatus} from "../../store";
 import DogImages from "./DogImages";
 
 const InitDog: IDog = {
-    id: null,
+    id: '',
     name: '',
     age: 0,
+    sex: 'male',
+    status: '',
     description: '',
     public: false,
     start: false,
@@ -57,6 +65,7 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
+        console.log('submit', isNew);
         if (isNew) dispatch(DogsActions.Add(dog));
         else dispatch(DogsActions.Update(dog))
         setLoading(value => !value);
@@ -76,11 +85,23 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
         }
     }
 
+    function handleSexChange(event: ChangeEvent<{value: unknown}>) {
+        console.log('sex changed');
+        let sex = event.target.value as ISex;
+        setDog({...dog, sex});
+    }
+
+    function handleStatusChange(event: ChangeEvent<{value: unknown}>) {
+        console.log('status changed');
+        let status = event.target.value as string;
+        setDog({...dog, status});
+    }
+
     function handleStartDog(event: MouseEvent<HTMLButtonElement>) {
         setDog({...dog, ...{start: !dog.start}});
     }
 
-    return <Paper>
+    return <Container>
         <form noValidate autoComplete="off" onSubmit={handleSubmit} onReset={handleReset}>
             <Grid container spacing={2}>
                 <Grid item
@@ -134,7 +155,7 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
                         labelPlacement="start"
                     />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={6} sm={6} md={3}>
                     <TextField
                         label="Name"
                         variant="outlined"
@@ -144,7 +165,7 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
                         onChange={handleDogChange('name')}
                     />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={6} sm={6} md={3}>
                     <TextField
                         label="Age"
                         variant="outlined"
@@ -155,7 +176,40 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
                         onChange={handleDogChange('age', 'number')}
                     />
                 </Grid>
-                <Grid item xs={12} sm={12}>
+                <Grid item xs={6} sm={6} md={3}>
+                    <FormControl variant="outlined" style={{display: 'flex'}}>
+                        <InputLabel id="sex">
+                            Sex
+                        </InputLabel>
+                        <Select
+                            labelId="sex"
+                            id="sex"
+                            value={dog.sex}
+                            onChange={handleSexChange}
+                        >
+                            <MenuItem value={'male'}>Male</MenuItem>
+                            <MenuItem value={'female'}>Female</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={6} sm={6} md={3}>
+                    <FormControl variant="outlined" style={{display: 'flex'}}>
+                        <InputLabel id="status">
+                            Status
+                        </InputLabel>
+                        <Select
+                            labelId="status"
+                            id="status"
+                            value={dog.status}
+                            onChange={handleStatusChange}
+                        >
+                            <MenuItem value=""><em>None</em></MenuItem>
+                            <MenuItem value={'tes_status'}>status 1</MenuItem>
+                            <MenuItem value={'female'}>status 2</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12}>
                     <TextField
                         label="Description"
                         variant="outlined"
@@ -166,7 +220,6 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
                         onChange={handleDogChange('description')}
                     />
                 </Grid>
-
                 <Grid item xs={12}>
                     <DogImages
                         dog={dog}
@@ -212,7 +265,7 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
 
             </Grid>
         </form>
-    </Paper>;
+    </Container>;
 };
 
 const mapStateToProps = (state: IAppState): IEditDogProps => ({

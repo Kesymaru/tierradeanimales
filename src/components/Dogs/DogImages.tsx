@@ -16,8 +16,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import PublishIcon from "@material-ui/icons/Publish";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+import Storage, {IFile} from "../../constants/firebase/storage";
 import {IDog} from "../../store/dogs/dogs.types";
-import {IFile, IFileFactory} from "../../store";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     selected: {
@@ -53,10 +53,7 @@ const DogImages: FunctionComponent<IDogImagesProps> = ({dog, loading, onImagesCh
 
         let _images: IFile[] = [...images];
         for (let i = 0; i < event.target.files.length; i++) {
-            _images.push(IFileFactory({
-                id: images.length + i,
-                file: event.target.files[i],
-            }));
+            _images.push(Storage.newFile(event.target.files[i]));
         }
 
         setImages(_images);
@@ -65,33 +62,31 @@ const DogImages: FunctionComponent<IDogImagesProps> = ({dog, loading, onImagesCh
 
     function handleSetAvatar(event?: MouseEvent<HTMLButtonElement>) {
         let avatar: IFile | null = null;
-        let _images = images.map(img => avatar = img.selected
-            ? {...img, ...{avatar: true}}
-            : {...img, ...{avatar: false}});
+        let _images = images.filter(img => img._selected);
+        if(_images.length) avatar = _images[0];
         if (onSelectAvatar && avatar) onSelectAvatar(avatar);
-        setImages(_images);
     }
 
     function handleSelectImage(image: IFile) {
         return (event: MouseEvent) => {
             if(loading) return;
             let _images = images.map(item => item === image
-                ? {...item, ...{selected: !image.selected}}
+                ? {...item, _selected: !image._selected}
                 : item);
             setImages(_images);
         }
     }
 
     function handleDelete(event: MouseEvent<HTMLButtonElement>) {
-        let _images = images.map(img => img.selected
-            ? {...img, ...{deleted: true, selected: false}}
+        let _images = images.map(img => img._selected
+            ? {...img, _deleted: true, _selected: false}
             : img);
         setImages(_images);
         onImagesChange(_images);
     }
 
     return <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={6} md={4}>
             <input
                 accept="image/*"
                 id="dog-images"
@@ -115,9 +110,10 @@ const DogImages: FunctionComponent<IDogImagesProps> = ({dog, loading, onImagesCh
         </Grid>
         <Grid item
               xs={6}
+              md={8}
               style={{display: 'flex', flexDirection: 'row-reverse'}}
         >
-            <Fade in={!!images.filter(i => i.selected).length}>
+            <Fade in={!!images.filter(i => i._selected).length}>
                 <IconButton
                     color="secondary"
                     disabled={loading}
@@ -126,7 +122,7 @@ const DogImages: FunctionComponent<IDogImagesProps> = ({dog, loading, onImagesCh
                     <DeleteIcon/>
                 </IconButton>
             </Fade>
-            <Fade in={images.filter(i => i.selected).length === 1}>
+            <Fade in={images.filter(i => i._selected).length === 1}>
                 <IconButton
                     color="primary"
                     disabled={loading}
@@ -142,18 +138,18 @@ const DogImages: FunctionComponent<IDogImagesProps> = ({dog, loading, onImagesCh
                 <GridList cellHeight={150} cols={2}>
                     {images.map((img, index) => (
                         <Zoom
-                            in={!img.deleted}
+                            in={!img._deleted}
                             key={index}
                             style={{
-                                transitionDelay: img.deleted ? `${index * 250}ms` : `0ms`
+                                transitionDelay: img._deleted ? `${index * 250}ms` : `0ms`
                             }}
                         >
                             <GridListTile
-                                hidden={img.deleted}
+                                hidden={img._deleted}
                                 cols={1}
                                 className={loading
                                     ? classes.disabled
-                                    : img.selected ? classes.selected : ''}
+                                    : img._selected ? classes.selected : ''}
                                 onClick={handleSelectImage(img)}
                             >
                                 <img src={img.src} alt={img.name}/>

@@ -1,136 +1,120 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {connect, useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 
+import Fade from "@material-ui/core/Fade";
 import Paper from "@material-ui/core/Paper";
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Toolbar from "@material-ui/core/Toolbar";
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
 import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import LinearProgress from "@material-ui/core/LinearProgress";
-
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from '@material-ui/icons/Edit';
 
-import AppTable, {IAppTableProps, IAppTableSelected, IAppTableToolbar} from "./AppTable";
-import AlertDialog, {AlertDialogProps} from "../AlertDialog";
+import AppTable from "../AppTable/AppTable";
+
 import {DOG_EDIT_ROUTE} from "../../constants";
 import {IAppState, TStatus} from "../../store";
-import {IDogState} from "../../store/dogs/dogs.types";
+import {IDog, IDogState} from "../../store/dogs/dogs.types";
 import DogsActions from "../../store/dogs/dogs.actions";
+import {IAppTableFooterProps} from "../AppTable/AppTableFooter";
 
 interface IDogProps extends Pick<IDogState, 'dogs'> {
 }
 
-function Dogs({dogs}: IDogProps) {
+function Dogs(props: IDogProps) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [selected, setSelected] = useState<any[]>([]);
-    const [deleteAlertProps, setDeleteAlertProps] = useState<AlertDialogProps>({
-        title: 'Delete Dogs',
-        content: '',
-        open: false,
-    });
-    const [toolbar, _setToolbar] = useState<IAppTableToolbar[]>([
-        {title: 'Edit', show: false, onClick: handleEdit, icon: EditIcon},
-        {title: 'Delete', show: false, onClick: handleDelete, icon: DeleteIcon},
-        {title: 'Add', show: true, onClick: handleAdd, icon: AddIcon}
-    ]);
-    const [tableProps, setTableProps] = useState<IAppTableProps>({
-        title: 'Dogs',
-        headers: ['Name', 'Age'],
-        cells: ['name', 'age'],
-        data: null,
-        toolbar,
-        count: 100,
-        rowPerPage: 10,
-        page: 1,
-        sortBy: '',
-        sortOrder: 'asc',
-        onSelectAll,
-        onSelect,
-        onChangePage,
-        onChangeRowsPerPage
-    });
+    const [dogs, _setDogs] = useState<IDog[]>(props.dogs.data);
+    const [selected, seSelected] = useState<IDog[]>([]);
+    const [loading, setLoading] = useState<boolean>(_getLoading());
+    const [pagination, setPagination] = useState<IAppTableFooterProps>(_getPagination());
 
-    function setToolbar(selection: IAppTableSelected) {
-        let _toolbar = toolbar.map(t => {
-            switch (t.title) {
-                case 'Edit':
-                    return Object.assign(t, {show: 1 === selection.total});
-                case 'Delete':
-                    return Object.assign(t, {show: !!selection.total});
-                default:
-                    return t;
-            }
-        });
-        _setToolbar(_toolbar);
+    useEffect(() => {
+        setDogs(props.dogs.data);
+        setLoading(_getLoading());
+        setPagination(_getPagination());
+    }, [props.dogs]);
+
+    function _getLoading(): boolean {
+        return props.dogs.status === TStatus.Fetching
     }
 
-    function onSelectAll(selection: IAppTableSelected) {
-        if (tableProps.toolbar) setToolbar(selection);
-        setSelected(selection.selected);
+    function _getPagination(): IAppTableFooterProps {
+        return {
+            count: props.dogs.data.length,
+            rowPerPage: 10,
+            page: 1,
+            onChangePage,
+            onChangeRowsPerPage,
+        };
     }
 
-    function onSelect(row: any, selection: IAppTableSelected) {
-        if (tableProps.toolbar) setToolbar(selection);
-        setSelected(selection.selected);
+    function setDogs(_dogs: IDog[]) {
+        seSelected(_dogs.filter(dog => dog._selected));
+        _setDogs(_dogs);
     }
+
+    if (props.dogs.status === TStatus.Empty)
+        dispatch(DogsActions.GetAll());
 
     function onChangePage(event: unknown, page: number) {
-        // console.log('onChangePage', page)
+        console.log('onChangePage', page)
     }
 
     function onChangeRowsPerPage(event: ChangeEvent<HTMLInputElement>) {
-        // console.log('onChangeRowsPerPage', event)
+        console.log('onChangeRowsPerPage', event)
     }
-
-    function handleAdd(selection: IAppTableSelected) {
-        history.push(DOG_EDIT_ROUTE.getPath())
-    }
-
-    function handleDelete(selection: IAppTableSelected) {
-        setDeleteAlertProps({
-            ...deleteAlertProps, ...{
-                open: true,
-                onClose: deleteData(selection)
-            }
-        });
-        setSelected(selection.selected);
-    }
-
-    function deleteData(selection: IAppTableSelected) {
-        return (reason: boolean) => {
-            console.log('selected to remove', reason, selection);
-            setDeleteAlertProps({...deleteAlertProps, ...{open: false}});
-
-            if (reason) console.log('remove data');
-        }
-    }
-
-    function handleEdit(selection: IAppTableSelected) {
-        console.log('handle edit', selection);
-        // history.push(DOG_EDIT_ROUTE.getPath(selection.selected[0]));
-    }
-
-    if (dogs.status === TStatus.Fetching)
-        return <Paper>
-            <Typography>Loading...</Typography>
-            <LinearProgress color="primary"/>
-        </Paper>;
-    if (dogs.status === TStatus.Empty)
-        dispatch(DogsActions.GetAll());
-    if (dogs.status === TStatus.Loaded && tableProps.data === null)
-        setTableProps({...tableProps, ...{data: dogs.data}});
 
     return <Paper>
-        <AppTable {...tableProps} />
-        <AlertDialog
+        <AppTable
+            data={dogs}
+            cells={['name', 'age']}
+            loading={loading}
+            onSelect={selected => setDogs(selected)}
+        >
+            <Toolbar>
+                {selected.length
+                    ? <Typography variant="subtitle1" style={{flex: '1 1 100%'}}>
+                        {selected.length} dogs selected
+                    </Typography>
+                    : <Typography variant="h6" style={{flex: '1 1 100%'}}>
+                        Dogs
+                    </Typography>}
+
+                <Fade in={selected.length === 1}>
+                    <Tooltip title="Edit Dog">
+                        <IconButton
+                            onClick={() => history.push(DOG_EDIT_ROUTE.getPath(dogs.filter(i => i._selected)[0]))}
+                        >
+                            <EditIcon/>
+                        </IconButton>
+                    </Tooltip>
+                </Fade>
+                <Fade in={!!selected.length}>
+                    <Tooltip
+                        title={`Delete Dog${selected.length ? 's' : ''}`}
+                    >
+                        <IconButton
+                            onClick={() => console.log('delete ->', selected)}>
+                            <DeleteIcon/>
+                        </IconButton>
+                    </Tooltip>
+                </Fade>
+                <Fade in={true}>
+                    <Tooltip title="Add Dog">
+                        <IconButton
+                            onClick={() => history.push(DOG_EDIT_ROUTE.getPath())}
+                        >
+                            <AddIcon/>
+                        </IconButton>
+                    </Tooltip>
+                </Fade>
+            </Toolbar>
+        </AppTable>
+
+        {/*<AlertDialog
             onClose={() => setDeleteAlertProps({...deleteAlertProps, ...{open: false}})}
             {...deleteAlertProps}
         >
@@ -149,14 +133,14 @@ function Dogs({dogs}: IDogProps) {
                     {selected.length
                         ? <List aria-label="delete details" dense={true}>
                             {selected.map((item, index) => (
-                                <ListItem key={index}>
+                                <ListItem sortBy={index}>
                                     <ListItemText primary={item.name}/>
                                 </ListItem>
                             ))}
                         </List> : null}
                 </ExpansionPanelDetails>
             </ExpansionPanel>
-        </AlertDialog>
+        </AlertDialog>*/}
     </Paper>;
 }
 
