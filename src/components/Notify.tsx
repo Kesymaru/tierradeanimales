@@ -5,7 +5,9 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import {INotification, ISystemState, SystemActions, IAppState} from "../store";
 
-interface INotifyProps extends Pick<ISystemState, 'notifications'> {}
+interface INotifyProps extends Pick<ISystemState, 'notifications'> {
+}
+
 const Notify: FunctionComponent<INotifyProps> = ({notifications}) => {
     const dispatch = useDispatch();
 
@@ -16,25 +18,25 @@ const Notify: FunctionComponent<INotifyProps> = ({notifications}) => {
     return (<>
         {notifications
             .filter(({open}) => open)
-            .map(item => (
-            <Snackbar
-                anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
-                open={item.open}
-                autoHideDuration={item.duration}
-                onClose={handleClose(item)}
-                message={item.message}
-                action={
-                    <IconButton
-                        size="small"
-                        aria-label="close"
-                        color="inherit"
-                        onClick={handleClose(item)}>
-                        <CloseIcon fontSize="small"/>
-                    </IconButton>
-                }
-            />
-        ))
-        }
+            .map((item, index) => (
+                <Snackbar
+                    key={index}
+                    anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
+                    open={item.open}
+                    autoHideDuration={item.duration}
+                    onClose={handleClose(item)}
+                    message={item.message}
+                    action={
+                        <IconButton
+                            size="small"
+                            aria-label="close"
+                            color="inherit"
+                            onClick={handleClose(item)}>
+                            <CloseIcon fontSize="small"/>
+                        </IconButton>
+                    }
+                />
+            ))}
     </>);
 };
 

@@ -1,7 +1,7 @@
 import {DELAY_REFRESH_TOKEN, ERROR_SIGN_IN, ERROR_SIGN_OUT, ERROR_SIGN_UP, RECEIVE_SIGN_IN, RECEIVE_SIGN_OUT, TAuthActions} from "./auth.types";
 import {Dispatch} from "redux";
 
-import {Auth} from "../../constants/firebase";
+import Auth from "../../constants/firebase/auth";
 import SystemActions from "../system/system.actions";
 import UserActions from "../user/user.actions";
 import {IUser} from "..";

@@ -7,7 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 
-import {IUser, IUserState, IAppState, UserActions, IFileFactory, IFile} from "../store";
+import Storage, {IFile} from "../constants/firebase/storage";
+import {IUser, IUserState, IAppState, UserActions} from "../store";
 
 interface AccountProps extends Pick<IUserState, 'user'> {
 }
@@ -47,7 +48,7 @@ const Account: FunctionComponent<AccountProps> = (props) => {
     function handleAvatarChange(event: ChangeEvent<HTMLInputElement>) {
         if (!event || !event.target || !event.target.files || !event.target.files[0]) return;
 
-        let avatar: IFile = IFileFactory({id: 0, file: event.target.files[0]});
+        let avatar: IFile = Storage.newFile(event.target.files[0]);
         setUser({...user, avatar} as IUser);
         setTouched(true);
     }

@@ -1,13 +1,15 @@
 import {Dispatch} from "redux";
 
+import {IFile} from "../../constants/firebase/storage";
 import {ERROR_RESET_PASSWORD, ERROR_UPDATE_PASSWORD, ERROR_USER, IUser, RECEIVE_USER, TUserActions} from './user.types'
 import SystemActions from "../system/system.actions";
-import {Auth, Storage} from "../../constants/firebase";
+import Auth from "../../constants/firebase/auth";
+import Actions from "../actions";
 
-/**
- * user Actions
- */
-class UserActions {
+class UserActions extends Actions{
+    protected collection: string = 'user';
+    protected directory: string = 'user';
+
     public static ReceiveUser(payload: IUser): TUserActions {
         return {type: RECEIVE_USER, payload}
     }
@@ -20,7 +22,7 @@ class UserActions {
         return async (dispatch: Dispatch) => {
             try {
                 if (user.avatar)
-                    user.avatar = await Storage.Save(`users/${user.uid}`, user.avatar);
+                    user.avatar = await UserActions.storage.save(user.avatar) as IFile;
                 await Auth.UpdateUser(user);
 
                 dispatch(SystemActions.Notify('Profile Updated'));
@@ -31,13 +33,16 @@ class UserActions {
     }
 
     public static UpdatePassword(password: string): Function {
-        return (dispatch: Dispatch) => {
-            dispatch(SystemActions.Loading());
-
-            Auth.UpdatePassword(password)
-                .then(() => dispatch(SystemActions.Notify('Password changed successfully')))
-                .catch(error => dispatch(UserActions.ErrorUpdatePassword(error)))
-                .finally(() => SystemActions.Loading(false));
+        return async (dispatch: Dispatch) => {
+            try {
+                dispatch(SystemActions.Loading());
+                await Auth.UpdatePassword(password);
+                dispatch(SystemActions.Notify('Password changed successfully'))
+            } catch (error) {
+                dispatch(UserActions.ErrorUpdatePassword(error))
+            } finally {
+                SystemActions.Loading(false)
+            }
         }
     }
 
@@ -60,4 +65,5 @@ class UserActions {
     }
 }
 
+// const UserActions = new User('users', 'users');
 export default UserActions;

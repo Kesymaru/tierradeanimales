@@ -1,4 +1,4 @@
-import {IFile} from "../app.types";
+import {IFile} from "../../constants/firebase/storage";
 
 export interface IUser {
     uid: string;
