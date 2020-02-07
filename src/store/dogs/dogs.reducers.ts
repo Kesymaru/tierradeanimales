@@ -9,19 +9,20 @@ const InitState: IDogState = {
     dog: {
         status: TStatus.Empty,
         data: null,
+        id: null,
     }
 };
 
 function DogsReducers(
     state: IDogState = InitState,
     action: TDogsActions): IDogState {
-
     switch (action.type) {
-        case "REQUEST_DOG":
+        case "FETCH_DOG":
             return Object.assign({}, state, {
                 dog: {
                     status: TStatus.Fetching,
                     data: null,
+                    id: null,
                 }
             });
 
@@ -30,21 +31,17 @@ function DogsReducers(
                 dog: {
                     status: TStatus.Loaded,
                     data: action.payload,
+                    id: action.payload.id,
                 },
                 dogs: InitState.dogs
             });
 
         case "DELETE_DOG":
-            return {
-                ...state, ...{
-                    dogs: {
-                        ...state.dogs,
-                        data: state.dogs.data.filter(dog => dog.id !== action.payload.id)
-                    },
-                }
-            };
+            return Object.assign({}, state, {
+                dog: InitState.dog
+            });
 
-        case "REQUEST_DOGS":
+        case "FETCH_DOGS":
             return Object.assign({}, state, {
                 dogs: {
                     status: TStatus.Fetching,
@@ -57,6 +54,15 @@ function DogsReducers(
                 dogs: {
                     status: TStatus.Loaded,
                     data: action.payload,
+                }
+            });
+
+        case "ERROR_DOGS":
+            return Object.assign({}, state, {
+                dogs: {
+                    status: TStatus.Error,
+                    data: [],
+                    error: action.payload
                 }
             });
 

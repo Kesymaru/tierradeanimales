@@ -24,9 +24,9 @@ export interface IDogState {
 // ------------------------------------
 // Dog
 // ------------------------------------
-export const REQUEST_DOG = 'REQUEST_DOG';
-interface IRequestDog {
-    type: typeof REQUEST_DOG;
+export const FETCH_DOG = 'FETCH_DOG';
+interface IFetchDog {
+    type: typeof FETCH_DOG;
 }
 
 export const LOAD_DOG = 'LOAD_DOG';
@@ -41,12 +41,18 @@ interface IDeleteDog {
     payload: IDog;
 }
 
+export const ERROR_DOG = 'ERROR_DOG';
+interface IErrorDog {
+    type: typeof ERROR_DOG;
+    payload: Error;
+}
+
 // ------------------------------------
 // Dogs
 // ------------------------------------
-export const REQUEST_DOGS = 'REQUEST_DOGS';
-interface IRequestDogs {
-    type: typeof REQUEST_DOGS;
+export const FETCH_DOGS = 'FETCH_DOGS';
+interface IFetchDogs {
+    type: typeof FETCH_DOGS;
 }
 
 export const LOAD_DOGS = 'LOAD_DOGS';
@@ -55,12 +61,19 @@ interface ILoadDogs {
     payload: IDog[];
 }
 
+export const ERROR_DOGS = 'ERROR_DOGS';
+interface IErrorDogs {
+    type: typeof ERROR_DOGS;
+    payload: Error;
+}
 
 export type TDogsActions =
-    IRequestDog |
+    IFetchDog |
     ILoadDog |
     IDeleteDog |
+    IErrorDog |
 
-    IRequestDogs |
-    ILoadDogs
+    IFetchDogs |
+    ILoadDogs |
+    IErrorDogs
 ;

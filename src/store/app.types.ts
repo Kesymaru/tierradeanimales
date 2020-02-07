@@ -16,6 +16,7 @@ export interface IAppState {
 export interface IAppStateItem<T> {
     status: TStatus;
     data: T;
+    id?: string|null;
     error?: string | Error;
 }
 
