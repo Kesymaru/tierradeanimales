@@ -33,8 +33,7 @@ function AppTable(props: IAppTableProps) {
         setData(props.data);
         setCells(_getCells());
         setLoading(!!props.loading);
-    }, [props.data, props.cells, props.loading]);
-
+    }, [props.data, props.loading, _getCells]);
 
     function _getCells(): string[] {
         if (props.cells) return props.cells;

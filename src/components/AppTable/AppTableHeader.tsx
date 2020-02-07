@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FunctionComponent, MouseEvent, useEffect, useState} from "react";
+import React, {ChangeEvent, FunctionComponent, MouseEvent, useState} from "react";
 
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
@@ -29,8 +29,6 @@ const AppTableHeader: FunctionComponent<IAppTableHeaderProps> = (props) => {
 
     function handleSort(cell: string) {
         return (event: MouseEvent<unknown>) => {
-            console.log('sort by', cell);
-
             let sortOrder = sorting.sortOrder;
             if (cell === sorting.sortBy)
                 sortOrder = sortOrder === "desc" ? "asc" : "desc";
