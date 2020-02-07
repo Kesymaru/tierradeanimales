@@ -65,8 +65,6 @@ const AppBar: FunctionComponent<IAppBarProps> = ({logged, open, setOpen, anchorI
     const routes = useRoutes();
     const route = useRoute();
 
-    console.log('routes =>', route, routes);
-
     return <>
         <MaterialAppBar position="fixed" className={logged ? classes.appBar : ''}>
             <Toolbar>
