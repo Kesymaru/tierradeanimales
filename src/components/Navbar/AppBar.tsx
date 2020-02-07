@@ -9,15 +9,12 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Slide from '@material-ui/core/Slide';
-import {makeStyles, Theme, createStyles} from '@material-ui/core/styles';
+import Link from "@material-ui/core/Link";
+import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 
 import {IAppState, IAuthState} from "../../store";
 import UserMenu from "./UserMenu";
 import {useRoute, useRoutes} from "../../constants";
-import Link from "@material-ui/core/Link";
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
@@ -102,11 +99,6 @@ const AppBar: FunctionComponent<IAppBarProps> = ({logged, open, setOpen, anchorI
                             </Link>)
                         )}
                     </Breadcrumbs>
-                    {/*<ButtonGroup variant="contained" size="small" color="secondary" aria-label="actions">
-                        <Button>One</Button>
-                        <Button>Two</Button>
-                        <Button>Three</Button>
-                    </ButtonGroup>*/}
                 </Toolbar>
             </MaterialAppBar>
         </Slide>

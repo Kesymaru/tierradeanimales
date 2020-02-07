@@ -15,8 +15,6 @@ const ADMIN_ROUTES: IAppRoute[] = [
     DOGS_ROUTE,
 ];
 
-const PUBLIC_ROUTES: IAppRoute[] = [];
-
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         toolbar: theme.mixins.toolbar,
@@ -51,8 +49,8 @@ const NavbarMenu: FunctionComponent<NavbarMenuProps> = ({open, setOpen}) => {
         </List>
         {/*<Divider/>
         <List>
-            {['GetAll mail', 'Trash', 'Spam'].map((text, index) => (
-                <ListItem button key={text}>
+            {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                <ListItem button sortBy={text}>
                     <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
                     <ListItemText primary={text}/>
                 </ListItem>

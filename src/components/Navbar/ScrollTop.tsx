@@ -1,6 +1,6 @@
-import React, {ReactElement, MouseEvent} from 'react';
+import React, {MouseEvent} from 'react';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import {makeStyles, Theme, createStyles} from '@material-ui/core/styles';
+import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
@@ -22,18 +22,14 @@ interface IScrollTopProps {
 function ScrollTop({anchorId}: IScrollTopProps) {
     const classes = useStyles();
     const trigger = useScrollTrigger({
-        // target: window ? window() : undefined,
         disableHysteresis: true,
         threshold: 100,
     });
 
     function handleClick(event: MouseEvent<HTMLDivElement>) {
-        console.log('handleClick', anchorId, event);
-
         const anchor = ((event.target as HTMLDivElement).ownerDocument || document)
             .querySelector(`#${anchorId}`);
 
-        console.log('anchor', anchor);
         if (anchor) {
             anchor.scrollIntoView({
                 behavior: 'smooth',
@@ -46,7 +42,7 @@ function ScrollTop({anchorId}: IScrollTopProps) {
     return <Zoom in={trigger}>
         <div onClick={handleClick} role="presentation" className={classes.root}>
             <Fab color="secondary" size="small" aria-label="scroll back to top">
-                <KeyboardArrowUpIcon />
+                <KeyboardArrowUpIcon/>
             </Fab>
         </div>
     </Zoom>;

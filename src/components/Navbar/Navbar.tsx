@@ -1,20 +1,12 @@
 import React, {FunctionComponent} from "react";
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import {makeStyles, useTheme, Theme, createStyles} from '@material-ui/core/styles';
+import {createStyles, makeStyles, Theme, useTheme} from '@material-ui/core/styles';
 import {IAppState, IAuthState} from "../../store";
 import {connect} from "react-redux";
 import NavbarMenu from "./NavbarMenu";
 
 const drawerWidth = 240;
-
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         drawer: {
