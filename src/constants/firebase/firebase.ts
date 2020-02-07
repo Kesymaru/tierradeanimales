@@ -2,8 +2,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/storage";
 import "firebase/database";
-
-import {IUser} from "../../store";
+import "firebase/firestore";
 
 export interface IFirebaseConfig {
     apiKey: string;
@@ -17,10 +16,11 @@ export interface IFirebaseConfig {
 }
 
 class Firebase {
-    protected static config: IFirebaseConfig;
-    protected static auth: firebase.auth.Auth;
-    protected static storage: firebase.storage.Storage;
-    protected static database: firebase.database.Database;
+    public static config: IFirebaseConfig;
+    public static auth: firebase.auth.Auth;
+    public static storage: firebase.storage.Storage;
+    public static database: firebase.database.Database;
+    public static firestore: firebase.firestore.Firestore;
 
     public static Configure(config: IFirebaseConfig): void {
         Firebase.config = config;
@@ -29,6 +29,7 @@ class Firebase {
         Firebase.auth = firebase.auth();
         Firebase.storage = firebase.storage();
         Firebase.database = firebase.database();
+        Firebase.firestore = firebase.firestore();
     }
 }
 

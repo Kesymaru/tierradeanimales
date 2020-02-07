@@ -1,68 +1,134 @@
-import * as firebase from "firebase";
-import Firebase from "./firebase";
+import * as firebase from "firebase/app";
+import "firebase/firestore";
+import {keys} from "@material-ui/core/styles/createBreakpoints";
+import {type} from "os";
 
-interface IDatabaseOptions {
-    key?: string;
-    value?: any;
-    limit?: number;
-    toArray?: boolean;
+// import {IData} from "../../store";
+
+export interface IDataOptions {
+    _selected?: boolean;
 }
 
-class Database extends Firebase {
-    private static DefaultOptions: IDatabaseOptions = {limit: 10};
+export interface IData extends IDataOptions {
+    id: string;
 
-    public static Ref(name: string): firebase.database.Reference {
-        return Database.database.ref(name);
-    }
+    createdAt?: Date;
+    updatedAt?: Date;
+}
 
-    public static Query(name: string, filter?: IDatabaseOptions): firebase.database.Query {
-        let ref = Database.Ref(name);
-        if(!filter) return ref;
-        let query;
+export interface IPagination {
+    page: number;
+    limit: number;
 
-        if(filter.limit) query = ref.limitToFirst(filter.limit);
-        if(filter.key && filter.value) {
-            query = (query||ref).orderByChild(filter.key)
-                .equalTo(filter.value);
-        }
-        return query || ref;
-    }
+    total?: number;
+    orderBy?: string;
+    direction?: "desc" | "asc";
+    startAfter?: firebase.firestore.DocumentSnapshot;
+}
 
-    private static ToArray(snapshot: firebase.database.DataSnapshot): any[] {
-        const array: any[] = [];
-        snapshot.forEach(child =>{
-            array.push({...child.val(), id: child.key});
-        });
-        return array;
+class Database {
+    public defaultsOptions: IDataOptions = {
+        _selected: false
     };
 
-    public static Read(name: string, filter?: IDatabaseOptions): Promise<any|any[]> {
-        return Database.Query(name, filter)
-            .once('value')
-            .then((snapshot) => {
-                if(filter && filter.toArray) return Database.ToArray(snapshot);
-                return {...snapshot.val(), id: snapshot.key};
-            });
+    public db: firebase.firestore.Firestore;
+    public collection: firebase.firestore.CollectionReference;
+    public pagination: IPagination = {
+        limit: 5,
+        page: 1,
+        total: 0,
+    };
+
+    constructor(public readonly path: string) {
+        this.db = firebase.firestore();
+        this.collection = this.db.collection(this.path);
     }
 
-    public static Write(name: string, data: any)
-        : Promise<firebase.database.DataSnapshot> {
-        return Database.Ref(name)
-            .set(data)
+    private async _add<T extends IData>(data: T): Promise<T> {
+        let _data = this._sanitize(data) as T;
+        let ref = await this.collection.add(_data);
+        let id = ref.id;
+        await ref.update('id', id);
+        return Object.assign(_data, this.defaultsOptions, {id});
     }
 
-    public static Push(name: string, data: any): Promise<string> {
-        let ref = Database.Ref(name).push();
-        return ref.set(data)
-            .then(() => ref.key || '');
+    private async _update<T extends IData>(data: T): Promise<T> {
+        let _data = this._sanitize(data);
+        await this.collection.doc(_data.id).update(_data);
+        return data;
     }
 
-    public static Remove(name: string): Promise<firebase.database.DataSnapshot> {
-        return Database.Ref(name)
-            .remove();
+    private _sanitize(data: any): any {
+        let _data = {...data};
+        let regex: RegExp = /\_\w+/;
+
+        Object.keys(_data).forEach(key => {
+            if(regex.test(key))
+                return delete _data[key];
+            if(Array.isArray(_data[key]))
+                return _data[key] = _data[key].map((item: any) => this._sanitize(item));
+            if(typeof _data[key] === 'object')
+                return _data[key] = this._sanitize(_data[key]);
+        });
+        return _data;
     }
 
-    public static Update(name: string, data: any) {
+    public async add<T extends IData>(data: T | T[]): Promise<T | T[]> {
+        if (Array.isArray(data))
+            return await Promise.all(data.map(async item =>
+                await this._add<T>(item)));
+        return await this._add(data);
+    }
+
+    public async update<T extends IData>(data: T | T): Promise<T | T[]> {
+        if (Array.isArray(data))
+            return await Promise.all(data.map(async item =>
+                await this._update<T>(item)));
+        return await this._update<T>(data);
+    }
+
+
+    public async get<T extends IData>(id: string | string[]): Promise<T | T[]> {
+        let data: T | T[];
+        if (Array.isArray(id)) {
+            data = await Promise.all(id.map(async i => {
+                let snapshot = await this.collection.doc(i).get();
+                return snapshot.data() as T;
+            }));
+            // data = data.filter(d => d);
+        } else {
+            let snapshot = await this.collection.doc(id).get();
+            data = snapshot.data() as T;
+        }
+
+        return data;
+    }
+
+    public async all<T extends IData>(pagination: IPagination = this.pagination): Promise<T[]> {
+        let collection = this.collection;
+        let query: firebase.firestore.Query | null = null;
+        let total = this.collection.doc.length;
+
+        if (pagination.orderBy)
+            query = (query || collection).orderBy(pagination.orderBy, pagination.direction || 'desc');
+        if (pagination.startAfter)
+            query = (query || collection).startAfter(pagination.startAfter);
+        if (pagination.limit)
+            query = (query || collection).limit(pagination.limit);
+
+        let snapshots = await (query || collection).get();
+
+        if (query) {
+            this.pagination.page++;
+            this.pagination.total = total;
+            this.pagination.startAfter = snapshots.docs[snapshots.docs.length - 1];
+        }
+
+        /*let data: T[] = [];
+        snapshots.docs.forEach(item => data.push(item.data()));
+        return data;*/
+
+        return snapshots.docs.map(item => item.data() as T);
     }
 }
 
