@@ -7,8 +7,12 @@ import Auth from "../../constants/firebase/auth";
 import Actions from "../actions";
 
 class UserActions extends Actions{
-    protected collection: string = 'user';
-    protected directory: string = 'user';
+    protected static databaseConfig = {
+        name: 'user',
+    };
+    protected static storageConfig = {
+        name: 'user'
+    };
 
     public static ReceiveUser(payload: IUser): TUserActions {
         return {type: RECEIVE_USER, payload}
