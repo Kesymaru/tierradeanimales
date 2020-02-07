@@ -5,7 +5,7 @@ import {makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 
 import ROUTES from "./constants/routes";
 import AppStore, {AuthActions, IAppState, IAuthState, IUser, UserActions} from "./store";
-import {Auth} from "./constants/firebase";
+import Auth from "./constants/firebase/auth"
 
 import Router from "./wrappers/Router";
 import Copyright from "./components/Copyright";

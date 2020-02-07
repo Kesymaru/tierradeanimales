@@ -1,15 +1,19 @@
-import {IAppStateItem, IFile, IData} from "../app.types";
+import {IFile} from "../../constants/firebase/storage";
+import {IAppStateItem, IData} from "../app.types";
+
+export type ISex = 'male' | 'female';
 
 export interface IDog extends IData {
     name: string;
     age: number;
+    sex: ISex;
+    status: string;
     description: string;
     public: boolean;
 
     avatar?: IFile;
     images?: IFile[];
     start?: boolean;
-
 }
 
 export interface IDogState {

@@ -1,33 +1,29 @@
 import {Dispatch} from "redux";
 import {push} from "connected-react-router";
 
-import Database from "../../constants/firebase/database";
-import Storage from "../../constants/firebase/storage";
+import {IFile} from "../../constants/firebase/storage";
 import SystemActions from "../system/system.actions";
 import {IDog, LOAD_DOG, LOAD_DOGS, REQUEST_DOG, REQUEST_DOGS, TDogsActions} from "./dogs.types";
 import {DOGS_ROUTE} from "../../constants";
-import {IFile} from "../app.types";
+import Actions from "../actions";
 
-class DogsActions {
+class DogsActions extends Actions {
+    public static collection: string = 'dogs';
+    public static directory: string = 'dogs';
 
     public static Add(dog: IDog): Function {
         return async (dispatch: Dispatch) => {
             try{
                 dispatch(DogsActions.RequestDogs());
 
-                dog = Database.Id('dogs', dog);
-                if(dog.images) {
-                    dog.images = await Storage.SaveFiles(`dogs/${dog.id}`, dog.images);
-                    dog.images.forEach(img => img.avatar ? dog.avatar = img : null);
-                }
-                await Database.Update('dogs', dog);
+                if(dog.images)
+                    dog.images = await DogsActions.storage.save(dog.images||[]) as IFile[];
+                dog = await DogsActions.db.add(dog) as IDog;
 
                 dispatch(DogsActions.LoadDog(dog));
                 dispatch(push(DOGS_ROUTE.getPath()));
             } catch (error) {
                 console.error(error)
-            } finally {
-                dispatch(SystemActions.Loading(false, 'dogs'));
             }
         }
     }
@@ -44,7 +40,7 @@ class DogsActions {
         return async (dispatch: Dispatch) => {
             try {
                 dispatch(DogsActions.RequestDog());
-                let dog = await Database.Read<IDog>(`dogs/${id}`);
+                let dog = await DogsActions.db.get(id) as IDog;
                 dispatch(DogsActions.LoadDog(dog));
             } catch (error) {
 
@@ -54,11 +50,11 @@ class DogsActions {
         }
     }
 
-    public static GetAll(): Function {
+    public static GetAll(page: number = 1, limit: number = 5): Function {
         return async (dispatch: Dispatch) => {
             try{
                 dispatch(DogsActions.RequestDogs());
-                let dogs = await Database.ReadArray<IDog>('dogs');
+                let dogs = await DogsActions.db.all({page, limit}) as IDog[];
                 dispatch(DogsActions.LoadDogs(dogs));
             } catch (error) {
                 console.error(error)
@@ -73,7 +69,6 @@ class DogsActions {
     }
 
     public static LoadDogs(payload: IDog[]): TDogsActions {
-        console.log('LoadDogs', payload);
         return {type: LOAD_DOGS, payload};
     }
 
@@ -82,18 +77,25 @@ class DogsActions {
             try {
                 dispatch(DogsActions.RequestDogs());
 
-                let newImgs = (dog.images||[]).filter(img => img.new);
-                let deleteImgs = (dog.images||[]).filter(img => img.deleted);
+                debugger;
 
-                if(newImgs) newImgs = await Storage.SaveFiles(`dogs/${dog.id}`, newImgs);
-                if(deleteImgs) deleteImgs = await Storage.DeleteFiles(`dogs/${dog.id}`, deleteImgs);
-                // dog.images = (dog.images||[]).map(img => );
+                let newImgs = (dog.images||[]).filter(img => img._new);
+                let deletedImgs = (dog.images||[]).filter(img => img._deleted);
+                dog.images = (dog.images||[]).filter(img => !img._deleted || img._new);
 
-                await Database.Update('dogs', dog);
+                if(newImgs.length)
+                    newImgs = await DogsActions.storage.save(newImgs) as IFile[];
+                if(deletedImgs.length)
+                    await DogsActions.storage.delete(deletedImgs);
+
+                dog.images = dog.images.concat(newImgs);
+
+                console.log('updated dogs ->', dog);
+                dog = await DogsActions.db.update(dog) as IDog;
 
                 dispatch(DogsActions.LoadDog(dog));
                 dispatch(push(DOGS_ROUTE.getPath()));
-
+                dispatch(SystemActions.Notify(`Dog ${dog.name} updated`));
             } catch (error) {
 
             } finally {
@@ -103,4 +105,5 @@ class DogsActions {
     }
 }
 
+// const DogsActions = new Dogs('dogs', 'dogs');
 export default DogsActions;
