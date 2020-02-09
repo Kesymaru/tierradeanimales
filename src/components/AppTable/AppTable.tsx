@@ -59,7 +59,6 @@ function AppTable(props: IAppTableProps) {
 
     return <Grow in={true}>
         <Paper>
-            <pre>{JSON.stringify(data)}</pre>
             {props.children
                 ? props.children
                 : null}
