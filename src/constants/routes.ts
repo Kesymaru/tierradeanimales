@@ -14,9 +14,10 @@ import ForgotPassword from "../components/ForgotPassword";
 import Account from "../components/Account";
 import NotFound from "../components/NotFound";
 
-import Dogs from "../components/Dogs/Dogs";
-import EditDog from "../components/Dogs/EditDog";
 import AdminDashboard from "../components/admin/AdminDashboard";
+import AdminDogs from "../components/Dogs/AdminDogs";
+import EditDog from "../components/Dogs/EditDog";
+import Dogs from "../components/Dogs/Dogs";
 
 export interface IAppRoute {
     name: string;
@@ -115,26 +116,35 @@ const ACCOUNT_ROUTES: IAppRoute[] = [
 // ------------------------------------
 // Dogs
 // ------------------------------------
-export const DOGS_ROUTE: IAppRoute = factory({
+export const ADMIN_DOGS_ROUTE: IAppRoute = factory({
     name: 'Dogs',
     path: '/admin/dogs',
     auth: true,
-    component: Dogs,
+    component: AdminDogs,
     parent: ADMIN_ROUTE
 });
 
-export const DOG_EDIT_ROUTE: IAppRoute = factory({
+export const ADMIN_DOG_EDIT_ROUTE: IAppRoute = factory({
     name: 'Edit Dog',
-    path: `${DOGS_ROUTE.path}/:id`,
+    path: `${ADMIN_DOGS_ROUTE.path}/:id`,
     defaultParams: {id: 'new'},
     auth: true,
     component: EditDog,
-    parent: DOGS_ROUTE
+    parent: ADMIN_DOGS_ROUTE
+});
+
+export const DOG_ROUTE: IAppRoute = factory({
+    name: 'Dogs',
+    path: `/dogs`,
+    // defaultParams: {id: 'new'},
+    component: Dogs,
 });
 
 const DOGS_ROUTES: IAppRoute[] = [
-    DOG_EDIT_ROUTE,
-    DOGS_ROUTE,
+    ADMIN_DOG_EDIT_ROUTE,
+    ADMIN_DOGS_ROUTE,
+
+    DOG_ROUTE,
 ];
 
 // ------------------------------------

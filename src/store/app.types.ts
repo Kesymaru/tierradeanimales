@@ -3,7 +3,8 @@ import {RouterState} from "connected-react-router";
 import {ISystemState} from "./system/system.types";
 import {IAuthState} from "./auth/auth.types";
 import {IUserState} from "./user/user.types";
-import {IDogState} from "./dogs/dogs.types";
+import {IDog, IDogState} from "./dogs/dogs.types";
+import {IDataPagination, IResult} from "../constants/firebase/database";
 
 export interface IAppState {
     system: ISystemState;
@@ -15,9 +16,14 @@ export interface IAppState {
 
 export interface IAppStateItem<T> {
     status: TStatus;
-    data: T;
-    id?: string|null;
+    data: T | null;
+    id: string | null;
     error?: string | Error;
+}
+
+export interface IAppStateItems<T> extends IResult<T> {
+    status: TStatus;
+    error?: string | Error
 }
 
 export enum TStatus {

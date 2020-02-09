@@ -14,8 +14,9 @@ import {
     LOAD_DOGS,
     TDogsActions
 } from "./dogs.types";
-import {DOGS_ROUTE} from "../../constants";
+import {ADMIN_DOGS_ROUTE} from "../../constants";
 import Actions from "../actions";
+import {IDataPagination, IResult} from "../../constants/firebase/database";
 
 class DogsActions extends Actions {
     protected static databaseConfig = {
@@ -26,7 +27,7 @@ class DogsActions extends Actions {
         }, {
             key: 'avatar',
             defaults: Storage.defaults as any
-        }]
+        }],
     };
     protected static storageConfig = {
         name: 'dogs'
@@ -63,7 +64,7 @@ class DogsActions extends Actions {
                 dog = await DogsActions.db.add(dog) as IDog;
 
                 dispatch(DogsActions._LoadDog(dog));
-                dispatch(push(DOGS_ROUTE.getPath()));
+                dispatch(push(ADMIN_DOGS_ROUTE.getPath()));
             } catch (error) {
                 dispatch(DogsActions._ErrorDog(error));
             }
@@ -100,7 +101,7 @@ class DogsActions extends Actions {
                 dog = await DogsActions.db.update(dog) as IDog;
 
                 dispatch(DogsActions._LoadDog(dog));
-                dispatch(push(DOGS_ROUTE.getPath()));
+                dispatch(push(ADMIN_DOGS_ROUTE.getPath()));
                 dispatch(SystemActions.Notify(`Dog ${dog.name} updated`));
             } catch (error) {
                 dispatch(DogsActions._ErrorDog(error));
@@ -129,7 +130,7 @@ class DogsActions extends Actions {
         return {type: FETCH_DOGS};
     }
 
-    private static _LoadDogs(payload: IDog[]): TDogsActions {
+    private static _LoadDogs(payload: IResult<IDog>): TDogsActions {
         return {type: LOAD_DOGS, payload};
     }
 
@@ -137,15 +138,15 @@ class DogsActions extends Actions {
         return {type: ERROR_DOGS, payload};
     }
 
-    public static All(page: number = 1, limit: number = 5): Function {
+    public static All(pagination?: IDataPagination): Function {
+        console.log('get all dogs');
         return async (dispatch: Dispatch) => {
             try{
                 dispatch(DogsActions._FetchDogs());
-
-                let dogs = await DogsActions.db.all({page, limit}) as IDog[];
-
-                dispatch(DogsActions._LoadDogs(dogs));
+                const results = await DogsActions.db.all<IDog>(pagination);
+                dispatch(DogsActions._LoadDogs(results));
             } catch (error) {
+                console.error(error);
                 dispatch(DogsActions._ErrorDogs(error));
             }
         }

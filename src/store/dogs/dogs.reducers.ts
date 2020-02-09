@@ -5,6 +5,11 @@ const InitState: IDogState = {
     dogs: {
         status: TStatus.Empty,
         data: [],
+        pagination: {
+            page: 0,
+            count: 0,
+            rowPerPage: 5,
+        }
     },
     dog: {
         status: TStatus.Empty,
@@ -17,6 +22,9 @@ function DogsReducers(
     state: IDogState = InitState,
     action: TDogsActions): IDogState {
     switch (action.type) {
+        // ------------------------------------
+        // Dog
+        // ------------------------------------
         case "FETCH_DOG":
             return Object.assign({}, state, {
                 dog: {
@@ -41,21 +49,20 @@ function DogsReducers(
                 dog: InitState.dog
             });
 
+        // ------------------------------------
+        // Dogs
+        // ------------------------------------
         case "FETCH_DOGS":
-            return Object.assign({}, state, {
-                dogs: {
+            return {...state, dogs: {
+                    ...InitState.dogs,
                     status: TStatus.Fetching,
-                    data: [],
-                }
-            });
+                }};
 
         case "LOAD_DOGS":
-            return Object.assign({}, state, {
-                dogs: {
+            return {...state, dogs: {
+                    ...action.payload,
                     status: TStatus.Loaded,
-                    data: action.payload,
-                }
-            });
+                }};
 
         case "ERROR_DOGS":
             return Object.assign({}, state, {
