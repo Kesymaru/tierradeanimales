@@ -1,11 +1,16 @@
 import React, {ChangeEvent, FormEvent, FunctionComponent, useEffect, useRef, useState} from "react";
 import {connect, useDispatch} from "react-redux";
 
+import Zoom from "@material-ui/core/Zoom";
+import Fade from "@material-ui/core/Fade";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import SaveIcon from "@material-ui/icons/Save";
+import CloseIcon from "@material-ui/icons/Close";
 
 import Storage, {IFile} from "../constants/firebase/storage";
 import {IUser, IUserState, IAppState, UserActions} from "../store";
@@ -14,10 +19,10 @@ interface AccountProps extends Pick<IUserState, 'user'> {
 }
 
 const Account: FunctionComponent<AccountProps> = (props) => {
+    const dispatch = useDispatch();
     const [touched, setTouched] = useState<boolean>(false);
     const [user, setUser] = useState<IUser | null>(props.user);
     const [password, setPassword] = useState<string>('');
-    const dispatch = useDispatch();
     const fileInput = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -28,7 +33,6 @@ const Account: FunctionComponent<AccountProps> = (props) => {
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
         if (!user || !touched) return;
-
         dispatch(UserActions.UpdateProfile(user));
         if (password.length) dispatch(UserActions.UpdatePassword(password));
     };
@@ -47,8 +51,7 @@ const Account: FunctionComponent<AccountProps> = (props) => {
 
     function handleAvatarChange(event: ChangeEvent<HTMLInputElement>) {
         if (!event || !event.target || !event.target.files || !event.target.files[0]) return;
-
-        let avatar: IFile = Storage.newFile(event.target.files[0]);
+        const avatar: IFile = Storage.newFile(event.target.files[0]);
         setUser({...user, avatar} as IUser);
         setTouched(true);
     }
@@ -58,31 +61,57 @@ const Account: FunctionComponent<AccountProps> = (props) => {
         setTouched(false);
     }
 
-    const clickFileUpload = () => {
+    function clickFileUpload() {
         if (fileInput && fileInput.current)
             fileInput.current.click();
-    };
+    }
 
-    return <>
-        <input
-            accept="image/*"
-            style={{display: 'none'}}
-            id="avatar"
-            type="file"
-            ref={fileInput}
-            onChange={handleAvatarChange}
-        />
-        <Avatar
-            style={{height: '150px', width: '150px', margin: '0 auto', cursor: 'pointer'}}
-            src={user && user.avatar ? user.avatar.src : undefined}
-            onClick={clickFileUpload}>
-        </Avatar>
-        <Typography component="h1" variant="h5">
-            {user ? user.displayName : ''}
-        </Typography>
+    return <Container>
         <form noValidate onSubmit={handleSubmit} onReset={handlerReset}>
             <Grid container spacing={2}>
-                <Grid item xs={12} sm={12}>
+                <Grid item xs={12}>
+                    <input
+                        accept="image/*"
+                        style={{display: 'none'}}
+                        id="avatar"
+                        type="file"
+                        ref={fileInput}
+                        onChange={handleAvatarChange}
+                    />
+                    <Zoom in={true} style={{transitionDelay: '250ms'}}>
+                        <Avatar
+                            alt={user && user.displayName ? user.displayName : 'Profile Picture'}
+                            src={user && user.photoURL ? user.photoURL : undefined}
+                            style={{
+                                height: 100,
+                                width: 100,
+                                margin: '0 auto'
+                            }}
+                            onClick={clickFileUpload}>
+                        </Avatar>
+                    </Zoom>
+                </Grid>
+                <Grid item xs={12}>
+                    <Fade in={true}>
+                        <Typography component="h1" variant="h5" style={{textAlign: 'center'}}>
+                            {user ? user.displayName : ''}
+                        </Typography>
+                    </Fade>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <TextField
+                        variant="outlined"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        value={user ? user.email : ''}
+                        onChange={handleUserChange('email')}
+                    />
+                </Grid>
+                <Grid item xs={12} md={6}>
                     <TextField
                         autoComplete="Name"
                         name="Name"
@@ -99,19 +128,6 @@ const Account: FunctionComponent<AccountProps> = (props) => {
                 <Grid item xs={12}>
                     <TextField
                         variant="outlined"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        value={user ? user.email : ''}
-                        onChange={handleUserChange('email')}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        variant="outlined"
                         fullWidth
                         id="password"
                         label="Change Password"
@@ -123,25 +139,30 @@ const Account: FunctionComponent<AccountProps> = (props) => {
                 </Grid>
                 <Grid item xs={6}>
                     <Button
+                        variant="contained"
                         type="reset"
                         color="secondary"
+                        style={{width: '100%'}}
+                        startIcon={<CloseIcon/>}
                     >
                         Cancel
                     </Button>
                 </Grid>
                 <Grid item xs={6} container justify="flex-end">
                     <Button
-                        type="submit"
                         variant="contained"
+                        type="submit"
                         color="primary"
                         disabled={!touched}
+                        style={{width: '100%'}}
+                        startIcon={<SaveIcon/>}
                     >
                         Update
                     </Button>
                 </Grid>
             </Grid>
         </form>
-    </>;
+    </Container>;
 };
 
 const mapStateToProps = (state: IAppState) => ({
