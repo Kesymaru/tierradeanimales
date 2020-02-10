@@ -2,6 +2,8 @@ import React, {ChangeEvent, FormEvent, FunctionComponent, MouseEvent, useEffect,
 import {connect, useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
 
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Zoom from "@material-ui/core/Zoom";
 import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
@@ -266,7 +268,6 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
                         <LinearProgress color="primary"/>
                     </Fade>
                 </Grid>
-
             </Grid>
         </form>
     </Container>;

@@ -1,6 +1,7 @@
 import React, {ChangeEvent, FunctionComponent, useState, MouseEvent, useEffect} from "react";
 
-import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
+import {createStyles, makeStyles, Theme, useTheme} from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import Fade from "@material-ui/core/Fade";
 import Zoom from "@material-ui/core/Zoom";
@@ -37,16 +38,32 @@ interface IDogImagesProps {
 
 const DogImages: FunctionComponent<IDogImagesProps> = ({dog, loading, onImagesChange, onSelectAvatar}) => {
     const classes = useStyles();
+    const theme = useTheme();
+    const isSm = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMd = useMediaQuery(theme.breakpoints.down('md'));
+    const isLg = useMediaQuery(theme.breakpoints.down('lg'));
+    const isXl = useMediaQuery(theme.breakpoints.down('xl'));
     const [images, setImages] = useState<IFile[]>(dog.images || []);
     const [avatar, setAvatar] = useState<IFile | undefined>(dog.avatar);
-
+    const [cols, setCols] = useState<number>(_getGridSize());
+    
     useEffect(() => {
+        console.log('use effect');
+
         setImages(dog.images || []);
         setAvatar(dog.avatar);
+        setCols(_getGridSize());
 
         if (onSelectAvatar && !avatar && images.filter(img => !img._deleted).length)
             onSelectAvatar(images[0]);
-    }, [dog, loading]);
+    }, [dog, loading, isSm, isMd, isLg, isXl]);
+
+    function _getGridSize(): number {
+        if(isSm) return 2;
+        if(isMd) return 3;
+        if(isLg) return 4;
+        return 5;
+    }
 
     function handleImageChange(event: ChangeEvent<HTMLInputElement>) {
         if (!event.target || !event.target.files) return;
@@ -140,7 +157,7 @@ const DogImages: FunctionComponent<IDogImagesProps> = ({dog, loading, onImagesCh
 
         {images.length
             ? <Grid item xs={12}>
-                <GridList cellHeight={150} cols={3}>
+                <GridList cellHeight={150} cols={cols}>
                     {images.map((img, index) => (
                         <Zoom
                             in={!img._deleted}
