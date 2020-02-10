@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+  // Allow to increment only the 'visits' field and only by 1.
+  match /_counter_shards_/{shardId} {
+    allow get;
+    allow write: if request.resource.data.keys() == ["visits"]
+                   && (resource == null || request.resource.data.visits ==
+                   resource.data.visits + 1);
+  }
+}

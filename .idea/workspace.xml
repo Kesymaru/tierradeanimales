@@ -1,28 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="Dashboard.tsx component&#10;Updated EditAccount.tsx">
+    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AppTable/AppTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppTable/AppTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AppTable/AppTableHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppTable/AppTableHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dogs/DogImages.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/DogImages.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dogs/Dogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/Dogs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dogs/EditDog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/EditDog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/AppBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/AppBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/Breadcrumbs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/Breadcrumbs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/NavbarMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/NavbarMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/ScrollTop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/ScrollTop.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/firebase/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase/database.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/firebase/storage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase/storage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/regex.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/app.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/app.types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/dogs/dogs.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dogs/dogs.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/dogs/dogs.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dogs/dogs.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/user/user.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/user/user.actions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,8 +59,18 @@
       <recent name="$PROJECT_DIR$/src/components" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.npm start">
+  <component name="RunManager" selected="npm.npm build">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="npm build" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="npm start" type="js.build_tools.npm">
@@ -93,6 +83,11 @@
       <envs />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.Debug Application" />
+      <item itemvalue="npm.npm start" />
+      <item itemvalue="npm.npm build" />
+    </list>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -121,112 +116,7 @@
       <workItem from="1576963346713" duration="35777000" />
       <workItem from="1577568811282" duration="99053000" />
       <workItem from="1579564004625" duration="40429000" />
-      <workItem from="1579733497168" duration="230996000" />
-    </task>
-    <task id="LOCAL-00009" summary="improved actions, types and reducers for redux&#10;improved firebase integration, added support to upload user profile img&#10;improved the Navbar component&#10;improved the routing order and config">
-      <created>1579566326301</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1579566326301</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Created the user menu component to display the user profile image and menu related to the user profile on the top app bar&#10;improved the navbar component styles and moved logic to the new user menu component">
-      <created>1579623845694</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1579623845694</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Improved the integration for firebase auth">
-      <created>1579625824853</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1579625824853</updated>
-    </task>
-    <task id="LOCAL-00012" summary="added a redirect into the sign in component in order to send the user to the home route when logged">
-      <created>1579626652897</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1579626652897</updated>
-    </task>
-    <task id="LOCAL-00013" summary="improved the chat components">
-      <created>1580002750988</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1580002750988</updated>
-    </task>
-    <task id="LOCAL-00014" summary="separated the integration with firebase services into different classes&#10;auth.ts, database.ts, firebase.ts and storage.ts">
-      <created>1580002813970</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1580002813970</updated>
-    </task>
-    <task id="LOCAL-00015" summary="improved the store organization&#10;updated tha auth actions">
-      <created>1580002855712</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1580002855712</updated>
-    </task>
-    <task id="LOCAL-00016" summary="updated the system and user on the store">
-      <created>1580002890165</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1580002890165</updated>
-    </task>
-    <task id="LOCAL-00017" summary="update firebase.ts separate &#10;added more routes improved the auth on the routes.ts">
-      <created>1580002943026</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1580002943026</updated>
-    </task>
-    <task id="LOCAL-00018" summary="improved the chats and chat actions&#10;improved the chat store status">
-      <created>1580002984742</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1580002984742</updated>
-    </task>
-    <task id="LOCAL-00019" summary="added connected react router to support router on the redux store">
-      <created>1580003021567</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1580003021567</updated>
-    </task>
-    <task id="LOCAL-00020" summary="updated components">
-      <created>1580003044499</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1580003044499</updated>
-    </task>
-    <task id="LOCAL-00021" summary="added a redirect into the sign in component in order to send the user to the home route when logged">
-      <created>1580003105817</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1580003105817</updated>
-    </task>
-    <task id="LOCAL-00022" summary="modified the navbar to support menu and navigation based on the route config">
-      <created>1580003145459</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1580003145459</updated>
-    </task>
-    <task id="LOCAL-00023" summary="added new versus component for demo">
-      <created>1580003161430</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1580003161430</updated>
+      <workItem from="1579733497168" duration="252801000" />
     </task>
     <task id="LOCAL-00024" summary="added admin route for the versus">
       <created>1580161179667</created>
@@ -466,7 +356,112 @@
       <option name="project" value="LOCAL" />
       <updated>1581113718486</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Removed regex.ts&#10;Updated the database.ts and storage.ts classes to support configuration&#10;Updated constans/index.ts">
+      <created>1581116536134</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1581116536134</updated>
+    </task>
+    <task id="LOCAL-00059" summary="Removed console logs and updated the app table components AppTable.tsx and AppTableHeader.tsx">
+      <created>1581116577607</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1581116577607</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Updated dogs components">
+      <created>1581116602757</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1581116602758</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Updated AppBar.tsx, Breadcrumbs.tsx, Navbar.tsx, NavbarMenu.tsx and ScrollTop.tsx">
+      <created>1581116656874</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1581116656874</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Updated the IAppStateItem on app.types.ts&#10;Updated the dogs.actions.ts, dogs.types.ts and dogs.reducers.ts">
+      <created>1581116709421</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1581116709421</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Updated actions.ts to support database and storage configuration&#10;Updated user.actions.ts">
+      <created>1581116750146</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1581116750146</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Removed realTimeDatabase.ts not used">
+      <created>1581116850884</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1581116850884</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Removed pre con AppTable.tsx">
+      <created>1581282596275</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1581282596276</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Renamed the Dogs component to AdminDogs.tsx&#10;Created new public component to display all the public dogs Dogs.tsx&#10;Updated database.ts to support pagination&#10;Updated the pagination interface&#10;Updated the dogs.actions.ts, dogs.types.ts and dogs.reducers.ts to support new pagination&#10;Updated the app.types.ts to support stat with new pagination">
+      <created>1581282711552</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1581282711558</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Updated the Account.tsx component">
+      <created>1581365503703</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1581365503703</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Improved the DogImages.tsx component to display a responsive image gallery &#10;&#10;Public dogs component Dogs.tsx&#10;Details dog component for public dogs DogDetails.tsx">
+      <created>1581375533970</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1581375533970</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Updated the IPagination interface&#10;Improved the all() method to return results including the pagination settings used for the query">
+      <created>1581375586414</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1581375586414</updated>
+    </task>
+    <task id="LOCAL-00070" summary="New DogDetails route added">
+      <created>1581375822052</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1581375822052</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Updated the NavbarMenu.tsx to display the admin routes&#10;Still needs to display public and detect auth">
+      <created>1581375864090</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1581375864090</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Updated dogs.actions.ts">
+      <created>1581375880334</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1581375880334</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -486,21 +481,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added the versus store, added actions, reducers and types" />
-    <MESSAGE value="added edit versus component&#10;improved the versus components" />
-    <MESSAGE value="updated the navbar to include AppBar.tsx, removed not used index.ts, added ScrollTop.tsx and improved the Navbar.tsx and NavbarMenu.tsx" />
-    <MESSAGE value="removed console.log" />
-    <MESSAGE value="added Dogs.tsx component&#10;added new AlertDialog.tsx component" />
-    <MESSAGE value="removed not used components for chats, versus and students" />
-    <MESSAGE value="removed store for chats, versus and students" />
-    <MESSAGE value="new AdminDashboard.tsx component" />
-    <MESSAGE value="updated NavbarMenu.tsx" />
-    <MESSAGE value="added the dogs into de redux store" />
-    <MESSAGE value="updated Account.tsx component&#10;updated Copyright.tsx component" />
-    <MESSAGE value="DogImages.tsx component" />
-    <MESSAGE value="EditDog.tsx component&#10;added support to create and edit dogs" />
-    <MESSAGE value="Dogs.tsx component&#10;added table for dogs&#10;load data" />
-    <MESSAGE value="refactored the app table components" />
     <MESSAGE value="Dogs components&#10;Dogs.tsx component to display in a list all the dogs&#10;EditDog.tsx component to edit and create new dogs&#10;DogImages.tsx component to manage the dog images, add and remove images to new or existing dog" />
     <MESSAGE value="updated the Account.tsx component to use the new UserAction&#10;Fixed Notify.tsx component, added key &#10;Added new actions.ts base class for the app redux actions &#10;updated the user.actions.ts to extend the new actions.ts class" />
     <MESSAGE value="Dashboard.tsx component&#10;Updated EditAccount.tsx&#10;Removed GoalEdit.tsx and GoalsList.tsx components, not used anymore" />
@@ -511,7 +491,22 @@
     <MESSAGE value="Update Dogs.tsx component, edit and delete actions&#10;EditDog.tsx status select updated&#10;Added new delete action on dogs.actions.ts&#10;updated dogs.reducers.ts and dogs.types.ts for the new delete dog action&#10;&#10;updated database.ts to support delete batch, add timestamp automatically on add and updated documents" />
     <MESSAGE value="removed console.log on AppBar.tsx" />
     <MESSAGE value="Updated SignIn.tsx and SignUp.tsx components" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated SignIn.tsx and SignUp.tsx components" />
+    <MESSAGE value="Removed regex.ts&#10;Updated the database.ts and storage.ts classes to support configuration&#10;Updated constans/index.ts" />
+    <MESSAGE value="Removed console logs and updated the app table components AppTable.tsx and AppTableHeader.tsx" />
+    <MESSAGE value="Updated dogs components" />
+    <MESSAGE value="Updated AppBar.tsx, Breadcrumbs.tsx, Navbar.tsx, NavbarMenu.tsx and ScrollTop.tsx" />
+    <MESSAGE value="Updated the IAppStateItem on app.types.ts&#10;Updated the dogs.actions.ts, dogs.types.ts and dogs.reducers.ts" />
+    <MESSAGE value="Updated actions.ts to support database and storage configuration&#10;Updated user.actions.ts" />
+    <MESSAGE value="Removed realTimeDatabase.ts not used" />
+    <MESSAGE value="Removed pre con AppTable.tsx" />
+    <MESSAGE value="Renamed the Dogs component to AdminDogs.tsx&#10;Created new public component to display all the public dogs Dogs.tsx&#10;Updated database.ts to support pagination&#10;Updated the pagination interface&#10;Updated the dogs.actions.ts, dogs.types.ts and dogs.reducers.ts to support new pagination&#10;Updated the app.types.ts to support stat with new pagination" />
+    <MESSAGE value="Updated the Account.tsx component" />
+    <MESSAGE value="Improved the DogImages.tsx component to display a responsive image gallery &#10;&#10;Public dogs component Dogs.tsx&#10;Details dog component for public dogs DogDetails.tsx" />
+    <MESSAGE value="Updated the IPagination interface&#10;Improved the all() method to return results including the pagination settings used for the query" />
+    <MESSAGE value="New DogDetails route added" />
+    <MESSAGE value="Updated the NavbarMenu.tsx to display the admin routes&#10;Still needs to display public and detect auth" />
+    <MESSAGE value="Updated dogs.actions.ts" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated dogs.actions.ts" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1360" y="-75" key="#Inspections" timestamp="1576817948911">
@@ -522,6 +517,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1360" y="-75" key="#Notifications/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1576963575587" />
+    <state x="-1496" y="-78" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581376539260">
+      <screen x="-1920" y="-280" width="1920" height="1080" />
+    </state>
+    <state x="-1496" y="-78" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581376539260" />
     <state x="-1246" y="59" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1580785377594">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -530,38 +529,38 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581113108781" />
-    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2" timestamp="1581116708899">
+    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2" timestamp="1581376554736">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581116708899" />
+    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581376554736" />
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog" timestamp="1580854290081">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580854290081" />
-    <state width="1920" height="323" key="GridCell.Tab.0.bottom" timestamp="1581113108800">
+    <state width="1920" height="323" key="GridCell.Tab.0.bottom" timestamp="1581376540951">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="323" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581113108800" />
+    <state width="1920" height="323" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581376540951" />
     <state width="1280" height="261" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1576731842392" />
-    <state width="1920" height="323" key="GridCell.Tab.0.center" timestamp="1581113108799">
+    <state width="1920" height="323" key="GridCell.Tab.0.center" timestamp="1581376540950">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="323" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581113108799" />
+    <state width="1920" height="323" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581376540950" />
     <state width="1280" height="261" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1576731842391" />
-    <state width="1920" height="323" key="GridCell.Tab.0.left" timestamp="1581113108799">
+    <state width="1920" height="323" key="GridCell.Tab.0.left" timestamp="1581376540949">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="323" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581113108799" />
+    <state width="1920" height="323" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581376540949" />
     <state width="1280" height="261" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1576731842390" />
-    <state width="1920" height="323" key="GridCell.Tab.0.right" timestamp="1581113108800">
+    <state width="1920" height="323" key="GridCell.Tab.0.right" timestamp="1581376540951">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="323" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581113108800" />
+    <state width="1920" height="323" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581376540951" />
     <state width="1280" height="261" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1576731842391" />
-    <state x="-1571" y="-198" width="1203" height="875" key="SettingsEditor" timestamp="1580507805428">
+    <state x="-1571" y="-198" width="1203" height="875" key="SettingsEditor" timestamp="1581375985729">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1571" y="-198" width="1203" height="875" key="SettingsEditor/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580507805428" />
+    <state x="-1571" y="-198" width="1203" height="875" key="SettingsEditor/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581375985729" />
     <state x="134" y="27" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1576727555828" />
     <state x="-1230" y="-1" width="567" height="540" key="StructurePopup" timestamp="1580009120712">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -571,10 +570,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="VCS.FileHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902347" />
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1581116658884">
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1581375883500">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581116658884" />
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581375883500" />
     <state x="-1197" y="111" key="cloudConfig.SelfSettingsDialog" timestamp="1576817894168">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -587,18 +586,18 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902348" />
-    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1581090751970">
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1581345083295">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581090751970" />
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581345083295" />
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576727526871">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.800@0.0.1280.800" timestamp="1576727526871" />
-    <state x="-1299" y="6" width="828" height="582" key="find.popup" timestamp="1581113090819">
+    <state x="-1299" y="6" width="828" height="582" key="find.popup" timestamp="1581345430336">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1299" y="6" width="828" height="582" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581113090819" />
+    <state x="-1299" y="6" width="828" height="582" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581345430336" />
     <state width="600" height="440" key="javadoc.popup" timestamp="1580145157568">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -608,10 +607,10 @@
     </state>
     <state x="-1462" y="-30" key="run.anything.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580872105579" />
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1581113727448">
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1581374765129">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581113727448" />
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581374765129" />
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1576731608589" />
   </component>
   <component name="XDebuggerManager">
@@ -628,6 +627,12 @@
           <line>51</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/Dogs/AdminDogs.tsx</url>
+          <line>59</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
