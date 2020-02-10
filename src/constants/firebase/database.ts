@@ -13,7 +13,7 @@ export interface IData extends IDataDefaults {
     updatedAt?: Date;
 }
 
-export interface IDataPagination {
+export interface IPagination {
     count: number;
     rowPerPage: number;
     page: number;
@@ -43,7 +43,7 @@ export interface IDataStats {
 
 export interface IResult<T> {
     data: T[];
-    pagination: IDataPagination;
+    pagination: IPagination;
 }
 
 class Database {
@@ -54,7 +54,7 @@ class Database {
 
     public db: firebase.firestore.Firestore;
     public collection: firebase.firestore.CollectionReference;
-    public pagination: IDataPagination = {
+    public pagination: IPagination = {
         count: 0,
         rowPerPage: 5,
         page: 0,
@@ -216,7 +216,7 @@ class Database {
         await batch.commit();
     }
 
-    public async all<T extends IData>(pagination: IDataPagination = this.pagination): Promise<IResult<T>> {
+    public async all<T extends IData>(pagination: IPagination = this.pagination): Promise<IResult<T>> {
         const query = this._query(pagination);
         const snapshots = await query.get();
 
@@ -227,7 +227,7 @@ class Database {
         return results;
     }
 
-    private _query(pagination: IDataPagination): firebase.firestore.Query {
+    private _query(pagination: IPagination): firebase.firestore.Query {
         pagination.rowPerPage = pagination.rowPerPage
             ? pagination.rowPerPage
             : this.pagination.rowPerPage;
@@ -249,7 +249,7 @@ class Database {
         return query;
     }
 
-    private async _setPagination(pagination: IDataPagination, snapshots: firebase.firestore.QuerySnapshot): Promise<IDataPagination> {
+    private async _setPagination(pagination: IPagination, snapshots: firebase.firestore.QuerySnapshot): Promise<IPagination> {
         const stats = await this._getStats();
 
         return this.pagination = {
