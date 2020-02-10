@@ -16,7 +16,7 @@ import {
 } from "./dogs.types";
 import {ADMIN_DOGS_ROUTE} from "../../constants";
 import Actions from "../actions";
-import {IDataPagination, IResult} from "../../constants/firebase/database";
+import {IPagination, IResult} from "../../constants/firebase/database";
 
 class DogsActions extends Actions {
     protected static databaseConfig = {
@@ -138,7 +138,7 @@ class DogsActions extends Actions {
         return {type: ERROR_DOGS, payload};
     }
 
-    public static All(pagination?: IDataPagination): Function {
+    public static All(pagination?: IPagination): Function {
         console.log('get all dogs');
         return async (dispatch: Dispatch) => {
             try{

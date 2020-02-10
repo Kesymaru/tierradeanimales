@@ -4,7 +4,7 @@ import {ISystemState} from "./system/system.types";
 import {IAuthState} from "./auth/auth.types";
 import {IUserState} from "./user/user.types";
 import {IDog, IDogState} from "./dogs/dogs.types";
-import {IDataPagination, IResult} from "../constants/firebase/database";
+import {IPagination, IResult} from "../constants/firebase/database";
 
 export interface IAppState {
     system: ISystemState;
