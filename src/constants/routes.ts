@@ -18,6 +18,7 @@ import AdminDashboard from "../components/admin/AdminDashboard";
 import AdminDogs from "../components/Dogs/AdminDogs";
 import EditDog from "../components/Dogs/EditDog";
 import Dogs from "../components/Dogs/Dogs";
+import DogDetails from "../components/Dogs/DogDetails";
 
 export interface IAppRoute {
     name: string;
@@ -107,6 +108,7 @@ export const ACCOUNT_ROUTE: IAppRoute = factory({
     auth: true,
     component: Account,
     icon: AccountBoxIcon,
+    parent: HOME_ROUTE,
 });
 
 const ACCOUNT_ROUTES: IAppRoute[] = [
@@ -136,15 +138,23 @@ export const ADMIN_DOG_EDIT_ROUTE: IAppRoute = factory({
 export const DOG_ROUTE: IAppRoute = factory({
     name: 'Dogs',
     path: `/dogs`,
-    // defaultParams: {id: 'new'},
     component: Dogs,
+    parent: HOME_ROUTE
+});
+
+export const DOG_DETAILS_ROUTE: IAppRoute = factory({
+    name: 'Dog',
+    path: `/dogs/:id`,
+    component: DogDetails,
+    parent: DOG_ROUTE
 });
 
 const DOGS_ROUTES: IAppRoute[] = [
     ADMIN_DOG_EDIT_ROUTE,
     ADMIN_DOGS_ROUTE,
 
-    DOG_ROUTE,
+    DOG_DETAILS_ROUTE,
+    DOG_ROUTE
 ];
 
 // ------------------------------------
