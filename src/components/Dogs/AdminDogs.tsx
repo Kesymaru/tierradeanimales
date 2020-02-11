@@ -11,14 +11,30 @@ import Typography from '@material-ui/core/Typography';
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from '@material-ui/icons/Edit';
+import FilterListIcon from '@material-ui/icons/FilterList';
 
 import AppTable from "../AppTable/AppTable";
-
 import {ADMIN_DOG_EDIT_ROUTE} from "../../constants";
 import {IAppState, TStatus} from "../../store";
 import {IDog, IDogState} from "../../store/dogs/dogs.types";
 import DogsActions from "../../store/dogs/dogs.actions";
 import {IAppTableFooterProps} from "../AppTable/AppTableFooter";
+import {IFilter, ISort} from "../../constants/firebase/database";
+
+const DOGS_FILTER: IFilter[] = [
+    {
+        name: 'Name',
+        key: 'name',
+        condition: '==',
+        value: ''
+    },
+    {
+        name: 'Age',
+        key: 'age',
+        condition: '==',
+        value: ''
+    }
+];
 
 interface IAdminDogs extends Pick<IDogState, 'dogs'> {
 }
@@ -28,25 +44,15 @@ function AdminDogs(props: IAdminDogs) {
     const history = useHistory();
     const [dogs, _setDogs] = useState<IDog[]>(props.dogs.data);
     const [selected, seSelected] = useState<IDog[]>([]);
-    const [footerProps, setFooterProps] = useState<IAppTableFooterProps>(_getFooterProps());
     const [loading, setLoading] = useState<boolean>(_getLoading());
 
     useEffect(() => {
         setDogs(props.dogs.data);
-        setFooterProps(_getFooterProps());
         setLoading(_getLoading());
     }, [props.dogs]);
 
     function _getLoading(): boolean {
         return props.dogs.status === TStatus.Fetching
-    }
-
-    function _getFooterProps(): IAppTableFooterProps {
-        return {
-            ...props.dogs.pagination,
-            onChangePage,
-            onChangeRowsPerPage,
-        };
     }
 
     function setDogs(_dogs: IDog[]) {
@@ -58,15 +64,21 @@ function AdminDogs(props: IAdminDogs) {
         dispatch(DogsActions.All());
 
     function onChangePage(event: unknown, page: number) {
-        if(page === props.dogs.pagination.page) return;
+        if (page === props.dogs.pagination.page) return;
         const pagination = {...props.dogs.pagination, page};
         dispatch(DogsActions.All(pagination));
     }
 
     function onChangeRowsPerPage(event: ChangeEvent<HTMLInputElement>) {
         const rowPerPage = parseInt(event.target.value);
-        if(rowPerPage === props.dogs.pagination.rowPerPage) return;
+        if (rowPerPage === props.dogs.pagination.rowPerPage) return;
         const pagination = {...props.dogs.pagination, rowPerPage};
+        dispatch(DogsActions.All(pagination));
+    }
+
+    function onSort(sort: ISort) {
+        const pagination = {...props.dogs.pagination, sort};
+        console.log('sort', sort, pagination);
         dispatch(DogsActions.All(pagination));
     }
 
@@ -75,8 +87,11 @@ function AdminDogs(props: IAdminDogs) {
             data={dogs}
             cells={['name', 'age', 'sex', 'status']}
             loading={loading}
+            pagination={props.dogs.pagination}
             onSelect={selected => setDogs(selected)}
-            pagination={footerProps}
+            onSort={onSort}
+            onChangePage={onChangePage}
+            onChangeRowsPerPage={onChangeRowsPerPage}
         >
             <Toolbar>
                 {selected.length
@@ -112,6 +127,13 @@ function AdminDogs(props: IAdminDogs) {
                             onClick={() => history.push(ADMIN_DOG_EDIT_ROUTE.getPath())}
                         >
                             <AddIcon/>
+                        </IconButton>
+                    </Tooltip>
+                </Fade>
+                <Fade in={true}>
+                    <Tooltip title="Filter">
+                        <IconButton>
+                            <FilterListIcon/>
                         </IconButton>
                     </Tooltip>
                 </Fade>

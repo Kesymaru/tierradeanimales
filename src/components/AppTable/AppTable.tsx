@@ -12,14 +12,15 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 import AppTableHeader, {IAppTableHeaderProps} from "./AppTableHeader";
 import AppTableFooter, {IAppTableFooterProps} from "./AppTableFooter";
+import {IPagination} from "../../constants/firebase/database";
 
-export interface IAppTableProps extends Omit<IAppTableHeaderProps, 'total' | 'selected' | 'cells'> {
+export interface IAppTableProps extends Omit<IAppTableHeaderProps, 'total' | 'selected' | 'cells'>, Omit<IAppTableFooterProps, 'pagination'> {
     data: any[];
 
     cells?: string[];
     loading?: boolean;
+    pagination?: IPagination;
 
-    pagination?: IAppTableFooterProps;
     onSelect?: (selected: any[]) => void;
     children?: ReactElement;
 }
@@ -70,11 +71,12 @@ function AppTable(props: IAppTableProps) {
                         cells={cells}
                         onSelectAll={handleSelectAll}
                         sort={props.sort}
+                        onSort={props.onSort}
                     />
                     <TableBody>
                         {data.length === 0
                             ? <TableRow>
-                                <TableCell colSpan={cells.length+1}>
+                                <TableCell colSpan={cells.length + 1}>
                                     {loading
                                         ? <LinearProgress color="primary"/>
                                         : 'No Data'}
@@ -108,8 +110,11 @@ function AppTable(props: IAppTableProps) {
                 </Table>
             </TableContainer>
             {props.pagination
-                ? <AppTableFooter {...props.pagination} />
-                : null}
+                ? <AppTableFooter
+                    pagination={props.pagination}
+                    onChangePage={props.onChangePage}
+                    onChangeRowsPerPage={props.onChangeRowsPerPage}
+                /> : null}
         </Paper>
     </Grow>;
 }

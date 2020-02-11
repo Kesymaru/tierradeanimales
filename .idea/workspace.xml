@@ -3,6 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firebase.json" beforeDir="false" afterPath="$PROJECT_DIR$/firebase.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AppTable/AppTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppTable/AppTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AppTable/AppTableFooter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppTable/AppTableFooter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dogs/AdminDogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/AdminDogs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/firebase/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase/database.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,28 +122,7 @@
       <workItem from="1576963346713" duration="35777000" />
       <workItem from="1577568811282" duration="99053000" />
       <workItem from="1579564004625" duration="40429000" />
-      <workItem from="1579733497168" duration="252801000" />
-    </task>
-    <task id="LOCAL-00024" summary="added admin route for the versus">
-      <created>1580161179667</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1580161179667</updated>
-    </task>
-    <task id="LOCAL-00025" summary="removed the refresh token on the user interface">
-      <created>1580161205541</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1580161205541</updated>
-    </task>
-    <task id="LOCAL-00026" summary="new store for versus">
-      <created>1580161245347</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1580161245347</updated>
+      <workItem from="1579733497168" duration="262794000" />
     </task>
     <task id="LOCAL-00027" summary="added moment and material date-picker packages">
       <created>1580161268932</created>
@@ -461,7 +446,28 @@
       <option name="project" value="LOCAL" />
       <updated>1581375880334</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="Added firebase project config for hosting, firestore and firebase storage&#10;firebase.json">
+      <created>1581376614762</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1581376614762</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Updated the AppTable.tsx, AppTableFooter.tsx and AppTableHeader.tsx">
+      <created>1581454243514</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1581454243515</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Updated AdminDogs.tsx to improved the pagination on the app table">
+      <created>1581454302761</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1581454302762</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -481,9 +487,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Dogs components&#10;Dogs.tsx component to display in a list all the dogs&#10;EditDog.tsx component to edit and create new dogs&#10;DogImages.tsx component to manage the dog images, add and remove images to new or existing dog" />
-    <MESSAGE value="updated the Account.tsx component to use the new UserAction&#10;Fixed Notify.tsx component, added key &#10;Added new actions.ts base class for the app redux actions &#10;updated the user.actions.ts to extend the new actions.ts class" />
-    <MESSAGE value="Dashboard.tsx component&#10;Updated EditAccount.tsx&#10;Removed GoalEdit.tsx and GoalsList.tsx components, not used anymore" />
     <MESSAGE value="Updated dogs.actions.ts and dogs.types.ts, actions implements new actions base class&#10;Updated Auth import on App.tsx" />
     <MESSAGE value="installed uui package" />
     <MESSAGE value="removed firebase index.ts&#10;updated the database.ts class to implement firebase firestore&#10;updated storage.ts class to implement firebase storage &#10;updated firebase.ts class to configure the firebase app&#10;realTimeDatabase.ts keeps old implementation for firebase database" />
@@ -506,7 +509,10 @@
     <MESSAGE value="New DogDetails route added" />
     <MESSAGE value="Updated the NavbarMenu.tsx to display the admin routes&#10;Still needs to display public and detect auth" />
     <MESSAGE value="Updated dogs.actions.ts" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated dogs.actions.ts" />
+    <MESSAGE value="Added firebase project config for hosting, firestore and firebase storage&#10;firebase.json" />
+    <MESSAGE value="Updated the AppTable.tsx, AppTableFooter.tsx and AppTableHeader.tsx" />
+    <MESSAGE value="Updated AdminDogs.tsx to improved the pagination on the app table" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated AdminDogs.tsx to improved the pagination on the app table" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1360" y="-75" key="#Inspections" timestamp="1576817948911">
@@ -529,34 +535,38 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581113108781" />
-    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2" timestamp="1581376554736">
+    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2" timestamp="1581456283094">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581376554736" />
+    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581456283094" />
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog" timestamp="1580854290081">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580854290081" />
-    <state width="1920" height="323" key="GridCell.Tab.0.bottom" timestamp="1581376540951">
+    <state width="1920" height="323" key="GridCell.Tab.0.bottom" timestamp="1581443310545">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="323" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581376540951" />
+    <state width="1920" height="323" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581443310545" />
     <state width="1280" height="261" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1576731842392" />
-    <state width="1920" height="323" key="GridCell.Tab.0.center" timestamp="1581376540950">
+    <state width="1920" height="323" key="GridCell.Tab.0.center" timestamp="1581443310543">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="323" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581376540950" />
+    <state width="1920" height="323" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581443310543" />
     <state width="1280" height="261" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1576731842391" />
-    <state width="1920" height="323" key="GridCell.Tab.0.left" timestamp="1581376540949">
+    <state width="1920" height="323" key="GridCell.Tab.0.left" timestamp="1581443310539">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="323" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581376540949" />
+    <state width="1920" height="323" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581443310539" />
     <state width="1280" height="261" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1576731842390" />
-    <state width="1920" height="323" key="GridCell.Tab.0.right" timestamp="1581376540951">
+    <state width="1920" height="323" key="GridCell.Tab.0.right" timestamp="1581443310544">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="323" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581376540951" />
+    <state width="1920" height="323" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581443310544" />
     <state width="1280" height="261" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1576731842391" />
+    <state x="-1209" y="-103" key="RollbackChangesDialog" timestamp="1581436539195">
+      <screen x="-1920" y="-280" width="1920" height="1080" />
+    </state>
+    <state x="-1209" y="-103" key="RollbackChangesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581436539195" />
     <state x="-1571" y="-198" width="1203" height="875" key="SettingsEditor" timestamp="1581375985729">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -570,10 +580,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="VCS.FileHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902347" />
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1581375883500">
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1581376616689">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581375883500" />
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581376616689" />
     <state x="-1197" y="111" key="cloudConfig.SelfSettingsDialog" timestamp="1576817894168">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -586,18 +596,18 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902348" />
-    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1581345083295">
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1581453496543">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581345083295" />
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581453496543" />
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576727526871">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.800@0.0.1280.800" timestamp="1576727526871" />
-    <state x="-1299" y="6" width="828" height="582" key="find.popup" timestamp="1581345430336">
+    <state x="-1299" y="6" width="828" height="582" key="find.popup" timestamp="1581435736379">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1299" y="6" width="828" height="582" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581345430336" />
+    <state x="-1299" y="6" width="828" height="582" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581435736379" />
     <state width="600" height="440" key="javadoc.popup" timestamp="1580145157568">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -607,10 +617,10 @@
     </state>
     <state x="-1462" y="-30" key="run.anything.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580872105579" />
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1581374765129">
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1581454343762">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581374765129" />
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581454343762" />
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1576731608589" />
   </component>
   <component name="XDebuggerManager">
@@ -630,7 +640,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/Dogs/AdminDogs.tsx</url>
-          <line>59</line>
+          <line>65</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="30" />
         </line-breakpoint>

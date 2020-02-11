@@ -13,15 +13,30 @@ export interface IData extends IDataDefaults {
     updatedAt?: Date;
 }
 
+export interface IFilter {
+    name: string;
+    key: string;
+    condition: "==" | "<" | ">" | "<=" | ">=" | "in" | "array-contains" | "array-contains-any";
+    value: any;
+}
+
+export interface ISort {
+    key: string;
+    order: "desc" | "asc";
+}
+
 export interface IPagination {
     count: number;
     rowPerPage: number;
     page: number;
 
+    filter?: IFilter | IFilter[];
+    sort?: ISort | ISort[];
+
     orderBy?: string;
     direction?: "desc" | "asc";
-    first?: firebase.firestore.DocumentSnapshot;
-    last?: firebase.firestore.DocumentSnapshot;
+    first?: firebase.firestore.DocumentSnapshot | number;
+    last?: firebase.firestore.DocumentSnapshot | number;
 }
 
 export interface IDataSubCollections {
@@ -216,37 +231,41 @@ class Database {
         await batch.commit();
     }
 
-    public async all<T extends IData>(pagination: IPagination = this.pagination): Promise<IResult<T>> {
-        const query = this._query(pagination);
-        const snapshots = await query.get();
-
-        const results: IResult<T> = {
+    public async all<T extends IData>(pagination?: IPagination): Promise<IResult<T>> {
+        pagination = {...this.pagination, ...pagination};
+        const snapshots = await this._query(pagination);
+        return {
             data: snapshots.docs.map(item => this._defaults(item.data() as T)),
             pagination: await this._setPagination(pagination, snapshots)
-        };
-        return results;
+        } as IResult<T>
     }
 
-    private _query(pagination: IPagination): firebase.firestore.Query {
-        pagination.rowPerPage = pagination.rowPerPage
-            ? pagination.rowPerPage
-            : this.pagination.rowPerPage;
+    private _query(pagination: IPagination): Promise<firebase.firestore.QuerySnapshot> {
+        let query = this.collection.orderBy('createdAt', 'desc');
 
-        pagination.orderBy = pagination.orderBy ? pagination.orderBy
-            : (this.pagination.orderBy ? this.pagination.orderBy : 'createdAt');
-        pagination.direction = pagination.direction ? pagination.direction
-            : (this.pagination.direction ? this.pagination.direction : 'desc');
+        // sort
+        if (Array.isArray(pagination.sort))
+            pagination.sort.forEach(sort => query = query.orderBy(sort.key, sort.order));
+        else if (pagination.sort)
+            query = query.orderBy(pagination.sort.key, pagination.sort.order);
 
-        const {first, last} = this.pagination;
-        let query = this.collection.orderBy(pagination.orderBy, pagination.direction);
+        // filter
+        if (Array.isArray(pagination.filter)) {
+            pagination.filter.forEach(filter =>
+                query = query.where(filter.key, filter.condition, filter.value));
+        } else if (pagination.filter) {
+            let {key, condition, value} = pagination.filter;
+            query = query.where(key, condition, value)
+        }
 
-        if (this.pagination.page > pagination.page && first) query = query.endBefore(first);
-        else if (last) query = query.startAfter(last);
+        // pagination
+        if (pagination.page >= 1) {
+            if (this.pagination.first) query = query.startAfter(this.pagination.first);
+            else if (this.pagination.last) query = query.endBefore(this.pagination.last);
+        }
 
-        if (pagination.rowPerPage)
-            query = query.limit(pagination.rowPerPage);
-
-        return query;
+        query = query.limit(pagination.rowPerPage || this.pagination.rowPerPage);
+        return query.get();
     }
 
     private async _setPagination(pagination: IPagination, snapshots: firebase.firestore.QuerySnapshot): Promise<IPagination> {
