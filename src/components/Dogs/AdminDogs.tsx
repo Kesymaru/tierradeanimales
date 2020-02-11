@@ -9,17 +9,25 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from '@material-ui/core/Typography';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from '@material-ui/icons/Edit';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
 import AppTable from "../AppTable/AppTable";
+import AlertDialog from "../AlertDialog";
+
 import {ADMIN_DOG_EDIT_ROUTE} from "../../constants";
 import {IAppState, TStatus} from "../../store";
 import {IDog, IDogState} from "../../store/dogs/dogs.types";
 import DogsActions from "../../store/dogs/dogs.actions";
-import {IAppTableFooterProps} from "../AppTable/AppTableFooter";
 import {IFilter, ISort} from "../../constants/firebase/database";
 
 const DOGS_FILTER: IFilter[] = [
@@ -48,6 +56,7 @@ function AdminDogs(props: IAdminDogs) {
     const [dogs, _setDogs] = useState<IDog[]>(props.dogs.data);
     const [selected, seSelected] = useState<IDog[]>([]);
     const [loading, setLoading] = useState<boolean>(_getLoading());
+    const [openDelete, setOpenDelete] = useState<boolean>(false);
 
     useEffect(() => {
         setDogs(props.dogs.data);
@@ -85,6 +94,11 @@ function AdminDogs(props: IAdminDogs) {
         dispatch(DogsActions.All(pagination));
     }
 
+    function handleDelete() {
+        // dispatch(DogsActions.Delete(selected[0]))
+        setOpenDelete(true);
+    }
+
     return <Paper>
         <AppTable
             data={dogs}
@@ -116,10 +130,10 @@ function AdminDogs(props: IAdminDogs) {
                 </Fade>
                 <Fade in={!!selected.length}>
                     <Tooltip
-                        title={`Delete Dog${selected.length ? 's' : ''}`}
+                        title={`Delete Dog${selected.length > 1 ? 's' : ''}`}
                     >
                         <IconButton
-                            onClick={() => dispatch(DogsActions.Delete(selected[0]))}>
+                            onClick={handleDelete}>
                             <DeleteIcon/>
                         </IconButton>
                     </Tooltip>
@@ -133,43 +147,53 @@ function AdminDogs(props: IAdminDogs) {
                         </IconButton>
                     </Tooltip>
                 </Fade>
-                <Fade in={true}>
+                {/*<Fade in={true}>
                     <Tooltip title="Filter">
                         <IconButton>
                             <FilterListIcon/>
                         </IconButton>
                     </Tooltip>
-                </Fade>
+                </Fade>*/}
             </Toolbar>
         </AppTable>
 
-        {/*<AlertDialog
-            onClose={() => setDeleteAlertProps({...deleteAlertProps, ...{open: false}})}
-            {...deleteAlertProps}
+        <AlertDialog
+            title={selected.length > 1 ? 'Delete Dogs' : 'Delete Dog'}
+            open={openDelete}
+            okTitle={selected.length > 1 ? 'Delete Dogs' : 'Delete Dog'}
+            okColor="secondary"
+            okIcon={<DeleteIcon/>}
+            cancelColor="primary"
+            onClose={() => setOpenDelete(false)}
         >
-            <Typography>
-                This action will delete {selected.length} items permanently.
-            </Typography>
-            <ExpansionPanel>
-                <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon/>}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                >
-                    <Typography>Delete details</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    {selected.length
-                        ? <List aria-label="delete details" dense={true}>
-                            {selected.map((item, index) => (
-                                <ListItem sortBy={index}>
-                                    <ListItemText primary={item.name}/>
-                                </ListItem>
-                            ))}
-                        </List> : null}
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-        </AlertDialog>*/}
+            {selected.length > 1
+                ? <>
+                    <Typography variant="subtitle1">
+                        This action will delete {selected.length} dogs permanently.
+                    </Typography>
+                    <ExpansionPanel>
+                        <ExpansionPanelSummary
+                            expandIcon={<ExpandMoreIcon/>}
+                        >
+                            <Typography>Delete details</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails style={{padding: '0 8px'}}>
+                            <List aria-label="delete details" dense={true}>
+                                {selected.map((dog, index) => (
+                                    <ListItem key={index}>
+                                        <ListItemText primary={dog.name}/>
+                                    </ListItem>
+                                ))}
+                            </List>
+                        </ExpansionPanelDetails>
+                    </ExpansionPanel>
+                </>
+                : <Typography variant="subtitle1">
+                    {selected[0]
+                        ? `This action will delete ${selected[0].name} permanently`
+                        : 'Selected dog will be deleted permanently.'}
+                </Typography>}
+        </AlertDialog>
     </Paper>;
 }
 
