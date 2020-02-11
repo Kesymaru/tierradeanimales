@@ -28,20 +28,20 @@ function AdminDogs(props: IAdminDogs) {
     const history = useHistory();
     const [dogs, _setDogs] = useState<IDog[]>(props.dogs.data);
     const [selected, seSelected] = useState<IDog[]>([]);
+    const [footerProps, setFooterProps] = useState<IAppTableFooterProps>(_getFooterProps());
     const [loading, setLoading] = useState<boolean>(_getLoading());
-    const [pagination, setPagination] = useState<IAppTableFooterProps>(_getPagination());
 
     useEffect(() => {
         setDogs(props.dogs.data);
+        setFooterProps(_getFooterProps());
         setLoading(_getLoading());
-        setPagination(_getPagination());
     }, [props.dogs]);
 
     function _getLoading(): boolean {
         return props.dogs.status === TStatus.Fetching
     }
 
-    function _getPagination(): IAppTableFooterProps {
+    function _getFooterProps(): IAppTableFooterProps {
         return {
             ...props.dogs.pagination,
             onChangePage,
@@ -58,22 +58,16 @@ function AdminDogs(props: IAdminDogs) {
         dispatch(DogsActions.All());
 
     function onChangePage(event: unknown, page: number) {
-        console.log('onChangePage', page)
-
-        dispatch(DogsActions.All({
-            ...props.dogs.pagination,
-            page,
-        }));
+        if(page === props.dogs.pagination.page) return;
+        const pagination = {...props.dogs.pagination, page};
+        dispatch(DogsActions.All(pagination));
     }
 
     function onChangeRowsPerPage(event: ChangeEvent<HTMLInputElement>) {
-        console.log('onChangeRowsPerPage', event);
-
         const rowPerPage = parseInt(event.target.value);
-        dispatch(DogsActions.All({
-            ...props.dogs.pagination,
-            rowPerPage,
-        }));
+        if(rowPerPage === props.dogs.pagination.rowPerPage) return;
+        const pagination = {...props.dogs.pagination, rowPerPage};
+        dispatch(DogsActions.All(pagination));
     }
 
     return <Paper>
@@ -82,7 +76,7 @@ function AdminDogs(props: IAdminDogs) {
             cells={['name', 'age', 'sex', 'status']}
             loading={loading}
             onSelect={selected => setDogs(selected)}
-            pagination={pagination}
+            pagination={footerProps}
         >
             <Toolbar>
                 {selected.length
