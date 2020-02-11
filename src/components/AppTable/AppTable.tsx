@@ -69,7 +69,7 @@ function AppTable(props: IAppTableProps) {
                         total={data.length}
                         cells={cells}
                         onSelectAll={handleSelectAll}
-                        sorting={props.sorting}
+                        sort={props.sort}
                     />
                     <TableBody>
                         {data.length === 0

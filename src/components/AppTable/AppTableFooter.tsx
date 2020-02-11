@@ -1,12 +1,9 @@
 import React, {ChangeEvent, FunctionComponent} from "react";
 
 import TablePagination from "@material-ui/core/TablePagination";
+import {IPagination} from "../../constants/firebase/database";
 
-export interface IAppTableFooterProps {
-    count: number;
-    rowPerPage: number;
-    page: number;
-
+export interface IAppTableFooterProps extends IPagination {
     rowsPerPageOptions?: number[];
     onChangePage: (event: unknown, page: number) => void;
     onChangeRowsPerPage: (event: ChangeEvent<HTMLInputElement>) => void;

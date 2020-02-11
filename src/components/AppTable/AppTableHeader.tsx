@@ -5,23 +5,20 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import Checkbox from "@material-ui/core/Checkbox";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
-
-export interface IAppTableSorting {
-    sortBy: string;
-    sortOrder: "desc" | "asc";
-}
+import {ISort} from "../../constants/firebase/database";
 
 export interface IAppTableHeaderProps {
     selected: number;
     total: number;
     cells: string[];
 
-    sorting?: IAppTableSorting;
+    sort?: ISort;
+    onSort?: (sort: ISort) => void;
     onSelectAll?: (checked: boolean) => void;
 }
 
 const AppTableHeader: FunctionComponent<IAppTableHeaderProps> = (props) => {
-    const [sorting, setSorting] = useState<IAppTableSorting>(props.sorting || {sortBy: '', sortOrder: 'desc'});
+    const [sort, setSort] = useState<ISort>(props.sort || {key: '', order: 'desc'});
 
     function handleSelectAll(event: ChangeEvent<HTMLInputElement>, checked: boolean) {
         if(props.onSelectAll) props.onSelectAll(checked);
@@ -29,12 +26,14 @@ const AppTableHeader: FunctionComponent<IAppTableHeaderProps> = (props) => {
 
     function handleSort(cell: string) {
         return (event: MouseEvent<unknown>) => {
-            let sortOrder = sorting.sortOrder;
-            if (cell === sorting.sortBy)
-                sortOrder = sortOrder === "desc" ? "asc" : "desc";
-            else sortOrder = "desc";
-
-            setSorting({sortBy: cell, sortOrder});
+            let order = sort.order;
+            let key = cell;
+            if (cell === sort.key)
+                order = order === "desc" ? "asc" : "desc";
+            else order = "desc";
+            const _sort = {key, order};
+            setSort(_sort);
+            if(props.onSort) props.onSort(_sort);
         }
     }
 
@@ -50,8 +49,8 @@ const AppTableHeader: FunctionComponent<IAppTableHeaderProps> = (props) => {
             {props.cells.map((cell, index) => (
                 <TableCell key={index}>
                     <TableSortLabel
-                        active={cell === sorting.sortBy}
-                        direction={sorting.sortOrder}
+                        active={cell === sort.key}
+                        direction={sort.order}
                         onClick={handleSort(cell)}
                     >
                         {cell}
