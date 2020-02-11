@@ -1,5 +1,6 @@
 import React, {MouseEvent, ReactElement, useEffect, useState} from "react";
-
+import {useTheme} from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -26,6 +27,8 @@ export interface IAppTableProps extends Omit<IAppTableHeaderProps, 'total' | 'se
 }
 
 function AppTable(props: IAppTableProps) {
+    const theme = useTheme();
+    const isSm = useMediaQuery(theme.breakpoints.down('sm'));
     const [data, setData] = useState(props.data);
     const [cells, setCells] = useState<string[]>(_getCells());
     const [loading, setLoading] = useState<boolean>(!!props.loading);
@@ -64,7 +67,7 @@ function AppTable(props: IAppTableProps) {
                 ? props.children
                 : null}
             <TableContainer component={Paper}>
-                <Table>
+                <Table size={isSm ? 'small' : 'medium'}>
                     <AppTableHeader
                         selected={data.filter(i => i._selected).length}
                         total={data.length}

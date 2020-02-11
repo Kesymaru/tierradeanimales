@@ -1,7 +1,8 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 import {connect, useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
-
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import {useTheme} from "@material-ui/core/styles";
 import Fade from "@material-ui/core/Fade";
 import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -42,6 +43,8 @@ interface IAdminDogs extends Pick<IDogState, 'dogs'> {
 function AdminDogs(props: IAdminDogs) {
     const dispatch = useDispatch();
     const history = useHistory();
+    const theme = useTheme();
+    const isSm = useMediaQuery(theme.breakpoints.down('sm'));
     const [dogs, _setDogs] = useState<IDog[]>(props.dogs.data);
     const [selected, seSelected] = useState<IDog[]>([]);
     const [loading, setLoading] = useState<boolean>(_getLoading());
@@ -93,7 +96,7 @@ function AdminDogs(props: IAdminDogs) {
             onChangePage={onChangePage}
             onChangeRowsPerPage={onChangeRowsPerPage}
         >
-            <Toolbar>
+            <Toolbar variant={isSm ? 'dense' : 'regular'}>
                 {selected.length
                     ? <Typography variant="subtitle1" style={{flex: '1 1 100%'}}>
                         {selected.length} dogs selected
