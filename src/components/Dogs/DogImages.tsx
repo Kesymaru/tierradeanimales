@@ -48,8 +48,6 @@ const DogImages: FunctionComponent<IDogImagesProps> = ({dog, loading, onImagesCh
     const [cols, setCols] = useState<number>(_getGridSize());
     
     useEffect(() => {
-        console.log('use effect');
-
         setImages(dog.images || []);
         setAvatar(dog.avatar);
         setCols(_getGridSize());

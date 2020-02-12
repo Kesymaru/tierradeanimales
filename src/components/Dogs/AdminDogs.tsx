@@ -160,7 +160,7 @@ function AdminDogs(props: IAdminDogs) {
         <AlertDialog
             title={selected.length > 1 ? 'Delete Dogs' : 'Delete Dog'}
             open={openDelete}
-            okTitle={selected.length > 1 ? 'Delete Dogs' : 'Delete Dog'}
+            okTitle="Delete"
             okColor="secondary"
             okIcon={<DeleteIcon/>}
             cancelColor="primary"

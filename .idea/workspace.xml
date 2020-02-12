@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
+    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="Added firebase-debug.log file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firebase-debug.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dogs/AdminDogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/AdminDogs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dogs/DogImages.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/DogImages.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dogs/EditDog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/EditDog.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,14 +120,7 @@
       <workItem from="1576963346713" duration="35777000" />
       <workItem from="1577568811282" duration="99053000" />
       <workItem from="1579564004625" duration="40429000" />
-      <workItem from="1579733497168" duration="267130000" />
-    </task>
-    <task id="LOCAL-00030" summary="added the versus actions and reducers to the redux store">
-      <created>1580162339165</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1580162339165</updated>
+      <workItem from="1579733497168" duration="267576000" />
     </task>
     <task id="LOCAL-00031" summary="new Breadcrumbs component to display the routes path&#10;updated the routes.ts in order to use an array as default and included find() and getBreadcrumbs() methods">
       <created>1580231162399</created>
@@ -461,7 +458,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581463647315</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="Added firebase-debug.log file">
+      <created>1581467425039</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1581467425039</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -481,7 +485,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="routes.ts updated, added new factory function in order to generate default values for the routes.ts" />
     <MESSAGE value="Update Dogs.tsx component, edit and delete actions&#10;EditDog.tsx status select updated&#10;Added new delete action on dogs.actions.ts&#10;updated dogs.reducers.ts and dogs.types.ts for the new delete dog action&#10;&#10;updated database.ts to support delete batch, add timestamp automatically on add and updated documents" />
     <MESSAGE value="removed console.log on AppBar.tsx" />
     <MESSAGE value="Updated SignIn.tsx and SignUp.tsx components" />
@@ -506,7 +509,8 @@
     <MESSAGE value="Updated the database.ts class to improve the pagination support&#10;Updated the AppTable.tsx and AppTableFooter.tsx component to better support&#10;Updated the AdminDogs.tsx component" />
     <MESSAGE value="Use dense table when is on mobile screen size" />
     <MESSAGE value="Added delete dialog on AdminDogs.tsx&#10;Updated the AlertDialog.tsx to support more configurations" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added delete dialog on AdminDogs.tsx&#10;Updated the AlertDialog.tsx to support more configurations" />
+    <MESSAGE value="Added firebase-debug.log file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added firebase-debug.log file" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1360" y="-75" key="#Inspections" timestamp="1576817948911">
@@ -529,35 +533,35 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581113108781" />
-    <state x="209" y="0" width="884" height="758" key="CommitChangelistDialog2" timestamp="1581467350479">
+    <state x="209" y="0" width="884" height="758" key="CommitChangelistDialog2" timestamp="1581467547987">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581463646708" />
-    <state x="209" y="0" width="884" height="758" key="CommitChangelistDialog2/0.0.1280.800@0.0.1280.800" timestamp="1581467350479" />
+    <state x="209" y="0" width="884" height="758" key="CommitChangelistDialog2/0.0.1280.800@0.0.1280.800" timestamp="1581467547987" />
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog" timestamp="1580854290081">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580854290081" />
-    <state width="1280" height="323" key="GridCell.Tab.0.bottom" timestamp="1581467324570">
+    <state width="1280" height="323" key="GridCell.Tab.0.bottom" timestamp="1581467907317">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state width="1920" height="323" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581456370165" />
-    <state width="1280" height="323" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1581467324570" />
-    <state width="1280" height="323" key="GridCell.Tab.0.center" timestamp="1581467324567">
+    <state width="1280" height="323" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1581467907317" />
+    <state width="1280" height="323" key="GridCell.Tab.0.center" timestamp="1581467907316">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state width="1920" height="323" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581456370163" />
-    <state width="1280" height="323" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1581467324567" />
-    <state width="1280" height="323" key="GridCell.Tab.0.left" timestamp="1581467324565">
+    <state width="1280" height="323" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1581467907316" />
+    <state width="1280" height="323" key="GridCell.Tab.0.left" timestamp="1581467907316">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state width="1920" height="323" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581456370163" />
-    <state width="1280" height="323" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1581467324565" />
-    <state width="1280" height="323" key="GridCell.Tab.0.right" timestamp="1581467324567">
+    <state width="1280" height="323" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1581467907316" />
+    <state width="1280" height="323" key="GridCell.Tab.0.right" timestamp="1581467907317">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state width="1920" height="323" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581456370164" />
-    <state width="1280" height="323" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1581467324567" />
+    <state width="1280" height="323" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1581467907317" />
     <state x="-1209" y="-103" key="RollbackChangesDialog" timestamp="1581436539195">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -575,11 +579,11 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="VCS.FileHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902347" />
-    <state x="257" y="133" key="Vcs.Push.Dialog.v2" timestamp="1581467358372">
+    <state x="257" y="133" key="Vcs.Push.Dialog.v2" timestamp="1581467428542">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581458462782" />
-    <state x="257" y="133" key="Vcs.Push.Dialog.v2/0.0.1280.800@0.0.1280.800" timestamp="1581467358372" />
+    <state x="257" y="133" key="Vcs.Push.Dialog.v2/0.0.1280.800@0.0.1280.800" timestamp="1581467428542" />
     <state x="-1197" y="111" key="cloudConfig.SelfSettingsDialog" timestamp="1576817894168">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -613,11 +617,11 @@
     </state>
     <state x="-1462" y="-30" key="run.anything.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580872105579" />
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1581460006524">
-      <screen x="-1920" y="-280" width="1920" height="1080" />
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1581467863285">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581460006524" />
-    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1576731608589" />
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1581467863285" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

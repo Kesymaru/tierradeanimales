@@ -55,7 +55,7 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
 
     useEffect(() => {
         setLoading(_getLoading());
-        if (props.dog.data) setDog(props.dog.data);
+        if (!isNew && props.dog.data) setDog(props.dog.data);
     }, [props.dog]);
 
     if (!isNew && id && (
