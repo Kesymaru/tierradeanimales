@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/firebase/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase/database.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dogs/EditDog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/EditDog.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/dogs/dogs.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dogs/dogs.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,14 +120,7 @@
       <workItem from="1576963346713" duration="35777000" />
       <workItem from="1577568811282" duration="99053000" />
       <workItem from="1579564004625" duration="40429000" />
-      <workItem from="1579733497168" duration="286073000" />
-    </task>
-    <task id="LOCAL-00033" summary="added the versus store, added actions, reducers and types">
-      <created>1580241236975</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1580241236975</updated>
+      <workItem from="1579733497168" duration="286778000" />
     </task>
     <task id="LOCAL-00034" summary="added edit versus component&#10;improved the versus components">
       <created>1580241275303</created>
@@ -464,7 +458,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581627781539</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="Fixed the stats name for the database.ts">
+      <created>1581628260053</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1581628260054</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -484,7 +485,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated SignIn.tsx and SignUp.tsx components" />
     <MESSAGE value="Removed regex.ts&#10;Updated the database.ts and storage.ts classes to support configuration&#10;Updated constans/index.ts" />
     <MESSAGE value="Removed console logs and updated the app table components AppTable.tsx and AppTableHeader.tsx" />
     <MESSAGE value="Updated dogs components" />
@@ -509,7 +509,8 @@
     <MESSAGE value="Added firebase-debug.log file" />
     <MESSAGE value="Fixes the issue on editing a dog after edited another one on EditDog.tsx" />
     <MESSAGE value="Refactored the store to delete the store/index.ts in order to force the imports my module so only used code is imported to improve performance&#10;&#10;Updated components" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored the store to delete the store/index.ts in order to force the imports my module so only used code is imported to improve performance&#10;&#10;Updated components" />
+    <MESSAGE value="Fixed the stats name for the database.ts" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed the stats name for the database.ts" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1360" y="-75" key="#Inspections" timestamp="1576817948911">
@@ -532,10 +533,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581113108781" />
-    <state x="-1505" y="-213" width="884" height="758" key="CommitChangelistDialog2" timestamp="1581627780839">
+    <state x="-1505" y="-213" width="884" height="758" key="CommitChangelistDialog2" timestamp="1581628259824">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581627780839" />
+    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581628259824" />
     <state x="209" y="0" width="884" height="758" key="CommitChangelistDialog2/0.0.1280.800@0.0.1280.800" timestamp="1581468005810" />
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog" timestamp="1580854290081">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -578,10 +579,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="VCS.FileHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902347" />
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1581627785060">
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1581628266524">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581627785060" />
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581628266524" />
     <state x="257" y="133" key="Vcs.Push.Dialog.v2/0.0.1280.800@0.0.1280.800" timestamp="1581467428542" />
     <state x="-1197" y="111" key="cloudConfig.SelfSettingsDialog" timestamp="1576817894168">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -617,10 +618,10 @@
     </state>
     <state x="-1462" y="-30" key="run.anything.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580872105579" />
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1581628137317">
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1581628716617">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581628137317" />
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581628716617" />
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1581467863285" />
   </component>
   <component name="XDebuggerManager">

@@ -11,6 +11,7 @@ import {
     FETCH_DOGS,
     IDog,
     IDogStats,
+    IDogStatus,
     LOAD_DOG,
     LOAD_DOGS,
     TDogsActions
@@ -29,7 +30,11 @@ function onStats(action: string, docs: IDog | IDog[], batch: firebase.firestore.
     const multiple = action === 'add' ? 1 : -1;
     const stats: IDogStats = {
         total: Array.isArray(docs) ? docs.length : 1,
+        rescued: 0,
+        hospitalized: 0,
+        fosterHome: 0,
         adopted: 0,
+        deceased: 0,
     };
 
     if (Array.isArray(docs))
@@ -46,7 +51,31 @@ function onStats(action: string, docs: IDog | IDog[], batch: firebase.firestore.
 }
 
 function countStats(stats: IDogStats, doc: IDog) {
-    if (doc.status === 'adopted') stats.adopted = +stats.adopted + 1;
+
+    switch (doc.status) {
+        case IDogStatus.Rescued:
+            stats.rescued = +stats.rescued + 1;
+            break;
+
+        case IDogStatus.Hospitalized:
+            stats.hospitalized = +stats.hospitalized + 1;
+            break;
+
+        case IDogStatus.FosterHome:
+            stats.fosterHome = +stats.fosterHome + 1;
+            break;
+
+        case IDogStatus.Adopted:
+            stats.adopted = +stats.adopted + 1;
+            break;
+
+        case IDogStatus.Deceased:
+            stats.deceased = +stats.deceased + 1;
+            break;
+
+        default:
+            break;
+    }
 }
 
 const storage = new Storage({path: 'dogs'});

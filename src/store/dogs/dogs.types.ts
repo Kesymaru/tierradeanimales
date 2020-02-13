@@ -1,8 +1,9 @@
+import * as firebase from "firebase";
+
 import {IFile} from "../../constants/firebase/storage";
 import {IData} from "../../constants/firebase/database";
 import {IAppStateItem, IAppStateItems} from "../app.types";
 import {IResult, IStats} from "../../constants/firebase/database";
-import * as firebase from "firebase";
 
 export type ISex = 'male' | 'female';
 
@@ -11,11 +12,19 @@ export interface IDogDefaults {
     _default?: boolean;
 }
 
+export enum IDogStatus {
+    Rescued = 'Rescued',
+    Hospitalized = 'Hospitalized',
+    FosterHome = 'Foster Home',
+    Adopted = 'Adopted',
+    Deceased = 'Deceased',
+}
+
 export interface IDog extends IData, IDogDefaults {
     name: string;
     age: number;
     sex: ISex;
-    status: string;
+    status: IDogStatus;
     description: string;
     public: boolean;
 
@@ -25,7 +34,11 @@ export interface IDog extends IData, IDogDefaults {
 }
 
 export interface IDogStats extends IStats{
+    rescued: number | firebase.firestore.FieldValue;
+    hospitalized: number | firebase.firestore.FieldValue;
+    fosterHome: number | firebase.firestore.FieldValue;
     adopted: number | firebase.firestore.FieldValue;
+    deceased: number | firebase.firestore.FieldValue;
 }
 
 export interface IDogState {

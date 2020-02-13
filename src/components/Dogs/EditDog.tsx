@@ -28,7 +28,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import RotateRightIcon from '@material-ui/icons/RotateRight';
 
 import IAppState, {TStatus} from "../../store/app.types";
-import {IDog, IDogState, ISex} from "../../store/dogs/dogs.types";
+import {IDog, IDogState, ISex, IDogStatus} from "../../store/dogs/dogs.types";
 import {AddDog, GetDog, UpdateDog} from "../../store/dogs/dogs.actions";
 import DogImages from "./DogImages";
 
@@ -37,7 +37,7 @@ const InitDog: IDog = {
     name: '',
     age: 0,
     sex: 'male',
-    status: 'rescued',
+    status: IDogStatus.Rescued,
     description: '',
     public: false,
     start: false,
@@ -97,7 +97,7 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
     }
 
     function handleStatusChange(event: ChangeEvent<{ value: unknown }>) {
-        let status = event.target.value as string;
+        let status = event.target.value as IDogStatus;
         setDog({...dog, status});
     }
 
@@ -207,11 +207,11 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
                             value={dog.status}
                             onChange={handleStatusChange}
                         >
-                            <MenuItem value={'rescued'}>Rescued</MenuItem>
-                            <MenuItem value={'hospitalized'}>Hospitalized</MenuItem>
-                            <MenuItem value={'foster home'}>Foster Home</MenuItem>
-                            <MenuItem value={'adopted'}>Adopted</MenuItem>
-                            <MenuItem value={'deceased'}>Deceased</MenuItem>
+                            <MenuItem value={IDogStatus.Rescued}>Rescued</MenuItem>
+                            <MenuItem value={IDogStatus.Hospitalized}>Hospitalized</MenuItem>
+                            <MenuItem value={IDogStatus.FosterHome}>Foster Home</MenuItem>
+                            <MenuItem value={IDogStatus.Adopted}>Adopted</MenuItem>
+                            <MenuItem value={IDogStatus.Deceased}>Deceased</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
