@@ -65,7 +65,7 @@ class Database<T extends IData, S extends IStats> {
         page: 0,
         sort: {key: 'createdAt', order: 'desc'}
     };
-    public statsPath: string = '__stats';
+    public statsPath: string = '_stats';
     public softDelete: boolean = false;
     public onStats: Function | null = null;
 
@@ -216,7 +216,7 @@ class Database<T extends IData, S extends IStats> {
         return {
             data: snapshots.docs.map(item => item.data() as T),
             pagination: await this._setPagination(pagination, snapshots)
-        } as IResult<T>
+        } as IResult<T>;
     }
 
     private _query(pagination: IPagination): Promise<firebase.firestore.QuerySnapshot> {

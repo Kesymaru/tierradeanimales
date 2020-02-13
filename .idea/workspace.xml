@@ -1,43 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="Refactored the store to delete the store/index.ts in order to force the imports my module so only used code is imported to improve performance">
-      <change afterPath="$PROJECT_DIR$/src/fire.ts" afterDir="false" />
+    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Account.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dogs/AdminDogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/AdminDogs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dogs/DogDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/DogDetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dogs/Dogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/Dogs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dogs/EditDog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/EditDog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/AppBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/AppBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/Breadcrumbs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/Breadcrumbs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/UserMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/UserMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Notify.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Notify.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignIn.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignUp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/firebase/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase/auth.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/constants/firebase/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase/database.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/firebase/storage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase/storage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/actions.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/app.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/app.types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/auth/auth.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/auth/auth.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/auth/auth.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/auth/auth.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/auth/auth.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/auth/auth.types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/dogs/dogs.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dogs/dogs.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/goals/goalsActions.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/goals/goalsReducers.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/goals/goalsTypes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/system/system.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/system/system.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/system/system.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/system/system.types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/user/user.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/user/user.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/user/user.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/user/user.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/user/user.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/user/user.types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,14 +119,7 @@
       <workItem from="1576963346713" duration="35777000" />
       <workItem from="1577568811282" duration="99053000" />
       <workItem from="1579564004625" duration="40429000" />
-      <workItem from="1579733497168" duration="285611000" />
-    </task>
-    <task id="LOCAL-00032" summary="updated the routes.ts&#10;added getPath method to routes to compose the route with the option to specify default params values and params">
-      <created>1580241209995</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1580241209995</updated>
+      <workItem from="1579733497168" duration="286073000" />
     </task>
     <task id="LOCAL-00033" summary="added the versus store, added actions, reducers and types">
       <created>1580241236975</created>
@@ -497,7 +457,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581468006369</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="Refactored the store to delete the store/index.ts in order to force the imports my module so only used code is imported to improve performance&#10;&#10;Updated components">
+      <created>1581627781539</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1581627781539</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -517,7 +484,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed console.log on AppBar.tsx" />
     <MESSAGE value="Updated SignIn.tsx and SignUp.tsx components" />
     <MESSAGE value="Removed regex.ts&#10;Updated the database.ts and storage.ts classes to support configuration&#10;Updated constans/index.ts" />
     <MESSAGE value="Removed console logs and updated the app table components AppTable.tsx and AppTableHeader.tsx" />
@@ -542,7 +508,8 @@
     <MESSAGE value="Added delete dialog on AdminDogs.tsx&#10;Updated the AlertDialog.tsx to support more configurations" />
     <MESSAGE value="Added firebase-debug.log file" />
     <MESSAGE value="Fixes the issue on editing a dog after edited another one on EditDog.tsx" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixes the issue on editing a dog after edited another one on EditDog.tsx" />
+    <MESSAGE value="Refactored the store to delete the store/index.ts in order to force the imports my module so only used code is imported to improve performance&#10;&#10;Updated components" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored the store to delete the store/index.ts in order to force the imports my module so only used code is imported to improve performance&#10;&#10;Updated components" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1360" y="-75" key="#Inspections" timestamp="1576817948911">
@@ -565,10 +532,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581113108781" />
-    <state x="-1505" y="-213" width="884" height="758" key="CommitChangelistDialog2" timestamp="1581627721687">
+    <state x="-1505" y="-213" width="884" height="758" key="CommitChangelistDialog2" timestamp="1581627780839">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581627721687" />
+    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581627780839" />
     <state x="209" y="0" width="884" height="758" key="CommitChangelistDialog2/0.0.1280.800@0.0.1280.800" timestamp="1581468005810" />
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog" timestamp="1580854290081">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -611,10 +578,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="VCS.FileHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902347" />
-    <state x="257" y="133" key="Vcs.Push.Dialog.v2" timestamp="1581467428542">
-      <screen x="0" y="0" width="1280" height="800" />
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1581627785060">
+      <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581458462782" />
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581627785060" />
     <state x="257" y="133" key="Vcs.Push.Dialog.v2/0.0.1280.800@0.0.1280.800" timestamp="1581467428542" />
     <state x="-1197" y="111" key="cloudConfig.SelfSettingsDialog" timestamp="1576817894168">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -628,10 +595,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902348" />
-    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1581627547285">
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1581627968246">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581627547285" />
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581627968246" />
     <state x="354" y="27" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800@0.0.1280.800" timestamp="1581484300487" />
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576727526871">
       <screen x="0" y="0" width="1280" height="800" />
@@ -650,10 +617,10 @@
     </state>
     <state x="-1462" y="-30" key="run.anything.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580872105579" />
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1581627642680">
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1581628137317">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581627642680" />
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581628137317" />
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1581467863285" />
   </component>
   <component name="XDebuggerManager">

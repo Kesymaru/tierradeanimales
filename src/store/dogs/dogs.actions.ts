@@ -19,6 +19,9 @@ import {ADMIN_DOGS_ROUTE} from "../../constants";
 import Storage, {IFile} from "../../constants/firebase/storage";
 import Database, {IPagination, IResult} from "../../constants/firebase/database";
 
+// ------------------------------------
+//  Dogs Actions
+// ------------------------------------
 const database = new Database<IDog, IDogStats>({path: 'dogs', onStats});
 
 function onStats(action: string, docs: IDog | IDog[], batch: firebase.firestore.WriteBatch): void {
