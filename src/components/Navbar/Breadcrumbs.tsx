@@ -16,12 +16,12 @@ interface IBreadcrumbsProps {
 
 const Breadcrumbs: FunctionComponent<IBreadcrumbsProps> = ({paths, title, children}) => {
     const match = useRouteMatch();
-    // const routes = paths || useRoutes(match.path);
+    // const routes = paths || useRoutes(match.pathName);
 
     return <MaterialBreadcrumbs aria-label="breadcrumb">
         {/*{routes.map((route, index) => index === routes.length - 1
             ? <Typography sortBy={index} color="textPrimary">{name || route.name}</Typography>
-            : (<Link sortBy={index} color="textPrimary" component={RouterLink} to={route.path}>
+            : (<Link sortBy={index} color="textPrimary" component={RouterLink} to={route.pathName}>
                 {route.name}
             </Link>)
         )}*/}

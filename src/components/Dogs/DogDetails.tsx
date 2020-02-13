@@ -14,9 +14,9 @@ import Hidden from "@material-ui/core/Hidden";
 
 import PetsIcon from '@material-ui/icons/Pets';
 
+import IAppState, {TStatus} from "../../store/app.types";
 import {IDog, IDogState} from "../../store/dogs/dogs.types";
-import {IAppState, TStatus} from "../../store";
-import DogsActions from "../../store/dogs/dogs.actions";
+import {GetDog} from "../../store/dogs/dogs.actions";
 
 interface IDogDetailsProps extends Pick<IDogState, 'dog'> {
 }
@@ -33,7 +33,7 @@ const DogDetails: FunctionComponent<IDogDetailsProps> = (props) => {
     }, [props.dog]);
 
     if (id && props.dog.status === TStatus.Empty)
-        dispatch(DogsActions.Get(id));
+        dispatch(GetDog(id));
 
     function _getLoading(): boolean {
         return props.dog.status === TStatus.Fetching;

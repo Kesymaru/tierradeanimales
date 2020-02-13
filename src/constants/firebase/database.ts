@@ -2,15 +2,13 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import {v4 as uuid} from 'uuid';
 
-export interface IDataDefaults {
-    _selected?: boolean;
-}
-
-export interface IData extends IDataDefaults {
+export interface IData {
     id: string;
 
     createdAt?: Date;
     updatedAt?: Date;
+    createdBy?: string;
+    updatedBy?: string;
 }
 
 export interface IFilter {
@@ -33,26 +31,11 @@ export interface IPagination {
     filter?: IFilter | IFilter[];
     sort?: ISort | ISort[];
 
-    orderBy?: string;
-    direction?: "desc" | "asc";
     first?: firebase.firestore.DocumentSnapshot | number;
     last?: firebase.firestore.DocumentSnapshot | number;
 }
 
-export interface IDataSubCollections {
-    key: string;
-    defaults: any;
-}
-
-export interface IDatabaseConfig {
-    name: string;
-    statsName?: string;
-    defaults?: IDataDefaults,
-    subCollections?: IDataSubCollections[];
-    softDelete?: boolean;
-}
-
-export interface IDataStats {
+export interface IStats {
     total: number | firebase.firestore.FieldValue;
 }
 
@@ -61,35 +44,45 @@ export interface IResult<T> {
     pagination: IPagination;
 }
 
-class Database {
-    public static statsName: string = '_stats';
-    public static defaults: IDataDefaults = {
-        _selected: false
-    };
+export interface IDataConfig<T extends IData> {
+    path: string;
 
+    pagination?: IPagination;
+    statsPath?: string;
+    softDelete?: boolean;
+    onStats?: (action: string, documents: T | T[], batch: firebase.firestore.WriteBatch) => void;
+}
+
+class Database<T extends IData, S extends IStats> {
     public db: firebase.firestore.Firestore;
     public collection: firebase.firestore.CollectionReference;
+    public stats: firebase.firestore.DocumentReference;
+
+    public path: string;
     public pagination: IPagination = {
         count: 0,
         rowPerPage: 5,
         page: 0,
-
-        orderBy: 'createdAt',
-        direction: 'desc',
+        sort: {key: 'createdAt', order: 'desc'}
     };
+    public statsPath: string = '__stats';
+    public softDelete: boolean = false;
+    public onStats: Function | null = null;
 
-    constructor(public readonly config: IDatabaseConfig) {
-        if (!this.config.defaults)
-            this.config.defaults = Database.defaults;
-
-        if (!this.config.statsName)
-            this.config.statsName = Database.statsName;
+    constructor(public readonly config: IDataConfig<T>) {
+        this.path = this.config.path;
+        if (this.config.pagination) this.pagination = this.config.pagination;
+        if (this.config.statsPath) this.statsPath = this.config.statsPath;
+        if (typeof this.config.softDelete !== 'undefined')
+            this.softDelete = this.config.softDelete;
+        if (this.config.onStats) this.onStats = this.config.onStats;
 
         this.db = firebase.firestore();
-        this.collection = this.db.collection(this.config.name);
+        this.collection = this.db.collection(this.path);
+        this.stats = this.collection.doc(this.statsPath);
     }
 
-    private _add<T extends IData>(data: T, batch: firebase.firestore.WriteBatch): T {
+    private _add(data: T, batch: firebase.firestore.WriteBatch): T {
         data.id = uuid();
         let _data = this._sanitize(data) as T;
         _data = this._timestamp(_data, ['createdAt', 'updatedAt']);
@@ -97,60 +90,67 @@ class Database {
         const doc = this.collection.doc(_data.id);
         batch.set(doc, _data);
 
-        return this._defaults(data);
+        return data;
     }
 
-    private _update<T extends IData>(data: T, batch: firebase.firestore.WriteBatch): T {
-        let _data = this._sanitize(data);
-        _data = this._timestamp(_data, ['updatedAt'], ['createdAt']);
+    private _update(_data: T, batch: firebase.firestore.WriteBatch): T {
+        let data = this._sanitize(_data);
+        data = this._timestamp(data, ['updatedAt'], ['createdAt']);
 
-        let doc = this.collection.doc(_data.id);
-        batch.set(doc, _data, {merge: true});
+        batch.set(this.collection.doc(data.id), data, {merge: true});
 
         return data;
     }
 
-    private _delete<T extends IData>(data: string | T, batch: firebase.firestore.WriteBatch): void {
+    private _delete(data: string | T, batch: firebase.firestore.WriteBatch): void {
         const id: string = typeof data === 'string' ? data : data.id;
         const doc = this.collection.doc(id);
 
-        if (this.config.softDelete) {
+        if (this.softDelete) {
             const timestamp = firebase.firestore.FieldValue.serverTimestamp;
             batch.update(doc, 'deleted', true);
             batch.update(doc, 'deletedAt', timestamp());
         } else batch.delete(doc);
     }
 
-    private _stats(total: number, batch: firebase.firestore.WriteBatch) {
+    private _setStats(action: string, docs: string | T | T[], batch: firebase.firestore.WriteBatch) {
+        if (this.onStats)
+            return this.onStats(action, docs, batch);
+
+        let total = 0;
+        if (action === 'add') total = 1;
+        if (action === 'delete') total = -1;
+
         const increment = firebase.firestore.FieldValue.increment(total);
+        const stats: IStats = {total: increment};
 
-        const doc = this.collection.doc(this.config.statsName);
-        const stats: IDataStats = {
-            total: increment
-        };
-
-        batch.set(doc, stats, {merge: true});
+        batch.set(this.stats, stats, {merge: true});
     }
 
-    private _sanitize(data: any): any {
-        let _data = {...data};
+    private async _getStats(): Promise<S> {
+        const snapshot = await this.stats.get();
+        return snapshot.data() as S;
+    }
+
+    private _sanitize(_data: T): T {
+        let data = {..._data} as any;
         let regex: RegExp = /\_\w+/;
 
-        Object.keys(_data).forEach(key => {
+        Object.keys(data).forEach(key => {
             if (regex.test(key))
-                return delete _data[key];
-            if (Array.isArray(_data[key]))
-                return _data[key] = _data[key].map((item: any) => this._sanitize(item));
-            if (typeof _data[key] === 'object')
-                return _data[key] = this._sanitize(_data[key]);
+                return delete data[key];
+            if (Array.isArray(data[key]))
+                return data[key] = data[key].map((item: any) => this._sanitize(item));
+            if (typeof data[key] === 'object')
+                return data[key] = this._sanitize(data[key]);
         });
 
-        return _data;
+        return data as T;
     }
 
-    private _timestamp<T extends IData, K extends keyof T>(data: T, adds: K[], remove: K[] = []): T {
+    private _timestamp<K extends keyof T>(data: T, add: K[], remove: K[] = []): T {
         const timestamp = firebase.firestore.FieldValue.serverTimestamp;
-        const times = adds.reduce((total, key) =>
+        const times = add.reduce((total, key) =>
             ({...total, [`${key}`]: timestamp()}), {});
 
         if (remove.length)
@@ -159,39 +159,21 @@ class Database {
         return Object.assign(data, times);
     }
 
-    private _defaults<T extends IData>(data: T, exten: any = {}): T {
-        let _data = {...data} as any;
-
-        if (this.config.subCollections) {
-            this.config.subCollections.forEach(({key, defaults}) => {
-                if (Array.isArray(_data[key]))
-                    return _data[key].map((item: any) => Object.assign(item, defaults));
-                if (typeof _data[key] === 'object')
-                    return Object.assign(_data[key], defaults);
-            });
-        }
-
-        Object.assign(_data, this.config.defaults, exten);
-        return _data as T;
-    }
-
-    public async add<T extends IData>(data: T | T[]): Promise<T | T[]> {
+    public async add(data: T | T[]): Promise<T | T[]> {
         const batch = this.db.batch();
 
-        if (Array.isArray(data)) {
-            this._stats(data.length - 1, batch);
-            data = data.map(item => this._add(item, batch))
-        } else {
-            this._stats(1, batch);
-            this._add(data, batch)
-        }
-        ;
+        if (Array.isArray(data))
+            data = data.map(item => this._add(item, batch));
+        else
+            this._add(data, batch);
 
+        this._setStats('add', data, batch);
         await batch.commit();
+
         return data;
     }
 
-    public async update<T extends IData>(data: T | T): Promise<T | T[]> {
+    public async update(data: T | T): Promise<T | T[]> {
         const batch = this.db.batch();
 
         if (Array.isArray(data))
@@ -203,39 +185,36 @@ class Database {
         return data;
     }
 
-
-    public async get<T extends IData>(id: string | string[]): Promise<T | T[]> {
+    public async get(id: string | string[]): Promise<T | T[]> {
         let data: T | T[];
         if (Array.isArray(id)) {
             let snapshots = await this.collection.where('id', 'in', id).get();
-            data = snapshots.docs.map(item => this._defaults(item.data() as T));
+            data = snapshots.docs.map(item => item.data() as T);
         } else {
             let snapshot = await this.collection.doc(id).get();
-            data = this._defaults(snapshot.data() as T);
+            data = snapshot.data() as T;
         }
 
         return data;
     }
 
-    public async delete<T extends IData>(data: string | T | T[]): Promise<void> {
+    public async delete(data: string | T | T[]): Promise<void> {
         const batch = this.db.batch();
 
-        if (Array.isArray(data)) {
-            this._stats(data.length - 1, batch);
+        if (Array.isArray(data))
             data.map(item => this._delete(item, batch));
-        } else {
-            this._stats(-1, batch);
+        else
             this._delete(data, batch);
-        }
 
+        this._setStats('delete', data, batch);
         await batch.commit();
     }
 
-    public async all<T extends IData>(pagination?: IPagination): Promise<IResult<T>> {
+    public async all(pagination?: IPagination): Promise<IResult<T>> {
         pagination = {...this.pagination, ...pagination};
         const snapshots = await this._query(pagination);
         return {
-            data: snapshots.docs.map(item => this._defaults(item.data() as T)),
+            data: snapshots.docs.map(item => item.data() as T),
             pagination: await this._setPagination(pagination, snapshots)
         } as IResult<T>
     }
@@ -279,11 +258,6 @@ class Database {
             first: snapshots.docs[0],
             last: snapshots.docs[snapshots.docs.length - 1],
         };
-    }
-
-    private async _getStats(): Promise<IDataStats> {
-        const snapshot = await this.collection.doc(this.config.statsName).get();
-        return snapshot.data() as IDataStats;
     }
 }
 

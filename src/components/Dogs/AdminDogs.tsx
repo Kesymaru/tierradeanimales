@@ -24,11 +24,11 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import AppTable from "../AppTable/AppTable";
 import AlertDialog from "../AlertDialog";
 
-import {ADMIN_DOG_EDIT_ROUTE} from "../../constants";
-import {IAppState, TStatus} from "../../store";
+import IAppState, {TStatus} from "../../store/app.types";
 import {IDog, IDogState} from "../../store/dogs/dogs.types";
-import DogsActions from "../../store/dogs/dogs.actions";
+import {GetDogs} from "../../store/dogs/dogs.actions";
 import {IFilter, ISort} from "../../constants/firebase/database";
+import {ADMIN_DOG_EDIT_ROUTE} from "../../constants/routes";
 
 const DOGS_FILTER: IFilter[] = [
     {
@@ -73,29 +73,29 @@ function AdminDogs(props: IAdminDogs) {
     }
 
     if (props.dogs.status === TStatus.Empty)
-        dispatch(DogsActions.All());
+        dispatch(GetDogs());
 
     function onChangePage(event: unknown, page: number) {
         if (page === props.dogs.pagination.page) return;
         const pagination = {...props.dogs.pagination, page};
-        dispatch(DogsActions.All(pagination));
+        dispatch(GetDogs(pagination));
     }
 
     function onChangeRowsPerPage(event: ChangeEvent<HTMLInputElement>) {
         const rowPerPage = parseInt(event.target.value);
         if (rowPerPage === props.dogs.pagination.rowPerPage) return;
         const pagination = {...props.dogs.pagination, rowPerPage};
-        dispatch(DogsActions.All(pagination));
+        dispatch(GetDogs(pagination));
     }
 
     function onSort(sort: ISort) {
         const pagination = {...props.dogs.pagination, sort};
         console.log('sort', sort, pagination);
-        dispatch(DogsActions.All(pagination));
+        dispatch(GetDogs(pagination));
     }
 
     function handleDelete() {
-        // dispatch(DogsActions.Delete(selected[0]))
+        // dispatch(DeleteDogs(selected))
         setOpenDelete(true);
     }
 

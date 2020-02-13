@@ -1,12 +1,12 @@
 import {RouterState} from "connected-react-router";
 
-import {ISystemState} from "./system/system.types";
-import {IAuthState} from "./auth/auth.types";
-import {IUserState} from "./user/user.types";
+import ISystemState from "./system/system.types";
+import IAuthState from "./auth/auth.types";
+import IUserState from "./user/user.types";
 import {IDog, IDogState} from "./dogs/dogs.types";
 import {IPagination, IResult} from "../constants/firebase/database";
 
-export interface IAppState {
+export default interface IAppState {
     system: ISystemState;
     auth: IAuthState;
     user: IUserState;
@@ -32,18 +32,3 @@ export enum TStatus {
     Fetching,
     Error
 }
-
-interface IDataOptions {
-    _selected?: boolean;
-}
-
-export interface IData extends IDataOptions {
-    id: string;
-
-    createdAt?: Date;
-    updatedAt?: Date;
-}
-
-export const IDataDefaults: IDataOptions = {
-    _selected: false,
-};

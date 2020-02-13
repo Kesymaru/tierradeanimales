@@ -3,9 +3,13 @@ import {Avatar, Button, Menu, MenuItem} from "@material-ui/core";
 import {connect, useDispatch} from "react-redux";
 import {useHistory, useLocation} from "react-router-dom";
 
-import {AuthActions, IAuthState, IUserState, IAppState} from "../../store";
-import {ACCOUNT_ROUTE, SIGN_IN_ROUTE} from "../../constants/routes";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+
+import IAppState from "../../store/app.types.js";
+import IAuthState from "../../store/auth/auth.types";
+import IUserState from "../../store/user/user.types";
+import {SingOut} from "../../store/auth/auth.actions";
+import {ACCOUNT_ROUTE, SIGN_IN_ROUTE} from "../../constants/routes";
 
 interface IUserMenuProps extends Pick<IUserState, 'user'>, Pick<IAuthState, 'logged'> {}
 const UserMenu: FunctionComponent<IUserMenuProps> = ({logged, user}) => {
@@ -26,7 +30,7 @@ const UserMenu: FunctionComponent<IUserMenuProps> = ({logged, user}) => {
                 return history.push(ACCOUNT_ROUTE.path);
 
             case 'SignOut':
-                return dispatch(AuthActions.SingOut());
+                return dispatch(SingOut());
 
             default:
                 break;

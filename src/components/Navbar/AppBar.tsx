@@ -12,7 +12,8 @@ import Slide from '@material-ui/core/Slide';
 import Link from "@material-ui/core/Link";
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 
-import {IAppState, IAuthState} from "../../store";
+import IAppState from "../../store/app.types";
+import IAuthState from "../../store/auth/auth.types";
 import UserMenu from "./UserMenu";
 import {useRoute, useRoutes} from "../../constants";
 

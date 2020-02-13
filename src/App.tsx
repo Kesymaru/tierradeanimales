@@ -3,9 +3,14 @@ import {ConnectedRouter} from 'connected-react-router'
 import {connect, useDispatch} from "react-redux";
 import {makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 
+import Auth from "./constants/firebase/auth";
+import AppStore from "./store/app.store";
+import IAppState from "./store/app.types";
+import IAuthState from "./store/auth/auth.types";
+import {IUser} from "./store/user/user.types";
+import {ReceiveUser} from "./store/user/user.actions";
+import {SingOut} from "./store/auth/auth.actions";
 import ROUTES from "./constants/routes";
-import AppStore, {AuthActions, IAppState, IAuthState, IUser, UserActions} from "./store";
-import Auth from "./constants/firebase/auth"
 
 import Router from "./wrappers/Router";
 import Copyright from "./components/Copyright";
@@ -14,6 +19,8 @@ import Navbar from "./components/Navbar/Navbar";
 import AppBar from "./components/Navbar/AppBar";
 import ScrollTop from "./components/Navbar/ScrollTop";
 
+
+const auth = new Auth();
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -37,9 +44,9 @@ const App: FunctionComponent<IAppProps> = ({logged}: IAppProps) => {
     const [open, setOpen] = useState<boolean>(false);
     const anchorId: string = 'back-to-top-anchor';
 
-    Auth.OnAuth((user: IUser) => user
-        ? dispatch(UserActions.ReceiveUser(user))
-        : dispatch(AuthActions.SingOut()));
+    auth.OnAuth((user: IUser) => user
+        ? dispatch(ReceiveUser(user))
+        : dispatch(SingOut()));
 
     return (<>
         <ConnectedRouter history={AppStore.history}>

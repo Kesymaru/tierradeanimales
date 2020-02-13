@@ -27,9 +27,9 @@ import SendIcon from "@material-ui/icons/Send"
 import SaveIcon from '@material-ui/icons/Save';
 import RotateRightIcon from '@material-ui/icons/RotateRight';
 
+import IAppState, {TStatus} from "../../store/app.types";
 import {IDog, IDogState, ISex} from "../../store/dogs/dogs.types";
-import DogsActions from "../../store/dogs/dogs.actions";
-import {IAppState, TStatus} from "../../store";
+import {AddDog, GetDog, UpdateDog} from "../../store/dogs/dogs.actions";
 import DogImages from "./DogImages";
 
 const InitDog: IDog = {
@@ -63,7 +63,7 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
         ||
         props.dog.id && props.dog.id !== id
     )) {
-        if (id) dispatch(DogsActions.Get(id));
+        if (id) dispatch(GetDog(id));
     }
 
     function _getLoading(): boolean {
@@ -72,8 +72,8 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
-        if (isNew) dispatch(DogsActions.Add(dog));
-        else dispatch(DogsActions.Update(dog))
+        if (isNew) dispatch(AddDog(dog));
+        else dispatch(UpdateDog(dog));
         setLoading(value => !value);
     }
 

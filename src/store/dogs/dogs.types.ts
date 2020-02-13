@@ -1,10 +1,17 @@
 import {IFile} from "../../constants/firebase/storage";
-import {IAppStateItem, IAppStateItems, IData} from "../app.types";
-import {IResult} from "../../constants/firebase/database";
+import {IData} from "../../constants/firebase/database";
+import {IAppStateItem, IAppStateItems} from "../app.types";
+import {IResult, IStats} from "../../constants/firebase/database";
+import * as firebase from "firebase";
 
 export type ISex = 'male' | 'female';
 
-export interface IDog extends IData {
+export interface IDogDefaults {
+    _selected?: boolean;
+    _default?: boolean;
+}
+
+export interface IDog extends IData, IDogDefaults {
     name: string;
     age: number;
     sex: ISex;
@@ -15,6 +22,10 @@ export interface IDog extends IData {
     avatar?: IFile;
     images?: IFile[];
     start?: boolean;
+}
+
+export interface IDogStats extends IStats{
+    adopted: number | firebase.firestore.FieldValue;
 }
 
 export interface IDogState {

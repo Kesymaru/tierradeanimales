@@ -6,18 +6,21 @@ import {useLocation} from "react-router-dom";
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 // ------------------------------------
-// Components
+//  Public Components
 // ------------------------------------
 import SignUp from "../components/SignUp";
 import SignIn from "../components/SignIn";
 import ForgotPassword from "../components/ForgotPassword";
 import Account from "../components/Account";
 import NotFound from "../components/NotFound";
+import Dogs from "../components/Dogs/Dogs";
 
+// ------------------------------------
+//  Admin Components
+// ------------------------------------
 import AdminDashboard from "../components/admin/AdminDashboard";
 import AdminDogs from "../components/Dogs/AdminDogs";
 import EditDog from "../components/Dogs/EditDog";
-import Dogs from "../components/Dogs/Dogs";
 import DogDetails from "../components/Dogs/DogDetails";
 
 export interface IAppRoute {

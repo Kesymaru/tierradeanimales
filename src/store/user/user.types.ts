@@ -15,7 +15,7 @@ export interface IUserErrors {
     resetPassword?: Error;
 }
 
-export interface IUserState {
+export default interface IUserState {
     user: IUser|null;
     errors?: IUserErrors;
 }

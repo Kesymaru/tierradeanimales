@@ -17,7 +17,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
 import {SIGN_IN_ROUTE} from "../constants/routes";
-import {AuthActions} from "../store";
+import {SingUp} from "../store/auth/auth.actions";
 
 const EMAIL_REGEX: RegExp = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
@@ -59,7 +59,7 @@ const SignUp: FunctionComponent<{}> = () => {
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
-        dispatch(AuthActions.SingUp(email, password));
+        dispatch(SingUp(email, password));
     };
 
     const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
