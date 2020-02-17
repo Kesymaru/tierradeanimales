@@ -1,7 +1,6 @@
 import {Dispatch} from "redux";
-import * as firebase from "firebase";
 
-import Database, {IPagination} from "../../constants/firebase/database";
+import Database, {IPagination, IResult} from "../../constants/firebase/database";
 import {
     DELETE_HOMES,
     ERROR_HOME,
@@ -11,24 +10,38 @@ import {
     IHome,
     IHomeActions,
     IHomeStats,
+    IHomeStatsFactory,
     LOAD_HOME,
     LOAD_HOMES
 } from "./homes.types";
+import Storage from "../../constants/firebase/storage";
 
 // ------------------------------------
-// Home config
+// Dashboard config
 // ------------------------------------
+const storage = new Storage({path: 'homes'});
 const database = new Database<IHome, IHomeStats>({
     path: 'homes',
-    onStats
+    statsFactory: IHomeStatsFactory,
+    countStats
 });
 
-function onStats(action: string, docs: IHome | IHome[], batch: firebase.firestore.WriteBatch): void {
+function countStats(multiple: number, stats: IHomeStats, home: IHome): IHomeStats {
+    if(multiple === 0 && home._prev && home.active !== home._prev.active) {
+        stats = countStats(1, stats, home);
+        stats = countStats(-1, stats, home._prev as IHome);
+        return stats;
+    }
 
+    stats.total = +stats.total + multiple;
+    if(home.active) stats.active = +stats.active + multiple;
+    else stats.inactive = +stats.inactive + multiple;
+
+    return stats;
 }
 
 // ------------------------------------
-// Home
+// Dashboard
 // ------------------------------------
 function FetchHome(): IHomeActions {
     return {type: FETCH_HOME};
@@ -46,7 +59,7 @@ export function AddHome(home: IHome): Function {
     return async (dispatch: Dispatch) => {
         try {
             dispatch(FetchHome());
-            home = await database.add(home);
+            home = await database.add(home) as IHome;
             dispatch(LoadHome(home));
         } catch (error) {
             dispatch(ErrorHome(error))
@@ -58,7 +71,7 @@ export function GetHome(id: string): Function {
     return async (dispatch: Dispatch) => {
         try {
             dispatch(FetchHome());
-            const home = await database.get(id);
+            const home = await database.get(id) as IHome;
             dispatch(LoadHome(home));
         } catch (error) {
             dispatch(ErrorHome(error));
@@ -66,11 +79,11 @@ export function GetHome(id: string): Function {
     }
 }
 
-export function UpdateHome(home: IHome): IHomeActions {
+export function UpdateHome(home: IHome): Function {
     return async (dispatch: Dispatch) => {
         try {
             dispatch(FetchHome());
-            home = await database.update(home);
+            home = await database.update(home) as IHome;
             dispatch(LoadHome(home));
         } catch (error) {
             dispatch(ErrorHome(error));
@@ -81,12 +94,11 @@ export function UpdateHome(home: IHome): IHomeActions {
 // ------------------------------------
 // Homes
 // ------------------------------------
-
-function FetchHomes(): IHomeActions{
+function FetchHomes(): IHomeActions {
     return {type: FETCH_HOMES};
 }
 
-function LoadHomes(payload: IHome[]): IHomeActions {
+function LoadHomes(payload: IResult<IHome>): IHomeActions {
     return {type: LOAD_HOMES, payload};
 }
 
@@ -113,7 +125,7 @@ export function GetDogs(pagination?: IPagination): Function {
 export function DeleteDogs(homes: IHome[]): Function {
     return async (dispatch: Dispatch) => {
         try {
-            dispatch(FetchHomes);
+            dispatch(FetchHomes());
             await database.delete(homes);
             dispatch(_DeleteDogs(homes));
         } catch (error) {

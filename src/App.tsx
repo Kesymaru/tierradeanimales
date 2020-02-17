@@ -10,7 +10,8 @@ import IAuthState from "./store/auth/auth.types";
 import {IUser} from "./store/user/user.types";
 import {ReceiveUser} from "./store/user/user.actions";
 import {SingOut} from "./store/auth/auth.actions";
-import ROUTES from "./constants/routes";
+// import ROUTES from "./constants/routes";
+import ROUTES from "./routes";
 
 import Router from "./wrappers/Router";
 import Copyright from "./components/Copyright";
@@ -18,7 +19,6 @@ import Notify from "./components/Notify";
 import Navbar from "./components/Navbar/Navbar";
 import AppBar from "./components/Navbar/AppBar";
 import ScrollTop from "./components/Navbar/ScrollTop";
-
 
 const auth = new Auth();
 const drawerWidth = 240;

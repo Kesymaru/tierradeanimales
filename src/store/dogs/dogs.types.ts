@@ -1,16 +1,11 @@
 import * as firebase from "firebase";
 
 import {IFile} from "../../constants/firebase/storage";
-import {IData} from "../../constants/firebase/database";
+import {IData, IDefaults} from "../../constants/firebase/database";
 import {IAppStateItem, IAppStateItems} from "../app.types";
 import {IResult, IStats} from "../../constants/firebase/database";
 
 export type ISex = 'male' | 'female';
-
-export interface IDogDefaults {
-    _selected?: boolean;
-    _default?: boolean;
-}
 
 export enum IDogStatus {
     Rescued = 'Rescued',
@@ -20,7 +15,7 @@ export enum IDogStatus {
     Deceased = 'Deceased',
 }
 
-export interface IDog extends IData, IDogDefaults {
+export interface IDog extends IData {
     name: string;
     age: number;
     sex: ISex;
@@ -33,7 +28,7 @@ export interface IDog extends IData, IDogDefaults {
     start?: boolean;
 }
 
-export interface IDogStats extends IStats{
+export interface IDogStats extends IStats {
     rescued: number | firebase.firestore.FieldValue;
     hospitalized: number | firebase.firestore.FieldValue;
     fosterHome: number | firebase.firestore.FieldValue;
@@ -41,9 +36,21 @@ export interface IDogStats extends IStats{
     deceased: number | firebase.firestore.FieldValue;
 }
 
-export interface IDogState {
+export default interface IDogState {
     dogs: IAppStateItems<IDog>;
     dog: IAppStateItem<IDog>;
+}
+
+export function IDogStatsFactory(config: Partial<IDogStats>): IDogStats {
+    return {
+        ...config,
+        total: config.total ? config.total : 0,
+        rescued: config.rescued ? config.rescued : 0,
+        hospitalized: config.hospitalized ? config.hospitalized : 0,
+        fosterHome: config.fosterHome ? config.fosterHome : 0,
+        adopted: config.adopted ? config.adopted : 0,
+        deceased: config.deceased ? config.deceased : 0,
+    }
 }
 
 // ------------------------------------
@@ -107,5 +114,4 @@ export type TDogsActions =
 
     IFetchDogs |
     ILoadDogs |
-    IErrorDogs
-    ;
+    IErrorDogs;

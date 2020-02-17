@@ -15,7 +15,7 @@ import Hidden from "@material-ui/core/Hidden";
 import PetsIcon from '@material-ui/icons/Pets';
 
 import IAppState, {TStatus} from "../../store/app.types";
-import {IDog, IDogState} from "../../store/dogs/dogs.types";
+import IDogState, {IDog} from "../../store/dogs/dogs.types";
 import {GetDog} from "../../store/dogs/dogs.actions";
 
 interface IDogDetailsProps extends Pick<IDogState, 'dog'> {

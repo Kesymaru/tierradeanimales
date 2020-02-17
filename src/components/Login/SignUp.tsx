@@ -16,8 +16,8 @@ import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
-import {SIGN_IN_ROUTE} from "../constants/routes";
-import {SingUp} from "../store/auth/auth.actions";
+import {SingUp} from "../../store/auth/auth.actions";
+import {SIGN_IN_ROUTE} from "./Login.routes";
 
 const EMAIL_REGEX: RegExp = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 

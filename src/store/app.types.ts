@@ -3,8 +3,8 @@ import {RouterState} from "connected-react-router";
 import ISystemState from "./system/system.types";
 import IAuthState from "./auth/auth.types";
 import IUserState from "./user/user.types";
-import {IDog, IDogState} from "./dogs/dogs.types";
-import {IPagination, IResult} from "../constants/firebase/database";
+import IDogState from "./dogs/dogs.types";
+import {IResult} from "../constants/firebase/database";
 
 export default interface IAppState {
     system: ISystemState;

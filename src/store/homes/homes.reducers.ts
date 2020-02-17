@@ -20,19 +20,19 @@ const InitState: IHomeState = {
 
 function HomeReducers(
     state: IHomeState = InitState,
-    action: IHomeActions): IHomeActions {
+    action: IHomeActions): IHomeState {
     switch (action.type) {
         // ------------------------------------
-        // Home
+        // Dashboard
         // ------------------------------------
         case "FETCH_HOME":
             return {
-                ...state, [`home`]: InitState.home
+                ...state, home: InitState.home
             };
 
         case "LOAD_HOME": {
             return {
-                ...state, [`home`]: {
+                ...state, home: {
                     status: TStatus.Fetching,
                     data: action.payload,
                     id: action.payload.id,
@@ -42,7 +42,7 @@ function HomeReducers(
 
         case "ERROR_HOME":
             return {
-                ...state, [`home`]: {
+                ...state, home: {
                     ...InitState.home,
                     status: TStatus.Error,
                     error: action.payload,
@@ -53,11 +53,11 @@ function HomeReducers(
         // Homes
         // ------------------------------------
         case "FETCH_HOMES":
-            return {...state, [`homes`]: InitState.homes};
+            return {...state, homes: InitState.homes};
 
         case "LOAD_HOMES":
             return {
-                ...state, [`homes`]: {
+                ...state, homes: {
                     ...action.payload,
                     status: TStatus.Loaded,
                 }
@@ -65,9 +65,9 @@ function HomeReducers(
 
         case "ERROR_HOMES":
             return {
-                ...state, [`homes`]: {
+                ...state, homes: {
+                    ...InitState.homes,
                     status: TStatus.Error,
-                    data: [],
                     error: action.payload,
                 }
             };

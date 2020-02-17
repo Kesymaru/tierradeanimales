@@ -16,11 +16,12 @@ import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
-import IAppState from "../store/app.types";
-import IAuthState from "../store/auth/auth.types";
-import ISystemState from "../store/system/system.types";
-import {SignIn as SignInAction} from "../store/auth/auth.actions";
-import {FORGOT_PASSWORD_ROUTE, HOME_ROUTE, SIGN_UP_ROUTE} from "../constants/routes";
+import IAppState from "../../store/app.types";
+import IAuthState from "../../store/auth/auth.types";
+import ISystemState from "../../store/system/system.types";
+import {SignIn as SignInAction} from "../../store/auth/auth.actions";
+import {DASHBOARD_ROUTE} from "../Dashboard/Dashboard.routes";
+import {FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE} from "./Login.routes";
 
 const EMAIL_REGEX: RegExp = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
@@ -87,7 +88,7 @@ const SignIn: FunctionComponent<ISignInProps> = ({loading, logged}) => {
         setPasswordError('');
     };
 
-    if (logged) return <Redirect to={HOME_ROUTE.path}/>;
+    if (logged) return <Redirect to={DASHBOARD_ROUTE.path}/>;
 
     return (
         <Container maxWidth="lg">

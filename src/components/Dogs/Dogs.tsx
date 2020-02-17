@@ -14,10 +14,10 @@ import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 import IAppState, {TStatus} from "../../store/app.types";
-import {IDog, IDogState} from "../../store/dogs/dogs.types";
+import IDogState, {IDog} from "../../store/dogs/dogs.types";
 import {IPagination} from "../../constants/firebase/database";
 import {GetDogs} from "../../store/dogs/dogs.actions";
-import {DOG_DETAILS_ROUTE} from "../../constants";
+import {DOG_DETAILS_ROUTE} from "./Dogs.routes";
 
 interface IDogsProps extends Pick<IDogState, 'dogs'> {
 }

@@ -15,7 +15,7 @@ import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import IAppState from "../../store/app.types";
 import IAuthState from "../../store/auth/auth.types";
 import UserMenu from "./UserMenu";
-import {useRoute, useRoutes} from "../../constants";
+import useRoutes from "../../routes/routes.hooks";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
@@ -61,7 +61,6 @@ interface IAppBarProps extends Pick<IAuthState, 'logged'> {
 const AppBar: FunctionComponent<IAppBarProps> = ({logged, open, setOpen, anchorId}) => {
     const classes = useStyles();
     const routes = useRoutes();
-    const route = useRoute();
 
     return <>
         <MaterialAppBar position="fixed" className={logged ? classes.appBar : ''}>

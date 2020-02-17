@@ -22,7 +22,7 @@ export interface IStorageConfig {
     defaults?: IFileDefaults;
 }
 
-const FileDefaults: IFileDefaults = {
+export const FileDefaults: IFileDefaults = {
     _file: null,
     _selected: false,
     _new: false,

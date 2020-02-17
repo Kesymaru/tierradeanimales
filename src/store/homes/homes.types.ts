@@ -18,7 +18,6 @@ export interface IHomeContact extends IData {
 
 export interface IHome extends IData {
     name: string;
-    date: Date;
     active: boolean;
 
     contacts?: IHomeContact[];
@@ -29,8 +28,17 @@ export default interface IHomeState {
     home: IAppStateItem<IHome>;
 }
 
+export function IHomeStatsFactory(config: Partial<IHomeStats>): IHomeStats {
+    return {
+        ...config,
+        total: config.total ? config.total : 0,
+        active: config.active ? config.active : 0,
+        inactive: config.inactive ? config.inactive : 0,
+    }
+}
+
 // ------------------------------------
-// Foster Home
+// Foster Dashboard
 // ------------------------------------
 export const FETCH_HOME = 'FETCH_HOME';
 
@@ -83,7 +91,7 @@ interface IErrorHomes {
 }
 
 // ------------------------------------
-// Home Actions
+// Dashboard Actions
 // ------------------------------------
 export type IHomeActions =
     IFetchHome |

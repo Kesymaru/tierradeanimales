@@ -25,10 +25,10 @@ import AppTable from "../AppTable/AppTable";
 import AlertDialog from "../AlertDialog";
 
 import IAppState, {TStatus} from "../../store/app.types";
-import {IDog, IDogState} from "../../store/dogs/dogs.types";
+import IDogState, {IDog} from "../../store/dogs/dogs.types";
 import {GetDogs} from "../../store/dogs/dogs.actions";
 import {IFilter, ISort} from "../../constants/firebase/database";
-import {ADMIN_DOG_EDIT_ROUTE} from "../../constants/routes";
+import {ADMIN_DOG_EDIT_ROUTE} from "./Dogs.routes";
 
 const DOGS_FILTER: IFilter[] = [
     {

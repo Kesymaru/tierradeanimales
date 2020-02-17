@@ -1,4 +1,4 @@
-import {IDogState, TDogsActions} from "./dogs.types";
+import IDogState, {TDogsActions} from "./dogs.types";
 import {TStatus} from "../app.types";
 
 const InitState: IDogState = {
@@ -6,9 +6,9 @@ const InitState: IDogState = {
         status: TStatus.Empty,
         data: [],
         pagination: {
-            page: 0,
             count: 0,
             rowPerPage: 5,
+            page: 0,
         }
     },
     dog: {

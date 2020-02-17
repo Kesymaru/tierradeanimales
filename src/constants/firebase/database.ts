@@ -2,7 +2,17 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import {v4 as uuid} from 'uuid';
 
-export interface IData {
+export interface IDefaults {
+    key: string;
+    values: any;
+}
+
+export interface IDataDefaults {
+    _selected?: boolean;
+    _prev?: any;
+}
+
+export interface IData extends IDataDefaults {
     id: string;
 
     createdAt?: Date;
@@ -44,14 +54,20 @@ export interface IResult<T> {
     pagination: IPagination;
 }
 
-export interface IDataConfig<T extends IData> {
+export interface IDataConfig<T extends IData, S extends IStats> {
     path: string;
 
+    defaults?: IDefaults[];
     pagination?: IPagination;
     statsPath?: string;
     softDelete?: boolean;
-    onStats?: (action: string, documents: T | T[], batch: firebase.firestore.WriteBatch) => void;
+    statsFactory?: (config: Partial<S>) => S;
+    countStats?: (multiple: number, stats: S, documents: T) => S;
 }
+
+export const DataDefaults: IDataDefaults = {
+    _selected: false,
+};
 
 class Database<T extends IData, S extends IStats> {
     public db: firebase.firestore.Firestore;
@@ -59,6 +75,9 @@ class Database<T extends IData, S extends IStats> {
     public stats: firebase.firestore.DocumentReference;
 
     public path: string;
+    public defaults: IDefaults[] = [
+        {key: '_root', values: DataDefaults},
+    ];
     public pagination: IPagination = {
         count: 0,
         rowPerPage: 5,
@@ -67,15 +86,18 @@ class Database<T extends IData, S extends IStats> {
     };
     public statsPath: string = '_stats';
     public softDelete: boolean = false;
-    public onStats: Function | null = null;
+    public statsFactory: Function | null = null;
+    public countStats: Function | null = null;
 
-    constructor(public readonly config: IDataConfig<T>) {
+    constructor(public readonly config: IDataConfig<T, S>) {
         this.path = this.config.path;
+        if (this.config.defaults) this.defaults = this.config.defaults;
         if (this.config.pagination) this.pagination = this.config.pagination;
         if (this.config.statsPath) this.statsPath = this.config.statsPath;
         if (typeof this.config.softDelete !== 'undefined')
             this.softDelete = this.config.softDelete;
-        if (this.config.onStats) this.onStats = this.config.onStats;
+        if (this.config.statsFactory) this.statsFactory = this.config.statsFactory;
+        if (this.config.countStats) this.countStats = this.config.countStats;
 
         this.db = firebase.firestore();
         this.collection = this.db.collection(this.path);
@@ -113,7 +135,7 @@ class Database<T extends IData, S extends IStats> {
         } else batch.delete(doc);
     }
 
-    private _setStats(action: string, docs: string | T | T[], batch: firebase.firestore.WriteBatch) {
+    /*private _setStatsOld(action: string, docs: string | T | T[], batch: firebase.firestore.WriteBatch) {
         if (this.onStats)
             return this.onStats(action, docs, batch);
 
@@ -125,6 +147,45 @@ class Database<T extends IData, S extends IStats> {
         const stats: IStats = {total: increment};
 
         batch.set(this.stats, stats, {merge: true});
+    }*/
+
+    private _setStats(action: string, docs: string | T | T[], batch: firebase.firestore.WriteBatch) {
+        const countStats = this.countStats ? this.countStats : this._countStats;
+        const multiple = action === 'add' ? 1 : action === 'delete' ? -1 : 0;
+        let stats = this.statsFactory
+            ? this.statsFactory({total: 0})
+            : {total: 0} as S;
+
+        if (Array.isArray(docs))
+            docs.forEach(doc => stats = countStats(multiple, stats, doc));
+        else stats = countStats(multiple, stats, docs);
+
+        Object.keys(stats).forEach(key => {
+            let value = +stats[key];
+            stats[key] = firebase.firestore.FieldValue.increment(value);
+        });
+
+        console.log('_stats docs', docs);
+        console.log('_stats', stats);
+
+        batch.set(this.stats, stats, {merge: true});
+    }
+
+    private _countStats(action: string, stats: S | Partial<S>, doc: T): (S | Partial<S>) {
+        switch (action) {
+            case 'add':
+                stats.total = stats.total ? +stats.total + 1 : 1;
+                break;
+
+            case 'delete':
+                stats.total = stats.total ? +stats.total - 1 : -1;
+                break;
+
+            case 'updated':
+                break;
+        }
+
+        return stats;
     }
 
     private async _getStats(): Promise<S> {
@@ -189,10 +250,10 @@ class Database<T extends IData, S extends IStats> {
         let data: T | T[];
         if (Array.isArray(id)) {
             let snapshots = await this.collection.where('id', 'in', id).get();
-            data = snapshots.docs.map(item => item.data() as T);
+            data = snapshots.docs.map(item => this._defaults(item.data() as T) as T);
         } else {
             let snapshot = await this.collection.doc(id).get();
-            data = snapshot.data() as T;
+            data = this._defaults(snapshot.data() as T);
         }
 
         return data;
@@ -214,13 +275,14 @@ class Database<T extends IData, S extends IStats> {
         pagination = {...this.pagination, ...pagination};
         const snapshots = await this._query(pagination);
         return {
-            data: snapshots.docs.map(item => item.data() as T),
+            data: snapshots.docs.map(item => this._defaults(item.data() as T)),
             pagination: await this._setPagination(pagination, snapshots)
         } as IResult<T>;
     }
 
     private _query(pagination: IPagination): Promise<firebase.firestore.QuerySnapshot> {
-        let query = this.collection.orderBy('createdAt', 'desc');
+        let query = this.collection.limit(pagination.rowPerPage || this.pagination.rowPerPage);
+        ;
 
         // sort
         if (Array.isArray(pagination.sort))
@@ -243,7 +305,6 @@ class Database<T extends IData, S extends IStats> {
             else if (this.pagination.last) query = query.endBefore(this.pagination.last);
         }
 
-        query = query.limit(pagination.rowPerPage || this.pagination.rowPerPage);
         return query.get();
     }
 
@@ -258,6 +319,29 @@ class Database<T extends IData, S extends IStats> {
             first: snapshots.docs[0],
             last: snapshots.docs[snapshots.docs.length - 1],
         };
+    }
+
+    private _defaults(data: T | T[]): (T | T[]) {
+        if (Array.isArray(data))
+            data = data.map(item => this._setDefault(item));
+        else data = this._setDefault(data);
+
+        return data;
+    }
+
+    private _setDefault(_data: T) {
+        const data = {..._data} as any;
+        this.defaults.forEach(({key, values}) => {
+            if (key === '_root' && typeof data === 'object')
+                return Object.assign(data, values);
+            if (typeof data[key] !== 'undefined') {
+                if (Array.isArray(data[key]))
+                    data[key] = data[key].map((item: any) => Object.assign(item, values));
+                else Object.assign(data[key], values);
+            }
+        });
+
+        return data as T;
     }
 }
 

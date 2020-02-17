@@ -10,75 +10,58 @@ import {
     FETCH_DOG,
     FETCH_DOGS,
     IDog,
-    IDogStats,
+    IDogStats, IDogStatsFactory,
     IDogStatus,
     LOAD_DOG,
     LOAD_DOGS,
     TDogsActions
 } from "./dogs.types";
-import {ADMIN_DOGS_ROUTE} from "../../constants";
-import Storage, {IFile} from "../../constants/firebase/storage";
-import Database, {IPagination, IResult} from "../../constants/firebase/database";
+import Storage, {FileDefaults, IFile} from "../../constants/firebase/storage";
+import Database, {DataDefaults, IPagination, IResult} from "../../constants/firebase/database";
+import {ADMIN_DOGS_ROUTE} from "../../components/Dogs/Dogs.routes";
 
 // ------------------------------------
-//  Dogs Actions
+//  Dogs Actions Config
 // ------------------------------------
-const database = new Database<IDog, IDogStats>({path: 'dogs', onStats});
+const storage = new Storage({path: 'dogs'});
+const database = new Database<IDog, IDogStats>({
+    path: 'dogs',
+    defaults: [
+        {key: '_root', values: DataDefaults},
+        {key: 'images', values: FileDefaults}
+    ],
+    statsFactory: IDogStatsFactory,
+    countStats
+});
 
-function onStats(action: string, docs: IDog | IDog[], batch: firebase.firestore.WriteBatch): void {
-    console.log('custom stats', action, docs);
-    const multiple = action === 'add' ? 1 : -1;
-    const stats: IDogStats = {
-        total: Array.isArray(docs) ? docs.length : 1,
-        rescued: 0,
-        hospitalized: 0,
-        fosterHome: 0,
-        adopted: 0,
-        deceased: 0,
-    };
-
-    if (Array.isArray(docs))
-        docs.forEach(doc => countStats(stats, doc));
-    else countStats(stats, docs);
-
-    (Object.keys(stats) as Array<keyof IDogStats>).forEach(key => {
-        let value: number = +stats[key] * multiple;
-        stats[key] = firebase.firestore.FieldValue.increment(value);
-    });
-    console.log('stats increments/decrements', stats);
-
-    batch.set(database.stats, stats, {merge: true});
-}
-
-function countStats(stats: IDogStats, doc: IDog) {
+function countStats(multiple: number, stats: IDogStats, doc: IDog): IDogStats {
+    if(multiple === 0 && doc._prev && doc.status !== doc._prev.status) {
+        stats = countStats(1, stats, doc);
+        stats = countStats(-1, stats, doc._prev as IDog);
+        return stats;
+    }
 
     switch (doc.status) {
         case IDogStatus.Rescued:
-            stats.rescued = +stats.rescued + 1;
+            stats.rescued = stats.rescued ? +stats.rescued + multiple : multiple;
             break;
-
         case IDogStatus.Hospitalized:
-            stats.hospitalized = +stats.hospitalized + 1;
+            stats.hospitalized = stats.hospitalized ? +stats.hospitalized + multiple : multiple;
             break;
-
         case IDogStatus.FosterHome:
-            stats.fosterHome = +stats.fosterHome + 1;
+            stats.fosterHome = stats.fosterHome ? +stats.fosterHome + multiple : multiple;
             break;
-
         case IDogStatus.Adopted:
-            stats.adopted = +stats.adopted + 1;
+            stats.adopted = stats.adopted ? +stats.adopted + multiple : multiple;
             break;
-
         case IDogStatus.Deceased:
-            stats.deceased = +stats.deceased + 1;
+            stats.deceased = stats.deceased ? +stats.deceased + multiple : multiple;
             break;
-
         default:
             break;
     }
+    return stats;
 }
-
-const storage = new Storage({path: 'dogs'});
 
 // ------------------------------------
 // Dog
@@ -122,7 +105,7 @@ export function GetDog(id: string): Function {
     return async (dispatch: Dispatch) => {
         try {
             dispatch(FetchDog());
-            let dog = await database.get(id) as IDog;
+            const dog = await database.get(id) as IDog;
             dispatch(LoadDog(dog));
         } catch (error) {
             dispatch(ErrorDog(error));

@@ -28,7 +28,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import RotateRightIcon from '@material-ui/icons/RotateRight';
 
 import IAppState, {TStatus} from "../../store/app.types";
-import {IDog, IDogState, ISex, IDogStatus} from "../../store/dogs/dogs.types";
+import IDogState, {IDog, ISex, IDogStatus} from "../../store/dogs/dogs.types";
 import {AddDog, GetDog, UpdateDog} from "../../store/dogs/dogs.actions";
 import DogImages from "./DogImages";
 

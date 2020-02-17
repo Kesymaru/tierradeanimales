@@ -9,7 +9,7 @@ import IAppState from "../../store/app.types.js";
 import IAuthState from "../../store/auth/auth.types";
 import IUserState from "../../store/user/user.types";
 import {SingOut} from "../../store/auth/auth.actions";
-import {ACCOUNT_ROUTE, SIGN_IN_ROUTE} from "../../constants/routes";
+import {ACCOUNT_ROUTE, SIGN_IN_ROUTE} from "../Login/Login.routes";
 
 interface IUserMenuProps extends Pick<IUserState, 'user'>, Pick<IAuthState, 'logged'> {}
 const UserMenu: FunctionComponent<IUserMenuProps> = ({logged, user}) => {
