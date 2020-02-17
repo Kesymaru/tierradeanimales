@@ -1,47 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="Added homes.actions.ts, homes.reducers.ts and homes.types.ts to the store">
-      <change afterPath="$PROJECT_DIR$/src/components/Admin/Admin.routes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Dashboard/Dashboard.routes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Dashboard/Dashboard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Dogs/Dogs.routes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Homes/EditHome.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Homes/Homes.routes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Homes/Homes.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Login/Login.routes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/routes.hooks.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/routes.tyoes.ts" afterDir="false" />
+    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/Account.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DetailsAccount.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dogs/AdminDogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/AdminDogs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dogs/DogDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/DogDetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dogs/Dogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/Dogs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dogs/EditDog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/EditDog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ForgotPassword.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/ForgotPassword.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/AppBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/AppBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/Breadcrumbs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/Breadcrumbs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/NavbarMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/NavbarMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/UserMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/UserMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/SignIn.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/SignUp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/admin/AdminDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/AdminDashboard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/constants/firebase/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase/database.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/firebase/storage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase/storage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/app.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/app.types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/dogs/dogs.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dogs/dogs.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/dogs/dogs.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dogs/dogs.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/homes/homes.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/homes/homes.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/homes/homes.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/homes/homes.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/homes/homes.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/homes/homes.types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/wrappers/Route.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/wrappers/Route.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/wrappers/Router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/wrappers/Router.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,14 +119,7 @@
       <workItem from="1576963346713" duration="35777000" />
       <workItem from="1577568811282" duration="99053000" />
       <workItem from="1579564004625" duration="40429000" />
-      <workItem from="1579733497168" duration="315618000" />
-    </task>
-    <task id="LOCAL-00036" summary="removed console.log">
-      <created>1580273363350</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1580273363350</updated>
+      <workItem from="1579733497168" duration="317157000" />
     </task>
     <task id="LOCAL-00037" summary="added Dogs.tsx component&#10;added new AlertDialog.tsx component">
       <created>1580592700193</created>
@@ -501,7 +457,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581717396269</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="separated the routes config into a new directory src/routes, routes.ts remvoed, added new index for the routes, routes.hooks.ts and routes.tyoes.ts to separate the interfaces, functions and custom hooks&#10;&#10;Created new foster homes component and edit foster home component, Homes.tsx and EditHome.tsx&#10;&#10;Updated the database.ts to support custon counter on the _stats&#10;&#10;Updated the homes redux store, homes.types.ts, homes.reducers.ts and homes.actions.ts">
+      <created>1581902297997</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1581902297997</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -521,7 +484,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated dogs components" />
     <MESSAGE value="Updated AppBar.tsx, Breadcrumbs.tsx, Navbar.tsx, NavbarMenu.tsx and ScrollTop.tsx" />
     <MESSAGE value="Updated the IAppStateItem on app.types.ts&#10;Updated the dogs.actions.ts, dogs.types.ts and dogs.reducers.ts" />
     <MESSAGE value="Updated actions.ts to support database and storage configuration&#10;Updated user.actions.ts" />
@@ -546,7 +508,8 @@
     <MESSAGE value="Fixed the stats name for the database.ts" />
     <MESSAGE value="dogs.actions.ts custom stats support using onStats() callback" />
     <MESSAGE value="Added homes.actions.ts, homes.reducers.ts and homes.types.ts to the store" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added homes.actions.ts, homes.reducers.ts and homes.types.ts to the store" />
+    <MESSAGE value="separated the routes config into a new directory src/routes, routes.ts remvoed, added new index for the routes, routes.hooks.ts and routes.tyoes.ts to separate the interfaces, functions and custom hooks&#10;&#10;Created new foster homes component and edit foster home component, Homes.tsx and EditHome.tsx&#10;&#10;Updated the database.ts to support custon counter on the _stats&#10;&#10;Updated the homes redux store, homes.types.ts, homes.reducers.ts and homes.actions.ts" />
+    <option name="LAST_COMMIT_MESSAGE" value="separated the routes config into a new directory src/routes, routes.ts remvoed, added new index for the routes, routes.hooks.ts and routes.tyoes.ts to separate the interfaces, functions and custom hooks&#10;&#10;Created new foster homes component and edit foster home component, Homes.tsx and EditHome.tsx&#10;&#10;Updated the database.ts to support custon counter on the _stats&#10;&#10;Updated the homes redux store, homes.types.ts, homes.reducers.ts and homes.actions.ts" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1360" y="-75" key="#Inspections" timestamp="1576817948911">
@@ -569,34 +532,34 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581901904900" />
-    <state x="209" y="0" width="884" height="758" key="CommitChangelistDialog2" timestamp="1581882363578">
-      <screen x="0" y="0" width="1280" height="800" />
+    <state x="-1505" y="-213" width="884" height="758" key="CommitChangelistDialog2" timestamp="1581902297189">
+      <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581717395121" />
+    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581902297189" />
     <state x="209" y="0" width="884" height="758" key="CommitChangelistDialog2/0.0.1280.800@0.0.1280.800" timestamp="1581882363578" />
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog" timestamp="1581691858353">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581691858353" />
-    <state width="1920" height="247" key="GridCell.Tab.0.bottom" timestamp="1581902087271">
+    <state width="1920" height="247" key="GridCell.Tab.0.bottom" timestamp="1581904079728">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581902087271" />
+    <state width="1920" height="247" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581904079728" />
     <state width="1280" height="323" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1581467907317" />
-    <state width="1920" height="247" key="GridCell.Tab.0.center" timestamp="1581902087268">
+    <state width="1920" height="247" key="GridCell.Tab.0.center" timestamp="1581904079727">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581902087268" />
+    <state width="1920" height="247" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581904079727" />
     <state width="1280" height="323" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1581467907316" />
-    <state width="1920" height="247" key="GridCell.Tab.0.left" timestamp="1581902087266">
+    <state width="1920" height="247" key="GridCell.Tab.0.left" timestamp="1581904079727">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581902087266" />
+    <state width="1920" height="247" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581904079727" />
     <state width="1280" height="323" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1581467907316" />
-    <state width="1920" height="247" key="GridCell.Tab.0.right" timestamp="1581902087269">
+    <state width="1920" height="247" key="GridCell.Tab.0.right" timestamp="1581904079728">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581902087269" />
+    <state width="1920" height="247" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581904079728" />
     <state width="1280" height="323" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1581467907317" />
     <state x="-1209" y="-103" key="RollbackChangesDialog" timestamp="1581436539195">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -615,10 +578,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="VCS.FileHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902347" />
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1581629089353">
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1581902300611">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581629089353" />
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581902300611" />
     <state x="257" y="133" key="Vcs.Push.Dialog.v2/0.0.1280.800@0.0.1280.800" timestamp="1581467428542" />
     <state x="-1197" y="111" key="cloudConfig.SelfSettingsDialog" timestamp="1576817894168">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -654,10 +617,10 @@
     </state>
     <state x="-1462" y="-30" key="run.anything.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580872105579" />
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1581901491118">
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1581904143638">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581901491118" />
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581904143638" />
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1581467863285" />
   </component>
   <component name="XDebuggerManager">

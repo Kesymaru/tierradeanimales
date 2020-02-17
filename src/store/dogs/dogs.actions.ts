@@ -19,6 +19,7 @@ import {
 import Storage, {FileDefaults, IFile} from "../../constants/firebase/storage";
 import Database, {DataDefaults, IPagination, IResult} from "../../constants/firebase/database";
 import {ADMIN_DOGS_ROUTE} from "../../components/Dogs/Dogs.routes";
+import IAppState from "../app.types";
 
 // ------------------------------------
 //  Dogs Actions Config
@@ -35,7 +36,7 @@ const database = new Database<IDog, IDogStats>({
 });
 
 function countStats(multiple: number, stats: IDogStats, doc: IDog): IDogStats {
-    if(multiple === 0 && doc._prev && doc.status !== doc._prev.status) {
+    if (multiple === 0 && doc._prev && doc.status !== doc._prev.status) {
         stats = countStats(1, stats, doc);
         stats = countStats(-1, stats, doc._prev as IDog);
         return stats;
@@ -43,23 +44,24 @@ function countStats(multiple: number, stats: IDogStats, doc: IDog): IDogStats {
 
     switch (doc.status) {
         case IDogStatus.Rescued:
-            stats.rescued = stats.rescued ? +stats.rescued + multiple : multiple;
+            stats.rescued = +stats.rescued + multiple;
             break;
         case IDogStatus.Hospitalized:
-            stats.hospitalized = stats.hospitalized ? +stats.hospitalized + multiple : multiple;
+            stats.hospitalized = +stats.hospitalized + multiple;
             break;
         case IDogStatus.FosterHome:
-            stats.fosterHome = stats.fosterHome ? +stats.fosterHome + multiple : multiple;
+            stats.fosterHome = +stats.fosterHome + multiple;
             break;
         case IDogStatus.Adopted:
-            stats.adopted = stats.adopted ? +stats.adopted + multiple : multiple;
+            stats.adopted = +stats.adopted + multiple;
             break;
         case IDogStatus.Deceased:
-            stats.deceased = stats.deceased ? +stats.deceased + multiple : multiple;
+            stats.deceased = +stats.deceased + multiple;
             break;
         default:
             break;
     }
+    stats.total = +stats.total + multiple;
     return stats;
 }
 
@@ -114,8 +116,10 @@ export function GetDog(id: string): Function {
 }
 
 export function UpdateDog(dog: IDog): Function {
-    return async (dispatch: Dispatch) => {
+    return async (dispatch: Dispatch, getState: Function) => {
         try {
+            const state = getState() as IAppState;
+            dog._prev = state.dogs.dog.data;
             dispatch(_FetchDogs());
 
             let newImgs = (dog.images || []).filter(img => img._new);

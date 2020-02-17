@@ -135,20 +135,6 @@ class Database<T extends IData, S extends IStats> {
         } else batch.delete(doc);
     }
 
-    /*private _setStatsOld(action: string, docs: string | T | T[], batch: firebase.firestore.WriteBatch) {
-        if (this.onStats)
-            return this.onStats(action, docs, batch);
-
-        let total = 0;
-        if (action === 'add') total = 1;
-        if (action === 'delete') total = -1;
-
-        const increment = firebase.firestore.FieldValue.increment(total);
-        const stats: IStats = {total: increment};
-
-        batch.set(this.stats, stats, {merge: true});
-    }*/
-
     private _setStats(action: string, docs: string | T | T[], batch: firebase.firestore.WriteBatch) {
         const countStats = this.countStats ? this.countStats : this._countStats;
         const multiple = action === 'add' ? 1 : action === 'delete' ? -1 : 0;
@@ -164,9 +150,6 @@ class Database<T extends IData, S extends IStats> {
             let value = +stats[key];
             stats[key] = firebase.firestore.FieldValue.increment(value);
         });
-
-        console.log('_stats docs', docs);
-        console.log('_stats', stats);
 
         batch.set(this.stats, stats, {merge: true});
     }
@@ -242,6 +225,7 @@ class Database<T extends IData, S extends IStats> {
         else
             this._update(data, batch);
 
+        this._setStats('updated', data, batch);
         await batch.commit();
         return data;
     }
