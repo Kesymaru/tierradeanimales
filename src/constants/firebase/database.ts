@@ -2,6 +2,9 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import {v4 as uuid} from 'uuid';
 
+// ------------------------------------
+// Types
+// ------------------------------------
 export interface IDefaults {
     key: string;
     values: any;
@@ -9,7 +12,17 @@ export interface IDefaults {
 
 export interface IDataDefaults {
     _selected?: boolean;
+    _deleted?: boolean;
+    _new?: boolean;
     _prev?: any;
+}
+
+export function IDataDefaultsFactory(values?: Partial<IDataDefaults>): IDataDefaults {
+    return {
+        _selected: false,
+        _deleted: false,
+        _new: true,
+    }
 }
 
 export interface IData extends IDataDefaults {
@@ -19,6 +32,14 @@ export interface IData extends IDataDefaults {
     updatedAt?: Date;
     createdBy?: string;
     updatedBy?: string;
+}
+
+export function IDataFactory(values?: Partial<IData>): IData {
+    return {
+        id: uuid(),
+        ...IDataDefaultsFactory(),
+        ...values,
+    }
 }
 
 export interface IFilter {
@@ -45,8 +66,24 @@ export interface IPagination {
     last?: firebase.firestore.DocumentSnapshot | number;
 }
 
+export function IPaginationFactory(values?: Partial<IPagination>): IPagination {
+    return {
+        count: 0,
+        rowPerPage: 5,
+        page: 0,
+        ...values,
+    }
+}
+
 export interface IStats {
     total: number | firebase.firestore.FieldValue;
+}
+
+export function IStatsFactory(values?: Partial<IStats>): IStats {
+    return {
+        total: 0,
+        ...values,
+    }
 }
 
 export interface IResult<T> {
@@ -65,10 +102,17 @@ export interface IDataConfig<T extends IData, S extends IStats> {
     countStats?: (multiple: number, stats: S, documents: T) => S;
 }
 
+// TODO
+// replace this with the IDataDefaultsFactory()
 export const DataDefaults: IDataDefaults = {
     _selected: false,
+    _deleted: false,
+    _new: true,
 };
 
+// ------------------------------------
+// Database Class
+// ------------------------------------
 class Database<T extends IData, S extends IStats> {
     public db: firebase.firestore.Firestore;
     public collection: firebase.firestore.CollectionReference;
@@ -266,7 +310,7 @@ class Database<T extends IData, S extends IStats> {
 
     private _query(pagination: IPagination): Promise<firebase.firestore.QuerySnapshot> {
         let query = this.collection.limit(pagination.rowPerPage || this.pagination.rowPerPage);
-        ;
+        debugger;
 
         // sort
         if (Array.isArray(pagination.sort))
