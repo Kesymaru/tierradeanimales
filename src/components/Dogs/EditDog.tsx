@@ -23,14 +23,15 @@ import Select from '@material-ui/core/Select';
 
 import StarIcon from '@material-ui/icons/Star';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import SendIcon from "@material-ui/icons/Send"
+import SendIcon from "@material-ui/icons/Send";
 import SaveIcon from '@material-ui/icons/Save';
 import RotateRightIcon from '@material-ui/icons/RotateRight';
 
 import IAppState, {TStatus} from "../../store/app.types";
-import IDogState, {IDog, ISex, IDogStatus} from "../../store/dogs/dogs.types";
+import IDogState, {IDog, ISex, IDogStatus, IDogFactory} from "../../store/dogs/dogs.types";
 import {AddDog, GetDog, UpdateDog} from "../../store/dogs/dogs.actions";
 import DogImages from "./DogImages";
+import {useIsNew} from "../../routes/routes.hooks";
 
 const InitDog: IDog = {
     id: '',
@@ -50,7 +51,7 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
     const dispatch = useDispatch();
     const {id} = useParams();
     const isNew = id && id.toLowerCase() === 'new';
-    const [dog, setDog] = useState<IDog>(InitDog);
+    const [dog, setDog] = useState<IDog>(IDogFactory());
     const [loading, setLoading] = useState<boolean>(_getLoading());
 
     useEffect(() => {
@@ -182,9 +183,7 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
                 </Grid>
                 <Grid item xs={6} sm={6} md={3}>
                     <FormControl variant="outlined" style={{display: 'flex'}}>
-                        <InputLabel id="sex">
-                            Sex
-                        </InputLabel>
+                        <InputLabel id="sex">Sex</InputLabel>
                         <Select
                             labelId="sex"
                             id="sex"
