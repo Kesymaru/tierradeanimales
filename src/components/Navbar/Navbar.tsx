@@ -70,8 +70,8 @@ const Navbar: FunctionComponent<INavbarProps> = ({logged, open, setOpen}) => {
 interface INarvarOwnProps extends Omit<INavbarProps, 'logged'> {
 }
 
-const mapStateToProps = (state: IAppState, props: INarvarOwnProps): INavbarProps => ({
-    ...props,
+const mapStateToProps = (state: IAppState, ownProps: INarvarOwnProps): INavbarProps => ({
+    ...ownProps,
     logged: state.auth.logged,
 });
 export default connect(mapStateToProps)(Navbar);
