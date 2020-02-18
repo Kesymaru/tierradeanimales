@@ -17,7 +17,13 @@ import {
     TDogsActions
 } from "./dogs.types";
 import Storage, {FileDefaults, IFile} from "../../constants/firebase/storage";
-import Database, {DataDefaults, IPagination, IResult} from "../../constants/firebase/database";
+import Database, {
+    DataDefaults,
+    IFilter,
+    IPagination,
+    IPaginationFactory,
+    IResult
+} from "../../constants/firebase/database";
 import {ADMIN_DOGS_ROUTE} from "../../components/Dogs/Dogs.routes";
 import IAppState from "../app.types";
 
@@ -173,6 +179,29 @@ function _ErrorDogs(payload: Error): TDogsActions {
 }
 
 export function GetDogs(pagination?: IPagination): Function {
+    return async (dispatch: Dispatch) => {
+        try {
+            dispatch(_FetchDogs());
+            const results = await database.all(pagination);
+            dispatch(_LoadDogs(results));
+        } catch (error) {
+            console.error(error);
+            dispatch(_ErrorDogs(error));
+        }
+    }
+}
+
+export function GetDogsToFosterHomes(pagination?: IPagination): Function {
+    const filter: IFilter = {
+        name: 'status',
+        key: 'status',
+        condition: 'in',
+        value: [IDogStatus.Rescued, IDogStatus.Hospitalized, IDogStatus.Adopted,]
+    };
+    pagination = pagination
+        ? {...pagination, filter}
+        : IPaginationFactory({filter});
+
     return async (dispatch: Dispatch) => {
         try {
             dispatch(_FetchDogs());

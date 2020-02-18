@@ -1,7 +1,8 @@
 import * as firebase from "firebase";
+import {v4 as uuid} from 'uuid';
 
 import {IFile} from "../../constants/firebase/storage";
-import {IData, IDefaults} from "../../constants/firebase/database";
+import {IData, IDataFactory} from "../../constants/firebase/database";
 import {IAppStateItem, IAppStateItems} from "../app.types";
 import {IResult, IStats} from "../../constants/firebase/database";
 
@@ -26,6 +27,21 @@ export interface IDog extends IData {
     avatar?: IFile;
     images?: IFile[];
     start?: boolean;
+}
+
+export function IDogFactory(values?: Partial<IDog>): IDog {
+    return {
+        name: '',
+        age: 0,
+        sex: 'male',
+        status: IDogStatus.Rescued,
+        description: '',
+        public: false,
+        start: false,
+
+        ...IDataFactory(),
+        ...values,
+    }
 }
 
 export interface IDogStats extends IStats {
