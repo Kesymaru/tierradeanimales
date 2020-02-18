@@ -1,7 +1,8 @@
 import * as firebase from "firebase";
 
 import {IAppStateItem, IAppStateItems} from "../app.types";
-import {IData, IResult, IStats} from "../../constants/firebase/database";
+import {IData, IDataFactory, IResult, IStats} from "../../constants/firebase/database";
+import {IDog} from "../dogs/dogs.types";
 
 export interface IHomeStats extends IStats {
     active: number | firebase.firestore.FieldValue;
@@ -10,17 +11,51 @@ export interface IHomeStats extends IStats {
 
 export interface IHomeContact extends IData {
     name: string;
-    address: string;
-    city: string;
-    state: string;
-    country: string;
+    phone: number | string;
+    email: string;
+}
+
+export function IHomeContactFactory(values?: Partial<IHomeContact>): IHomeContact {
+    return {
+        name: '',
+        phone: '',
+        email: '',
+        _new: true,
+        _selected: false,
+        _deleted: false,
+
+        ...IDataFactory(),
+        ...values,
+    }
 }
 
 export interface IHome extends IData {
     name: string;
     active: boolean;
+    country: string;
+    state: string;
+    county: string;
+    city: string;
+    address: string;
 
     contacts?: IHomeContact[];
+    dogs?: IDog[];
+}
+
+export function IHomeFactory(values?: Partial<IHome>): IHome {
+    return {
+        name: '',
+        active: true,
+        country: '',
+        state: '',
+        county: '',
+        city: '',
+        address: '',
+        contacts: [IHomeContactFactory()],
+
+        ...IDataFactory(),
+        ...values,
+    }
 }
 
 export default interface IHomeState {
@@ -57,7 +92,7 @@ export const ERROR_HOME = 'ERROR_HOME';
 
 interface IErrorHome {
     type: typeof ERROR_HOME;
-    payload: Error|string;
+    payload: Error | string;
 }
 
 // ------------------------------------
@@ -87,7 +122,7 @@ export const ERROR_HOMES = 'ERROR_HOMES';
 
 interface IErrorHomes {
     type: typeof ERROR_HOMES;
-    payload: Error|string;
+    payload: Error | string;
 }
 
 // ------------------------------------

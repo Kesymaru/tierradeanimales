@@ -18,7 +18,7 @@ const InitState: IHomeState = {
     },
 };
 
-function HomeReducers(
+function HomesReducers(
     state: IHomeState = InitState,
     action: IHomeActions): IHomeState {
     switch (action.type) {
@@ -77,4 +77,4 @@ function HomeReducers(
     }
 }
 
-export default HomeReducers;
+export default HomesReducers;

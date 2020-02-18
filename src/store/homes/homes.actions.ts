@@ -19,7 +19,6 @@ import Storage from "../../constants/firebase/storage";
 // ------------------------------------
 // Dashboard config
 // ------------------------------------
-const storage = new Storage({path: 'homes'});
 const database = new Database<IHome, IHomeStats>({
     path: 'homes',
     statsFactory: IHomeStatsFactory,
@@ -55,7 +54,7 @@ function ErrorHome(payload: Error): IHomeActions {
     return {type: ERROR_HOME, payload};
 }
 
-export function AddHome(home: IHome): Function {
+export function SaveHome(home: IHome): Function {
     return async (dispatch: Dispatch) => {
         try {
             dispatch(FetchHome());

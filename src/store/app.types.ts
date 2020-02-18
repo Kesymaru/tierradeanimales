@@ -5,12 +5,14 @@ import IAuthState from "./auth/auth.types";
 import IUserState from "./user/user.types";
 import IDogState from "./dogs/dogs.types";
 import {IResult} from "../constants/firebase/database";
+import IHomeState from "./homes/homes.types";
 
 export default interface IAppState {
     system: ISystemState;
     auth: IAuthState;
     user: IUserState;
     dogs: IDogState;
+    homes: IHomeState,
     router: RouterState;
 }
 
