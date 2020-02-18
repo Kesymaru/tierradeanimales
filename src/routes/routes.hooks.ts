@@ -39,6 +39,11 @@ export function findRoute(location: H.Location | string): IAppRoute | undefined 
 // Custom Hooks
 // ------------------------------------
 
+export function useIsNew(params: any, field: string = 'id'): boolean {
+    const value = params[field];
+    return value && value.toLowerCase() === 'new';
+}
+
 /**
  * Hook to get the current matched route
  */
