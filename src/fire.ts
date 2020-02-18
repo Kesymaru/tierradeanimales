@@ -27,6 +27,4 @@ const config: IFirebaseConfig = {
 };
 const fire = firebase.initializeApp(config);
 
-console.log('config firebase');
-
 export default fire;
