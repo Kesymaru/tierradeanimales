@@ -14,7 +14,6 @@ import {
     LOAD_HOME,
     LOAD_HOMES
 } from "./homes.types";
-import Storage from "../../constants/firebase/storage";
 
 // ------------------------------------
 // Dashboard config
