@@ -1,4 +1,5 @@
 import React, {ChangeEvent, FormEvent, FunctionComponent, useState, MouseEvent} from "react";
+import {v4 as uuid} from 'uuid';
 
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -23,25 +24,14 @@ import RoomIcon from '@material-ui/icons/Room';
 import CloseIcon from '@material-ui/icons/Close';
 import SendIcon from "@material-ui/icons/Send";
 
-import {IHome, IHomeContact} from "../../store/homes/homes.types";
+import {IHome, IHomeContact, IHomeFactory} from "../../store/homes/homes.types";
 import HomeContacts from "./HomeContacts";
-
-const InitHome: IHome = {
-    id: '',
-    name: '',
-    active: true,
-    country: '',
-    state: '',
-    county: '',
-    city: '',
-    address: '',
-};
 
 interface IEditHomeProps {
 }
 
 const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
-    const [home, setHome] = useState<IHome>(InitHome);
+    const [home, setHome] = useState<IHome>(IHomeFactory());
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
@@ -88,7 +78,12 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
                     />
                 </Grid>
 
-                <HomeContacts contacts={home.contacts} onChange={contacts => setHome({...home, contacts})}/>
+                <Grid item xs={12}>
+                    <HomeContacts
+                        contacts={(home.contacts||[])}
+                        onChange={contacts => setHome({...home, contacts})}
+                    />
+                </Grid>
 
                 <Grid item xs={6} md={3}>
                     <FormControl variant="outlined">
