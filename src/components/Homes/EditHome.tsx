@@ -1,5 +1,6 @@
-import React, {ChangeEvent, FormEvent, FunctionComponent, useState, MouseEvent} from "react";
-import {v4 as uuid} from 'uuid';
+import React, {ChangeEvent, FormEvent, FunctionComponent, MouseEvent, useState} from "react";
+import {useHistory, useParams} from "react-router-dom";
+import {connect, useDispatch} from "react-redux";
 
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -9,32 +10,49 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from "@material-ui/core/Button";
-import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Tooltip from "@material-ui/core/Tooltip";
-import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
 
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
 import HomeIcon from '@material-ui/icons/Home';
-import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
-import ContactPhoneIcon from '@material-ui/icons/ContactPhone';
-import ContactMailIcon from '@material-ui/icons/ContactMail';
 import RoomIcon from '@material-ui/icons/Room';
 import CloseIcon from '@material-ui/icons/Close';
 import SendIcon from "@material-ui/icons/Send";
 
-import {IHome, IHomeContact, IHomeFactory} from "../../store/homes/homes.types";
+import IHomeState, {IHome, IHomeFactory} from "../../store/homes/homes.types";
+import IAppState, {TStatus} from "../../store/app.types";
+import {SaveHome} from "../../store/homes/homes.actions";
+import {useIsNew} from "../../routes/routes.hooks";
 import HomeContacts from "./HomeContacts";
+import HomeDogs from "./HomeDogs";
 
-interface IEditHomeProps {
+interface IEditHomeProps extends Pick<IHomeState, 'home'>{
 }
 
 const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const params = useParams();
+    const isNew = useIsNew(params);
     const [home, setHome] = useState<IHome>(IHomeFactory());
+    const [loading, setLoading] = useState<boolean>(getLoading());
+
+    init();
+    function init(){
+    }
+
+    function getLoading(): boolean {
+        return props.home.status === TStatus.Fetching;
+    }
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
+        console.log('save', home)
+        dispatch(SaveHome(home));
+    }
+
+    function handleReset(event: FormEvent) {
+        if(isNew) return history.goBack();
     }
 
     function handleChange(field: keyof IHome) {
@@ -43,18 +61,11 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
         });
     }
 
-    function handleContactChange(field: keyof IHomeContact, index: number) {
-        return (event: ChangeEvent<HTMLInputElement>) => setHome({
-            ...home, contacts: (home.contacts || []).map((contact, i) => index === i
-                ? ({...contact, [`${field}`]: event.target.value})
-                : contact)
-        });
-    }
-
     return <Container>
-        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <form noValidate autoComplete="off" onSubmit={handleSubmit} onReset={handleReset}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
+                    <Typography>Foster Home</Typography>
                     <TextField
                         label="Name"
                         variant="outlined"
@@ -64,27 +75,13 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
                                 <InputAdornment position="start">
                                     <HomeIcon/>
                                 </InputAdornment>
-                            ),
-                            endAdornment: (<InputAdornment position="start">
-                                <Tooltip title="Add Contact">
-                                    <IconButton>
-                                        <AddIcon/>
-                                    </IconButton>
-                                </Tooltip>
-                            </InputAdornment>)
+                            )
                         }}
                         value={home.name}
+                        disabled={loading}
                         onChange={handleChange("name")}
                     />
                 </Grid>
-
-                <Grid item xs={12}>
-                    <HomeContacts
-                        contacts={(home.contacts||[])}
-                        onChange={contacts => setHome({...home, contacts})}
-                    />
-                </Grid>
-
                 <Grid item xs={6} md={3}>
                     <FormControl variant="outlined">
                         <InputLabel>Country</InputLabel>
@@ -99,7 +96,10 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
                 <Grid item xs={6} md={3}>
                     <FormControl variant="outlined">
                         <InputLabel>State</InputLabel>
-                        <Select value={home.state}>
+                        <Select
+                            value={home.state}
+                            disabled={loading}
+                        >
                             <MenuItem value="">None</MenuItem>
                             <MenuItem value={10}>Ten</MenuItem>
                             <MenuItem value={20}>Twenty</MenuItem>
@@ -121,7 +121,10 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
                 <Grid item xs={6} md={3}>
                     <FormControl variant="outlined">
                         <InputLabel>City</InputLabel>
-                        <Select value={home.city}>
+                        <Select
+                            value={home.city}
+                            disabled={loading}
+                        >
                             <MenuItem value="">None</MenuItem>
                             <MenuItem value={10}>Ten</MenuItem>
                             <MenuItem value={20}>Twenty</MenuItem>
@@ -142,32 +145,60 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
                             ),
                         }}
                         value={home.address}
+                        disabled={loading}
                         onChange={handleChange("address")}
                     />
                 </Grid>
+
+                <Grid item xs={12}>
+                    <Typography>Contacts</Typography>
+                    <HomeContacts
+                        contacts={(home.contacts || [])}
+                        disabled={loading}
+                        onChange={contacts => setHome({...home, contacts})}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography>Dogs</Typography>
+                    <HomeDogs
+                        selected={(home.dogs || [])}
+                        disabled={loading}
+                        onChange={dogs => setHome({...home, dogs})}
+                    />
+                </Grid>
+
                 <Grid item xs={6}>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        startIcon={<CloseIcon/>}
-                        fullWidth
-                    >
-                        Cancel
-                    </Button>
+                    <Tooltip title="Cancel">
+                        <Button
+                            type="reset"
+                            variant="contained"
+                            color="secondary"
+                            startIcon={<CloseIcon/>}
+                            fullWidth
+                        >
+                            Cancel
+                        </Button>
+                    </Tooltip>
                 </Grid>
                 <Grid item xs={6}>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        startIcon={<SendIcon/>}
-                        fullWidth
-                    >
-                        Submit
-                    </Button>
+                    <Tooltip title="Submit">
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            startIcon={<SendIcon/>}
+                            fullWidth
+                        >
+                            Submit
+                        </Button>
+                    </Tooltip>
                 </Grid>
             </Grid>
         </form>
     </Container>
 };
 
-export default EditHome;
+const mapStateToProps = (state: IAppState): IEditHomeProps => ({
+    home: state.homes.home
+});
+export default connect(mapStateToProps)(EditHome);
