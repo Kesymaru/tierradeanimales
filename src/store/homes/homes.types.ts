@@ -1,7 +1,7 @@
 import * as firebase from "firebase";
 
 import {IAppStateItem, IAppStateItems} from "../app.types";
-import {IData, IDataFactory, IResult, IStats} from "../../constants/firebase/database";
+import {IAddress, IAddressFactory, IData, IDataFactory, IResult, IStats} from "../../constants/firebase/database";
 import {IDog} from "../dogs/dogs.types";
 
 export interface IHomeStats extends IStats {
@@ -32,11 +32,7 @@ export function IHomeContactFactory(values?: Partial<IHomeContact>): IHomeContac
 export interface IHome extends IData {
     name: string;
     active: boolean;
-    country: string;
-    state: string;
-    county: string;
-    city: string;
-    address: string;
+    address: IAddress;
 
     contacts?: IHomeContact[];
     dogs?: IDog[];
@@ -46,11 +42,7 @@ export function IHomeFactory(values?: Partial<IHome>): IHome {
     return {
         name: '',
         active: true,
-        country: '',
-        state: '',
-        county: '',
-        city: '',
-        address: '',
+        address: IAddressFactory(),
         contacts: [IHomeContactFactory()],
 
         ...IDataFactory(),
