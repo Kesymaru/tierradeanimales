@@ -26,6 +26,24 @@ export function IDataDefaultsFactory(values?: Partial<IDataDefaults>): IDataDefa
     }
 }
 
+export interface IAddress {
+    country: string;
+    state: string;
+    county: string;
+    city: string;
+    address: string;
+}
+
+export function IAddressFactory(values?: Partial<IAddress>): IAddress {
+    return {
+        country: 'Costa Rica',
+        state: '',
+        county: '',
+        city: '',
+        address: '',
+    }
+}
+
 export interface IData extends IDataDefaults {
     id: string;
 
