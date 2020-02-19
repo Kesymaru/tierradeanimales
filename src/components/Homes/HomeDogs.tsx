@@ -2,27 +2,21 @@ import React, {ChangeEvent, FunctionComponent, useEffect, useState} from "react"
 import {connect, useDispatch} from "react-redux";
 
 import Grid from "@material-ui/core/Grid";
-import Select from '@material-ui/core/Select';
-import Chip from '@material-ui/core/Chip';
-import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import Checkbox from '@material-ui/core/Checkbox';
+import InputAdornment from "@material-ui/core/InputAdornment";
+import PetsIcon from '@material-ui/icons/Pets';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 import IDogState, {IDog} from "../../store/dogs/dogs.types";
 import IAppState, {TStatus} from "../../store/app.types";
 import {GetDogsToFosterHomes} from "../../store/dogs/dogs.actions";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
-};
+const checkBoxIcon = <CheckBoxOutlineBlankIcon fontSize="small"/>;
+const checkedIcon = <CheckBoxIcon fontSize="small"/>;
+const adornment = (<InputAdornment position="start"><PetsIcon/></InputAdornment>);
 
 interface IHomeDogsProps extends Pick<IDogState, 'dogs'> {
     selected: IDog[];
@@ -33,13 +27,11 @@ interface IHomeDogsProps extends Pick<IDogState, 'dogs'> {
 const HomeDogs: FunctionComponent<IHomeDogsProps> = (props) => {
     const dispatch = useDispatch();
     const [selected, setSelected] = useState<IDog[]>(props.selected);
-    const [selectedIds, setSelectedIds] = useState<string[]>(props.selected.map(dog => dog.id));
     const [dogs, setDogs] = useState<IDog[]>(props.dogs.data);
     const [disabled, setDisabled] = useState<boolean>(!!props.disabled);
 
     useEffect(() => {
         setSelected(props.selected);
-        setSelectedIds(props.selected.map(dog => dog.id))
         setDogs(props.dogs.data);
         setDisabled(!!props.disabled);
     }, [props.selected, props.disabled, props.dogs]);
@@ -51,40 +43,52 @@ const HomeDogs: FunctionComponent<IHomeDogsProps> = (props) => {
             dispatch(GetDogsToFosterHomes());
     }
 
-    function handleChange(event: ChangeEvent<{ value: unknown }>) {
-        const ids = event.target.value as string[];
-        setSelectedIds(ids);
-
-        const _selected = ids.map(id => dogs.find(dog => dog.id === id)) as IDog[];
-        setSelected(_selected);
-        if (props.onChange) props.onChange(_selected);
+    function handleChange(event: ChangeEvent<{}>, value: any | null) {
+        console.log('change', value);
+        setSelected(value);
+        if(props.onChange) props.onChange(value);
     }
 
     return <Grid container spacing={2}>
         <Grid item xs={12}>
-            <FormControl variant="outlined">
-                <Select
-                    multiple
-                    value={selectedIds}
-                    disabled={disabled}
-                    onChange={handleChange}
-                    input={<Input/>}
-                    renderValue={() => (
-                        <div>
-                            {selected.map(dog => (
-                                <Chip key={dog.id} label={dog.name}/>
-                            ))}
-                        </div>
-                    )}
-                    MenuProps={MenuProps}
-                >
-                    {dogs.map(dog => (
-                        <MenuItem key={dog.id} value={dog.id}>
-                            {dog.name}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
+            <Autocomplete
+                multiple
+                options={dogs}
+                value={selected}
+                disabled={disabled}
+                disableCloseOnSelect
+                getOptionLabel={option => option.name}
+                renderOption={(option, {selected}) => (
+                    <React.Fragment>
+                        <Checkbox
+                            icon={checkBoxIcon}
+                            checkedIcon={checkedIcon}
+                            style={{marginRight: 8}}
+                            checked={selected}
+                        />
+                        {option.name}
+                    </React.Fragment>
+                )}
+                style={{width: '100%'}}
+                renderInput={params => {
+                    const startAdornment = Array.isArray(params.InputProps.startAdornment)
+                        ? [adornment, ...params.InputProps.startAdornment]
+                        : adornment;
+                    params = {
+                        ...params, InputProps: {
+                            ...params.InputProps, startAdornment,
+                        }
+                    };
+                    return <TextField
+                        {...params}
+                        variant="outlined"
+                        label="Home Dogs"
+                        placeholder="Select Dogs"
+                        fullWidth
+                    />
+                }}
+                onChange={handleChange}
+            />
         </Grid>
     </Grid>
 };

@@ -123,7 +123,9 @@ const HomeContacts: FunctionComponent<IHomeContactsProps> = (props) => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12}><Divider/></Grid>
+                    {index < contacts.length-1
+                        ? <Grid item xs={12}><Divider/></Grid>
+                        : null}
                 </Grid>
             </Zoom>))}
     </>;
