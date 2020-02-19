@@ -27,23 +27,8 @@ import AlertDialog from "../AlertDialog";
 import IAppState, {TStatus} from "../../store/app.types";
 import IDogState, {IDog} from "../../store/dogs/dogs.types";
 import {GetDogs} from "../../store/dogs/dogs.actions";
-import {IFilter, ISort} from "../../constants/firebase/database";
+import {ISort} from "../../constants/firebase/database";
 import {ADMIN_DOG_EDIT_ROUTE} from "./Dogs.routes";
-
-const DOGS_FILTER: IFilter[] = [
-    {
-        name: 'Name',
-        key: 'name',
-        condition: '==',
-        value: ''
-    },
-    {
-        name: 'Age',
-        key: 'age',
-        condition: '==',
-        value: ''
-    }
-];
 
 interface IAdminDogs extends Pick<IDogState, 'dogs'> {
 }
@@ -76,22 +61,21 @@ function AdminDogs(props: IAdminDogs) {
         dispatch(GetDogs());
 
     function onChangePage(event: unknown, page: number) {
-        if (page === props.dogs.pagination.page) return;
+        if (!props.dogs.pagination || page === props.dogs.pagination.page) return;
         const pagination = {...props.dogs.pagination, page};
         dispatch(GetDogs(pagination));
     }
 
     function onChangeRowsPerPage(event: ChangeEvent<HTMLInputElement>) {
         const rowPerPage = parseInt(event.target.value);
-        if (rowPerPage === props.dogs.pagination.rowPerPage) return;
+        if (!props.dogs.pagination || rowPerPage === props.dogs.pagination.rowPerPage) return;
         const pagination = {...props.dogs.pagination, rowPerPage};
         dispatch(GetDogs(pagination));
     }
 
     function onSort(sort: ISort) {
-        const pagination = {...props.dogs.pagination, sort};
-        console.log('sort', sort, pagination);
-        dispatch(GetDogs(pagination));
+        console.log('on sort', sort);
+        dispatch(GetDogs(props.dogs.pagination, sort));
     }
 
     function handleDelete() {

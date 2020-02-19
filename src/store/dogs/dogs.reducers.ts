@@ -5,11 +5,6 @@ const InitState: IDogState = {
     dogs: {
         status: TStatus.Empty,
         data: [],
-        pagination: {
-            count: 0,
-            rowPerPage: 5,
-            page: 0,
-        }
     },
     dog: {
         status: TStatus.Empty,

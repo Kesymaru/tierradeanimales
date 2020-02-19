@@ -19,10 +19,10 @@ import {
 import Storage, {FileDefaults, IFile} from "../../constants/firebase/storage";
 import Database, {
     DataDefaults,
-    IFilter,
+    IFilter, IFilterFactory,
     IPagination,
     IPaginationFactory,
-    IResult
+    IResult, ISort
 } from "../../constants/firebase/database";
 import {ADMIN_DOGS_ROUTE} from "../../components/Dogs/Dogs.routes";
 import IAppState from "../app.types";
@@ -178,11 +178,11 @@ function _ErrorDogs(payload: Error): TDogsActions {
     return {type: ERROR_DOGS, payload};
 }
 
-export function GetDogs(pagination?: IPagination): Function {
+export function GetDogs(pagination?: IPagination, sort?: ISort, filter?: IFilter): Function {
     return async (dispatch: Dispatch) => {
         try {
             dispatch(_FetchDogs());
-            const results = await database.all(pagination);
+            const results = await database.all(pagination, sort, filter);
             dispatch(_LoadDogs(results));
         } catch (error) {
             console.error(error);
@@ -191,21 +191,18 @@ export function GetDogs(pagination?: IPagination): Function {
     }
 }
 
-export function GetDogsToFosterHomes(pagination?: IPagination): Function {
-    const filter: IFilter = {
-        name: 'status',
+export function GetDogsToFosterHomes(): Function {
+    const filter = IFilterFactory({
         key: 'status',
         condition: 'in',
         value: [IDogStatus.Rescued, IDogStatus.Hospitalized, IDogStatus.Adopted,]
-    };
-    pagination = pagination
-        ? {...pagination, filter}
-        : IPaginationFactory({filter});
+    });
 
     return async (dispatch: Dispatch) => {
         try {
             dispatch(_FetchDogs());
-            const results = await database.all(pagination);
+            const results = await database.all(undefined, undefined, filter);
+            console.log('dogs for homes', results);
             dispatch(_LoadDogs(results));
         } catch (error) {
             console.error(error);

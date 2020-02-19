@@ -1,6 +1,7 @@
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 import {v4 as uuid} from 'uuid';
+import {IDogStatus} from "../../store/dogs/dogs.types";
 
 // ------------------------------------
 // Types
@@ -49,19 +50,35 @@ export interface IFilter {
     value: any;
 }
 
+interface IFilterFactoryParams extends Omit<IFilter, 'name'> {
+    name?: string;
+}
+
+export function IFilterFactory(values: IFilterFactoryParams): IFilter {
+    return {
+        name: values.key || '',
+        condition: "==",
+        ...values,
+    }
+}
+
 export interface ISort {
     key: string;
     order: "desc" | "asc";
+}
+
+export function ISortFactory(values?: Partial<ISort>): ISort {
+    return {
+        key: 'createdAt',
+        order: 'desc',
+        ...values,
+    }
 }
 
 export interface IPagination {
     count: number;
     rowPerPage: number;
     page: number;
-
-    filter?: IFilter | IFilter[];
-    sort?: ISort | ISort[];
-
     first?: firebase.firestore.DocumentSnapshot | number;
     last?: firebase.firestore.DocumentSnapshot | number;
 }
@@ -88,7 +105,9 @@ export function IStatsFactory(values?: Partial<IStats>): IStats {
 
 export interface IResult<T> {
     data: T[];
-    pagination: IPagination;
+    pagination?: IPagination;
+    sort?: ISort | ISort[];
+    filter?: IFilter | IFilter[];
 }
 
 export interface IDataConfig<T extends IData, S extends IStats> {
@@ -122,12 +141,6 @@ class Database<T extends IData, S extends IStats> {
     public defaults: IDefaults[] = [
         {key: '_root', values: DataDefaults},
     ];
-    public pagination: IPagination = {
-        count: 0,
-        rowPerPage: 5,
-        page: 0,
-        sort: {key: 'createdAt', order: 'desc'}
-    };
     public statsPath: string = '_stats';
     public softDelete: boolean = false;
     public statsFactory: Function | null = null;
@@ -136,7 +149,6 @@ class Database<T extends IData, S extends IStats> {
     constructor(public readonly config: IDataConfig<T, S>) {
         this.path = this.config.path;
         if (this.config.defaults) this.defaults = this.config.defaults;
-        if (this.config.pagination) this.pagination = this.config.pagination;
         if (this.config.statsPath) this.statsPath = this.config.statsPath;
         if (typeof this.config.softDelete !== 'undefined')
             this.softDelete = this.config.softDelete;
@@ -299,54 +311,66 @@ class Database<T extends IData, S extends IStats> {
         await batch.commit();
     }
 
-    public async all(pagination?: IPagination): Promise<IResult<T>> {
-        pagination = {...this.pagination, ...pagination};
-        const snapshots = await this._query(pagination);
+    public async all(
+        pagination?: IPagination,
+        sort?: ISort | ISort[],
+        filter?: IFilter | IFilter[]): Promise<IResult<T>> {
+
+        const snapshots = await this._query(pagination, sort, filter);
+
         return {
             data: snapshots.docs.map(item => this._defaults(item.data() as T)),
-            pagination: await this._setPagination(pagination, snapshots)
+            pagination,
+            sort: sort ? sort : ISortFactory(),
+            filter,
         } as IResult<T>;
     }
 
-    private _query(pagination: IPagination): Promise<firebase.firestore.QuerySnapshot> {
-        let query = this.collection.limit(pagination.rowPerPage || this.pagination.rowPerPage);
-        debugger;
+    private _query(
+        pagination?: IPagination,
+        sort?: ISort | ISort[],
+        filter?: IFilter | IFilter[],
+        query?: firebase.firestore.Query): Promise<firebase.firestore.QuerySnapshot> {
+        query = this._sort(sort, query);
 
-        // sort
-        if (Array.isArray(pagination.sort))
-            pagination.sort.forEach(sort => query = query.orderBy(sort.key, sort.order));
-        else if (pagination.sort)
-            query = query.orderBy(pagination.sort.key, pagination.sort.order);
-
-        // filter
-        if (Array.isArray(pagination.filter)) {
-            pagination.filter.forEach(filter =>
-                query = query.where(filter.key, filter.condition, filter.value));
-        } else if (pagination.filter) {
-            let {key, condition, value} = pagination.filter;
-            query = query.where(key, condition, value)
+        if (pagination) {
+            query = (query || this.collection).limit(pagination.rowPerPage);
+            if (pagination.page >= 1) {
+                if (pagination.first) query = query.startAfter(pagination.first);
+                else if (pagination.last) query = query.endBefore(pagination.last);
+            }
         }
-
-        // pagination
-        if (pagination.page >= 1) {
-            if (this.pagination.first) query = query.startAfter(this.pagination.first);
-            else if (this.pagination.last) query = query.endBefore(this.pagination.last);
-        }
+        if (filter) query = this._filter(filter, query);
 
         return query.get();
     }
 
-    private async _setPagination(pagination: IPagination, snapshots: firebase.firestore.QuerySnapshot): Promise<IPagination> {
-        const stats = await this._getStats();
+    private _sort(
+        sort?: ISort | ISort[],
+        _query?: firebase.firestore.Query): firebase.firestore.Query {
+        let query = _query || this.collection;
+        sort = sort ? sort : ISortFactory();
 
-        return this.pagination = {
-            ...this.pagination,
-            ...pagination,
+        if (Array.isArray(sort))
+            sort.forEach(s => query = query.orderBy(s.key, s.order));
+        else if (sort)
+            query = query.orderBy(sort.key, sort.order);
 
-            count: stats.total as number,
-            first: snapshots.docs[0],
-            last: snapshots.docs[snapshots.docs.length - 1],
-        };
+        return query;
+    }
+
+    private _filter(
+        filter: IFilter | IFilter[],
+        _query?: firebase.firestore.Query): firebase.firestore.Query {
+        let query = _query || this.collection;
+
+        if (Array.isArray(filter))
+            filter.forEach(f =>
+                query = query.where(f.key, f.condition, f.value));
+        else if (filter)
+            query = query.where(filter.key, filter.condition, filter.value);
+
+        return query;
     }
 
     private _defaults(data: T | T[]): (T | T[]) {

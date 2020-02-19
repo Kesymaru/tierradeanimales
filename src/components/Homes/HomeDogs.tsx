@@ -3,11 +3,10 @@ import {connect, useDispatch} from "react-redux";
 
 import Grid from "@material-ui/core/Grid";
 import Select from '@material-ui/core/Select';
-import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import Input from '@material-ui/core/Input';
 
-import IDogState, {IDog, IDogStatus} from "../../store/dogs/dogs.types";
+import IDogState, {IDog} from "../../store/dogs/dogs.types";
 import IAppState, {TStatus} from "../../store/app.types";
 import {GetDogsToFosterHomes} from "../../store/dogs/dogs.actions";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -34,56 +33,52 @@ interface IHomeDogsProps extends Pick<IDogState, 'dogs'> {
 const HomeDogs: FunctionComponent<IHomeDogsProps> = (props) => {
     const dispatch = useDispatch();
     const [selected, setSelected] = useState<IDog[]>(props.selected);
-    const [dogs, setDogs] = useState<IDog[]>([]);
+    const [selectedIds, setSelectedIds] = useState<string[]>(props.selected.map(dog => dog.id));
+    const [dogs, setDogs] = useState<IDog[]>(props.dogs.data);
     const [disabled, setDisabled] = useState<boolean>(!!props.disabled);
 
     useEffect(() => {
+        setSelected(props.selected);
+        setSelectedIds(props.selected.map(dog => dog.id))
+        setDogs(props.dogs.data);
         setDisabled(!!props.disabled);
-    }, [props.dogs]);
+    }, [props.selected, props.disabled, props.dogs]);
 
     init();
+
     function init() {
         if (props.dogs.status === TStatus.Empty)
             dispatch(GetDogsToFosterHomes());
     }
 
     function handleChange(event: ChangeEvent<{ value: unknown }>) {
+        const ids = event.target.value as string[];
+        setSelectedIds(ids);
+
+        const _selected = ids.map(id => dogs.find(dog => dog.id === id)) as IDog[];
+        setSelected(_selected);
+        if (props.onChange) props.onChange(_selected);
     }
 
     return <Grid container spacing={2}>
         <Grid item xs={12}>
-            {/*<FormControl variant="outlined">
-                <InputLabel>City</InputLabel>
-                <Select
-                    value={selected}
-                    onChange={handleChange}
-                >
-                    {dogs.map(dog => (
-                        <MenuItem value={dog.id}>
-                            {dog.name}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>*/}
-
-            <FormControl>
-                <InputLabel>Dogs to home</InputLabel>
+            <FormControl variant="outlined">
                 <Select
                     multiple
-                    value={selected}
+                    value={selectedIds}
                     disabled={disabled}
                     onChange={handleChange}
                     input={<Input/>}
-                    renderValue={items => (
+                    renderValue={() => (
                         <div>
-                            {(items as IDog[]).map(dog => (
+                            {selected.map(dog => (
                                 <Chip key={dog.id} label={dog.name}/>
                             ))}
                         </div>
                     )}
                     MenuProps={MenuProps}
                 >
-                    {selected.map(dog => (
+                    {dogs.map(dog => (
                         <MenuItem key={dog.id} value={dog.id}>
                             {dog.name}
                         </MenuItem>
