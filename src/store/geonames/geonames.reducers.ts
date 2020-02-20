@@ -135,3 +135,5 @@ function GeonamesReducers(
             return state;
     }
 }
+
+export default GeonamesReducers;

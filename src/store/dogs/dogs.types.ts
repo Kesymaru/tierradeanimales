@@ -122,6 +122,9 @@ interface IErrorDogs {
     payload: Error;
 }
 
+// ------------------------------------
+// Dogs Actions
+// ------------------------------------
 export type TDogsActions =
     IFetchDog |
     ILoadDog |

@@ -21,7 +21,7 @@ export interface IGeonames {
 }
 
 export interface IGeonamesResult {
-    geonames: IGeonames[]
+    geonames: any[];
 }
 
 export default interface IGeonamesState {
@@ -48,7 +48,7 @@ interface IErrorCountry {
 export const LOAD_COUNTRY = 'LOAD_COUNTRY';
 interface ILoadCountry {
     type: typeof LOAD_COUNTRY;
-    payload: IGeonames;
+    payload: any;
 }
 
 // ------------------------------------
@@ -68,7 +68,7 @@ interface IErrorStates {
 export const LOAD_STATES = 'LOAD_STATES';
 interface ILoadStates {
     type: typeof LOAD_STATES;
-    payload: IGeonames[];
+    payload: any[];
 }
 
 // ------------------------------------
@@ -88,7 +88,7 @@ interface IErrorCounties {
 export const LOAD_COUNTIES = 'LOAD_COUNTIES';
 interface ILoadCounties {
     type: typeof LOAD_COUNTIES;
-    payload: IGeonames[];
+    payload: any[];
 }
 
 // ------------------------------------
@@ -108,7 +108,7 @@ interface IErrorCities {
 export const LOAD_CITIES = 'LOAD_CITIES';
 interface ILoadCities {
     type: typeof LOAD_CITIES;
-    payload: IGeonames;
+    payload: any[];
 }
 
 

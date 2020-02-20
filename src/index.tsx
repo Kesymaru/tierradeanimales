@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {Provider} from "react-redux";
 import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
-import fire from "./fire";
 
 import App from "./App";
 import './index.css';

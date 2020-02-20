@@ -1,57 +1,112 @@
 import React, {ChangeEvent, FunctionComponent, useEffect, useState} from "react";
+import {connect, useDispatch} from "react-redux";
 
 import Grid from "@material-ui/core/Grid";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 import FlagIcon from "@material-ui/icons/Flag";
 import RoomIcon from "@material-ui/icons/Room";
 
 import Countries, {ICountry} from "../constants/countries";
-import {IAddress, IAddressFactory} from "../constants/firebase/database";
+import IGeonamesState from "../store/geonames/geonames.types";
+import {IAddress} from "../constants/firebase/database";
+import IAppState, {TStatus} from "../store/app.types";
+import {GetCities, GetCounties, GetCountry, GetStates} from "../store/geonames/geonames.actions";
 
-interface IAddressProps {
+interface IAddressOwnProps {
     address: IAddress;
     disabled?: boolean;
     onChange?: (address: IAddress) => void;
 }
 
-const Address: FunctionComponent<IAddressProps> = (props) => {
-    const [data, setData] = useState<IAddress>(props.address);
+interface IAddressProps extends IAddressOwnProps, IGeonamesState {
+}
 
-    const [country, setCountry] = useState<ICountry | null>(getCountry());
-    // const [state, setState] = useState<string>('');
-    // const [county, setCounty] = useState<string>('');
-    // const [city, setCity] = useState<string>('');
-    const [address, setAddress] = useState<string>('');
+const Address: FunctionComponent<IAddressProps> = (props) => {
+    const dispatch = useDispatch();
+
+    const [data, setData] = useState<IAddress>(props.address);
     const [disabled, setDisabled] = useState<boolean>(!!props.disabled);
+    const [country, setCountry] = useState<ICountry | null>(getCountry());
+    const [state, setState] = useState<any | null>(null);
+    const [county, setCounty] = useState<any | null>(null);
+    const [city, setCity] = useState<any | null>(null);
 
     useEffect(() => {
-        setCountry(getCountry());
         setDisabled(!!props.disabled);
     }, [props]);
 
-    function getCountry(): ICountry | null {
-        return Countries.find(c => c.name === props.address.country) || null
+    init();
+
+    function init() {
+        console.log('init');
+
+        if (props.address.country && props.country.status === TStatus.Empty) {
+            const _country = getCountry();
+            if (_country) dispatch(GetCountry(_country.abbr))
+        }
+        if (props.address.country && props.country.status === TStatus.Loaded
+            && (props.country.data && props.address.country !== props.country.data.countryName)) {
+            const _country = getCountry();
+            if (_country) dispatch(GetCountry(_country.abbr))
+        }
+        if (props.country.status === TStatus.Loaded
+            && (props.states.status === TStatus.Empty)) {
+            dispatch(GetStates(props.country.data))
+        }
     }
 
-    function handleAutocompleChange(field: keyof IAddress, setter: Function) {
-        return (event: ChangeEvent<{}>, value: any | null) => {
-            console.log('change', field, value);
-            setter(value);
-            if (value) setData({...data, [`${field}`]: value});
-            ;
-        };
+    function getCountry(name: string = props.address.country): ICountry | null {
+        return Countries.find(c => c.name === name) || null;
+    }
+
+    function _setData(values: any) {
+        const _data = {...data, ...values};
+        setData(_data);
+        if (props.onChange) props.onChange(_data);
+    }
+
+    function handleCountryChange(event: ChangeEvent<{}>, value: any | null) {
+        console.log('select country', value);
+
+        setCountry(value);
+        if(country !== value) {
+            setState(null);
+            setCounty(null);
+            setCity(null);
+        }
+        if (value) _setData({country: value.name, state: '', county: '', city: ''});
+        if (value && value !== country) dispatch(GetCountry(value.abbr));
+    }
+
+    function handleStateChange(event: ChangeEvent<{}>, value: any | null) {
+        setState(value);
+        if(state !== value) {
+            setCounty(null);
+            setCity(null);
+        }
+        if (value) _setData({state: value.name, county: '', city: ''});
+        if (value && value !== state) dispatch(GetCounties(value));
+    }
+
+    function handleCountyChange(event: ChangeEvent<{}>, value: any | null) {
+        setCounty(value);
+        if(county !== value) setCity(null);
+        if (value) _setData({county: value.name, city: ''});
+        if (value && value !== county) dispatch(GetCities(value));
+    }
+
+    function handleCityChange(event: ChangeEvent<{}>, value: any | null) {
+        setCity(value);
+        if (value) _setData({city: value.name});
     }
 
     function handleAddressChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-        const value = event.target.value;
-        setAddress(value);
-        setData({...data, address: value});
+        const address = event.target.value;
+        const _data = {...data, address};
+        setData(_data);
+        if (props.onChange) props.onChange(_data);
     }
 
     return <Grid container spacing={2}>
@@ -60,7 +115,7 @@ const Address: FunctionComponent<IAddressProps> = (props) => {
                 style={{width: '100%'}}
                 value={country}
                 disabled={disabled}
-                onChange={handleAutocompleChange('country', setCountry)}
+                onChange={handleCountryChange}
                 options={Countries as ICountry[]}
                 autoHighlight
                 getOptionLabel={option => option.name}
@@ -96,13 +151,76 @@ const Address: FunctionComponent<IAddressProps> = (props) => {
             />
         </Grid>
         <Grid item xs={6} md={3}>
-            STATE
+            <Autocomplete
+                style={{width: '100%'}}
+                value={state}
+                disabled={disabled}
+                onChange={handleStateChange}
+                options={props.states.data}
+                autoHighlight
+                getOptionLabel={option => option.name}
+                renderOption={option => (
+                    <React.Fragment>
+                        {option.name}
+                    </React.Fragment>
+                )}
+                renderInput={params => (
+                    <TextField
+                        {...params}
+                        label="State"
+                        variant="outlined"
+                        fullWidth
+                    />
+                )}
+            />
         </Grid>
         <Grid item xs={6} md={3}>
-            COUNTY
+            <Autocomplete
+                style={{width: '100%'}}
+                value={county}
+                disabled={disabled}
+                onChange={handleCountyChange}
+                options={props.counties.data}
+                autoHighlight
+                getOptionLabel={option => option.name}
+                renderOption={option => (
+                    <React.Fragment>
+                        {option.name}
+                    </React.Fragment>
+                )}
+                renderInput={params => (
+                    <TextField
+                        {...params}
+                        label="County"
+                        variant="outlined"
+                        fullWidth
+                    />
+                )}
+            />
         </Grid>
         <Grid item xs={6} md={3}>
-            CITY
+            <Autocomplete
+                style={{width: '100%'}}
+                value={city}
+                disabled={disabled}
+                onChange={handleCityChange}
+                options={props.cities.data}
+                autoHighlight
+                getOptionLabel={option => option.name}
+                renderOption={option => (
+                    <React.Fragment>
+                        {option.name}
+                    </React.Fragment>
+                )}
+                renderInput={params => (
+                    <TextField
+                        {...params}
+                        label="City"
+                        variant="outlined"
+                        fullWidth
+                    />
+                )}
+            />
         </Grid>
         <Grid item xs={12}>
             <TextField
@@ -117,7 +235,7 @@ const Address: FunctionComponent<IAddressProps> = (props) => {
                         </InputAdornment>
                     ),
                 }}
-                value={address}
+                value={data.address}
                 disabled={disabled}
                 onChange={handleAddressChange}
             />
@@ -125,4 +243,9 @@ const Address: FunctionComponent<IAddressProps> = (props) => {
     </Grid>;
 };
 
-export default Address
+const mapStateToProps = (state: IAppState, ownProps: IAddressOwnProps): IAddressProps => ({
+    ...ownProps,
+    ...state.geonames,
+});
+
+export default connect(mapStateToProps)(Address);
