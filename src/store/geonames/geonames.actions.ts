@@ -4,18 +4,19 @@ import Geonames from 'geonames.js';
 import {
     ERROR_CITIES,
     ERROR_COUNTIES,
-    ERROR_COUNTRY,
+    ERROR_COUNTRIES,
     ERROR_STATES,
     FETCH_CITIES,
     FETCH_COUNTIES,
-    FETCH_COUNTRY,
+    FETCH_COUNTRIES,
     FETCH_STATES,
-    IGeonames,
+    IGeonamesChildren,
+    IGeonamesCountry,
     IGeonamesActions,
     IGeonamesResult,
     LOAD_CITIES,
     LOAD_COUNTIES,
-    LOAD_COUNTRY,
+    LOAD_COUNTRIES,
     LOAD_STATES
 } from "./geonames.types";
 
@@ -31,29 +32,31 @@ const geonames = new Geonames({
 // ------------------------------------
 // Country
 // ------------------------------------
-function FetchCountry(): IGeonamesActions {
-    return {type: FETCH_COUNTRY};
+function FetchCountries(): IGeonamesActions {
+    return {type: FETCH_COUNTRIES};
 }
 
-function ErrorCountry(payload: Error): IGeonamesActions {
-    return {type: ERROR_COUNTRY, payload};
+function ErrorCountries(payload: Error): IGeonamesActions {
+    return {type: ERROR_COUNTRIES, payload};
 }
 
-function LoadCountry(payload: any): IGeonamesActions {
-    return {type: LOAD_COUNTRY, payload};
+function LoadCountries(payload: IGeonamesCountry[]): IGeonamesActions {
+    return {type: LOAD_COUNTRIES, payload};
 }
 
-export function GetCountry(country: string = 'CR'): Function {
-    console.log('get country', country);
+async function RequestCountries(): Promise<IGeonamesCountry[]> {
+    const results = await geonames.countryInfo() as IGeonamesResult<IGeonamesCountry>;
+    return results.geonames;
+}
+
+export function GetCountries(): Function {
     return async (dispatch: Dispatch) => {
         try {
-            await dispatch(FetchCountry());
-            const countries = await geonames.countryInfo({country}) as IGeonamesResult;
-            if (countries.geonames.length) {
-                dispatch(LoadCountry(countries.geonames[0]));
-            }
+            await dispatch(FetchCountries());
+            const countries = await RequestCountries();
+            dispatch(LoadCountries(countries));
         } catch (error) {
-            dispatch(ErrorCountry(error));
+            dispatch(ErrorCountries(error));
         }
     }
 }
@@ -73,13 +76,18 @@ function LoadStates(payload: any[]): IGeonamesActions {
     return {type: LOAD_STATES, payload}
 }
 
+async function RequestStates(country: IGeonamesCountry): Promise<IGeonamesChildren[]> {
+    const states = await geonames.children({geonameId: country.geonameId}) as IGeonamesResult<IGeonamesChildren>;
+    return states.geonames;
+}
+
 export function GetStates(country: any): Function {
     console.log('GetStates', country);
     return async (dispatch: Dispatch) => {
         try {
             dispatch(FetchStates());
-            const states = await geonames.children({geonameId: country.geonameId}) as IGeonamesResult;
-            dispatch(LoadStates(states.geonames));
+            const states = await RequestStates(country);
+            dispatch(LoadStates(states));
         } catch (error) {
             dispatch(ErrorStates(error));
         }
@@ -105,7 +113,7 @@ export function GetCounties(state: any): Function {
     return async (dispatch: Dispatch) => {
         try {
             dispatch(FetchCounties());
-            const counties = await geonames.children({geonameId: state.geonameId}) as IGeonamesResult;
+            const counties = await geonames.children({geonameId: state.geonameId}) as IGeonamesResult<IGeonamesChildren>;
             dispatch(LoadCounties(counties.geonames));
         } catch (error) {
             dispatch(ErrorCounties(error));
@@ -132,7 +140,7 @@ export function GetCities(county: any): Function {
     return async (dispatch: Dispatch) => {
         try {
             dispatch(FetchCities());
-            const cities = await geonames.children({geonameId: county.geonameId}) as IGeonamesResult;
+            const cities = await geonames.children({geonameId: county.geonameId}) as IGeonamesResult<IGeonamesChildren>;
             dispatch(LoadCities(cities.geonames));
         } catch (error) {
             dispatch(ErrorCities(error));

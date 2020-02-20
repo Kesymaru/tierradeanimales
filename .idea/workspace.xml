@@ -4,11 +4,8 @@
     <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Address.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Address.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Homes/EditHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Homes/EditHome.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/constants/countries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/countries.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/app.store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/app.store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/app.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/app.types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/geonames/geonames.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/geonames/geonames.actions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/geonames/geonames.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/geonames/geonames.reducers.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/geonames/geonames.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/geonames/geonames.types.ts" afterDir="false" />
@@ -69,7 +66,7 @@
       <recent name="$PROJECT_DIR$/src/components/AppTable" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.npm build">
+  <component name="RunManager" selected="npm.npm start">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
       <method v="2" />
     </configuration>
@@ -126,14 +123,8 @@
       <workItem from="1576963346713" duration="35777000" />
       <workItem from="1577568811282" duration="99053000" />
       <workItem from="1579564004625" duration="40429000" />
-      <workItem from="1579733497168" duration="365821000" />
-    </task>
-    <task id="LOCAL-00062" summary="Updated the IAppStateItem on app.types.ts&#10;Updated the dogs.actions.ts, dogs.types.ts and dogs.reducers.ts">
-      <created>1581116709421</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1581116709421</updated>
+      <workItem from="1579733497168" duration="365923000" />
+      <workItem from="1582215133977" duration="3713000" />
     </task>
     <task id="LOCAL-00063" summary="Updated actions.ts to support database and storage configuration&#10;Updated user.actions.ts">
       <created>1581116750146</created>
@@ -471,7 +462,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582172414422</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="Updated the Address.tsx component to be connected to geonames store&#10;load the country, states, counties and cities&#10;&#10;Updated the geonames store, geonames.types.ts, geonames.reducers.ts and geonames.actions.ts&#10;&#10;Remove import for fire.ts on index.tsx, not used anymore">
+      <created>1582212197366</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1582212197366</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -491,7 +489,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="EditHome.tsx component to create and edit foster homes" />
     <MESSAGE value="HomeContacts.tsx component to manage, add, remove and edit foster homes contacts" />
     <MESSAGE value="Edit home component" />
     <MESSAGE value="Added the new homes state to the reducers and store&#10;updated app.store.ts, app.types.ts to include the homes store&#10;updated homes.actions.ts, homes.reducers.ts and homes.types.ts" />
@@ -516,7 +513,8 @@
     <MESSAGE value="added IAddress interface and factory in database.ts" />
     <MESSAGE value="Updated EditHome.tsx component&#10;Updated HomeContacts.tsx and HomeDogs.tsx components" />
     <MESSAGE value="Installed geonames.js package.json&#10;Added geonames.d.ts to work with typescript&#10;&#10;Created geonames store to load country, states, counties and cities datata from geonames, geonames.actions.ts, geonames.reducers.ts, geonames.types.ts" />
-    <option name="LAST_COMMIT_MESSAGE" value="Installed geonames.js package.json&#10;Added geonames.d.ts to work with typescript&#10;&#10;Created geonames store to load country, states, counties and cities datata from geonames, geonames.actions.ts, geonames.reducers.ts, geonames.types.ts" />
+    <MESSAGE value="Updated the Address.tsx component to be connected to geonames store&#10;load the country, states, counties and cities&#10;&#10;Updated the geonames store, geonames.types.ts, geonames.reducers.ts and geonames.actions.ts&#10;&#10;Remove import for fire.ts on index.tsx, not used anymore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated the Address.tsx component to be connected to geonames store&#10;load the country, states, counties and cities&#10;&#10;Updated the geonames store, geonames.types.ts, geonames.reducers.ts and geonames.actions.ts&#10;&#10;Remove import for fire.ts on index.tsx, not used anymore" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1360" y="-75" key="#Inspections" timestamp="1576817948911">
@@ -539,34 +537,34 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581901904900" />
-    <state x="-1505" y="-213" width="884" height="758" key="CommitChangelistDialog2" timestamp="1582172413932">
+    <state x="-1505" y="-213" width="884" height="758" key="CommitChangelistDialog2" timestamp="1582212196852">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582172413932" />
+    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582212196852" />
     <state x="209" y="0" width="884" height="758" key="CommitChangelistDialog2/0.0.1280.800@0.0.1280.800" timestamp="1581882363578" />
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog" timestamp="1581691858353">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581691858353" />
-    <state width="1920" height="247" key="GridCell.Tab.0.bottom" timestamp="1582178605682">
+    <state width="1920" height="247" key="GridCell.Tab.0.bottom" timestamp="1582218670473">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582178605682" />
+    <state width="1920" height="247" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582218670473" />
     <state width="1280" height="323" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1581467907317" />
-    <state width="1920" height="247" key="GridCell.Tab.0.center" timestamp="1582178605680">
+    <state width="1920" height="247" key="GridCell.Tab.0.center" timestamp="1582218670472">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582178605680" />
+    <state width="1920" height="247" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582218670472" />
     <state width="1280" height="323" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1581467907316" />
-    <state width="1920" height="247" key="GridCell.Tab.0.left" timestamp="1582178605674">
+    <state width="1920" height="247" key="GridCell.Tab.0.left" timestamp="1582218670472">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582178605674" />
+    <state width="1920" height="247" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582218670472" />
     <state width="1280" height="323" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1581467907316" />
-    <state width="1920" height="247" key="GridCell.Tab.0.right" timestamp="1582178605681">
+    <state width="1920" height="247" key="GridCell.Tab.0.right" timestamp="1582218670473">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582178605681" />
+    <state width="1920" height="247" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582218670473" />
     <state width="1280" height="323" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1581467907317" />
     <state x="-1209" y="-103" key="RollbackChangesDialog" timestamp="1581436539195">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -585,10 +583,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="VCS.FileHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902347" />
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1582172415491">
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1582212198797">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582172415491" />
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582212198797" />
     <state x="257" y="133" key="Vcs.Push.Dialog.v2/0.0.1280.800@0.0.1280.800" timestamp="1581467428542" />
     <state x="-1197" y="111" key="cloudConfig.SelfSettingsDialog" timestamp="1576817894168">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -624,10 +622,10 @@
     </state>
     <state x="-1462" y="-30" key="run.anything.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580872105579" />
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1582180501175">
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1582218890622">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582180501175" />
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582218890622" />
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1581467863285" />
   </component>
   <component name="XDebuggerManager">
@@ -636,37 +634,31 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/AppTable/AppTable.tsx</url>
           <line>68</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/constants/firebase/storage.ts</url>
           <line>58</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/Dogs/AdminDogs.tsx</url>
           <line>62</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/constants/firebase/database.ts</url>
           <line>47</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/routes/routes.hooks.ts</url>
           <line>4</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/Address.tsx</url>
           <line>37</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="45" />
         </line-breakpoint>
       </breakpoints>

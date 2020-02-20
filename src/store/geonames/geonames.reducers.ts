@@ -1,11 +1,12 @@
 import IGeonamesState, {IGeonamesActions} from "./geonames.types";
+
 import {TStatus} from "../app.types";
+import FlagCountries from "../../constants/countries";
 
 const InitState: IGeonamesState = {
-    country: {
+    countries: {
         status: TStatus.Empty,
-        data: null,
-        id: null,
+        data: [],
     },
     states: {
         status: TStatus.Empty,
@@ -27,29 +28,31 @@ function GeonamesReducers(
 ): IGeonamesState {
     switch (action.type) {
         // ------------------------------------
-        // Country
+        // Countries
         // ------------------------------------
-        case "FETCH_COUNTRY":
+        case "FETCH_COUNTRIES":
             return {
-                ...state, country: {
-                    ...InitState.country,
+                ...state, countries: {
+                    ...InitState.countries,
                     status: TStatus.Fetching,
                 }
             };
-        case "ERROR_COUNTRY":
+        case "ERROR_COUNTRIES":
             return {
-                ...state, country: {
-                    ...InitState.country,
+                ...state, countries: {
+                    ...InitState.countries,
                     status: TStatus.Error,
                     error: action.payload,
                 }
             };
-        case "LOAD_COUNTRY":
+        case "LOAD_COUNTRIES":
             return {
-                ...state, country: {
+                ...state, countries: {
                     status: TStatus.Loaded,
-                    data: action.payload,
-                    id: action.payload.geonameId,
+                    data: action.payload.map(country => {
+                        const flag = FlagCountries.find(f => f.name === country.countryName);
+                        return {...country, icon: flag ? flag.icon : undefined}
+                    }),
                 }
             };
 

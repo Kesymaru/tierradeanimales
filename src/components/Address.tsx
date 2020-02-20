@@ -8,11 +8,10 @@ import TextField from "@material-ui/core/TextField";
 import FlagIcon from "@material-ui/icons/Flag";
 import RoomIcon from "@material-ui/icons/Room";
 
-import Countries, {ICountry} from "../constants/countries";
-import IGeonamesState from "../store/geonames/geonames.types";
+import IGeonamesState, {IGeonamesChildren, IGeonamesCountry} from "../store/geonames/geonames.types";
 import {IAddress} from "../constants/firebase/database";
 import IAppState, {TStatus} from "../store/app.types";
-import {GetCities, GetCounties, GetCountry, GetStates} from "../store/geonames/geonames.actions";
+import {GetCities, GetCounties, GetCountries, GetStates} from "../store/geonames/geonames.actions";
 
 interface IAddressOwnProps {
     address: IAddress;
@@ -28,37 +27,30 @@ const Address: FunctionComponent<IAddressProps> = (props) => {
 
     const [data, setData] = useState<IAddress>(props.address);
     const [disabled, setDisabled] = useState<boolean>(!!props.disabled);
-    const [country, setCountry] = useState<ICountry | null>(getCountry());
-    const [state, setState] = useState<any | null>(null);
-    const [county, setCounty] = useState<any | null>(null);
-    const [city, setCity] = useState<any | null>(null);
+    const [country, setCountry] = useState<IGeonamesCountry | null>(getCountry());
+    const [state, setState] = useState<IGeonamesChildren | null>(null);
+    const [county, setCounty] = useState<IGeonamesChildren | null>(null);
+    const [city, setCity] = useState<IGeonamesChildren | null>(null);
 
     useEffect(() => {
+        setCountry(getCountry());
         setDisabled(!!props.disabled);
     }, [props]);
 
     init();
 
     function init() {
-        console.log('init');
-
-        if (props.address.country && props.country.status === TStatus.Empty) {
-            const _country = getCountry();
-            if (_country) dispatch(GetCountry(_country.abbr))
+        if (props.address.country && props.countries.status === TStatus.Empty) {
+            dispatch(GetCountries());
         }
-        if (props.address.country && props.country.status === TStatus.Loaded
-            && (props.country.data && props.address.country !== props.country.data.countryName)) {
+        if(props.address.country && props.states.status === TStatus.Empty) {
             const _country = getCountry();
-            if (_country) dispatch(GetCountry(_country.abbr))
-        }
-        if (props.country.status === TStatus.Loaded
-            && (props.states.status === TStatus.Empty)) {
-            dispatch(GetStates(props.country.data))
+            if(_country) dispatch(GetStates(_country));
         }
     }
 
-    function getCountry(name: string = props.address.country): ICountry | null {
-        return Countries.find(c => c.name === name) || null;
+    function getCountry(name: string = props.address.country): IGeonamesCountry | null {
+        return props.countries.data.find(country => country.countryName === name) || null;
     }
 
     function _setData(values: any) {
@@ -68,16 +60,14 @@ const Address: FunctionComponent<IAddressProps> = (props) => {
     }
 
     function handleCountryChange(event: ChangeEvent<{}>, value: any | null) {
-        console.log('select country', value);
-
         setCountry(value);
         if(country !== value) {
             setState(null);
             setCounty(null);
             setCity(null);
         }
-        if (value) _setData({country: value.name, state: '', county: '', city: ''});
-        if (value && value !== country) dispatch(GetCountry(value.abbr));
+        if (value) _setData({country: value.countryName, state: '', county: '', city: ''});
+        if (value && value !== country) dispatch(GetStates(value));
     }
 
     function handleStateChange(event: ChangeEvent<{}>, value: any | null) {
@@ -116,13 +106,15 @@ const Address: FunctionComponent<IAddressProps> = (props) => {
                 value={country}
                 disabled={disabled}
                 onChange={handleCountryChange}
-                options={Countries as ICountry[]}
+                options={props.countries.data}
                 autoHighlight
-                getOptionLabel={option => option.name}
+                getOptionLabel={option => option.countryName}
                 renderOption={option => (
                     <React.Fragment>
-                        <span>{option.icon}</span>
-                        {option.name}
+                        {option.icon
+                            ? <span>{option.icon}</span>
+                            : null}
+                        {option.countryName}
                     </React.Fragment>
                 )}
                 renderInput={params => {

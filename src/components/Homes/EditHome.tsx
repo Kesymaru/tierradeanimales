@@ -21,6 +21,7 @@ import {useIsNew} from "../../routes/routes.hooks";
 import HomeContacts from "./HomeContacts";
 import HomeDogs from "./HomeDogs";
 import Address from "../Address";
+import {ADMIN_HOMES_ROUTE} from "./Homes.routes";
 
 interface IEditHomeProps extends Pick<IHomeState, 'home'> {
 }
@@ -49,7 +50,7 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
     }
 
     function handleReset(event: FormEvent) {
-        if (isNew) return history.goBack();
+        if (isNew) return history.push(ADMIN_HOMES_ROUTE.getPath());
     }
 
     function handleChange(field: keyof IHome) {
