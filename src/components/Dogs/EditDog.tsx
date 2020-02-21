@@ -30,7 +30,6 @@ import IDogState, {IDog, IDogStatus, IDogFactory} from "../../store/dogs/dogs.ty
 import {AddDog, GetDog, UpdateDog} from "../../store/dogs/dogs.actions";
 import {ISex} from "../../constants/firebase/database";
 import DogImages from "./DogImages";
-import {useIsNew} from "../../routes/routes.hooks";
 
 const InitDog: IDog = {
     id: '',

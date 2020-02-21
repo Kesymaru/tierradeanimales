@@ -1,5 +1,5 @@
-import React, {ChangeEvent, FormEvent, FunctionComponent, MouseEvent, useState} from "react";
-import {useHistory, useParams} from "react-router-dom";
+import React, {ChangeEvent, FormEvent, FunctionComponent, useEffect, useState} from "react";
+import {useHistory} from "react-router-dom";
 import {connect, useDispatch} from "react-redux";
 import {ValidationError, ValidationResult} from "@hapi/joi";
 
@@ -16,8 +16,8 @@ import SendIcon from "@material-ui/icons/Send";
 
 import IHomeState, {IHome, IHomeFactory, IHomeValidator} from "../../store/homes/homes.types";
 import IAppState, {TStatus} from "../../store/app.types";
-import {SaveHome} from "../../store/homes/homes.actions";
-import {useIsNew} from "../../routes/routes.hooks";
+import {GetHome, SaveHome} from "../../store/homes/homes.actions";
+import {useId} from "../../routes/routes.hooks";
 import HomeContacts from "./HomeContacts";
 import HomeDogs from "./HomeDogs";
 import Address from "../Address";
@@ -30,29 +30,47 @@ interface IEditHomeProps extends Pick<IHomeState, 'home'> {
 const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const params = useParams();
-    const isNew = useIsNew(params);
-    const [home, _setHome] = useState<IHome>(IHomeFactory());
+    const {isNew, id} = useId();
+    const [home, _setHome] = useState<IHome>(getHome());
     const [loading, setLoading] = useState<boolean>(getLoading());
     const [errors, setErrors] = useState<ValidationError | null>(null);
 
-    function setHome(value: IHome) {
-        _setHome(value);
-        validate(value);
+    useEffect(() => {
+        setHome(getHome());
+        setLoading(getLoading());
+    }, [props.home]);
+
+    init();
+
+    function init() {
+        if (!isNew && id
+            && (props.home.status === TStatus.Empty
+                || props.home.status === TStatus.Loaded && props.home.id !== id))
+            dispatch(GetHome(id));
     }
-    function validate(value: IHome = home): boolean {
-        const results = IHomeValidator(value) as ValidationResult;
-        setErrors(results.error || null);
-        return !results.error;
+
+    function getHome(): IHome {
+        return props.home.data || IHomeFactory();
     }
 
     function getLoading(): boolean {
         return props.home.status === TStatus.Fetching;
     }
 
+    function setHome(value: IHome) {
+        _setHome(value);
+        validate(value);
+    }
+
+    function validate(value: IHome = home): boolean {
+        const results = IHomeValidator(value) as ValidationResult;
+        setErrors(results.error || null);
+        return !results.error;
+    }
+
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
-        if(!validate()) return;
+        if (!validate()) return;
         console.log('save ->', home);
         dispatch(SaveHome(home));
     }

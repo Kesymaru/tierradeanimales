@@ -1,32 +1,30 @@
 import React, {ChangeEvent, FunctionComponent, useEffect, useState} from "react";
 import {connect, useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
+import {useTheme} from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import AppTable from "../AppTable/AppTable";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Fade from "@material-ui/core/Fade";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
-import {ADMIN_DOG_EDIT_ROUTE} from "../Dogs/Dogs.routes";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import AddIcon from "@material-ui/icons/Add";
-import AlertDialog from "../AlertDialog";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import {useHistory} from "react-router-dom";
-import {useTheme} from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+import AddIcon from "@material-ui/icons/Add";
+import AlertDialog from "../AlertDialog";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
+import AppTable from "../AppTable/AppTable";
 import IHomeState, {IHome} from "../../store/homes/homes.types";
 import {ISort} from "../../constants/firebase/database";
-import {GetDogs} from "../../store/dogs/dogs.actions";
 import {ADMIN_HOME_EDIT_ROUTE} from "./Homes.routes";
 import IAppState, {TStatus} from "../../store/app.types";
 import {GetHomes} from "../../store/homes/homes.actions";
@@ -78,9 +76,8 @@ const Homes: FunctionComponent<IHomeProps> = (props) => {
         console.log('onChangeRowsPerPage', rowPerPage);
     }
 
-    function handleDelete() {
-        // dispatch(DeleteDogs(selected))
-        setOpenDelete(true);
+    function handleDelete(){
+        console.log('delete homes', selected);
     }
 
     return <Paper>
@@ -104,7 +101,7 @@ const Homes: FunctionComponent<IHomeProps> = (props) => {
                     </Typography>}
 
                 <Fade in={selected.length === 1}>
-                    <Tooltip title="Edit Dog">
+                    <Tooltip title="Edit Home">
                         <IconButton
                             onClick={() => history.push(ADMIN_HOME_EDIT_ROUTE.getPath(homes.filter(i => i._selected)[0]))}
                         >
@@ -117,7 +114,7 @@ const Homes: FunctionComponent<IHomeProps> = (props) => {
                         title={`Delete Home${selected.length > 1 ? 's' : ''}`}
                     >
                         <IconButton
-                            onClick={handleDelete}>
+                            onClick={() => setOpenDelete(true)}>
                             <DeleteIcon/>
                         </IconButton>
                     </Tooltip>
@@ -125,7 +122,7 @@ const Homes: FunctionComponent<IHomeProps> = (props) => {
                 <Fade in={true}>
                     <Tooltip title="Add Home">
                         <IconButton
-                            onClick={() => history.push(ADMIN_DOG_EDIT_ROUTE.getPath())}
+                            onClick={() => history.push(ADMIN_HOME_EDIT_ROUTE.getPath())}
                         >
                             <AddIcon/>
                         </IconButton>
@@ -148,7 +145,10 @@ const Homes: FunctionComponent<IHomeProps> = (props) => {
             okColor="secondary"
             okIcon={<DeleteIcon/>}
             cancelColor="primary"
-            onClose={() => setOpenDelete(false)}
+            onClose={reason => {
+                if(reason) handleDelete();
+                setOpenDelete(false)
+            }}
         >
             {selected.length > 1
                 ? <>
