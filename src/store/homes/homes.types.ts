@@ -1,5 +1,5 @@
 import * as firebase from "firebase";
-import Joi from "@hapi/joi";
+import Joi, {AnySchema} from "@hapi/joi";
 
 import {IAppStateItem, IAppStateItems} from "../app.types";
 import {
@@ -37,13 +37,16 @@ export function IHomeContactFactory(
 
 export function IHomeContactValidator(value: IHomeContact | IHomeContact[] | boolean) {
     const schema = Joi.object({
-        name: Joi.string().min(3),
-        phone: Joi.string().alphanum().min(8),
-        email: Joi.string().email({tlds: {allow: false}}),
+        name: Joi.string().min(3).label('Contact Name'),
+        phone: Joi.string().alphanum().min(8).label('Contact Phone'),
+        email: Joi.string().email({tlds: {allow: false}}).label('Contact Email'),
     });
 
     if (Array.isArray(value))
-        return Validator(Joi.array().items(schema).has(schema), value);
+        return Validator(Joi.array()
+            .items(schema)
+            .has(schema)
+            .message("Must Include at least one contact."), value);
     return Validator(schema, value);
 }
 
@@ -65,18 +68,18 @@ export function IHomeFactory(value?: Partial<IHome>, _new: boolean = true): IHom
         active: true,
         address: IAddressFactory(),
         contacts: [IHomeContactFactory()],
-
         ...IDataFactory({_new}),
         ...value,
     }
 }
 
 export function IHomeValidator(value: IHome | boolean) {
+    const addressSchema = IAddressValidator(true) as AnySchema;
     return Validator(Joi.object({
-        name: Joi.string().min(3).required(),
+        name: Joi.string().min(3).required().label('Name'),
         active: Joi.boolean().optional(),
-        address: IAddressValidator(true),
-        contacts: Joi.array().has(IHomeContactValidator(true)),
+        address: addressSchema.label('Address'),
+        contacts: Joi.array().has(IHomeContactValidator(true)).label('Contacts'),
     }), value);
 }
 

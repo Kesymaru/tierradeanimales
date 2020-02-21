@@ -1,14 +1,48 @@
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 import {v4 as uuid} from 'uuid';
-import Joi, {AnySchema, ArraySchema, ObjectSchema, ValidationOptions, ValidationResult} from "@hapi/joi";
+import Joi, {
+    AnySchema,
+    ValidationError,
+    ValidationErrorItem,
+    ValidationOptions,
+    ValidationResult
+} from "@hapi/joi";
+
+// ------------------------------------
+// Validator
+// ------------------------------------
+const ValidatorOptions: ValidationOptions = {abortEarly: false, stripUnknown: true};
 
 export function Validator(
     schema: AnySchema,
     value: any,
-    options: ValidationOptions = {abortEarly: false, stripUnknown: true}): ValidationResult | AnySchema {
+    options: ValidationOptions = ValidatorOptions): ValidationResult | AnySchema {
     if (typeof value === 'boolean') return schema as AnySchema;
+    options = {...ValidatorOptions, ...options};
     return schema.validate(value, options) as ValidationResult;
+}
+
+export function HasError(
+    paths: Array<string | number>,
+    error: ValidationError | null): boolean {
+    if (!error) return false;
+
+    return !!GetError(paths, error);
+}
+
+export function GetError(
+    paths: Array<string | number>,
+    error: ValidationError | null): string {
+    if (!error) return '';
+
+    const found = error.details.find((detail: ValidationErrorItem) =>
+        detail.path.length === paths.length
+            ? detail.path.every((path, i) =>
+            path === paths[i] as unknown)
+            : false
+    );
+    return found ? found.message : '';
 }
 
 // ------------------------------------
@@ -61,11 +95,11 @@ export function IAddressFactory(value?: Partial<IAddress>): IAddress {
 
 export function IAddressValidator(value: IAddress | boolean) {
     return Validator(Joi.object({
-        country: Joi.string().min(3).required(),
-        state: Joi.string().min(3).required(),
-        county: Joi.string().min(3).required(),
-        city: Joi.string().min(3).required(),
-        address: Joi.string().min(3).required(),
+        country: Joi.string().min(3).required().label('Country'),
+        state: Joi.string().min(3).required().label('State'),
+        county: Joi.string().min(3).required().label('County'),
+        city: Joi.string().min(3).required().label('City'),
+        address: Joi.string().min(3).required().label('Address'),
     }), value);
 }
 
