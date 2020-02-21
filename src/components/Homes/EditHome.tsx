@@ -22,6 +22,7 @@ import HomeContacts from "./HomeContacts";
 import HomeDogs from "./HomeDogs";
 import Address from "../Address";
 import {ADMIN_HOMES_ROUTE} from "./Homes.routes";
+import {GetError, HasError} from "../../constants/firebase/database";
 
 interface IEditHomeProps extends Pick<IHomeState, 'home'> {
 }
@@ -31,16 +32,18 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
     const history = useHistory();
     const params = useParams();
     const isNew = useIsNew(params);
-    const [home, setHome] = useState<IHome>(IHomeFactory());
+    const [home, _setHome] = useState<IHome>(IHomeFactory());
     const [loading, setLoading] = useState<boolean>(getLoading());
-    const [errors, setErrors] = useState<ValidationError|undefined>(undefined);
+    const [errors, setErrors] = useState<ValidationError | null>(null);
 
+    function setHome(value: IHome) {
+        _setHome(value);
+        validate(value);
+    }
     function validate(value: IHome = home): boolean {
         const results = IHomeValidator(value) as ValidationResult;
-
-        console.log('validation ->', results);
-        setErrors(results.error);
-        return !!results.error || false
+        setErrors(results.error || null);
+        return !results.error;
     }
 
     function getLoading(): boolean {
@@ -50,9 +53,8 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
         if(!validate()) return;
-
-        console.log('save ->', home)
-        // dispatch(SaveHome(home));
+        console.log('save ->', home);
+        dispatch(SaveHome(home));
     }
 
     function handleReset(event: FormEvent) {
@@ -72,6 +74,8 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
                     <TextField
                         label="Name"
                         variant="outlined"
+                        error={HasError(['name'], errors)}
+                        helperText={GetError(['name'], errors)}
                         fullWidth
                         InputProps={{
                             startAdornment: (
@@ -89,6 +93,7 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
                     <Address
                         address={home.address}
                         disabled={loading}
+                        errors={errors}
                         onChange={address => setHome({...home, address})}
                     />
                 </Grid>
@@ -104,6 +109,7 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
                     <HomeContacts
                         contacts={(home.contacts || [])}
                         disabled={loading}
+                        errors={errors}
                         onChange={contacts => setHome({...home, contacts})}
                     />
                 </Grid>

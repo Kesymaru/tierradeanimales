@@ -16,25 +16,33 @@ import ContactPhoneIcon from "@material-ui/icons/ContactPhone";
 import ContactMailIcon from "@material-ui/icons/ContactMail";
 
 import {IHomeContact, IHomeContactFactory, IHomeContactValidator} from "../../store/homes/homes.types";
-import {Validator} from "../../constants/firebase/database";
+import {HasError, GetError} from "../../constants/firebase/database";
 
 interface IHomeContactsProps {
     contacts: IHomeContact[];
     disabled?: boolean;
+    errors?: ValidationError | null;
     onChange?: (contacts: IHomeContact[]) => void;
 }
 
 const HomeContacts: FunctionComponent<IHomeContactsProps> = (props) => {
     const [contacts, _setContacts] = useState<IHomeContact[]>(props.contacts);
-    const [errors, setErrors] = useState<ValidationError|undefined>(undefined);
+    const [errors, setErrors] = useState<ValidationError | null>(null);
 
-    useEffect(() => _setContacts(props.contacts), [props.contacts]);
+    useEffect(() => {
+        _setContacts(props.contacts);
+        if(props.errors) validate(props.contacts);
+    }, [props]);
+
+    function validate(value: IHomeContact[]): boolean {
+        const results = IHomeContactValidator(value) as ValidationResult;
+        setErrors(results.error || null);
+        return !results.error;
+    }
 
     function setContacts(value: IHomeContact[]) {
         _setContacts(value);
-        const results = IHomeContactValidator(value) as ValidationResult;
-        console.log('results', results);
-        // setErrors(results.error);
+        validate(value);
     }
 
     function handleAdd(event: MouseEvent<HTMLButtonElement>) {
@@ -63,7 +71,6 @@ const HomeContacts: FunctionComponent<IHomeContactsProps> = (props) => {
     }
 
     return <>
-        <pre>ERRORS: {JSON.stringify(errors)}</pre>
         {contacts.map((contact, index) => (
             <Zoom in={!contact._deleted} unmountOnExit={true} key={contact.id}>
                 <Grid container spacing={2}>
@@ -88,6 +95,8 @@ const HomeContacts: FunctionComponent<IHomeContactsProps> = (props) => {
                                 <TextField
                                     label="Contact Name"
                                     variant="outlined"
+                                    error={HasError([index, 'name'], errors)}
+                                    helperText={GetError([index, 'name'], errors)}
                                     fullWidth
                                     InputProps={{
                                         startAdornment: (
@@ -104,6 +113,8 @@ const HomeContacts: FunctionComponent<IHomeContactsProps> = (props) => {
                                 <TextField
                                     label="Contact Phone"
                                     variant="outlined"
+                                    error={HasError([index, 'phone'], errors)}
+                                    helperText={GetError([index, 'phone'], errors)}
                                     fullWidth
                                     InputProps={{
                                         startAdornment: (
@@ -120,6 +131,8 @@ const HomeContacts: FunctionComponent<IHomeContactsProps> = (props) => {
                                 <TextField
                                     label="Contact Email"
                                     variant="outlined"
+                                    error={HasError([index, 'email'], errors)}
+                                    helperText={GetError([index, 'email'], errors)}
                                     fullWidth
                                     InputProps={{
                                         startAdornment: (
@@ -134,7 +147,7 @@ const HomeContacts: FunctionComponent<IHomeContactsProps> = (props) => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    {index < contacts.length-1
+                    {index < contacts.length - 1
                         ? <Grid item xs={12}><Divider/></Grid>
                         : null}
                 </Grid>
