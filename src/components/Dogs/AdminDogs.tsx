@@ -3,6 +3,7 @@ import {connect, useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {useTheme} from "@material-ui/core/styles";
+
 import Fade from "@material-ui/core/Fade";
 import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -39,26 +40,30 @@ function AdminDogs(props: IAdminDogs) {
     const theme = useTheme();
     const isSm = useMediaQuery(theme.breakpoints.down('sm'));
     const [dogs, _setDogs] = useState<IDog[]>(props.dogs.data);
-    const [selected, seSelected] = useState<IDog[]>([]);
-    const [loading, setLoading] = useState<boolean>(_getLoading());
+    const [selected, setSelected] = useState<IDog[]>([]);
+    const [loading, setLoading] = useState<boolean>(getLoading());
     const [openDelete, setOpenDelete] = useState<boolean>(false);
 
     useEffect(() => {
         setDogs(props.dogs.data);
-        setLoading(_getLoading());
+        setLoading(getLoading());
     }, [props.dogs]);
 
-    function _getLoading(): boolean {
+    init();
+
+    function init() {
+        if (props.dogs.status === TStatus.Empty)
+            dispatch(GetDogs());
+    }
+
+    function getLoading(): boolean {
         return props.dogs.status === TStatus.Fetching
     }
 
-    function setDogs(_dogs: IDog[]) {
-        seSelected(_dogs.filter(dog => dog._selected));
-        _setDogs(_dogs);
+    function setDogs(value: IDog[]) {
+        setSelected(value.filter(dog => dog._selected));
+        _setDogs(value);
     }
-
-    if (props.dogs.status === TStatus.Empty)
-        dispatch(GetDogs());
 
     function onChangePage(event: unknown, page: number) {
         if (!props.dogs.pagination || page === props.dogs.pagination.page) return;
