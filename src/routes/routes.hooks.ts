@@ -1,6 +1,6 @@
 import {generatePath, matchPath} from "react-router";
 import * as H from 'history';
-import {useLocation} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 
 import IAppRoute, {IAppRouteDefaults, IAppRouteFactoryParams, IParam} from "./routes.tyoes";
 import ROUTES from "./index";
@@ -39,9 +39,12 @@ export function findRoute(location: H.Location | string): IAppRoute | undefined 
 // Custom Hooks
 // ------------------------------------
 
-export function useIsNew(params: any, field: string = 'id'): boolean {
-    const value = params[field];
-    return value && value.toLowerCase() === 'new';
+export function useId(field: string = 'id'): { isNew: boolean, id: string | undefined } {
+    const params = useParams() as any;
+    const id = params[field];
+    const isNew = id && id.toLowerCase() === 'new';
+
+    return {isNew, id}
 }
 
 /**
@@ -69,4 +72,5 @@ function useRoutes(): IAppRoute[] {
     }
     return routes.reverse();
 }
+
 export default useRoutes;
