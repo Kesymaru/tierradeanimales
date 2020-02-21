@@ -108,7 +108,7 @@ function _DeleteDogs(payload: IHome[]): IHomeActions {
     return {type: DELETE_HOMES, payload};
 }
 
-export function GetDogs(pagination?: IPagination): Function {
+export function GetHomes(pagination?: IPagination): Function {
     return async (dispatch: Dispatch) => {
         try {
             dispatch(FetchHomes());
@@ -120,14 +120,3 @@ export function GetDogs(pagination?: IPagination): Function {
     }
 }
 
-export function DeleteDogs(homes: IHome[]): Function {
-    return async (dispatch: Dispatch) => {
-        try {
-            dispatch(FetchHomes());
-            await database.delete(homes);
-            dispatch(_DeleteDogs(homes));
-        } catch (error) {
-            dispatch(ErrorHomes(error));
-        }
-    }
-}
