@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
+    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="Updated geonames store to load countries and map the country flag icon&#10;Update Address.tsx component to use the new countries store data">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Address.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Address.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dogs/EditDog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/EditDog.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Homes/EditHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Homes/EditHome.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/countries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/countries.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/geonames/geonames.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/geonames/geonames.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/geonames/geonames.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/geonames/geonames.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/geonames/geonames.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/geonames/geonames.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Homes/HomeContacts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Homes/HomeContacts.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/firebase/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase/database.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/firebase/storage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase/storage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/homes/homes.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/homes/homes.types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +69,7 @@
       <recent name="$PROJECT_DIR$/src/components/AppTable" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.npm start">
+  <component name="RunManager" selected="npm.npm build">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
       <method v="2" />
     </configuration>
@@ -124,14 +127,7 @@
       <workItem from="1577568811282" duration="99053000" />
       <workItem from="1579564004625" duration="40429000" />
       <workItem from="1579733497168" duration="365923000" />
-      <workItem from="1582215133977" duration="3713000" />
-    </task>
-    <task id="LOCAL-00063" summary="Updated actions.ts to support database and storage configuration&#10;Updated user.actions.ts">
-      <created>1581116750146</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1581116750146</updated>
+      <workItem from="1582215133977" duration="11444000" />
     </task>
     <task id="LOCAL-00064" summary="Removed realTimeDatabase.ts not used">
       <created>1581116850884</created>
@@ -469,7 +465,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582212197366</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="Updated geonames store to load countries and map the country flag icon&#10;Update Address.tsx component to use the new countries store data">
+      <created>1582222353067</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1582222353067</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -489,7 +492,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="HomeContacts.tsx component to manage, add, remove and edit foster homes contacts" />
     <MESSAGE value="Edit home component" />
     <MESSAGE value="Added the new homes state to the reducers and store&#10;updated app.store.ts, app.types.ts to include the homes store&#10;updated homes.actions.ts, homes.reducers.ts and homes.types.ts" />
     <MESSAGE value="Changed the app title" />
@@ -514,7 +516,8 @@
     <MESSAGE value="Updated EditHome.tsx component&#10;Updated HomeContacts.tsx and HomeDogs.tsx components" />
     <MESSAGE value="Installed geonames.js package.json&#10;Added geonames.d.ts to work with typescript&#10;&#10;Created geonames store to load country, states, counties and cities datata from geonames, geonames.actions.ts, geonames.reducers.ts, geonames.types.ts" />
     <MESSAGE value="Updated the Address.tsx component to be connected to geonames store&#10;load the country, states, counties and cities&#10;&#10;Updated the geonames store, geonames.types.ts, geonames.reducers.ts and geonames.actions.ts&#10;&#10;Remove import for fire.ts on index.tsx, not used anymore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated the Address.tsx component to be connected to geonames store&#10;load the country, states, counties and cities&#10;&#10;Updated the geonames store, geonames.types.ts, geonames.reducers.ts and geonames.actions.ts&#10;&#10;Remove import for fire.ts on index.tsx, not used anymore" />
+    <MESSAGE value="Updated geonames store to load countries and map the country flag icon&#10;Update Address.tsx component to use the new countries store data" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated geonames store to load countries and map the country flag icon&#10;Update Address.tsx component to use the new countries store data" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1360" y="-75" key="#Inspections" timestamp="1576817948911">
@@ -537,34 +540,34 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581901904900" />
-    <state x="-1505" y="-213" width="884" height="758" key="CommitChangelistDialog2" timestamp="1582212196852">
+    <state x="-1505" y="-213" width="884" height="758" key="CommitChangelistDialog2" timestamp="1582229013868">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582212196852" />
+    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582229013868" />
     <state x="209" y="0" width="884" height="758" key="CommitChangelistDialog2/0.0.1280.800@0.0.1280.800" timestamp="1581882363578" />
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog" timestamp="1581691858353">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581691858353" />
-    <state width="1920" height="247" key="GridCell.Tab.0.bottom" timestamp="1582218670473">
+    <state width="1920" height="247" key="GridCell.Tab.0.bottom" timestamp="1582242602914">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582218670473" />
+    <state width="1920" height="247" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582242602914" />
     <state width="1280" height="323" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1581467907317" />
-    <state width="1920" height="247" key="GridCell.Tab.0.center" timestamp="1582218670472">
+    <state width="1920" height="247" key="GridCell.Tab.0.center" timestamp="1582242602914">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582218670472" />
+    <state width="1920" height="247" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582242602914" />
     <state width="1280" height="323" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1581467907316" />
-    <state width="1920" height="247" key="GridCell.Tab.0.left" timestamp="1582218670472">
+    <state width="1920" height="247" key="GridCell.Tab.0.left" timestamp="1582242602913">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582218670472" />
+    <state width="1920" height="247" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582242602913" />
     <state width="1280" height="323" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1581467907316" />
-    <state width="1920" height="247" key="GridCell.Tab.0.right" timestamp="1582218670473">
+    <state width="1920" height="247" key="GridCell.Tab.0.right" timestamp="1582242602914">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582218670473" />
+    <state width="1920" height="247" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582242602914" />
     <state width="1280" height="323" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1581467907317" />
     <state x="-1209" y="-103" key="RollbackChangesDialog" timestamp="1581436539195">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -583,10 +586,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="VCS.FileHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902347" />
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1582212198797">
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1582222354165">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582212198797" />
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582222354165" />
     <state x="257" y="133" key="Vcs.Push.Dialog.v2/0.0.1280.800@0.0.1280.800" timestamp="1581467428542" />
     <state x="-1197" y="111" key="cloudConfig.SelfSettingsDialog" timestamp="1576817894168">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -600,19 +603,19 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902348" />
-    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1582172021681">
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1582237128937">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582172021681" />
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582237128937" />
     <state x="354" y="27" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800@0.0.1280.800" timestamp="1581484300487" />
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576727526871">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.800@0.0.1280.800" timestamp="1576727526871" />
-    <state x="-1299" y="6" width="828" height="582" key="find.popup" timestamp="1582072816965">
+    <state x="-1299" y="6" width="828" height="582" key="find.popup" timestamp="1582243106280">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1299" y="6" width="828" height="582" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582072816965" />
+    <state x="-1299" y="6" width="828" height="582" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582243106280" />
     <state width="600" height="440" key="javadoc.popup" timestamp="1580145157568">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -622,10 +625,10 @@
     </state>
     <state x="-1462" y="-30" key="run.anything.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580872105579" />
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1582218890622">
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1582237310956">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582218890622" />
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582237310956" />
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1581467863285" />
   </component>
   <component name="XDebuggerManager">
@@ -638,7 +641,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/constants/firebase/storage.ts</url>
-          <line>58</line>
+          <line>74</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -648,7 +651,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/constants/firebase/database.ts</url>
-          <line>47</line>
+          <line>75</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

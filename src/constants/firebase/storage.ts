@@ -5,16 +5,32 @@ import fire from "../../fire";
 import {v4 as uuid} from 'uuid';
 
 export interface IFileDefaults {
-    _file?: File|null;
+    _file?: File | null;
     _selected?: boolean;
-    _new?: boolean;
     _deleted?: boolean;
+    _new?: boolean;
 }
 
+// ------------------------------------
+// IFile
+// ------------------------------------
 export interface IFile extends IFileDefaults {
     id: string;
     name: string;
     src: string;
+}
+
+export function IFileFactory(value?: Partial<IFile>, _new: boolean = true): IFile {
+    return {
+        id: uuid(),
+        name: '',
+        src: '',
+        _file: null,
+        _selected: false,
+        _deleted: false,
+        _new,
+        ...value,
+    }
 }
 
 export interface IStorageConfig {
@@ -38,7 +54,7 @@ class Storage {
 
     constructor(public readonly config: IStorageConfig) {
         this.pathName = this.config.path
-        if(this.config.defaults) this.defaults = this.config.defaults;
+        if (this.config.defaults) this.defaults = this.config.defaults;
 
         this.storage = fire.storage();
         this.path = this.storage.ref(this.pathName);

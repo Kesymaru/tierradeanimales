@@ -1,6 +1,7 @@
 import React, {ChangeEvent, FormEvent, FunctionComponent, MouseEvent, useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import {connect, useDispatch} from "react-redux";
+import {ValidationError, ValidationResult} from "@hapi/joi";
 
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -8,13 +9,12 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
-import Typography from "@material-ui/core/Typography";
 
 import HomeIcon from '@material-ui/icons/Home';
 import CloseIcon from '@material-ui/icons/Close';
 import SendIcon from "@material-ui/icons/Send";
 
-import IHomeState, {IHome, IHomeFactory} from "../../store/homes/homes.types";
+import IHomeState, {IHome, IHomeFactory, IHomeValidator} from "../../store/homes/homes.types";
 import IAppState, {TStatus} from "../../store/app.types";
 import {SaveHome} from "../../store/homes/homes.actions";
 import {useIsNew} from "../../routes/routes.hooks";
@@ -33,10 +33,14 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
     const isNew = useIsNew(params);
     const [home, setHome] = useState<IHome>(IHomeFactory());
     const [loading, setLoading] = useState<boolean>(getLoading());
+    const [errors, setErrors] = useState<ValidationError|undefined>(undefined);
 
-    init();
+    function validate(value: IHome = home): boolean {
+        const results = IHomeValidator(value) as ValidationResult;
 
-    function init() {
+        console.log('validation ->', results);
+        setErrors(results.error);
+        return !!results.error || false
     }
 
     function getLoading(): boolean {
@@ -45,8 +49,10 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
-        console.log('save', home)
-        dispatch(SaveHome(home));
+        if(!validate()) return;
+
+        console.log('save ->', home)
+        // dispatch(SaveHome(home));
     }
 
     function handleReset(event: FormEvent) {
@@ -59,7 +65,7 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
         });
     }
 
-    return <Container>
+    return (<Container>
         <form noValidate autoComplete="off" onSubmit={handleSubmit} onReset={handleReset}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -130,7 +136,7 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
                 </Grid>
             </Grid>
         </form>
-    </Container>
+    </Container>);
 };
 
 const mapStateToProps = (state: IAppState): IEditHomeProps => ({

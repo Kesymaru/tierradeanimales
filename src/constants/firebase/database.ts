@@ -1,11 +1,21 @@
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 import {v4 as uuid} from 'uuid';
-import {IDogStatus} from "../../store/dogs/dogs.types";
+import Joi, {AnySchema, ArraySchema, ObjectSchema, ValidationOptions, ValidationResult} from "@hapi/joi";
+
+export function Validator(
+    schema: AnySchema,
+    value: any,
+    options: ValidationOptions = {abortEarly: false, stripUnknown: true}): ValidationResult | AnySchema {
+    if (typeof value === 'boolean') return schema as AnySchema;
+    return schema.validate(value, options) as ValidationResult;
+}
 
 // ------------------------------------
 // Types
 // ------------------------------------
+export type ISex = 'male' | 'female';
+
 export interface IDefaults {
     key: string;
     values: any;
@@ -18,14 +28,18 @@ export interface IDataDefaults {
     _prev?: any;
 }
 
-export function IDataDefaultsFactory(values?: Partial<IDataDefaults>): IDataDefaults {
+export function IDataDefaultsFactory(value?: Partial<IDataDefaults>): IDataDefaults {
     return {
         _selected: false,
         _deleted: false,
-        _new: true,
+        _new: false,
+        ...value,
     }
 }
 
+// ------------------------------------
+// IAddress
+// ------------------------------------
 export interface IAddress {
     country: string;
     state: string;
@@ -34,16 +48,30 @@ export interface IAddress {
     address: string;
 }
 
-export function IAddressFactory(values?: Partial<IAddress>): IAddress {
+export function IAddressFactory(value?: Partial<IAddress>): IAddress {
     return {
         country: 'Costa Rica',
         state: '',
         county: '',
         city: '',
         address: '',
+        ...value,
     }
 }
 
+export function IAddressValidator(value: IAddress | boolean) {
+    return Validator(Joi.object({
+        country: Joi.string().min(3).required(),
+        state: Joi.string().min(3).required(),
+        county: Joi.string().min(3).required(),
+        city: Joi.string().min(3).required(),
+        address: Joi.string().min(3).required(),
+    }), value);
+}
+
+// ------------------------------------
+// IData
+// ------------------------------------
 export interface IData extends IDataDefaults {
     id: string;
 
@@ -53,14 +81,19 @@ export interface IData extends IDataDefaults {
     updatedBy?: string;
 }
 
-export function IDataFactory(values?: Partial<IData>): IData {
+export function IDataFactory(
+    value?: Partial<IData>,
+    _new: boolean = true): IData {
     return {
         id: uuid(),
-        ...IDataDefaultsFactory(),
-        ...values,
+        ...IDataDefaultsFactory({_new}),
+        ...value,
     }
 }
 
+// ------------------------------------
+// IFilter
+// ------------------------------------
 export interface IFilter {
     name: string;
     key: string;
@@ -80,6 +113,9 @@ export function IFilterFactory(values: IFilterFactoryParams): IFilter {
     }
 }
 
+// ------------------------------------
+// ISort
+// ------------------------------------
 export interface ISort {
     key: string;
     order: "desc" | "asc";
@@ -93,6 +129,9 @@ export function ISortFactory(values?: Partial<ISort>): ISort {
     }
 }
 
+// ------------------------------------
+// IPagination
+// ------------------------------------
 export interface IPagination {
     count: number;
     rowPerPage: number;
@@ -110,6 +149,9 @@ export function IPaginationFactory(values?: Partial<IPagination>): IPagination {
     }
 }
 
+// ------------------------------------
+// IStats
+// ------------------------------------
 export interface IStats {
     total: number | firebase.firestore.FieldValue;
 }
@@ -121,6 +163,9 @@ export function IStatsFactory(values?: Partial<IStats>): IStats {
     }
 }
 
+// ------------------------------------
+// IResult
+// ------------------------------------
 export interface IResult<T> {
     data: T[];
     pagination?: IPagination;

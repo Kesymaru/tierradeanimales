@@ -2,8 +2,6 @@ import React, {ChangeEvent, FormEvent, FunctionComponent, MouseEvent, useEffect,
 import {connect, useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
 
-import { useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Zoom from "@material-ui/core/Zoom";
 import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
@@ -28,8 +26,9 @@ import SaveIcon from '@material-ui/icons/Save';
 import RotateRightIcon from '@material-ui/icons/RotateRight';
 
 import IAppState, {TStatus} from "../../store/app.types";
-import IDogState, {IDog, ISex, IDogStatus, IDogFactory} from "../../store/dogs/dogs.types";
+import IDogState, {IDog, IDogStatus, IDogFactory} from "../../store/dogs/dogs.types";
 import {AddDog, GetDog, UpdateDog} from "../../store/dogs/dogs.actions";
+import {ISex} from "../../constants/firebase/database";
 import DogImages from "./DogImages";
 import {useIsNew} from "../../routes/routes.hooks";
 
@@ -88,7 +87,7 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
             if (type === 'number') value = parseInt(event.target.value);
             if (typeof checked === 'boolean') value = checked;
 
-            setDog({...dog, ...{[`${key}`]: value}});
+            setDog({...dog, [`${key}`]: value});
         }
     }
 

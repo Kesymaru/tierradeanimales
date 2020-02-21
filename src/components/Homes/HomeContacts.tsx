@@ -1,4 +1,5 @@
 import React, {ChangeEvent, FunctionComponent, MouseEvent, useEffect, useState} from "react";
+import Joi, {ValidationError, ValidationResult} from "@hapi/joi";
 
 import Zoom from "@material-ui/core/Zoom";
 import Box from '@material-ui/core/Box';
@@ -14,7 +15,8 @@ import PermContactCalendarIcon from "@material-ui/icons/PermContactCalendar";
 import ContactPhoneIcon from "@material-ui/icons/ContactPhone";
 import ContactMailIcon from "@material-ui/icons/ContactMail";
 
-import {IHomeContact, IHomeContactFactory} from "../../store/homes/homes.types";
+import {IHomeContact, IHomeContactFactory, IHomeContactValidator} from "../../store/homes/homes.types";
+import {Validator} from "../../constants/firebase/database";
 
 interface IHomeContactsProps {
     contacts: IHomeContact[];
@@ -23,9 +25,17 @@ interface IHomeContactsProps {
 }
 
 const HomeContacts: FunctionComponent<IHomeContactsProps> = (props) => {
-    const [contacts, setContacts] = useState<IHomeContact[]>(props.contacts);
+    const [contacts, _setContacts] = useState<IHomeContact[]>(props.contacts);
+    const [errors, setErrors] = useState<ValidationError|undefined>(undefined);
 
-    useEffect(() => setContacts(props.contacts), [props.contacts]);
+    useEffect(() => _setContacts(props.contacts), [props.contacts]);
+
+    function setContacts(value: IHomeContact[]) {
+        _setContacts(value);
+        const results = IHomeContactValidator(value) as ValidationResult;
+        console.log('results', results);
+        // setErrors(results.error);
+    }
 
     function handleAdd(event: MouseEvent<HTMLButtonElement>) {
         const _contacts = [...contacts, IHomeContactFactory()];
@@ -53,6 +63,7 @@ const HomeContacts: FunctionComponent<IHomeContactsProps> = (props) => {
     }
 
     return <>
+        <pre>ERRORS: {JSON.stringify(errors)}</pre>
         {contacts.map((contact, index) => (
             <Zoom in={!contact._deleted} unmountOnExit={true} key={contact.id}>
                 <Grid container spacing={2}>
