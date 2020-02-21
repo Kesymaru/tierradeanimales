@@ -33,7 +33,7 @@ function HomesReducers(
         case "LOAD_HOME": {
             return {
                 ...state, home: {
-                    status: TStatus.Fetching,
+                    status: TStatus.Loaded,
                     data: action.payload,
                     id: action.payload.id,
                 }

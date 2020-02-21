@@ -66,6 +66,7 @@ export function SaveHome(home: IHome): Function {
 }
 
 export function GetHome(id: string): Function {
+    console.log('GetHome', id);
     return async (dispatch: Dispatch) => {
         try {
             dispatch(FetchHome());
