@@ -1,0 +1,23 @@
+{
+  "translation": {
+    "home": {
+      "mission": "Mision",
+      "missionBody": "Mision texto va aqui",
+      "vision": "Vision",
+      "visionBody": "Vision texto va aqui",
+      "about": "Acerca",
+      "aboutBody": "Acerca texto va aqui",
+      "donate": "Done",
+      "donateBody": "Done texto va aqui"
+    },
+    "signIn": {
+      "title": "Iniciar Session",
+      "email": "Email",
+      "password": "Contraseña",
+      "remember": "Recordar session",
+      "loading": "Iniciando session",
+      "forgotPassword": "Restablecer contraseña",
+      "signUp": "Crear Cuenta"
+    }
+  }
+}
