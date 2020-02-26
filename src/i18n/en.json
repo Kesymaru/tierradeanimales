@@ -1,5 +1,8 @@
 {
   "translation": {
+    "app": {
+      "changeLanguage": "Change Language"
+    },
     "home": {
       "mission": "Mission",
       "missionBody": "Mission body goes here",

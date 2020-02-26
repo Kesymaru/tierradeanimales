@@ -1,5 +1,8 @@
 {
   "translation": {
+    "app": {
+      "changeLanguage": "Cambiar de Idioma"
+    },
     "home": {
       "mission": "Mision",
       "missionBody": "Mision texto va aqui",
