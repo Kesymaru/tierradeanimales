@@ -4,9 +4,11 @@ import {Provider} from "react-redux";
 import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 
-import App from "./App";
 import './index.css';
+import "./i18n";
 import * as serviceWorker from './serviceWorker';
+
+import App from "./App";
 import AppStore from "./store/app.store";
 
 // ------------------------------------

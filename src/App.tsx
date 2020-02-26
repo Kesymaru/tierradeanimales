@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useState} from 'react';
+import React, {FunctionComponent, useState, Suspense} from 'react';
 import {ConnectedRouter} from 'connected-react-router'
 import {connect, useDispatch} from "react-redux";
 import {makeStyles, Theme, createStyles} from '@material-ui/core/styles';
@@ -10,7 +10,6 @@ import IAuthState from "./store/auth/auth.types";
 import {IUser} from "./store/user/user.types";
 import {ReceiveUser} from "./store/user/user.actions";
 import {SingOut} from "./store/auth/auth.actions";
-// import ROUTES from "./constants/routes";
 import ROUTES from "./routes";
 
 import Router from "./wrappers/Router";
@@ -38,6 +37,15 @@ const useStyles = makeStyles((theme: Theme) =>
 interface IAppProps extends Pick<IAuthState, 'logged'> {
 }
 
+// loading component for suspense fallback
+const Loader: FunctionComponent<{}> = () => (
+    <div className="App">
+        {/*<img src={logo} className="App-logo" alt="logo" />*/}
+        {/*<img src={logo} className="App-logo" alt="logo" />*/}
+        <div>Loading...</div>
+    </div>
+);
+
 const App: FunctionComponent<IAppProps> = ({logged}: IAppProps) => {
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -48,7 +56,7 @@ const App: FunctionComponent<IAppProps> = ({logged}: IAppProps) => {
         ? dispatch(ReceiveUser(user))
         : dispatch(SingOut()));
 
-    return (<>
+    return (<Suspense fallback={<Loader/>}>
         <ConnectedRouter history={AppStore.history}>
             <AppBar open={open} setOpen={setOpen} anchorId={anchorId}/>
             <Navbar open={open} setOpen={setOpen}/>
@@ -60,7 +68,7 @@ const App: FunctionComponent<IAppProps> = ({logged}: IAppProps) => {
         </ConnectedRouter>
         <Copyright/>
         <Notify/>
-    </>);
+    </Suspense>);
 };
 
 const mapStateToProps = (state: IAppState): IAppProps => ({
