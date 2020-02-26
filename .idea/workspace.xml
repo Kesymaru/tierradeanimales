@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="Updated geonames store to load countries and map the country flag icon&#10;Update Address.tsx component to use the new countries store data">
+    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dogs/EditDog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dogs/EditDog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Address.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Address.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/Admin.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Admin.routes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Homes/EditHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Homes/EditHome.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Homes/HomeContacts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Homes/HomeContacts.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/firebase/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase/database.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/firebase/storage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase/storage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dogs/dogs.types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/homes/homes.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/homes/homes.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Homes/HomeDogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Homes/HomeDogs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Homes/Homes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Homes/Homes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/SignIn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/user/user.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/user/user.types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +69,7 @@
       <recent name="$PROJECT_DIR$/src/components/AppTable" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.npm build">
+  <component name="RunManager" selected="npm.npm start">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
       <method v="2" />
     </configuration>
@@ -89,7 +89,8 @@
       <scripts>
         <script value="start" />
       </scripts>
-      <node-interpreter value="project" />
+      <node-interpreter value="$USER_HOME$/.nvm/versions/node/v11.15.0/bin/node" />
+      <package-manager value="npm" />
       <envs />
       <method v="2" />
     </configuration>
@@ -127,126 +128,8 @@
       <workItem from="1577568811282" duration="99053000" />
       <workItem from="1579564004625" duration="40429000" />
       <workItem from="1579733497168" duration="365923000" />
-      <workItem from="1582215133977" duration="11444000" />
-    </task>
-    <task id="LOCAL-00064" summary="Removed realTimeDatabase.ts not used">
-      <created>1581116850884</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1581116850884</updated>
-    </task>
-    <task id="LOCAL-00065" summary="Removed pre con AppTable.tsx">
-      <created>1581282596275</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1581282596276</updated>
-    </task>
-    <task id="LOCAL-00066" summary="Renamed the Dogs component to AdminDogs.tsx&#10;Created new public component to display all the public dogs Dogs.tsx&#10;Updated database.ts to support pagination&#10;Updated the pagination interface&#10;Updated the dogs.actions.ts, dogs.types.ts and dogs.reducers.ts to support new pagination&#10;Updated the app.types.ts to support stat with new pagination">
-      <created>1581282711552</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1581282711558</updated>
-    </task>
-    <task id="LOCAL-00067" summary="Updated the Account.tsx component">
-      <created>1581365503703</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1581365503703</updated>
-    </task>
-    <task id="LOCAL-00068" summary="Improved the DogImages.tsx component to display a responsive image gallery &#10;&#10;Public dogs component Dogs.tsx&#10;Details dog component for public dogs DogDetails.tsx">
-      <created>1581375533970</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1581375533970</updated>
-    </task>
-    <task id="LOCAL-00069" summary="Updated the IPagination interface&#10;Improved the all() method to return results including the pagination settings used for the query">
-      <created>1581375586414</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1581375586414</updated>
-    </task>
-    <task id="LOCAL-00070" summary="New DogDetails route added">
-      <created>1581375822052</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1581375822052</updated>
-    </task>
-    <task id="LOCAL-00071" summary="Updated the NavbarMenu.tsx to display the admin routes&#10;Still needs to display public and detect auth">
-      <created>1581375864090</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1581375864090</updated>
-    </task>
-    <task id="LOCAL-00072" summary="Updated dogs.actions.ts">
-      <created>1581375880334</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1581375880334</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Added firebase project config for hosting, firestore and firebase storage&#10;firebase.json">
-      <created>1581376614762</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1581376614762</updated>
-    </task>
-    <task id="LOCAL-00074" summary="Updated the AppTable.tsx, AppTableFooter.tsx and AppTableHeader.tsx">
-      <created>1581454243514</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1581454243515</updated>
-    </task>
-    <task id="LOCAL-00075" summary="Updated AdminDogs.tsx to improved the pagination on the app table">
-      <created>1581454302761</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1581454302762</updated>
-    </task>
-    <task id="LOCAL-00076" summary="Updated the database.ts class to improve the pagination support&#10;Updated the AppTable.tsx and AppTableFooter.tsx component to better support&#10;Updated the AdminDogs.tsx component">
-      <created>1581456359019</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1581456359021</updated>
-    </task>
-    <task id="LOCAL-00077" summary="Use dense table when is on mobile screen size">
-      <created>1581458461688</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1581458461688</updated>
-    </task>
-    <task id="LOCAL-00078" summary="Added delete dialog on AdminDogs.tsx&#10;Updated the AlertDialog.tsx to support more configurations">
-      <created>1581463647314</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1581463647315</updated>
-    </task>
-    <task id="LOCAL-00079" summary="Added firebase-debug.log file">
-      <created>1581467425039</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1581467425039</updated>
-    </task>
-    <task id="LOCAL-00080" summary="Fixes the issue on editing a dog after edited another one on EditDog.tsx">
-      <created>1581468006368</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1581468006369</updated>
+      <workItem from="1582215133977" duration="27590000" />
+      <workItem from="1582558357513" duration="12083000" />
     </task>
     <task id="LOCAL-00081" summary="Refactored the store to delete the store/index.ts in order to force the imports my module so only used code is imported to improve performance&#10;&#10;Updated components">
       <created>1581627781539</created>
@@ -472,7 +355,126 @@
       <option name="project" value="LOCAL" />
       <updated>1582222353067</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="Implemented form validation using Joi package">
+      <created>1582243570966</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1582243570966</updated>
+    </task>
+    <task id="LOCAL-00114" summary="Updated the Homes.tsx component to load the homes in a table&#10;Updated the homes.actions.ts GetHomes() method">
+      <created>1582305353781</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1582305353781</updated>
+    </task>
+    <task id="LOCAL-00115" summary="Update database.ts to include Validator() function to validate a Joi schema or get an schema, added helpers functions to GetError() and HasError()&#10;Updated homes.types.ts to include validator functions for IHome, IHomeContact">
+      <created>1582305552029</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1582305552029</updated>
+    </task>
+    <task id="LOCAL-00116" summary="Updated AdminDogs.tsx, implemente init() method">
+      <created>1582305586895</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1582305586895</updated>
+    </task>
+    <task id="LOCAL-00117" summary="Updated EditHome.tsx component to validate form using Joi schemas and Validators functions&#10;Updated HomeContacts.tsx component to validate the form and support parent validation errors&#10;Updated Address.tsx component to validate the form and support parent validation errors">
+      <created>1582305674491</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1582305674491</updated>
+    </task>
+    <task id="LOCAL-00118" summary="Updated custom hook to get the id and isNew flag for params">
+      <created>1582308733275</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1582308733275</updated>
+    </task>
+    <task id="LOCAL-00119" summary="Fixed error on GetHome() action and reducer, homes.actions.ts and homes.reducers.ts">
+      <created>1582308767147</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1582308767147</updated>
+    </task>
+    <task id="LOCAL-00120" summary="Updated EditDog.tsx removed not used import&#10;&#10;Updated Homes.tsx component to load the existing homes &#10;Updated EditHome.tsx to load an existing home to edit">
+      <created>1582308848811</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1582308848811</updated>
+    </task>
+    <task id="LOCAL-00121" summary="Simple HomePage.tsx for a landing page">
+      <created>1582736064914</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1582736064914</updated>
+    </task>
+    <task id="LOCAL-00122" summary="Added translation support, added i18next package.json&#10;Added en and es languages and i18n config in i18n.ts">
+      <created>1582736142003</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1582736142003</updated>
+    </task>
+    <task id="LOCAL-00123" summary="Added to the AppBar.tsx the LanguageMenu.tsx to allow the user to select/change the translation language">
+      <created>1582739311852</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1582739311852</updated>
+    </task>
+    <task id="LOCAL-00124" summary="About.tsx component">
+      <created>1582756967119</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1582756967119</updated>
+    </task>
+    <task id="LOCAL-00125" summary="homes store updated, homes.reducers.ts and homes.types.ts">
+      <created>1582757054220</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1582757054220</updated>
+    </task>
+    <task id="LOCAL-00126" summary="Updated the Route.tsx and Router.tsx wrapper components">
+      <created>1582757086691</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1582757086691</updated>
+    </task>
+    <task id="LOCAL-00127" summary="Added support for translations">
+      <created>1582757120133</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1582757120133</updated>
+    </task>
+    <task id="LOCAL-00128" summary="Separated the routes in index.ts, routes.hooks.ts and routes.types.ts">
+      <created>1582757164440</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1582757164440</updated>
+    </task>
+    <task id="LOCAL-00129" summary="Translations resources">
+      <created>1582757185225</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1582757185225</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -492,34 +494,38 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Edit home component" />
-    <MESSAGE value="Added the new homes state to the reducers and store&#10;updated app.store.ts, app.types.ts to include the homes store&#10;updated homes.actions.ts, homes.reducers.ts and homes.types.ts" />
-    <MESSAGE value="Changed the app title" />
-    <MESSAGE value="removed console.log on fire.ts" />
-    <MESSAGE value="simple renamed the ownProps on Navbar.tsx" />
-    <MESSAGE value="Removed the Storage import no used" />
-    <MESSAGE value="New HomeDogs.tsx component to display all the available dogs to be selected for the foster home" />
-    <MESSAGE value="Added interfaces factories on database.ts" />
-    <MESSAGE value="New useIsNew() custom hook to detect if a route param is 'new'" />
-    <MESSAGE value="Added joi validation module" />
-    <MESSAGE value="Implemented interface factories in dogs.types.ts&#10;Updated dogs.actions.ts" />
-    <MESSAGE value="Updated HomeContacts.tsx component" />
-    <MESSAGE value="Updated and improved EditHome.tsx component" />
-    <MESSAGE value="Use IDogFactory on EditDog.tsx" />
-    <MESSAGE value="Refactored the pagination on the database.ts, updated the database interfaces to implement the interface factories&#10;updated dogs.actions.ts ad dogs.reducers.ts to support filtering, sorting and paging separated&#10;updated the database.ts pagination methods, all() and _query() &#10;&#10;Updated the HomeDogs.tsx component to load the available dogs to be selected&#10;&#10;Updated AdminDogs.tsx, implemented new changes on the pagination" />
-    <MESSAGE value="Create Address.tsx component to handle the addres in a form" />
-    <MESSAGE value="Create Address.tsx component to handle the address in a form" />
-    <MESSAGE value="Added countries.ts list of all countries" />
-    <MESSAGE value="Added material labin  package.json" />
-    <MESSAGE value="updated IHome interface, included country default value and interface factory" />
     <MESSAGE value="added IAddress interface and factory in database.ts" />
     <MESSAGE value="Updated EditHome.tsx component&#10;Updated HomeContacts.tsx and HomeDogs.tsx components" />
     <MESSAGE value="Installed geonames.js package.json&#10;Added geonames.d.ts to work with typescript&#10;&#10;Created geonames store to load country, states, counties and cities datata from geonames, geonames.actions.ts, geonames.reducers.ts, geonames.types.ts" />
     <MESSAGE value="Updated the Address.tsx component to be connected to geonames store&#10;load the country, states, counties and cities&#10;&#10;Updated the geonames store, geonames.types.ts, geonames.reducers.ts and geonames.actions.ts&#10;&#10;Remove import for fire.ts on index.tsx, not used anymore" />
     <MESSAGE value="Updated geonames store to load countries and map the country flag icon&#10;Update Address.tsx component to use the new countries store data" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated geonames store to load countries and map the country flag icon&#10;Update Address.tsx component to use the new countries store data" />
+    <MESSAGE value="Implemented form validation using Joi package" />
+    <MESSAGE value="Updated the Homes.tsx component to load the homes in a table" />
+    <MESSAGE value="Updated the Homes.tsx component to load the homes in a table&#10;Updated the homes.actions.ts GetHomes() method" />
+    <MESSAGE value="Update database.ts to include Validator() function to validate a Joi schema or get an schema, added helpers functions to GetError() and HasError()&#10;Updated homes.types.ts to include validator functions for IHome, IHomeContact" />
+    <MESSAGE value="Updated AdminDogs.tsx, implemente init() method" />
+    <MESSAGE value="Updated EditHome.tsx component to validate form using Joi schemas and Validators functions&#10;Updated HomeContacts.tsx component to validate the form and support parent validation errors&#10;Updated Address.tsx component to validate the form and support parent validation errors" />
+    <MESSAGE value="Updated custom hook to get the id and isNew flag for params" />
+    <MESSAGE value="Fixed error on GetHome() action and reducer, homes.actions.ts and homes.reducers.ts" />
+    <MESSAGE value="Updated EditDog.tsx removed not used import&#10;&#10;Updated Homes.tsx component to load the existing homes" />
+    <MESSAGE value="Updated EditDog.tsx removed not used import&#10;&#10;Updated Homes.tsx component to load the existing homes &#10;Updated EditHome.tsx to load an existing home to edit" />
+    <MESSAGE value="Simple HomePage.tsx for a landing page" />
+    <MESSAGE value="Added translation support, added i18next package.json&#10;Added en and es languages and i18n config in i18n.ts" />
+    <MESSAGE value="Added to the AppBar.tsx the LanguageMenu.tsx to allow the user to select/change the translation language" />
+    <MESSAGE value="About.tsx component" />
+    <MESSAGE value="Address.tsx component to edit/create an address with support for validation" />
+    <MESSAGE value="homes store updated, homes.reducers.ts and homes.types.ts" />
+    <MESSAGE value="Updated the Route.tsx and Router.tsx wrapper components" />
+    <MESSAGE value="Added support for translations" />
+    <MESSAGE value="Separated the routes in index.ts, routes.hooks.ts and routes.types.ts" />
+    <MESSAGE value="Translations resources" />
+    <option name="LAST_COMMIT_MESSAGE" value="Translations resources" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="-1360" y="-75" key="#ESLint" timestamp="1582565528064">
+      <screen x="-1920" y="-280" width="1920" height="1080" />
+    </state>
+    <state x="-1360" y="-75" key="#ESLint/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582565528064" />
     <state x="-1360" y="-75" key="#Inspections" timestamp="1576817948911">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -532,42 +538,46 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1496" y="-78" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581376539260" />
-    <state x="-1246" y="59" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1582168752827">
+    <state x="-1246" y="59" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1582566526011">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1246" y="59" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582168752827" />
+    <state x="-1246" y="59" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582566526011" />
     <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1581901904900">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1222" y="13" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581901904900" />
-    <state x="-1505" y="-213" width="884" height="758" key="CommitChangelistDialog2" timestamp="1582229013868">
+    <state x="-1265" y="-50" key="#npm_start" timestamp="1582558619495">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582229013868" />
+    <state x="-1265" y="-50" key="#npm_start/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582558619495" />
+    <state x="-1505" y="-213" width="884" height="758" key="CommitChangelistDialog2" timestamp="1582757252533">
+      <screen x="-1920" y="-280" width="1920" height="1080" />
+    </state>
+    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582757252533" />
     <state x="209" y="0" width="884" height="758" key="CommitChangelistDialog2/0.0.1280.800@0.0.1280.800" timestamp="1581882363578" />
-    <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog" timestamp="1581691858353">
+    <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog" timestamp="1582690402669">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1581691858353" />
-    <state width="1920" height="247" key="GridCell.Tab.0.bottom" timestamp="1582242602914">
+    <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582690402669" />
+    <state width="1920" height="247" key="GridCell.Tab.0.bottom" timestamp="1582737095103">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582242602914" />
+    <state width="1920" height="247" key="GridCell.Tab.0.bottom/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582737095103" />
     <state width="1280" height="323" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1581467907317" />
-    <state width="1920" height="247" key="GridCell.Tab.0.center" timestamp="1582242602914">
+    <state width="1920" height="247" key="GridCell.Tab.0.center" timestamp="1582737095102">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582242602914" />
+    <state width="1920" height="247" key="GridCell.Tab.0.center/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582737095102" />
     <state width="1280" height="323" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1581467907316" />
-    <state width="1920" height="247" key="GridCell.Tab.0.left" timestamp="1582242602913">
+    <state width="1920" height="247" key="GridCell.Tab.0.left" timestamp="1582737095102">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582242602913" />
+    <state width="1920" height="247" key="GridCell.Tab.0.left/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582737095102" />
     <state width="1280" height="323" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1581467907316" />
-    <state width="1920" height="247" key="GridCell.Tab.0.right" timestamp="1582242602914">
+    <state width="1920" height="247" key="GridCell.Tab.0.right" timestamp="1582737095103">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state width="1920" height="247" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582242602914" />
+    <state width="1920" height="247" key="GridCell.Tab.0.right/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582737095103" />
     <state width="1280" height="323" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1581467907317" />
     <state x="-1209" y="-103" key="RollbackChangesDialog" timestamp="1581436539195">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -586,10 +596,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="VCS.FileHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902347" />
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1582222354165">
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1582757214454">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582222354165" />
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582757214454" />
     <state x="257" y="133" key="Vcs.Push.Dialog.v2/0.0.1280.800@0.0.1280.800" timestamp="1581467428542" />
     <state x="-1197" y="111" key="cloudConfig.SelfSettingsDialog" timestamp="1576817894168">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -603,19 +613,19 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902348" />
-    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1582237128937">
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1582737963795">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582237128937" />
+    <state x="-1389" y="-127" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582737963795" />
     <state x="354" y="27" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800@0.0.1280.800" timestamp="1581484300487" />
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576727526871">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.800@0.0.1280.800" timestamp="1576727526871" />
-    <state x="-1299" y="6" width="828" height="582" key="find.popup" timestamp="1582243106280">
+    <state x="-1299" y="6" width="828" height="582" key="find.popup" timestamp="1582736485932">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1299" y="6" width="828" height="582" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582243106280" />
+    <state x="-1299" y="6" width="828" height="582" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582736485932" />
     <state width="600" height="440" key="javadoc.popup" timestamp="1580145157568">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -625,10 +635,10 @@
     </state>
     <state x="-1462" y="-30" key="run.anything.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580872105579" />
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1582237310956">
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1582689529857">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582237310956" />
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582689529857" />
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1581467863285" />
   </component>
   <component name="XDebuggerManager">
@@ -646,12 +656,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/Dogs/AdminDogs.tsx</url>
-          <line>62</line>
+          <line>67</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/constants/firebase/database.ts</url>
-          <line>75</line>
+          <line>109</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -661,7 +671,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/Address.tsx</url>
-          <line>37</line>
+          <line>48</line>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
       </breakpoints>

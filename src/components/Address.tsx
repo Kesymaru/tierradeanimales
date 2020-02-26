@@ -28,33 +28,71 @@ const Address: FunctionComponent<IAddressProps> = (props) => {
     const dispatch = useDispatch();
 
     const [data, setData] = useState<IAddress>(props.address);
-    const [disabled, setDisabled] = useState<boolean>(!!props.disabled);
     const [country, setCountry] = useState<IGeonamesCountry | null>(getCountry());
-    const [state, setState] = useState<IGeonamesChildren | null>(null);
-    const [county, setCounty] = useState<IGeonamesChildren | null>(null);
-    const [city, setCity] = useState<IGeonamesChildren | null>(null);
+    const [state, setState] = useState<IGeonamesChildren | null>(getState());
+    const [county, setCounty] = useState<IGeonamesChildren | null>(getCounty());
+    const [city, setCity] = useState<IGeonamesChildren | null>(getCity());
+    const [loading, setLoading] = useState<boolean>(true);
     const [errors, setErrrors] = useState<ValidationError | null>(null);
 
     useEffect(() => {
+        setData(props.address);
         setCountry(getCountry());
-        setDisabled(!!props.disabled);
-        if (props.errors) validate(props.address);
+        setState(getState());
+        setCounty(getCounty());
+        setCity(getCity());
+
+        const _loading = getLoading();
+        setLoading(_loading);
+        if (props.errors && !_loading) validate(props.address);
+        else setErrrors(null);
     }, [props]);
 
     init();
 
     function init() {
+        // load countries
         if (props.address.country && props.countries.status === TStatus.Empty) {
             dispatch(GetCountries());
         }
+        // load states
         if (props.address.country && props.states.status === TStatus.Empty) {
             const _country = getCountry();
             if (_country) dispatch(GetStates(_country));
+        }
+        // load counties
+        if (props.address.state && props.counties.status === TStatus.Empty) {
+            const _state = getState();
+            if (_state) dispatch(GetCounties(_state));
+        }
+        // load cities
+        if (props.address.county && props.cities.status === TStatus.Empty) {
+            const _county = getCounty();
+            if (_county) dispatch(GetCities(_county));
         }
     }
 
     function getCountry(name: string = props.address.country): IGeonamesCountry | null {
         return props.countries.data.find(country => country.countryName === name) || null;
+    }
+
+    function getState(): IGeonamesChildren | null {
+        return props.states.data.find(s => s.name === props.address.state) || null;
+    }
+
+    function getCounty(): IGeonamesChildren | null {
+        return props.counties.data.find(c => c.name === props.address.county) || null;
+    }
+
+    function getCity(): IGeonamesChildren | null {
+        return props.cities.data.find(c => c.name === props.address.city) || null;
+    }
+
+    function getLoading(): boolean {
+        return props.countries.status === TStatus.Fetching
+            || props.states.status === TStatus.Fetching
+            || props.counties.status === TStatus.Fetching
+            || props.cities.status === TStatus.Fetching;
     }
 
     function validate(value: IAddress): boolean {
@@ -115,7 +153,7 @@ const Address: FunctionComponent<IAddressProps> = (props) => {
             <Autocomplete
                 style={{width: '100%'}}
                 value={country}
-                disabled={disabled}
+                disabled={props.disabled || loading}
                 onChange={handleCountryChange}
                 options={props.countries.data}
                 autoHighlight
@@ -159,16 +197,14 @@ const Address: FunctionComponent<IAddressProps> = (props) => {
             <Autocomplete
                 style={{width: '100%'}}
                 value={state}
-                disabled={disabled}
+                disabled={props.disabled || loading}
                 onChange={handleStateChange}
                 options={props.states.data}
                 autoHighlight
                 getOptionLabel={option => option.name}
-                renderOption={option => (
-                    <React.Fragment>
-                        {option.name}
-                    </React.Fragment>
-                )}
+                renderOption={option => (<React.Fragment>
+                    {option.name}
+                </React.Fragment>)}
                 renderInput={params => (
                     <TextField
                         {...params}
@@ -177,15 +213,14 @@ const Address: FunctionComponent<IAddressProps> = (props) => {
                         error={HasError(['state'], errors)}
                         helperText={GetError(['state'], errors)}
                         fullWidth
-                    />
-                )}
+                    />)}
             />
         </Grid>
         <Grid item xs={6} md={3}>
             <Autocomplete
                 style={{width: '100%'}}
                 value={county}
-                disabled={disabled}
+                disabled={props.disabled || loading}
                 onChange={handleCountyChange}
                 options={props.counties.data}
                 autoHighlight
@@ -211,7 +246,7 @@ const Address: FunctionComponent<IAddressProps> = (props) => {
             <Autocomplete
                 style={{width: '100%'}}
                 value={city}
-                disabled={disabled}
+                disabled={props.disabled || loading}
                 onChange={handleCityChange}
                 options={props.cities.data}
                 autoHighlight
@@ -249,7 +284,7 @@ const Address: FunctionComponent<IAddressProps> = (props) => {
                     ),
                 }}
                 value={data.address}
-                disabled={disabled}
+                disabled={props.disabled || loading}
                 onChange={handleAddressChange}
             />
         </Grid>
