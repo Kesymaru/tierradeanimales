@@ -32,6 +32,7 @@ const HomeContacts: FunctionComponent<IHomeContactsProps> = (props) => {
     useEffect(() => {
         _setContacts(props.contacts);
         if(props.errors) validate(props.contacts);
+        else setErrors(null);
     }, [props]);
 
     function validate(value: IHomeContact[]): boolean {
@@ -95,6 +96,7 @@ const HomeContacts: FunctionComponent<IHomeContactsProps> = (props) => {
                                 <TextField
                                     label="Contact Name"
                                     variant="outlined"
+                                    disabled={props.disabled}
                                     error={HasError([index, 'name'], errors)}
                                     helperText={GetError([index, 'name'], errors)}
                                     fullWidth
@@ -113,6 +115,7 @@ const HomeContacts: FunctionComponent<IHomeContactsProps> = (props) => {
                                 <TextField
                                     label="Contact Phone"
                                     variant="outlined"
+                                    disabled={props.disabled}
                                     error={HasError([index, 'phone'], errors)}
                                     helperText={GetError([index, 'phone'], errors)}
                                     fullWidth
@@ -131,6 +134,7 @@ const HomeContacts: FunctionComponent<IHomeContactsProps> = (props) => {
                                 <TextField
                                     label="Contact Email"
                                     variant="outlined"
+                                    disabled={props.disabled}
                                     error={HasError([index, 'email'], errors)}
                                     helperText={GetError([index, 'email'], errors)}
                                     fullWidth

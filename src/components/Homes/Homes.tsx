@@ -101,7 +101,7 @@ const Homes: FunctionComponent<IHomeProps> = (props) => {
                     </Typography>}
 
                 <Fade in={selected.length === 1}>
-                    <Tooltip title="Edit Home">
+                    <Tooltip title="Edit HomePage">
                         <IconButton
                             onClick={() => history.push(ADMIN_HOME_EDIT_ROUTE.getPath(homes.filter(i => i._selected)[0]))}
                         >
@@ -111,7 +111,7 @@ const Homes: FunctionComponent<IHomeProps> = (props) => {
                 </Fade>
                 <Fade in={!!selected.length}>
                     <Tooltip
-                        title={`Delete Home${selected.length > 1 ? 's' : ''}`}
+                        title={`Delete HomePage${selected.length > 1 ? 's' : ''}`}
                     >
                         <IconButton
                             onClick={() => setOpenDelete(true)}>
@@ -120,7 +120,7 @@ const Homes: FunctionComponent<IHomeProps> = (props) => {
                     </Tooltip>
                 </Fade>
                 <Fade in={true}>
-                    <Tooltip title="Add Home">
+                    <Tooltip title="Add HomePage">
                         <IconButton
                             onClick={() => history.push(ADMIN_HOME_EDIT_ROUTE.getPath())}
                         >
@@ -139,7 +139,7 @@ const Homes: FunctionComponent<IHomeProps> = (props) => {
         </AppTable>
 
         <AlertDialog
-            title={selected.length > 1 ? 'Delete Homes' : 'Delete Home'}
+            title={selected.length > 1 ? 'Delete Homes' : 'Delete HomePage'}
             open={openDelete}
             okTitle="Delete"
             okColor="secondary"

@@ -9,6 +9,7 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 import HomeIcon from '@material-ui/icons/Home';
 import CloseIcon from '@material-ui/icons/Close';
@@ -16,7 +17,7 @@ import SendIcon from "@material-ui/icons/Send";
 
 import IHomeState, {IHome, IHomeFactory, IHomeValidator} from "../../store/homes/homes.types";
 import IAppState, {TStatus} from "../../store/app.types";
-import {GetHome, SaveHome} from "../../store/homes/homes.actions";
+import {GetHome, SaveHome, UpdateHome} from "../../store/homes/homes.actions";
 import {useId} from "../../routes/routes.hooks";
 import HomeContacts from "./HomeContacts";
 import HomeDogs from "./HomeDogs";
@@ -50,7 +51,9 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
     }
 
     function getHome(): IHome {
-        return props.home.data || IHomeFactory();
+        return isNew
+            ? IHomeFactory()
+            : (props.home.data ? props.home.data : IHomeFactory());
     }
 
     function getLoading(): boolean {
@@ -72,7 +75,8 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
         event.preventDefault();
         if (!validate()) return;
         console.log('save ->', home);
-        dispatch(SaveHome(home));
+        if(isNew) return dispatch(SaveHome(home));
+        dispatch(UpdateHome(home));
     }
 
     function handleReset(event: FormEvent) {
@@ -151,12 +155,14 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
                             type="submit"
                             variant="contained"
                             color="primary"
+                            disabled={loading}
                             startIcon={<SendIcon/>}
                             fullWidth
                         >
-                            Submit
+                            {loading ? 'Loading' : isNew ? 'Submit' : 'Update'}
                         </Button>
                     </Tooltip>
+                    {loading ? <LinearProgress color="primary"/> : null}
                 </Grid>
             </Grid>
         </form>

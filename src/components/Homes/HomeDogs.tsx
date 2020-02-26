@@ -82,7 +82,7 @@ const HomeDogs: FunctionComponent<IHomeDogsProps> = (props) => {
                     return <TextField
                         {...params}
                         variant="outlined"
-                        label="Home Dogs"
+                        label="HomePage Dogs"
                         placeholder="Select Dogs"
                         fullWidth
                     />
