@@ -1,6 +1,8 @@
 import React, {ChangeEvent, FormEvent, FunctionComponent, useState} from "react";
 import {connect, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
 import {Link as RouterLink, Redirect} from 'react-router-dom';
+import {ValidationError, ValidationResult} from "@hapi/joi";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -19,11 +21,11 @@ import {makeStyles, Theme} from '@material-ui/core/styles';
 import IAppState from "../../store/app.types";
 import IAuthState from "../../store/auth/auth.types";
 import ISystemState from "../../store/system/system.types";
+import {IUserSignIn, IUserSignInValidator} from "../../store/user/user.types";
 import {SignIn as SignInAction} from "../../store/auth/auth.actions";
 import {DASHBOARD_ROUTE} from "../Dashboard/Dashboard.routes";
 import {FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE} from "./Login.routes";
-
-const EMAIL_REGEX: RegExp = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+import {GetError, HasError} from "../../constants/firebase/database";
 
 const useStyles = makeStyles((theme: Theme) => ({
     paper: {
@@ -48,142 +50,142 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-interface ISignInProps extends Pick<ISystemState, 'loading'>, Pick<IAuthState, 'logged'> {}
+
+interface ISignInProps extends Pick<ISystemState, 'loading'>, Pick<IAuthState, 'logged'> {
+}
+
 const SignIn: FunctionComponent<ISignInProps> = ({loading, logged}) => {
     const classes = useStyles();
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [remember, setRemember] = useState<boolean>(false);
-    const [emailError, setEmailError] = useState<string>('');
-    const [passwordError, setPasswordError] = useState<string>('');
     const dispatch = useDispatch();
+    const {t, i18n} = useTranslation();
+    const [data, _setData] = useState<IUserSignIn>({email: '', password: '', remember: false});
+    const [touched, setTouched] = useState<boolean>(false);
+    const [errors, setErrors] = useState<ValidationError | null>(null);
 
-    const handleSubmit = async (event: FormEvent) => {
+    function handleSubmit(event: FormEvent) {
         event.preventDefault();
-        dispatch(SignInAction(email, password, remember));
+        dispatch(SignInAction(data.email, data.password, data.remember));
     };
 
-    const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-        let {value} = event.target;
-        setEmail(value);
-        validateEmail(value);
+    function validate(value: IUserSignIn = data) {
+        const results = IUserSignInValidator(value) as ValidationResult;
+        setErrors(results.error || null);
+    }
+
+    function setData(value: IUserSignIn) {
+        _setData(value);
+        validate(value);
+        setTouched(true);
+    }
+
+    function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
+        const email = event.target.value;
+        setData({...data, email});
+    }
+
+    function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
+        const password = event.target.value;
+        setData({...data, password});
     };
 
-    const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-        let {value} = event.target;
-        setPassword(value);
-        validatePassword(value);
-    };
-
-    const validateEmail = (value: string) => {
-        if (!value) return setEmailError('Email is required');
-        EMAIL_REGEX.test(value)
-            ? setEmailError('')
-            : setEmailError('Invalid Email');
-    };
-
-    const validatePassword = (value: string) => {
-        if (!value.length) return setPasswordError('Password is required');
-        if (value.length < 6) return setPasswordError('Invalid Password');
-        setPasswordError('');
-    };
+    function handleRememberChange(event: ChangeEvent<HTMLInputElement>) {
+        const remember = event.target.checked;
+        setData({...data, remember});
+    }
 
     if (logged) return <Redirect to={DASHBOARD_ROUTE.path}/>;
-
-    return (
-        <Container maxWidth="lg">
-            <Container component="main" maxWidth="xs">
-                <CssBaseline/>
-                <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon/>
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
-                    </Typography>
-                    <form className={classes.form} noValidate onSubmit={handleSubmit}>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            type="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                            value={email}
-                            error={!!emailError}
-                            helperText={emailError}
-                            onChange={handleEmailChange}
-                            onBlur={() => validateEmail(email)}
-                            disabled={loading}
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                            value={password}
-                            error={!!passwordError}
-                            helperText={passwordError}
-                            onChange={handlePasswordChange}
-                            onBlur={() => validatePassword(password)}
-                            disabled={loading}
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    value="remember"
-                                    color="primary"
-                                    onChange={e => setRemember(e.target.checked)}
-                                    disabled={loading}
-                                />
-                            }
-                            label="Remember me"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                            disabled={loading || !!emailError || !!passwordError}
-                        >
-                            {loading ? 'Loading' : 'Sign In'}
-                        </Button>
-                        {loading ? <LinearProgress color="primary"/> : null}
-                        <Grid container className={classes.grid}>
-                            <Grid item xs>
-                                <Link
-                                    component={RouterLink}
-                                    variant="body2"
-                                    to={FORGOT_PASSWORD_ROUTE.path}
-                                >
-                                    Forgot password?
-                                </Link>
-                            </Grid>
-                            <Grid item>
-                                <Link
-                                    component={RouterLink}
-                                    variant="body2"
-                                    to={SIGN_UP_ROUTE.path}
-                                >
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
-                            </Grid>
+    return <Container maxWidth="lg">
+        <Container component="main" maxWidth="xs">
+            <CssBaseline/>
+            <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon/>
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    {t('signIn.title')}
+                </Typography>
+                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        type="email"
+                        label={t('signIn.email')}
+                        name="email"
+                        autoComplete="email"
+                        autoFocus
+                        value={data.email}
+                        error={HasError(['email'], errors)}
+                        helperText={GetError(['email'], errors)}
+                        onChange={handleEmailChange}
+                        // onBlur={() => validate()}
+                        disabled={loading}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label={t('signIn.password')}
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                        value={data.password}
+                        error={HasError(['password'], errors)}
+                        helperText={GetError(['password'], errors)}
+                        onChange={handlePasswordChange}
+                        // onBlur={() => validate()}
+                        disabled={loading}
+                    />
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                value="remember"
+                                color="primary"
+                                onChange={handleRememberChange}
+                                disabled={loading}
+                            />
+                        }
+                        label={t('signIn.remember')}
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        disabled={!touched || loading || !!errors}
+                    >
+                        {loading ? t('signIn.loading') : t('signIn.title')}
+                    </Button>
+                    {loading ? <LinearProgress color="primary"/> : null}
+                    <Grid container className={classes.grid}>
+                        <Grid item xs>
+                            <Link
+                                component={RouterLink}
+                                variant="body2"
+                                to={FORGOT_PASSWORD_ROUTE.path}
+                            >
+                                {t('signIn.forgotPassword')}
+                            </Link>
                         </Grid>
-                    </form>
-                </div>
-            </Container>
+                        <Grid item>
+                            <Link
+                                component={RouterLink}
+                                variant="body2"
+                                to={SIGN_UP_ROUTE.path}
+                            >
+                                {t('signIn.signUp')}
+                            </Link>
+                        </Grid>
+                    </Grid>
+                </form>
+            </div>
         </Container>
-    );
+    </Container>;
 };
 
 const mapStateToProps = (state: IAppState) => ({
