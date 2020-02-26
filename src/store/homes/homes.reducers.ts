@@ -27,7 +27,10 @@ function HomesReducers(
         // ------------------------------------
         case "FETCH_HOME":
             return {
-                ...state, home: InitState.home
+                ...state, home: {
+                    ...InitState.home,
+                    status: TStatus.Fetching,
+                }
             };
 
         case "LOAD_HOME": {

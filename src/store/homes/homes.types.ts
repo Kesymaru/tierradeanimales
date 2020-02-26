@@ -106,7 +106,7 @@ export function IHomeStatsFactory(config: Partial<IHomeStats>): IHomeStats {
 }
 
 // ------------------------------------
-// Foster Home
+// Foster HomePage
 // ------------------------------------
 export const FETCH_HOME = 'FETCH_HOME';
 
@@ -159,7 +159,7 @@ interface IDeleteHomes {
 }
 
 // ------------------------------------
-// Home Actions
+// HomePage Actions
 // ------------------------------------
 export type IHomeActions =
     IFetchHome |
