@@ -1,4 +1,7 @@
+import Joi from "@hapi/joi";
+
 import {IFile} from "../../constants/firebase/storage";
+import {Validator} from "../../constants/firebase/database";
 
 export interface IUser {
     uid: string;
@@ -7,6 +10,19 @@ export interface IUser {
     photoURL: string;
 
     avatar?: IFile;
+}
+
+export interface IUserSignIn {
+    email: string;
+    password: string;
+    remember: boolean;
+}
+
+export function IUserSignInValidator(value: IUserSignIn | boolean) {
+    return Validator(Joi.object({
+        email: Joi.string().email({tlds: {allow: false}}).label('Email'),
+        password: Joi.string().min(3).required(),
+    }), value, {abortEarly: true});
 }
 
 export interface IUserErrors {
