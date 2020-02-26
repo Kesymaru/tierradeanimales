@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from "react";
 import {Switch} from "react-router-dom";
 
-import IAppRoute from "../routes/routes.tyoes";
+import IAppRoute from "../routes/routes.types";
 import Route from "./Route";
 
 interface RoutesProps {
