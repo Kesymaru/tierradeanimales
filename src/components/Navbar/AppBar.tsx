@@ -16,6 +16,7 @@ import IAppState from "../../store/app.types";
 import IAuthState from "../../store/auth/auth.types";
 import UserMenu from "./UserMenu";
 import useRoutes from "../../routes/routes.hooks";
+import LanguageMenu from "./LanguageMenu";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
@@ -78,6 +79,7 @@ const AppBar: FunctionComponent<IAppBarProps> = ({logged, open, setOpen, anchorI
                 <Typography variant="h6" noWrap className={classes.title}>
                     App Name
                 </Typography>
+                <LanguageMenu/>
                 <UserMenu/>
             </Toolbar>
         </MaterialAppBar>

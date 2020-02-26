@@ -6,7 +6,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import {Link as RouterLink, useRouteMatch} from "react-router-dom";
 
-import IAppRoute from "../../routes/routes.tyoes";
+import IAppRoute from "../../routes/routes.types";
 import useRoutes from "../../routes/routes.hooks";
 
 interface IBreadcrumbsProps {
