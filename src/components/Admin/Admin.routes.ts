@@ -1,4 +1,4 @@
-import IAppRoute from "../../routes/routes.tyoes";
+import IAppRoute from "../../routes/routes.types";
 import {IAppRouteFactory} from "../../routes/routes.hooks";
 
 import AdminDashboard from "./AdminDashboard";
