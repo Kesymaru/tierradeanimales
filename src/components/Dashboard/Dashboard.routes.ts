@@ -1,11 +1,11 @@
-import IAppRoute from "../../routes/routes.tyoes";
+import IAppRoute from "../../routes/routes.types";
 import {IAppRouteFactory} from "../../routes/routes.hooks";
 
 import Dashboard from "./Dashboard";
 
 export const DASHBOARD_ROUTE: IAppRoute = IAppRouteFactory({
     name: 'Dashboard',
-    path: '/',
+    path: '/dashboard',
     exact: true,
     component: Dashboard
 });

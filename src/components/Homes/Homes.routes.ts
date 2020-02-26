@@ -1,7 +1,7 @@
 import HouseIcon from "@material-ui/icons/House";
 import EditIcon from '@material-ui/icons/Edit';
 
-import IAppRoute from "../../routes/routes.tyoes";
+import IAppRoute from "../../routes/routes.types";
 import {IAppRouteFactory} from "../../routes/routes.hooks";
 import {ADMIN_ROUTE} from "../Admin/Admin.routes";
 

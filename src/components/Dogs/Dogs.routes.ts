@@ -1,7 +1,7 @@
 import PetsIcon from '@material-ui/icons/Pets';
 import EditIcon from '@material-ui/icons/Edit';
 
-import IAppRoute from "../../routes/routes.tyoes";
+import IAppRoute from "../../routes/routes.types";
 import {IAppRouteFactory} from "../../routes/routes.hooks";
 import {DASHBOARD_ROUTE} from "../Dashboard/Dashboard.routes";
 import {ADMIN_ROUTE} from "../Admin/Admin.routes";

@@ -1,6 +1,6 @@
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
-import IAppRoute from "../../routes/routes.tyoes";
+import IAppRoute from "../../routes/routes.types";
 import {IAppRouteFactory} from "../../routes/routes.hooks";
 import {DASHBOARD_ROUTE} from "../Dashboard/Dashboard.routes";
 
