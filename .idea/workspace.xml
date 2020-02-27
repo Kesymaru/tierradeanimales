@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
+    <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="Address.tsx component">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/SignIn.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/SignUp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/firebase/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase/database.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18n/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/user/user.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/user/user.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/user/user.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/user/user.types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,8 +87,8 @@
     </configuration>
     <list>
       <item itemvalue="JavaScript Debug.Debug Application" />
-      <item itemvalue="npm.npm start" />
       <item itemvalue="npm.npm build" />
+      <item itemvalue="npm.npm start" />
     </list>
   </component>
   <component name="ServiceViewManager">
@@ -547,10 +541,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1265" y="-50" key="#npm_start/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582558619495" />
-    <state x="-1505" y="-213" width="884" height="758" key="CommitChangelistDialog2" timestamp="1582757266440">
+    <state x="-1505" y="-213" width="884" height="758" key="CommitChangelistDialog2" timestamp="1582818205252">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582757266440" />
+    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582818205252" />
     <state x="209" y="0" width="884" height="758" key="CommitChangelistDialog2/0.0.1280.800@0.0.1280.800" timestamp="1581882363578" />
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog" timestamp="1582690402669">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -593,10 +587,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="VCS.FileHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902347" />
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1582757267913">
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1582818715324">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582757267913" />
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582818715324" />
     <state x="257" y="133" key="Vcs.Push.Dialog.v2/0.0.1280.800@0.0.1280.800" timestamp="1581467428542" />
     <state x="-1197" y="111" key="cloudConfig.SelfSettingsDialog" timestamp="1576817894168">
       <screen x="-1920" y="-280" width="1920" height="1080" />
