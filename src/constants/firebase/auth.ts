@@ -1,14 +1,22 @@
 import Firebase from "./firebase";
 import * as firebase from "firebase";
-import {IUser} from "../../store";
 
-class Auth extends Firebase{
+import fire from "../../fire";
+import {IUser} from "../../store/user/user.types";
 
-    public static OnAuth(callback: Function) {
-        Auth.auth.onAuthStateChanged(user => callback(user));
+class Auth {
+
+    public auth: firebase.auth.Auth;
+
+    constructor() {
+        this.auth = fire.auth()
     }
 
-    public static SignUp(email: string, password: string)
+    public OnAuth(callback: Function) {
+        this.auth.onAuthStateChanged(user => callback(user));
+    }
+
+    public SignUp(email: string, password: string)
         : Promise<firebase.auth.UserCredential> {
         /*let user = null;
         try {
@@ -32,30 +40,30 @@ class Auth extends Firebase{
             }
         }*/
 
-        return Auth.auth.createUserWithEmailAndPassword(email, password);
+        return this.auth.createUserWithEmailAndPassword(email, password);
     }
 
-    public static SignIn(email: string, password: string)
+    public SignIn(email: string, password: string)
         : Promise<firebase.auth.UserCredential> {
-        return Auth.auth.signInWithEmailAndPassword(email, password);
+        return this.auth.signInWithEmailAndPassword(email, password);
     }
 
-    public static SignOut(): Promise<void> {
-        return Auth.auth.signOut();
+    public SignOut(): Promise<void> {
+        return this.auth.signOut();
     }
 
-    public static UpdatePassword (password: string): Promise<void> {
-        if(!Firebase.auth.currentUser)
+    public UpdatePassword (password: string): Promise<void> {
+        if(!this.auth.currentUser)
             return Promise.reject('There is no current user logged.');
-        return Firebase.auth.currentUser.updatePassword(password);
+        return this.auth.currentUser.updatePassword(password);
     }
 
-    public static ResetPassword(email: string): Promise<void> {
-        return Firebase.auth.sendPasswordResetEmail(email);
+    public ResetPassword(email: string): Promise<void> {
+        return this.auth.sendPasswordResetEmail(email);
     }
 
-    public static UpdateUser(profile: IUser): Promise<void|string> {
-        let user = Firebase.auth.currentUser;
+    public UpdateUser(profile: IUser): Promise<void|string> {
+        let user = this.auth.currentUser;
         if(!user) return Promise.reject('User not logged');
 
         return user.updateProfile(profile);

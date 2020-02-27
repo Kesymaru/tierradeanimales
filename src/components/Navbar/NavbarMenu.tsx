@@ -8,11 +8,15 @@ import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 
-import {ACCOUNT_ROUTE, ADMIN_DOGS_ROUTE, IAppRoute} from "../../constants";
+import IAppRoute from "../../routes/routes.types";
+import {ACCOUNT_ROUTE} from "../Login/Login.routes";
+import {ADMIN_DOGS_ROUTE} from "../Dogs/Dogs.routes";
+import {ADMIN_HOMES_ROUTE} from "../Homes/Homes.routes";
 
 const ADMIN_ROUTES: IAppRoute[] = [
     ACCOUNT_ROUTE,
     ADMIN_DOGS_ROUTE,
+    ADMIN_HOMES_ROUTE,
 ];
 
 const useStyles = makeStyles((theme: Theme) =>

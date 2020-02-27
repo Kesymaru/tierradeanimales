@@ -1,23 +1,27 @@
 import {RouterState} from "connected-react-router";
 
-import {ISystemState} from "./system/system.types";
-import {IAuthState} from "./auth/auth.types";
-import {IUserState} from "./user/user.types";
-import {IDog, IDogState} from "./dogs/dogs.types";
-import {IPagination, IResult} from "../constants/firebase/database";
+import ISystemState from "./system/system.types";
+import IAuthState from "./auth/auth.types";
+import IUserState from "./user/user.types";
+import IDogState from "./dogs/dogs.types";
+import {IResult} from "../constants/firebase/database";
+import IHomeState from "./homes/homes.types";
+import IGeonamesState from "./geonames/geonames.types";
 
-export interface IAppState {
+export default interface IAppState {
     system: ISystemState;
     auth: IAuthState;
     user: IUserState;
     dogs: IDogState;
+    homes: IHomeState;
+    geonames: IGeonamesState;
     router: RouterState;
 }
 
 export interface IAppStateItem<T> {
     status: TStatus;
     data: T | null;
-    id: string | null;
+    id: string | number | null;
     error?: string | Error;
 }
 
@@ -32,18 +36,3 @@ export enum TStatus {
     Fetching,
     Error
 }
-
-interface IDataOptions {
-    _selected?: boolean;
-}
-
-export interface IData extends IDataOptions {
-    id: string;
-
-    createdAt?: Date;
-    updatedAt?: Date;
-}
-
-export const IDataDefaults: IDataOptions = {
-    _selected: false,
-};

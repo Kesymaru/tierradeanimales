@@ -13,11 +13,11 @@ import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
-import {IDog, IDogState} from "../../store/dogs/dogs.types";
-import {IAppState, TStatus} from "../../store";
+import IAppState, {TStatus} from "../../store/app.types";
+import IDogState, {IDog} from "../../store/dogs/dogs.types";
 import {IPagination} from "../../constants/firebase/database";
-import DogsActions from "../../store/dogs/dogs.actions";
-import {DOG_DETAILS_ROUTE} from "../../constants";
+import {GetDogs} from "../../store/dogs/dogs.actions";
+import {DOG_DETAILS_ROUTE} from "./Dogs.routes";
 
 interface IDogsProps extends Pick<IDogState, 'dogs'> {
 }
@@ -34,7 +34,7 @@ const Dogs: FunctionComponent<IDogsProps> = (props) => {
     }, [props.dogs]);
 
     if (props.dogs.status === TStatus.Empty)
-        dispatch(DogsActions.All(pagination));
+        dispatch(GetDogs(pagination));
 
     console.log('dogs', dogs);
 

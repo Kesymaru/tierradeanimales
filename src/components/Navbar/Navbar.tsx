@@ -1,9 +1,12 @@
 import React, {FunctionComponent} from "react";
+import {connect} from "react-redux";
+
+import {createStyles, makeStyles, Theme, useTheme} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
-import {createStyles, makeStyles, Theme, useTheme} from '@material-ui/core/styles';
-import {IAppState, IAuthState} from "../../store";
-import {connect} from "react-redux";
+
+import IAppState from "../../store/app.types";
+import IAuthState from "../../store/auth/auth.types";
 import NavbarMenu from "./NavbarMenu";
 
 const drawerWidth = 240;
@@ -67,8 +70,8 @@ const Navbar: FunctionComponent<INavbarProps> = ({logged, open, setOpen}) => {
 interface INarvarOwnProps extends Omit<INavbarProps, 'logged'> {
 }
 
-const mapStateToProps = (state: IAppState, props: INarvarOwnProps): INavbarProps => ({
-    ...props,
+const mapStateToProps = (state: IAppState, ownProps: INarvarOwnProps): INavbarProps => ({
+    ...ownProps,
     logged: state.auth.logged,
 });
 export default connect(mapStateToProps)(Navbar);

@@ -1,14 +1,27 @@
-import {IFile} from "../../constants/firebase/storage";
-import {IAppStateItem, IAppStateItems, IData} from "../app.types";
-import {IResult} from "../../constants/firebase/database";
+import * as firebase from "firebase";
+import {v4 as uuid} from 'uuid';
 
-export type ISex = 'male' | 'female';
+import {IFile, IFileFactory} from "../../constants/firebase/storage";
+import {IData, IDataFactory, ISex} from "../../constants/firebase/database";
+import {IAppStateItem, IAppStateItems} from "../app.types";
+import {IResult, IStats} from "../../constants/firebase/database";
+
+// ------------------------------------
+// IDog
+// ------------------------------------
+export enum IDogStatus {
+    Rescued = 'Rescued',
+    Hospitalized = 'Hospitalized',
+    FosterHome = 'Foster Home',
+    Adopted = 'Adopted',
+    Deceased = 'Deceased',
+}
 
 export interface IDog extends IData {
     name: string;
     age: number;
     sex: ISex;
-    status: string;
+    status: IDogStatus;
     description: string;
     public: boolean;
 
@@ -17,7 +30,49 @@ export interface IDog extends IData {
     start?: boolean;
 }
 
-export interface IDogState {
+export function IDogFactory(value?: Partial<IDog>, _new: boolean = true): IDog {
+    if (!_new) value = {
+        ...value,
+        avatar: value?.avatar ? IFileFactory(value.avatar, _new) : undefined,
+        images: value?.images ? value.images.map(v => IFileFactory(v, _new)) : undefined
+    };
+    return {
+        name: '',
+        age: 1,
+        sex: 'male',
+        status: IDogStatus.Rescued,
+        description: '',
+        public: false,
+        start: false,
+        ...IDataFactory({_new}),
+        ...value,
+    }
+}
+
+// ------------------------------------
+// Dogs Stats
+// ------------------------------------
+export interface IDogStats extends IStats {
+    rescued: number | firebase.firestore.FieldValue;
+    hospitalized: number | firebase.firestore.FieldValue;
+    fosterHome: number | firebase.firestore.FieldValue;
+    adopted: number | firebase.firestore.FieldValue;
+    deceased: number | firebase.firestore.FieldValue;
+}
+
+export function IDogStatsFactory(config: Partial<IDogStats>): IDogStats {
+    return {
+        ...config,
+        total: config.total ? config.total : 0,
+        rescued: config.rescued ? config.rescued : 0,
+        hospitalized: config.hospitalized ? config.hospitalized : 0,
+        fosterHome: config.fosterHome ? config.fosterHome : 0,
+        adopted: config.adopted ? config.adopted : 0,
+        deceased: config.deceased ? config.deceased : 0,
+    }
+}
+
+export default interface IDogState {
     dogs: IAppStateItems<IDog>;
     dog: IAppStateItem<IDog>;
 }
@@ -75,6 +130,9 @@ interface IErrorDogs {
     payload: Error;
 }
 
+// ------------------------------------
+// Dogs Actions
+// ------------------------------------
 export type TDogsActions =
     IFetchDog |
     ILoadDog |
@@ -83,5 +141,4 @@ export type TDogsActions =
 
     IFetchDogs |
     ILoadDogs |
-    IErrorDogs
-    ;
+    IErrorDogs;

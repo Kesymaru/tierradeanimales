@@ -16,10 +16,11 @@ import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
-import {SIGN_IN_ROUTE} from "../constants/routes";
-import {AuthActions} from "../store";
-
-const EMAIL_REGEX: RegExp = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+import {SingUp} from "../../store/auth/auth.actions";
+import {SIGN_IN_ROUTE} from "./Login.routes";
+import {IUserSignUp} from "../../store/user/user.types";
+import {ValidationError} from "@hapi/joi";
+import {GetError, HasError} from "../../constants/firebase/database";
 
 const useStyles = makeStyles((theme: Theme) => ({
     paper: {
@@ -41,83 +42,34 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-const USED_EMAILS: string[] = [];
-
 const SignUp: FunctionComponent<{}> = () => {
     const classes = useStyles();
-    const [firstName, setFirstName] = useState<string>('');
-    const [lastName, setLastName] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [terms, setTerms] = useState<boolean>(false);
-    const [firstNameError, setFirstNameError] = useState<string>('');
-    const [lastNameError, setLastNameError] = useState<string>('');
-    const [emailError, setEmailError] = useState<string>('');
-    const [passwordError, setPasswordError] = useState<string>('');
-    const [termsError, setTermsError] = useState<string>('');
     const dispatch = useDispatch();
 
-    const handleSubmit = async (event: FormEvent) => {
+    const [user, setUser] = useState<IUserSignUp>({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+    });
+    const [terms, setTerms] = useState<boolean>(false);
+    const [errors, setErrors] = useState<ValidationError | null>(null);
+
+    function handleSubmit(event: FormEvent) {
         event.preventDefault();
-        dispatch(AuthActions.SingUp(email, password));
+        // dispatch(SingUp(user.email, user.password));
     };
 
-    const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-        let {value} = event.target;
-        setFirstName(value);
-        validateFirstName(value);
-    };
-
-    const handleLastNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-        let {value} = event.target;
-        setLastName(value);
-        validateLastName(value);
+    function handleUserChange(key: keyof IUserSignUp) {
+        return (event: ChangeEvent<HTMLInputElement>) => {
+            const value = event.target.value;
+            setUser({...user, [`${key}`]: value});
+        }
     }
-
-    const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-      let {value} = event.target;
-      setEmail(value);
-      validateEmail(value);
-    };
-
-    const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-        let {value} = event.target;
-        setPassword(value);
-        validatePassword(value);
-    };
 
     const handleTermsChange = (event: ChangeEvent<HTMLInputElement>) => {
         let {checked} = event.target;
         setTerms(checked);
-        setTermsError(checked ? '' : 'Terms is required');
-    };
-
-    const validateFirstName = (value: string) => {
-        if(!value) return setFirstNameError('First Name required');
-        if(value.length < 3) return setFirstNameError('Invalid First Name');
-        setFirstNameError('')
-    };
-
-    const validateLastName = (value: string) => {
-        if(!value) return setLastNameError('Last Name required');
-        if(value.length < 3) return setLastNameError('Invalid Last Name');
-        setLastNameError('')
-    };
-
-    const validateEmail = (value: string) => {
-        if(!value) return setEmailError('Email is required');
-        if(USED_EMAILS.includes(value))
-            return setEmailError('Email already in registered');
-        EMAIL_REGEX.test(value)
-            ? setEmailError('')
-            : setEmailError('Invalid Email');
-    };
-
-    const validatePassword = (value: string) => {
-        if(!value) return setPasswordError('Password required');
-        if(value.length < 6) return setPasswordError('Invalid Password length, min 6 characters');
-        setPasswordError('');
-        setTermsError(terms ? '' : 'Terms is required');
     };
 
     return (
@@ -142,11 +94,10 @@ const SignUp: FunctionComponent<{}> = () => {
                                 id="firstName"
                                 label="First Name"
                                 autoFocus
-                                value={firstName}
-                                error={!!firstNameError}
-                                helperText={firstNameError}
-                                onChange={handleFirstNameChange}
-                                onBlur={() => validateFirstName(firstName)}
+                                value={user.firstName}
+                                error={HasError(['firstName'], errors)}
+                                helperText={GetError(['firstName'], errors)}
+                                onChange={handleUserChange('firstName')}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -158,11 +109,10 @@ const SignUp: FunctionComponent<{}> = () => {
                                 label="Last Name"
                                 name="lastName"
                                 autoComplete="lname"
-                                value={lastName}
-                                error={!!lastNameError}
-                                helperText={lastNameError}
-                                onChange={handleLastNameChange}
-                                onBlur={() => validateLastName(lastName)}
+                                value={user.lastName}
+                                error={HasError(['lastName'], errors)}
+                                helperText={GetError(['lastName'], errors)}
+                                onChange={handleUserChange('lastName')}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -174,11 +124,10 @@ const SignUp: FunctionComponent<{}> = () => {
                                 label="Email Address"
                                 name="email"
                                 autoComplete="email"
-                                value={email}
-                                error={!!emailError}
-                                helperText={emailError}
-                                onChange={handleEmailChange}
-                                onBlur={() => validateEmail(email)}
+                                value={user.email}
+                                error={HasError(['email'], errors)}
+                                helperText={GetError(['email'], errors)}
+                                onChange={handleUserChange('email')}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -191,11 +140,10 @@ const SignUp: FunctionComponent<{}> = () => {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
-                                value={password}
-                                error={!!passwordError}
-                                helperText={passwordError}
-                                onChange={handlePasswordChange}
-                                onBlur={() => validatePassword(password)}
+                                value={user.password}
+                                error={HasError(['password'], errors)}
+                                helperText={GetError(['password'], errors)}
+                                onChange={handleUserChange('password')}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -210,9 +158,9 @@ const SignUp: FunctionComponent<{}> = () => {
                                 }
                                 label="I have read the use terms"
                             />
-                            {termsError
+                            {/*{termsError
                                 ? <FormHelperText>{termsError}</FormHelperText>
-                                : null}
+                                : null}*/}
                         </Grid>
                     </Grid>
                     <Button
@@ -221,7 +169,7 @@ const SignUp: FunctionComponent<{}> = () => {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        disabled={ !!firstNameError || !!lastNameError || !!emailError || !!passwordError || !!termsError }
+                        disabled={!!errors}
                     >
                         Sign Up
                     </Button>

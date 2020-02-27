@@ -1,45 +1,68 @@
-import Firebase from "./firebase";
 import * as firebase from "firebase";
+import "firebase/storage";
+
+import fire from "../../fire";
 import {v4 as uuid} from 'uuid';
 
-export interface IStorageDefaults {
-    _file?: File|null;
+export interface IFileDefaults {
+    _file?: File | null;
     _selected?: boolean;
-    _new?: boolean;
     _deleted?: boolean;
+    _new?: boolean;
 }
 
-export interface IFile extends IStorageDefaults {
+// ------------------------------------
+// IFile
+// ------------------------------------
+export interface IFile extends IFileDefaults {
     id: string;
     name: string;
     src: string;
 }
 
-export interface IStorageConfig {
-    name: string;
-    defaults?: IStorageDefaults;
-}
-
-class Storage {
-    public static defaults: IStorageDefaults = {
+export function IFileFactory(value?: Partial<IFile>, _new: boolean = true): IFile {
+    return {
+        id: uuid(),
+        name: '',
+        src: '',
         _file: null,
         _selected: false,
-        _new: false,
         _deleted: false,
-    };
+        _new,
+        ...value,
+    }
+}
 
-    public storage: firebase.storage.Reference;
+export interface IStorageConfig {
+    path: string;
+    defaults?: IFileDefaults;
+}
+
+export const FileDefaults: IFileDefaults = {
+    _file: null,
+    _selected: false,
+    _new: false,
+    _deleted: false,
+};
+
+class Storage {
+    public pathName: string;
+    public defaults: IFileDefaults = FileDefaults;
+
+    public storage: firebase.storage.Storage;
+    public path: firebase.storage.Reference;
 
     constructor(public readonly config: IStorageConfig) {
-        if(!this.config.defaults)
-            this.config.defaults = Storage.defaults;
+        this.pathName = this.config.path
+        if (this.config.defaults) this.defaults = this.config.defaults;
 
-        this.storage = Firebase.storage.ref(this.config.name);
+        this.storage = fire.storage();
+        this.path = this.storage.ref(this.pathName);
     }
 
-    public static newFile(file: File, defaults: IStorageDefaults = Storage.defaults): IFile {
+    public static newFile(file: File): IFile {
         return {
-            ...defaults,
+            ...FileDefaults,
             id: uuid(),
             name: file.name,
             src: URL.createObjectURL(file),
@@ -49,13 +72,13 @@ class Storage {
     }
 
     public async _softSave<T extends IFile>(file: T): Promise<T> {
-        let ref = this.storage.child(file.id);
+        let ref = this.path.child(file.id);
         if (file._file) await ref.put(file._file);
         return Object.assign(file, {_new: false});
     }
 
     public async _save<T extends IFile>(file: T): Promise<T> {
-        let ref = this.storage.child(file.id);
+        let ref = this.path.child(file.id);
         let src = file.src;
         if (file._file) {
             let snapshot = await ref.put(file._file);
@@ -65,7 +88,7 @@ class Storage {
     }
 
     public async _delete<T extends IFile>(file: T): Promise<T> {
-        let ref = this.storage.child(file.id);
+        let ref = this.path.child(file.id);
         await ref.delete();
         return Object.assign(file, {_deleted: true});
     }

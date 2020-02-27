@@ -12,8 +12,11 @@ import Typography from "@material-ui/core/Typography";
 import SaveIcon from "@material-ui/icons/Save";
 import CloseIcon from "@material-ui/icons/Close";
 
-import Storage, {IFile} from "../constants/firebase/storage";
-import {IUser, IUserState, IAppState, UserActions} from "../store";
+import Storage, {IFile} from "../../constants/firebase/storage";
+import IAppState from "../../store/app.types";
+import IUserState, {IUser} from "../../store/user/user.types";
+import {UpdatePassword, UpdateProfile} from "../../store/user/user.actions";
+
 
 interface AccountProps extends Pick<IUserState, 'user'> {
 }
@@ -33,8 +36,8 @@ const Account: FunctionComponent<AccountProps> = (props) => {
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
         if (!user || !touched) return;
-        dispatch(UserActions.UpdateProfile(user));
-        if (password.length) dispatch(UserActions.UpdatePassword(password));
+        dispatch(UpdateProfile(user));
+        if (password.length) dispatch(UpdatePassword(password));
     };
 
     function handleUserChange(key: keyof IUser) {

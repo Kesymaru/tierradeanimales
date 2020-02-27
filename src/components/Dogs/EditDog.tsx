@@ -2,8 +2,6 @@ import React, {ChangeEvent, FormEvent, FunctionComponent, MouseEvent, useEffect,
 import {connect, useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
 
-import { useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Zoom from "@material-ui/core/Zoom";
 import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
@@ -23,13 +21,14 @@ import Select from '@material-ui/core/Select';
 
 import StarIcon from '@material-ui/icons/Star';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import SendIcon from "@material-ui/icons/Send"
+import SendIcon from "@material-ui/icons/Send";
 import SaveIcon from '@material-ui/icons/Save';
 import RotateRightIcon from '@material-ui/icons/RotateRight';
 
-import {IDog, IDogState, ISex} from "../../store/dogs/dogs.types";
-import DogsActions from "../../store/dogs/dogs.actions";
-import {IAppState, TStatus} from "../../store";
+import IAppState, {TStatus} from "../../store/app.types";
+import IDogState, {IDog, IDogStatus, IDogFactory} from "../../store/dogs/dogs.types";
+import {AddDog, GetDog, UpdateDog} from "../../store/dogs/dogs.actions";
+import {ISex} from "../../constants/firebase/database";
 import DogImages from "./DogImages";
 
 const InitDog: IDog = {
@@ -37,7 +36,7 @@ const InitDog: IDog = {
     name: '',
     age: 0,
     sex: 'male',
-    status: 'rescued',
+    status: IDogStatus.Rescued,
     description: '',
     public: false,
     start: false,
@@ -50,12 +49,12 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
     const dispatch = useDispatch();
     const {id} = useParams();
     const isNew = id && id.toLowerCase() === 'new';
-    const [dog, setDog] = useState<IDog>(InitDog);
+    const [dog, setDog] = useState<IDog>(IDogFactory());
     const [loading, setLoading] = useState<boolean>(_getLoading());
 
     useEffect(() => {
         setLoading(_getLoading());
-        if (props.dog.data) setDog(props.dog.data);
+        if (!isNew && props.dog.data) setDog(props.dog.data);
     }, [props.dog]);
 
     if (!isNew && id && (
@@ -63,7 +62,7 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
         ||
         props.dog.id && props.dog.id !== id
     )) {
-        if (id) dispatch(DogsActions.Get(id));
+        if (id) dispatch(GetDog(id));
     }
 
     function _getLoading(): boolean {
@@ -72,8 +71,8 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
-        if (isNew) dispatch(DogsActions.Add(dog));
-        else dispatch(DogsActions.Update(dog))
+        if (isNew) dispatch(AddDog(dog));
+        else dispatch(UpdateDog(dog));
         setLoading(value => !value);
     }
 
@@ -87,7 +86,7 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
             if (type === 'number') value = parseInt(event.target.value);
             if (typeof checked === 'boolean') value = checked;
 
-            setDog({...dog, ...{[`${key}`]: value}});
+            setDog({...dog, [`${key}`]: value});
         }
     }
 
@@ -97,7 +96,7 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
     }
 
     function handleStatusChange(event: ChangeEvent<{ value: unknown }>) {
-        let status = event.target.value as string;
+        let status = event.target.value as IDogStatus;
         setDog({...dog, status});
     }
 
@@ -182,9 +181,7 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
                 </Grid>
                 <Grid item xs={6} sm={6} md={3}>
                     <FormControl variant="outlined" style={{display: 'flex'}}>
-                        <InputLabel id="sex">
-                            Sex
-                        </InputLabel>
+                        <InputLabel id="sex">Sex</InputLabel>
                         <Select
                             labelId="sex"
                             id="sex"
@@ -207,11 +204,11 @@ const EditDog: FunctionComponent<IEditDogProps> = (props) => {
                             value={dog.status}
                             onChange={handleStatusChange}
                         >
-                            <MenuItem value={'rescued'}>Rescued</MenuItem>
-                            <MenuItem value={'hospitalized'}>Hospitalized</MenuItem>
-                            <MenuItem value={'foster home'}>Foster Home</MenuItem>
-                            <MenuItem value={'adopted'}>Adopted</MenuItem>
-                            <MenuItem value={'deceased'}>Deceased</MenuItem>
+                            <MenuItem value={IDogStatus.Rescued}>Rescued</MenuItem>
+                            <MenuItem value={IDogStatus.Hospitalized}>Hospitalized</MenuItem>
+                            <MenuItem value={IDogStatus.FosterHome}>Foster Home</MenuItem>
+                            <MenuItem value={IDogStatus.Adopted}>Adopted</MenuItem>
+                            <MenuItem value={IDogStatus.Deceased}>Deceased</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>

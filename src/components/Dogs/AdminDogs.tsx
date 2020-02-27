@@ -3,6 +3,7 @@ import {connect, useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {useTheme} from "@material-ui/core/styles";
+
 import Fade from "@material-ui/core/Fade";
 import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -24,26 +25,11 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import AppTable from "../AppTable/AppTable";
 import AlertDialog from "../AlertDialog";
 
-import {ADMIN_DOG_EDIT_ROUTE} from "../../constants";
-import {IAppState, TStatus} from "../../store";
-import {IDog, IDogState} from "../../store/dogs/dogs.types";
-import DogsActions from "../../store/dogs/dogs.actions";
-import {IFilter, ISort} from "../../constants/firebase/database";
-
-const DOGS_FILTER: IFilter[] = [
-    {
-        name: 'Name',
-        key: 'name',
-        condition: '==',
-        value: ''
-    },
-    {
-        name: 'Age',
-        key: 'age',
-        condition: '==',
-        value: ''
-    }
-];
+import IAppState, {TStatus} from "../../store/app.types";
+import IDogState, {IDog} from "../../store/dogs/dogs.types";
+import {GetDogs} from "../../store/dogs/dogs.actions";
+import {ISort} from "../../constants/firebase/database";
+import {ADMIN_DOG_EDIT_ROUTE} from "./Dogs.routes";
 
 interface IAdminDogs extends Pick<IDogState, 'dogs'> {
 }
@@ -54,48 +40,51 @@ function AdminDogs(props: IAdminDogs) {
     const theme = useTheme();
     const isSm = useMediaQuery(theme.breakpoints.down('sm'));
     const [dogs, _setDogs] = useState<IDog[]>(props.dogs.data);
-    const [selected, seSelected] = useState<IDog[]>([]);
-    const [loading, setLoading] = useState<boolean>(_getLoading());
+    const [selected, setSelected] = useState<IDog[]>([]);
+    const [loading, setLoading] = useState<boolean>(getLoading());
     const [openDelete, setOpenDelete] = useState<boolean>(false);
 
     useEffect(() => {
         setDogs(props.dogs.data);
-        setLoading(_getLoading());
+        setLoading(getLoading());
     }, [props.dogs]);
 
-    function _getLoading(): boolean {
+    init();
+
+    function init() {
+        if (props.dogs.status === TStatus.Empty)
+            dispatch(GetDogs());
+    }
+
+    function getLoading(): boolean {
         return props.dogs.status === TStatus.Fetching
     }
 
-    function setDogs(_dogs: IDog[]) {
-        seSelected(_dogs.filter(dog => dog._selected));
-        _setDogs(_dogs);
+    function setDogs(value: IDog[]) {
+        setSelected(value.filter(dog => dog._selected));
+        _setDogs(value);
     }
 
-    if (props.dogs.status === TStatus.Empty)
-        dispatch(DogsActions.All());
-
     function onChangePage(event: unknown, page: number) {
-        if (page === props.dogs.pagination.page) return;
+        if (!props.dogs.pagination || page === props.dogs.pagination.page) return;
         const pagination = {...props.dogs.pagination, page};
-        dispatch(DogsActions.All(pagination));
+        dispatch(GetDogs(pagination));
     }
 
     function onChangeRowsPerPage(event: ChangeEvent<HTMLInputElement>) {
         const rowPerPage = parseInt(event.target.value);
-        if (rowPerPage === props.dogs.pagination.rowPerPage) return;
+        if (!props.dogs.pagination || rowPerPage === props.dogs.pagination.rowPerPage) return;
         const pagination = {...props.dogs.pagination, rowPerPage};
-        dispatch(DogsActions.All(pagination));
+        dispatch(GetDogs(pagination));
     }
 
     function onSort(sort: ISort) {
-        const pagination = {...props.dogs.pagination, sort};
-        console.log('sort', sort, pagination);
-        dispatch(DogsActions.All(pagination));
+        console.log('on sort', sort);
+        dispatch(GetDogs(props.dogs.pagination, sort));
     }
 
     function handleDelete() {
-        // dispatch(DogsActions.Delete(selected[0]))
+        // dispatch(DeleteDogs(selected))
         setOpenDelete(true);
     }
 
@@ -160,7 +149,7 @@ function AdminDogs(props: IAdminDogs) {
         <AlertDialog
             title={selected.length > 1 ? 'Delete Dogs' : 'Delete Dog'}
             open={openDelete}
-            okTitle={selected.length > 1 ? 'Delete Dogs' : 'Delete Dog'}
+            okTitle="Delete"
             okColor="secondary"
             okIcon={<DeleteIcon/>}
             cancelColor="primary"

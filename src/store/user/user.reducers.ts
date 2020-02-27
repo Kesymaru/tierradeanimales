@@ -1,4 +1,4 @@
-import {ERROR_USER, IUserState, RECEIVE_USER, TUserActions} from "./user.types";
+import IUserState, {ERROR_USER, RECEIVE_USER, TUserActions} from "./user.types";
 
 const InitState: IUserState = {
     user: null,
@@ -17,10 +17,6 @@ function UserReducers (
         case ERROR_USER:
             return {
                 ...state,
-                errors: {
-                    ...(state.errors || []),
-                    user: action.payload,
-                }
             };
 
         default:

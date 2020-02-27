@@ -10,7 +10,7 @@ export interface ISingIn {
     expire: Date|null;
 }
 
-export interface IAuthState extends ISingIn {
+export default interface IAuthState extends ISingIn {
     logged: boolean;
     errors?: IAutheErrors|null;
 }

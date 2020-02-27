@@ -1,4 +1,4 @@
-import {CLOSE_NOTIFICATION, ERROR, ISystemState, LOADING, NOTIFY, TSystemActions} from "./system.types";
+import ISystemState, {CLOSE_NOTIFICATION, ERROR, LOADING, NOTIFY, TSystemActions} from "./system.types";
 
 const InitState: ISystemState = {
     notifications: [],

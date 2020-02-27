@@ -8,6 +8,8 @@ import SystemReducers from "./system/system.reducers";
 import AuthReducers from "./auth/auth.reducers";
 import UserReducers from "./user/user.reducers";
 import DogsReducers from "./dogs/dogs.reducers";
+import HomesReducers from "./homes/homes.reducers";
+import GeonamesReducers from "./geonames/geonames.reducers";
 
 class AppStore {
     public static store: Store;
@@ -19,6 +21,8 @@ class AppStore {
         auth: AuthReducers,
         user: UserReducers,
         dogs: DogsReducers,
+        homes: HomesReducers,
+        geonames: GeonamesReducers,
     };
     private static middlewares = [
         // AuthMiddleware,

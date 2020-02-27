@@ -4,35 +4,17 @@ import {Provider} from "react-redux";
 import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 
-import App from "./App";
 import './index.css';
+import "./i18n";
 import * as serviceWorker from './serviceWorker';
-import AppStore from "./store";
-import Firebase from "./constants/firebase/firebase";
-import LocalStorage from "./constants/localStorage";
+
+import App from "./App";
+import AppStore from "./store/app.store";
 
 // ------------------------------------
 // Configure App
 // ------------------------------------
 AppStore.Configure();
-
-LocalStorage.configure({
-    keys: [{
-        key: 'token',
-        path: 'system.auth.token'
-    }]
-});
-
-Firebase.Configure({
-    apiKey: "AIzaSyCHHJ0dpe8h5cfisKgOLsIKppZNrFbuRQk",
-    appId: "app-id",
-    projectId: "mywod-1c55e",
-    authDomain: "project-id.firebaseapp.com",
-    databaseURL: "https://mywod-1c55e.firebaseio.com/",
-    storageBucket: "gs://mywod-1c55e.appspot.com",
-    messagingSenderId: "sender-id",
-    measurementId: "G-measurement-id",
-});
 
 const AppRoot: FunctionComponent = () => (
     <Provider store={AppStore.store}>

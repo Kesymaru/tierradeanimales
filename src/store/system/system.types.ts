@@ -9,7 +9,7 @@ export interface ISystemLoading {
     [key: string]: boolean;
 }
 
-export interface ISystemState {
+export default interface ISystemState {
     notifications: INotification[];
     loading: boolean;
     loadingStatus: ISystemLoading;

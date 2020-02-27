@@ -3,7 +3,9 @@ import {connect, useDispatch} from "react-redux";
 import {Snackbar, IconButton} from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 
-import {INotification, ISystemState, SystemActions, IAppState} from "../store";
+import IAppState from "../store/app.types";
+import ISystemState, {INotification} from "../store/system/system.types";
+import SystemActions from "../store/system/system.actions";
 
 interface INotifyProps extends Pick<ISystemState, 'notifications'> {
 }

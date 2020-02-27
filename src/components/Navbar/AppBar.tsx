@@ -12,9 +12,11 @@ import Slide from '@material-ui/core/Slide';
 import Link from "@material-ui/core/Link";
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 
-import {IAppState, IAuthState} from "../../store";
+import IAppState from "../../store/app.types";
+import IAuthState from "../../store/auth/auth.types";
 import UserMenu from "./UserMenu";
-import {useRoute, useRoutes} from "../../constants";
+import useRoutes from "../../routes/routes.hooks";
+import LanguageMenu from "./LanguageMenu";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
@@ -60,7 +62,6 @@ interface IAppBarProps extends Pick<IAuthState, 'logged'> {
 const AppBar: FunctionComponent<IAppBarProps> = ({logged, open, setOpen, anchorId}) => {
     const classes = useStyles();
     const routes = useRoutes();
-    const route = useRoute();
 
     return <>
         <MaterialAppBar position="fixed" className={logged ? classes.appBar : ''}>
@@ -78,6 +79,7 @@ const AppBar: FunctionComponent<IAppBarProps> = ({logged, open, setOpen, anchorI
                 <Typography variant="h6" noWrap className={classes.title}>
                     App Name
                 </Typography>
+                <LanguageMenu/>
                 <UserMenu/>
             </Toolbar>
         </MaterialAppBar>

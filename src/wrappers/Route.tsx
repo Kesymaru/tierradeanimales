@@ -1,7 +1,8 @@
 import React, {FunctionComponent} from "react";
 import {Route as ReactRouter, Redirect} from "react-router-dom";
 
-import {IAppRoute, SIGN_IN_ROUTE} from "../constants";
+import IAppRoute from "../routes/routes.types";
+import {SIGN_IN_ROUTE} from "../components/Login/Login.routes";
 
 interface RouteProps extends IAppRoute {
     logged: boolean;
