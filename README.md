@@ -47,6 +47,9 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ## Material UI 
 https://material-ui.com/components/menus/
 
+### Material Icons
+https://material-ui.com/components/material-icons/
+
 ## i18 Translations
 https://github.com/i18next/react-i18next
 
