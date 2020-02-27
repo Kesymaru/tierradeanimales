@@ -57,7 +57,7 @@ interface ISignInProps extends Pick<ISystemState, 'loading'>, Pick<IAuthState, '
 const SignIn: FunctionComponent<ISignInProps> = ({loading, logged}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
     const [data, _setData] = useState<IUserSignIn>({email: '', password: '', remember: false});
     const [touched, setTouched] = useState<boolean>(false);
     const [errors, setErrors] = useState<ValidationError | null>(null);
@@ -120,7 +120,6 @@ const SignIn: FunctionComponent<ISignInProps> = ({loading, logged}) => {
                         error={HasError(['email'], errors)}
                         helperText={GetError(['email'], errors)}
                         onChange={handleEmailChange}
-                        // onBlur={() => validate()}
                         disabled={loading}
                     />
                     <TextField

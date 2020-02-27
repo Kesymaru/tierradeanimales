@@ -17,10 +17,6 @@ function UserReducers (
         case ERROR_USER:
             return {
                 ...state,
-                errors: {
-                    ...(state.errors || []),
-                    user: action.payload,
-                }
             };
 
         default:

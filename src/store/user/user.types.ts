@@ -1,4 +1,4 @@
-import Joi from "@hapi/joi";
+import Joi, {ErrorReport} from "@hapi/joi";
 
 import {IFile} from "../../constants/firebase/storage";
 import {Validator} from "../../constants/firebase/database";
@@ -20,24 +20,46 @@ export interface IUserSignIn {
 
 export function IUserSignInValidator(value: IUserSignIn | boolean) {
     return Validator(Joi.object({
-        email: Joi.string().email({tlds: {allow: false}}).label('Email'),
-        password: Joi.string().min(3).required(),
+        email: Joi.string()
+            .email({tlds: {allow: false}})
+            .label('Email'),
+        password: Joi.string().min(3).required().label('Password'),
+    }), value, {abortEarly: true, messages: {
+        'string.email': 'Custom email message!!'
+        }});
+}
+
+export interface IUserSignUp {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+}
+
+export function IUserSignUpValidator(value: IUserSignUp | boolean) {
+    return Validator(Joi.object({
+        firstName: Joi.string()
+            .required()
+            .label('First Name'),
+        lastName: Joi.string()
+            .required()
+            .label('Last Name'),
+        email: Joi.string()
+            .email({tlds: {allow: false}})
+            .required()
+            .label('Email'),
+        password: Joi.string()
+            .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+            .required().label('Password'),
     }), value, {abortEarly: true});
 }
 
-export interface IUserErrors {
-    user?: Error;
-    updatePassword?: Error;
-    resetPassword?: Error;
-}
-
 export default interface IUserState {
-    user: IUser|null;
-    errors?: IUserErrors;
+    user: IUser | null;
 }
 
 // ------------------------------------
-// load user
+// Load User
 // ------------------------------------
 export const RECEIVE_USER = 'RECEIVE_USER';
 export const ERROR_USER = 'ERROR_USER';
@@ -53,7 +75,7 @@ interface IErrorUser {
 }
 
 // ------------------------------------
-// update password
+// Update Password
 // ------------------------------------
 export const ERROR_UPDATE_PASSWORD = 'ERROR_UPDATE_PASSWORD';
 

@@ -2,7 +2,7 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import {v4 as uuid} from 'uuid';
 import Joi, {
-    AnySchema,
+    AnySchema, ErrorReport,
     ValidationError,
     ValidationErrorItem,
     ValidationOptions,
@@ -12,14 +12,22 @@ import Joi, {
 // ------------------------------------
 // Validator
 // ------------------------------------
+interface IValidationTranslate {
+    type: string;
+    label: string;
+    message: string;
+}
+
 const ValidatorOptions: ValidationOptions = {abortEarly: false, stripUnknown: true};
 
 export function Validator(
     schema: AnySchema,
     value: any,
     options: ValidationOptions = ValidatorOptions): ValidationResult | AnySchema {
-    if (typeof value === 'boolean') return schema as AnySchema;
+    if (typeof value === 'boolean')
+        return schema as AnySchema;
     options = {...ValidatorOptions, ...options};
+
     return schema.validate(value, options) as ValidationResult;
 }
 

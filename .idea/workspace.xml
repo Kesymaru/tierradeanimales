@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="531f010c-4639-4ef4-a02a-6248b66079dd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Address.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Address.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Admin/Admin.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/Admin.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Homes/EditHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Homes/EditHome.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Homes/HomeContacts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Homes/HomeContacts.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Homes/HomeDogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Homes/HomeDogs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Homes/Homes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Homes/Homes.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Login/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/SignIn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/SignUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/firebase/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/firebase/database.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/i18n/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/user/user.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/user/user.reducers.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/user/user.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/user/user.types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -129,42 +126,7 @@
       <workItem from="1579564004625" duration="40429000" />
       <workItem from="1579733497168" duration="365923000" />
       <workItem from="1582215133977" duration="27590000" />
-      <workItem from="1582558357513" duration="12083000" />
-    </task>
-    <task id="LOCAL-00081" summary="Refactored the store to delete the store/index.ts in order to force the imports my module so only used code is imported to improve performance&#10;&#10;Updated components">
-      <created>1581627781539</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1581627781539</updated>
-    </task>
-    <task id="LOCAL-00082" summary="Fixed the stats name for the database.ts">
-      <created>1581628260053</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1581628260054</updated>
-    </task>
-    <task id="LOCAL-00083" summary="dogs.actions.ts custom stats support using onStats() callback">
-      <created>1581629088436</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1581629088436</updated>
-    </task>
-    <task id="LOCAL-00084" summary="Added homes.actions.ts, homes.reducers.ts and homes.types.ts to the store">
-      <created>1581717396265</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1581717396269</updated>
-    </task>
-    <task id="LOCAL-00085" summary="separated the routes config into a new directory src/routes, routes.ts remvoed, added new index for the routes, routes.hooks.ts and routes.tyoes.ts to separate the interfaces, functions and custom hooks&#10;&#10;Created new foster homes component and edit foster home component, Homes.tsx and EditHome.tsx&#10;&#10;Updated the database.ts to support custon counter on the _stats&#10;&#10;Updated the homes redux store, homes.types.ts, homes.reducers.ts and homes.actions.ts">
-      <created>1581902297997</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1581902297997</updated>
+      <workItem from="1582558357513" duration="14682000" />
     </task>
     <task id="LOCAL-00086" summary="Fixes the count stats on the dogs.actions.ts&#10;removed not used and comented code on database.ts">
       <created>1581904877939</created>
@@ -474,7 +436,42 @@
       <option name="project" value="LOCAL" />
       <updated>1582757185225</updated>
     </task>
-    <option name="localTasksCounter" value="130" />
+    <task id="LOCAL-00130" summary="Admin.routes.ts">
+      <created>1582757195557</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1582757195557</updated>
+    </task>
+    <task id="LOCAL-00131" summary="Homes components updated and improved">
+      <created>1582757213693</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1582757213693</updated>
+    </task>
+    <task id="LOCAL-00132" summary="Translated SignIn.tsx component">
+      <created>1582757239109</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1582757239109</updated>
+    </task>
+    <task id="LOCAL-00133" summary="Updated user.types.ts">
+      <created>1582757252792</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1582757252793</updated>
+    </task>
+    <task id="LOCAL-00134" summary="Address.tsx component">
+      <created>1582757266892</created>
+      <option name="number" value="00134" />
+      <option name="presentableId" value="LOCAL-00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1582757266893</updated>
+    </task>
+    <option name="localTasksCounter" value="135" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -494,11 +491,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added IAddress interface and factory in database.ts" />
-    <MESSAGE value="Updated EditHome.tsx component&#10;Updated HomeContacts.tsx and HomeDogs.tsx components" />
-    <MESSAGE value="Installed geonames.js package.json&#10;Added geonames.d.ts to work with typescript&#10;&#10;Created geonames store to load country, states, counties and cities datata from geonames, geonames.actions.ts, geonames.reducers.ts, geonames.types.ts" />
-    <MESSAGE value="Updated the Address.tsx component to be connected to geonames store&#10;load the country, states, counties and cities&#10;&#10;Updated the geonames store, geonames.types.ts, geonames.reducers.ts and geonames.actions.ts&#10;&#10;Remove import for fire.ts on index.tsx, not used anymore" />
-    <MESSAGE value="Updated geonames store to load countries and map the country flag icon&#10;Update Address.tsx component to use the new countries store data" />
     <MESSAGE value="Implemented form validation using Joi package" />
     <MESSAGE value="Updated the Homes.tsx component to load the homes in a table" />
     <MESSAGE value="Updated the Homes.tsx component to load the homes in a table&#10;Updated the homes.actions.ts GetHomes() method" />
@@ -519,7 +511,12 @@
     <MESSAGE value="Added support for translations" />
     <MESSAGE value="Separated the routes in index.ts, routes.hooks.ts and routes.types.ts" />
     <MESSAGE value="Translations resources" />
-    <option name="LAST_COMMIT_MESSAGE" value="Translations resources" />
+    <MESSAGE value="Admin.routes.ts" />
+    <MESSAGE value="Homes components updated and improved" />
+    <MESSAGE value="Translated SignIn.tsx component" />
+    <MESSAGE value="Updated user.types.ts" />
+    <MESSAGE value="Address.tsx component" />
+    <option name="LAST_COMMIT_MESSAGE" value="Address.tsx component" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1360" y="-75" key="#ESLint" timestamp="1582565528064">
@@ -550,10 +547,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1265" y="-50" key="#npm_start/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582558619495" />
-    <state x="-1505" y="-213" width="884" height="758" key="CommitChangelistDialog2" timestamp="1582757252533">
+    <state x="-1505" y="-213" width="884" height="758" key="CommitChangelistDialog2" timestamp="1582757266440">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582757252533" />
+    <state x="-1505" y="-213" width="1037" height="955" key="CommitChangelistDialog2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582757266440" />
     <state x="209" y="0" width="884" height="758" key="CommitChangelistDialog2/0.0.1280.800@0.0.1280.800" timestamp="1581882363578" />
     <state x="-1820" y="-180" width="1720" height="880" key="DiffContextDialog" timestamp="1582690402669">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -596,10 +593,10 @@
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
     <state x="-1820" y="-180" width="1720" height="880" key="VCS.FileHistoryDialog/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580949902347" />
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1582757214454">
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2" timestamp="1582757267913">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582757214454" />
+    <state x="-1360" y="-4" key="Vcs.Push.Dialog.v2/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582757267913" />
     <state x="257" y="133" key="Vcs.Push.Dialog.v2/0.0.1280.800@0.0.1280.800" timestamp="1581467428542" />
     <state x="-1197" y="111" key="cloudConfig.SelfSettingsDialog" timestamp="1576817894168">
       <screen x="-1920" y="-280" width="1920" height="1080" />
@@ -622,10 +619,10 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="426" y="318" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.800@0.0.1280.800" timestamp="1576727526871" />
-    <state x="-1299" y="6" width="828" height="582" key="find.popup" timestamp="1582736485932">
+    <state x="-1299" y="6" width="828" height="582" key="find.popup" timestamp="1582757416891">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1299" y="6" width="828" height="582" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582736485932" />
+    <state x="-1299" y="6" width="828" height="582" key="find.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582757416891" />
     <state width="600" height="440" key="javadoc.popup" timestamp="1580145157568">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
@@ -635,10 +632,10 @@
     </state>
     <state x="-1462" y="-30" key="run.anything.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1580872105579" />
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1576727535405" />
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1582689529857">
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup" timestamp="1582759289711">
       <screen x="-1920" y="-280" width="1920" height="1080" />
     </state>
-    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582689529857" />
+    <state x="-1265" y="-202" width="1005" height="913" key="search.everywhere.popup/0.0.1280.800/-1920.-280.1920.1080@-1920.-280.1920.1080" timestamp="1582759289711" />
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1581467863285" />
   </component>
   <component name="XDebuggerManager">
@@ -661,7 +658,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/constants/firebase/database.ts</url>
-          <line>109</line>
+          <line>117</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
