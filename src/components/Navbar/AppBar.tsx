@@ -59,32 +59,32 @@ interface IAppBarProps extends Pick<IAuthState, 'logged'> {
     anchorId: string;
 }
 
-const AppBar: FunctionComponent<IAppBarProps> = ({logged, open, setOpen, anchorId}) => {
+const AppBar: FunctionComponent<IAppBarProps> = (props) => {
     const classes = useStyles();
     const routes = useRoutes();
 
     return <>
-        <MaterialAppBar position="fixed" className={logged ? classes.appBar : ''}>
+        <MaterialAppBar position="fixed" className={props.logged ? classes.appBar : ''}>
             <Toolbar>
-                {logged &&
+                {props.logged &&
                 <IconButton
                     color="inherit"
                     aria-label="open menu"
                     edge="start"
-                    onClick={() => setOpen(!open)}
+                    onClick={() => props.setOpen(!props.open)}
                     className={classes.menuButton}
                 >
                     <MenuIcon/>
                 </IconButton>}
                 <Typography variant="h6" noWrap className={classes.title}>
-                    App Name
+                    {process.env.REACT_APP_NAME}
                 </Typography>
                 <LanguageMenu/>
                 <UserMenu/>
             </Toolbar>
         </MaterialAppBar>
-        <div id={anchorId}/>
-        <Slide direction="down" in={logged && 1 < routes.length} mountOnEnter unmountOnExit>
+        <div id={props.anchorId}/>
+        <Slide direction="down" in={props.logged && 1 < routes.length} mountOnEnter unmountOnExit>
             <MaterialAppBar
                 color="primary"
                 position="static"
@@ -110,8 +110,8 @@ const AppBar: FunctionComponent<IAppBarProps> = ({logged, open, setOpen, anchorI
 interface IAppBarOwnProps extends Omit<IAppBarProps, 'logged'> {
 }
 
-const mapStateToProps = (state: IAppState, props: IAppBarOwnProps): IAppBarProps => ({
-    ...props,
+const mapStateToProps = (state: IAppState, ownProps: IAppBarOwnProps): IAppBarProps => ({
+    ...ownProps,
     logged: state.auth.logged,
 });
 export default connect(mapStateToProps)(AppBar);

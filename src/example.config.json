@@ -1,0 +1,12 @@
+{
+    "firebase": {
+        apiKey: "api=key",
+        appId: "app-id",
+        projectId: "project-id",
+        authDomain: "project-id.firebaseapp.com",
+        databaseURL: "https://project-id.firebaseio.com/",
+        storageBucket: "gs://project-id.appspot.com",
+        messagingSenderId: "sender-id",
+        measurementId: "G-measurement-id"
+    }
+}

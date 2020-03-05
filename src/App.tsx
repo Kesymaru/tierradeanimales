@@ -41,7 +41,6 @@ interface IAppProps extends Pick<IAuthState, 'logged'> {
 const Loader: FunctionComponent<{}> = () => (
     <div className="App">
         {/*<img src={logo} className="App-logo" alt="logo" />*/}
-        {/*<img src={logo} className="App-logo" alt="logo" />*/}
         <div>Loading...</div>
     </div>
 );
@@ -61,7 +60,8 @@ const App: FunctionComponent<IAppProps> = ({logged}: IAppProps) => {
             <AppBar open={open} setOpen={setOpen} anchorId={anchorId}/>
             <Navbar open={open} setOpen={setOpen}/>
 
-            <main className={classes.content}>
+            {/*<main className={classes.content}>*/}
+            <main>
                 <Router logged={logged} routes={ROUTES}/>
                 <ScrollTop anchorId={anchorId}/>
             </main>
