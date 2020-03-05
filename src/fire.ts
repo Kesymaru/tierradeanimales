@@ -26,7 +26,5 @@ const config: IFirebaseConfig = {
     measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID || '',
 };
 
-console.log('process env', process.env);
-
 const fire = firebase.initializeApp(config);
 export default fire;
