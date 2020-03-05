@@ -2,6 +2,7 @@ import React, {FunctionComponent, useState, MouseEvent} from "react";
 import {Avatar, Button, Menu, MenuItem} from "@material-ui/core";
 import {connect, useDispatch} from "react-redux";
 import {useHistory, useLocation} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
@@ -11,31 +12,33 @@ import IUserState from "../../store/user/user.types";
 import {SingOut} from "../../store/auth/auth.actions";
 import {ACCOUNT_ROUTE, SIGN_IN_ROUTE} from "../Login/Login.routes";
 
-interface IUserMenuProps extends Pick<IUserState, 'user'>, Pick<IAuthState, 'logged'> {}
+interface IUserMenuProps extends Pick<IUserState, 'user'>, Pick<IAuthState, 'logged'> {
+}
+
 const UserMenu: FunctionComponent<IUserMenuProps> = ({logged, user}) => {
     const dispatch = useDispatch();
     const location = useLocation();
     const history = useHistory();
+    const {t} = useTranslation();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-    const handleClick = (event: MouseEvent<HTMLElement>) => {
+    function handleClick(event: MouseEvent<HTMLElement>) {
         setAnchorEl(event.currentTarget);
-    };
+    }
 
-    const handleClose = (item: string | null) => (event: MouseEvent) => {
-        setAnchorEl(null);
-
-        switch (item) {
-            case 'Profile':
-                return history.push(ACCOUNT_ROUTE.path);
-
-            case 'SignOut':
-                return dispatch(SingOut());
-
-            default:
-                break;
-        }
-    };
+    function handleClose(item: string | null) {
+        return (event: MouseEvent) => {
+            setAnchorEl(null);
+            switch (item) {
+                case 'Profile':
+                    return history.push(ACCOUNT_ROUTE.path);
+                case 'SignOut':
+                    return dispatch(SingOut());
+                default:
+                    break;
+            }
+        };
+    }
 
     if (logged) {
         return <div>
@@ -57,17 +60,21 @@ const UserMenu: FunctionComponent<IUserMenuProps> = ({logged, user}) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose(null)}
             >
-                <MenuItem onClick={handleClose('Profile')}>Profile</MenuItem>
-                <MenuItem onClick={handleClose('SignOut')}>SignOut</MenuItem>
+                <MenuItem onClick={handleClose('Profile')}>
+                    Profile
+                </MenuItem>
+                <MenuItem onClick={handleClose('SignOut')}>
+                    {t('signOut.title')}
+                </MenuItem>
             </Menu>
         </div>;
-    } else if(location.pathname === SIGN_IN_ROUTE.path) return null;
+    } else if (location.pathname === SIGN_IN_ROUTE.path) return null;
 
     return <Button
         color="inherit"
         onClick={() => history.push(SIGN_IN_ROUTE.path)}
     >
-        SignIn
+        {t('signIn.title')}
     </Button>;
 };
 
