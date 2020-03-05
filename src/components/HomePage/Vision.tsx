@@ -10,7 +10,7 @@ interface IVisionProps {
 const Vision: FunctionComponent<IVisionProps> = () => {
     const {t, i18n} = useTranslation();
 
-    return <Grid container spacing={2}>
+    return <Grid container spacing={2} style={{height: 'calc(100vh - 60px)'}}>
         <Grid item xs={12}>
             <Typography variant="h2">
                 {t('home.vision')}
@@ -20,6 +20,6 @@ const Vision: FunctionComponent<IVisionProps> = () => {
             </Typography>
         </Grid>
     </Grid>;
-}
+};
 
 export default Vision;

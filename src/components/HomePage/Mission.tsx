@@ -20,6 +20,6 @@ const Mission: FunctionComponent<IMissionProps> = (props) => {
             </Typography>
         </Grid>
     </Grid>;
-}
+};
 
 export default Mission;
