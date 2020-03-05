@@ -1,0 +1,10 @@
+
+/* TEAM */
+Developer: Andrey Alfaro Alvarado
+Email: andreyalfaro@gmail.com
+
+/* SITE */
+Last update: 2020/03/05
+Standards: HTML5, CSS3
+Components: React.js, React Router, React Redux
+Software: WebStorm

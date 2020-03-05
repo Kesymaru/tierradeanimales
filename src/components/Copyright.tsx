@@ -21,12 +21,12 @@ const Copyright: FunctionComponent<{}> = () => {
         align="center"
         className={classes.copyRight}>
         {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-            App Name
+        <Link color="inherit" href={process.env.REACT_APP_DOMAIN}>
+            {process.env.REACT_APP_NAME}
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}
-    </Typography>
+    </Typography>;
 };
 
 export default Copyright;
