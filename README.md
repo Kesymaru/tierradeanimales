@@ -43,6 +43,28 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+# Configuration
+example.env file includes an example config .env
+
+`REACT_APP_NAME=App Name
+REACT_APP_VERSION=$npm_package_version
+REACT_APP_DOMAIN=www.domain.com
+REACT_APP_FIREBASE_API_KEY=app-key
+REACT_APP_FIREBASE_APP_ID=app-id
+REACT_APP_FIREBASE_PROJECT_ID=project-id
+REACT_APP_FIREBASE_AUTH_DOMAIN=project-id.firebaseapp.com
+REACT_APP_FIREBASE_DATABASE_URL=https://project-id..firebaseio.com/
+REACT_APP_FIREBASE_STORAGE_BUCKET=gs://project-id..appspot.com
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=sender-id
+REACT_APP_FIREBASE_MEASUREMENT_ID=G-measurement-id`
+
+## Development Config
+In order to use a dev config you can create **.env.development**, the npm start strict will take .env file
+
+## Production Config
+
+Similar to dev config **.env.production** is used by default on npm build task.
+
 # Packages
 ## Material UI 
 https://material-ui.com/components/menus/
