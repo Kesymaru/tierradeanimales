@@ -7,11 +7,13 @@ import IDogState from "./dogs/dogs.types";
 import {IResult} from "../constants/firebase/database";
 import IHomeState from "./homes/homes.types";
 import IGeonamesState from "./geonames/geonames.types";
+import IEmailState from "./emails/emails.types";
 
 export default interface IAppState {
     system: ISystemState;
     auth: IAuthState;
     user: IUserState;
+    email: IEmailState;
     dogs: IDogState;
     homes: IHomeState;
     geonames: IGeonamesState;

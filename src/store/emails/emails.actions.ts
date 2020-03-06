@@ -2,9 +2,17 @@ import {Dispatch} from "redux";
 import i18n from "i18next";
 
 import Database from "../../constants/firebase/database";
-import {IContact, IEmail, IEmailsStats, IEmailsStatsFactory, IEmailsActions} from "./emails.types";
-
-import {CONTACT_EMAIL} from "./emails.types";
+import {
+    IContact,
+    IEmail,
+    IEmailFactory,
+    IEmailsStats,
+    IEmailsStatsFactory,
+    IEmailsActions,
+    FETCH_EMAIL,
+    LOAD_EMAIL,
+    ERROR_EMAIL
+} from "./emails.types";
 
 // ------------------------------------
 // Emails Actions Config
@@ -17,12 +25,28 @@ const database = new Database<IEmail, IEmailsStats>({
 // ------------------------------------
 // Email
 // ------------------------------------
-export function SentEmail(email: IEmail): Function {
+function FetchEmail(): IEmailsActions {
+    return {type: FETCH_EMAIL};
+}
+
+function LoadEmail(payload: IEmail): IEmailsActions {
+    return {type: LOAD_EMAIL, payload};
+}
+
+function ErrorEmail(payload: Error): IEmailsActions {
+    return {type: ERROR_EMAIL, payload}
+}
+
+export function SendEmail(email: IEmail): Function {
     return async (dispatch: Dispatch) => {
         try {
+            console.log('add email');
             email = await database.add(email) as IEmail;
-        } catch (error) {
 
+            // TODO use system action to notify
+            dispatch(LoadEmail(email));
+        } catch (error) {
+            dispatch(ErrorEmail(error))
         }
     }
 }
@@ -30,7 +54,7 @@ export function SentEmail(email: IEmail): Function {
 // ------------------------------------
 // Contact Email
 // ------------------------------------
-export function SentContactEmail(contact: IContact): Function {
+export function SendContactEmail(contact: IContact): Function {
     return async (dispatch: Dispatch) => {
         const date = new Date();
         const labels = {
@@ -47,16 +71,20 @@ export function SentContactEmail(contact: IContact): Function {
             <p>${contact.message}</p>
         `;
 
-        await SentEmail({
-            to: process.env.REACT_APP_EMAIL,
-            message: {
-                subject: i18n.t('contact.title'),
-                html
-            }
-        });
+        try {
+            const email = await database.add(IEmailFactory({
+                to: process.env.REACT_APP_EMAIL,
+                message: {
+                    subject: i18n.t('contact.title'),
+                    html
+                }
+            })) as IEmail;
 
-        // TODO dispathc the load email
-        //dispatch()
+            // TODO use system action to notify
+            dispatch(LoadEmail(email));
+        } catch(error) {
+            dispatch(ErrorEmail(error));
+        }
     }
 }
 

@@ -7,6 +7,7 @@ import {createBrowserHistory, History} from 'history'
 import SystemReducers from "./system/system.reducers";
 import AuthReducers from "./auth/auth.reducers";
 import UserReducers from "./user/user.reducers";
+import EmailReducers from "./emails/emails.reducers";
 import DogsReducers from "./dogs/dogs.reducers";
 import HomesReducers from "./homes/homes.reducers";
 import GeonamesReducers from "./geonames/geonames.reducers";
@@ -20,6 +21,7 @@ class AppStore {
         system: SystemReducers,
         auth: AuthReducers,
         user: UserReducers,
+        email: EmailReducers,
         dogs: DogsReducers,
         homes: HomesReducers,
         geonames: GeonamesReducers,
