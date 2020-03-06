@@ -17,7 +17,7 @@ import EmailIcon from '@material-ui/icons/Email';
 import MessageIcon from '@material-ui/icons/Message';
 
 import useValidation from "../../constants/validations";
-import {IContact, IContactFactory, IContactSchema} from "../../store/system/system.types";
+import {IContact, IContactFactory, IContactSchema} from "../../store/emails/emails.types";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const Contact: FunctionComponent<{}> = () => {
     const classes = useStyles();
     const {t} = useTranslation();
-    const [data, setData] = useState<IContact>(IContactFactory());
+    const [data, setData] = useState<IContact>(IContactFactory({subject: t('contact.title')}));
     const {errors, setErrors, validate} = useValidation<IContact>(IContactSchema({
         name: t('contact.name'),
         email: t('contact.email'),

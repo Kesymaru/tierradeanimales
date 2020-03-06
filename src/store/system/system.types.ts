@@ -69,7 +69,6 @@ interface IError {
     payload: Error;
 }
 
-
 export const NOTIFY = 'NOTIFY';
 export const CLOSE_NOTIFICATION = 'CLOSE_NOTIFICATION';
 
