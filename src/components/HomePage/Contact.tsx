@@ -16,7 +16,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import MessageIcon from '@material-ui/icons/Message';
 
-import useValidation, {HasError, GetError} from "../../constants/validations";
+import useValidation from "../../constants/validations";
 import {IContact, IContactFactory, IContactSchema} from "../../store/system/system.types";
 
 const useStyles = makeStyles((theme: Theme) =>

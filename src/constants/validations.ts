@@ -5,16 +5,14 @@ import {AnySchema, ValidationError, ValidationErrorItem, ValidationOptions, Vali
 
 // ------------------------------------
 // Validation Hooks & Functions
-// ---------------------
+// ------------------------------------
 const DefaultOptions: ValidationOptions = {abortEarly: false, stripUnknown: true};
 
-interface IValidationError {
+export interface IValidationError {
     [key: string]: string;
 }
 
-interface IUseValidation<T> {
-    // errors: ValidationError | null;
-    // setErrors: (error: ValidationError | null) => void;
+export interface IUseValidation<T> {
     errors: IValidationError | null;
     setErrors: (error: IValidationError | null) => void;
     validate: (value: T) => boolean;
@@ -53,8 +51,6 @@ function Validator<T>(
 }
 
 function getErrors(results: ValidationResult): IValidationError | null {
-    console.log('results', results);
-
     const errors = results.error?.details.reduce((total, detail) =>
         detail?.path?.length && detail?.message
             ? ({
@@ -63,30 +59,7 @@ function getErrors(results: ValidationResult): IValidationError | null {
             })
             : total, {}) as IValidationError;
 
-    console.log('new errors', errors);
     return !!errors ? errors : null;
-}
-
-export function HasError(
-    paths: Array<string | number>,
-    error: ValidationError | null): boolean {
-    if (!error) return false;
-
-    return !!GetError(paths, error);
-}
-
-export function GetError(
-    paths: Array<string | number>,
-    error: ValidationError | null): string {
-    if (!error) return '';
-
-    const found = error.details.find((detail: ValidationErrorItem) =>
-        detail.path.length === paths.length
-            ? detail.path.every((path, i) =>
-            path === paths[i] as unknown)
-            : false
-    );
-    return found ? found.message : '';
 }
 
 export default useValidation;
