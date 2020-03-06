@@ -2,16 +2,15 @@ import React, {FunctionComponent} from "react";
 
 import Vision from "./Vision";
 import Mission from "./Mission";
-import About from "./About";
 import Donate from "./Donate";
+import Contact from "./Contact";
+import About from "./About";
 
-interface IHomePageProps {
-}
-
-const HomePage: FunctionComponent<IHomePageProps> = (props) => <div style={{marginTop: 50}}>
+const HomePage: FunctionComponent<{}> = (props) => <div style={{marginTop: 50}}>
     <Vision/>
     <Mission/>
     <Donate/>
+    <Contact/>
     <About/>
 </div>;
 

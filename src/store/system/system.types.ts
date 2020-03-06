@@ -1,8 +1,38 @@
+import {Validator} from "../../constants/firebase/database";
+import Joi, {AnySchema} from "@hapi/joi";
+
 export interface INotification {
     message: string;
     open: boolean;
     type?: string;
     duration?: number;
+}
+
+export interface IContact {
+    name: string;
+    email: string;
+    message: string;
+}
+
+export function IContactFactory(values?: Partial<IContact>): IContact {
+    return {name: '', email: '', message: '', ...values}
+}
+
+export function IContactSchema(labels?: Partial<IContact>): AnySchema {
+    return Joi.object({
+        name: Joi.string()
+            .min(3)
+            .required()
+            .label(labels?.name || 'Name'),
+        email: Joi.string()
+            .email({tlds: {allow: false}})
+            .required()
+            .label(labels?.email || "Email"),
+        message: Joi.string()
+            .min(3)
+            .required()
+            .label(labels?.message || 'Message'),
+    });
 }
 
 export interface ISystemLoading {
@@ -31,7 +61,7 @@ export const ERROR = 'ERROR';
 
 interface IError {
     type: typeof ERROR;
-    status?: string|number;
+    status?: string | number;
     payload: Error;
 }
 

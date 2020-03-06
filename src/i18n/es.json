@@ -1,7 +1,14 @@
 {
     "translation": {
         "app": {
-            "changeLanguage": "Cambiar de Idioma"
+            "changeLanguage": "Cambiar de Idioma",
+            "submit": "Enviar",
+            "reset": "Limpiar",
+            "errors": {
+                "string.min": "{#label} debe ser de al menos {#limit} caracteres",
+                "string.empty": "{#label} no puede estar vacio",
+                "string.email": "{#label} debe ser un email valido"
+            }
         },
         "home": {
             "mission": "Mision",
@@ -13,6 +20,12 @@
             "donate": "Done",
             "donateBody": "Done texto va aqui"
         },
+        "contact": {
+            "title": "Contacto",
+            "name": "Nombre",
+            "email": "Email",
+            "message": "Mensaje"
+        },
         "signIn": {
             "title": "Iniciar Session",
             "email": "Email",
@@ -21,13 +34,6 @@
             "loading": "Iniciando session",
             "forgotPassword": "Restablecer contraseña",
             "signUp": "Crear Cuenta"
-        },
-        "signUp": {
-            "errors": [
-                {
-                    "type": "string"
-                }
-            ]
         },
         "signOut": {
             "title": "Cerrar Session"
