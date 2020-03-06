@@ -4,6 +4,7 @@
             "changeLanguage": "Cambiar de Idioma",
             "submit": "Enviar",
             "reset": "Limpiar",
+            "date": "Fecha",
             "errors": {
                 "string.min": "{#label} debe ser de al menos {#limit} caracteres",
                 "string.empty": "{#label} no puede estar vacio",
