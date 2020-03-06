@@ -1,6 +1,9 @@
 import {Validator} from "../../constants/firebase/database";
 import Joi, {AnySchema} from "@hapi/joi";
 
+// ------------------------------------
+// Interfaces
+// ------------------------------------
 export interface INotification {
     message: string;
     open: boolean;
@@ -46,8 +49,9 @@ export default interface ISystemState {
     errors?: Error[];
 }
 
-// -------------------------
+// ------------------------------------
 // Loading
+// ------------------------------------
 export const LOADING = 'LOADING';
 
 interface ILoading {

@@ -38,10 +38,8 @@ function useValidation<T>(
         const results = Validator(schema, value, options);
         const errors = getErrors(results);
         setErrors(errors);
-        return !!results.error;
+        return !errors;
     }
-
-    console.log('use validation', options);
 
     return {errors, setErrors, validate};
 }

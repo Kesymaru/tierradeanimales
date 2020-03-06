@@ -40,7 +40,9 @@ const Contact: FunctionComponent<{}> = () => {
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
         const valid = validate(data);
-        console.log('submit', data, valid);
+        if(valid) {
+            // TODO send
+        }
     }
 
     function handleReset() {
