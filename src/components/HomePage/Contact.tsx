@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FormEvent, FunctionComponent, useState} from "react";
-import Joi, {ValidationError, ValidationResult} from "@hapi/joi";
+import { useDispatch } from "react-redux";
 import {useTranslation} from "react-i18next";
 
 import Container from "@material-ui/core/Container";
@@ -18,6 +18,7 @@ import MessageIcon from '@material-ui/icons/Message';
 
 import useValidation from "../../constants/validations";
 import {IContact, IContactFactory, IContactSchema} from "../../store/emails/emails.types";
+import {SendContactEmail} from "../../store/emails/emails.actions";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -29,8 +30,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Contact: FunctionComponent<{}> = () => {
     const classes = useStyles();
+    const distpatch = useDispatch();
     const {t} = useTranslation();
-    const [data, setData] = useState<IContact>(IContactFactory({subject: t('contact.title')}));
+    const [data, setData] = useState<IContact>(IContactFactory());
     const {errors, setErrors, validate} = useValidation<IContact>(IContactSchema({
         name: t('contact.name'),
         email: t('contact.email'),
@@ -41,7 +43,8 @@ const Contact: FunctionComponent<{}> = () => {
         event.preventDefault();
         const valid = validate(data);
         if(valid) {
-            // TODO send
+            console.log('send contact email');
+            distpatch(SendContactEmail(data));
         }
     }
 

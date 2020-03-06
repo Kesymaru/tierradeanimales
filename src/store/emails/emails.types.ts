@@ -1,8 +1,8 @@
 import Joi, {AnySchema} from "@hapi/joi";
-import {IData, IStats} from "../../constants/firebase/database";
 import * as firebase from "firebase";
+
+import {IData, IDataFactory, IStats} from "../../constants/firebase/database";
 import {IAppStateItem, IAppStateItems} from "../app.types";
-import {IDog} from "../dogs/dogs.types";
 
 // ------------------------------------
 // IEmail
@@ -12,6 +12,15 @@ export interface IEmail extends IData {
     message: {
         subject: string;
         html: string;
+    }
+}
+
+export function IEmailFactory(value?: Partial<IEmail>): IEmail {
+    return {
+        to: '',
+        message: {subject: '',html: ''},
+        ...IDataFactory(),
+        ...value
     }
 }
 
@@ -36,12 +45,11 @@ export function IEmailsStatsFactory(config: Partial<IEmailsStats>): IEmailsStats
 export interface IContact {
     name: string;
     email: string;
-    subject: string;
     message: string;
 }
 
 export function IContactFactory(values?: Partial<IContact>): IContact {
-    return {name: '', email: '', subject: '', message: '', ...values}
+    return {name: '', email: '', message: '', ...values}
 }
 
 export function IContactSchema(labels?: Partial<IContact>): AnySchema {
@@ -62,32 +70,37 @@ export function IContactSchema(labels?: Partial<IContact>): AnySchema {
 }
 
 // ------------------------------------
-// Contact Email
+// Email
 // ------------------------------------
-export const CONTACT_EMAIL = 'CONTACT_EMAIL';
-
-interface IContactEmail {
-    type: typeof CONTACT_EMAIL;
-    payload: IContact;
+export const FETCH_EMAIL = 'FETCH_EMAIL';
+interface IFetchEmail {
+    type: typeof FETCH_EMAIL;
 }
 
-export const ERROR_CONTACT_EMAIL = 'ERROR_CONTACT_EMAIL';
+export const LOAD_EMAIL = 'LOAD_EMAIL';
+interface ILoadEmail {
+    type: typeof LOAD_EMAIL;
+    payload: IEmail;
+}
 
-interface IErrorContactEmail {
-    type: typeof ERROR_CONTACT_EMAIL;
+export const ERROR_EMAIL = 'ERROR_EMAIL';
+
+interface IErrorEmail {
+    type: typeof ERROR_EMAIL;
     payload: Error;
 }
 
 // ------------------------------------
 // Emails State
 // ------------------------------------
-export default interface IEmailState {
+export default interface IEmailState extends IAppStateItem<IEmail> {
 }
 
 // ------------------------------------
 // Emails Actions
 // ------------------------------------
 export type IEmailsActions =
-    IContactEmail |
-    IErrorContactEmail
+    IFetchEmail |
+    ILoadEmail |
+    IErrorEmail
     ;
