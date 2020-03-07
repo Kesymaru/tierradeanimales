@@ -5,7 +5,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import IAppState from "../store/app.types";
 import ISystemState, {INotification} from "../store/system/system.types";
-import SystemActions from "../store/system/system.actions";
+import {CloseNotification} from "../store/system/system.actions";
 
 interface INotifyProps extends Pick<ISystemState, 'notifications'> {
 }
@@ -14,7 +14,7 @@ const Notify: FunctionComponent<INotifyProps> = ({notifications}) => {
     const dispatch = useDispatch();
 
     const handleClose = (item: INotification) => (event: SyntheticEvent, reason?: string) => {
-        dispatch(SystemActions.CloseNotification(item));
+        dispatch(CloseNotification(item));
     };
 
     return (<>
