@@ -2,7 +2,7 @@ import {Dispatch} from "redux";
 import * as firebase from "firebase";
 import {push} from "connected-react-router";
 
-import SystemActions from "../system/system.actions";
+import {Notify} from "../system/system.actions";
 import {
     DELETE_DOG,
     ERROR_DOG,
@@ -142,7 +142,7 @@ export function UpdateDog(dog: IDog): Function {
 
             dispatch(LoadDog(dog));
             dispatch(push(ADMIN_DOGS_ROUTE.getPath()));
-            dispatch(SystemActions.Notify(`Dog ${dog.name} updated`));
+            dispatch(Notify(`Dog ${dog.name} updated`));
         } catch (error) {
             dispatch(ErrorDog(error));
         }
@@ -156,7 +156,7 @@ export function DeleteDog(dog: IDog): Function {
             if (dog.images) await storage.delete(dog.images);
 
             dispatch(_DeleteDog(dog));
-            dispatch(SystemActions.Notify(`Dog ${dog.name} deleted`));
+            dispatch(Notify(`Dog ${dog.name} deleted`));
         } catch (error) {
             dispatch(ErrorDog(error));
         }

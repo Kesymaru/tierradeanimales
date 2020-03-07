@@ -13,6 +13,7 @@ import {
     LOAD_EMAIL,
     ERROR_EMAIL
 } from "./emails.types";
+import { Notify } from "../system/system.actions";
 
 // ------------------------------------
 // Emails Actions Config
@@ -80,8 +81,8 @@ export function SendContactEmail(contact: IContact): Function {
                 }
             })) as IEmail;
 
-            // TODO use system action to notify
             dispatch(LoadEmail(email));
+            dispatch(Notify(i18n.t('contact.emailSend')));
         } catch(error) {
             dispatch(ErrorEmail(error));
         }
