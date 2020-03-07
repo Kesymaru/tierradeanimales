@@ -1,13 +1,18 @@
 import React, {FunctionComponent} from "react";
 import {useTranslation} from "react-i18next";
 
-import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            paddingTop: 40,
+            paddingBottom: 40,
             background: 'url(./images/dog1.jpg) no-repeat center',
             backgroundSize: 'cover',
             [theme.breakpoints.up('md')]: {
@@ -20,18 +25,18 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Vision: FunctionComponent<{}> = () => {
     const classes = useStyles();
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
-    return <Grid container spacing={2} className={classes.container}>
-        <Grid item xs={12}>
-            <Typography variant="h2">
+    return <Container maxWidth={false} className={classes.container}>
+        <article>
+            <Typography variant="h1" color="textPrimary">
                 {t('home.vision')}
             </Typography>
             <Typography variant="body1">
                 {t('home.visionBody')}
             </Typography>
-        </Grid>
-    </Grid>;
+        </article>
+    </Container>
 };
 
 export default Vision;
