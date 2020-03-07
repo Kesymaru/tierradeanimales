@@ -16,10 +16,12 @@
             "missionBody": "Mision texto va aqui",
             "vision": "Vision",
             "visionBody": "Vision texto va aqui",
-            "about": "Acerca",
-            "aboutBody": "Acerca texto va aqui",
             "donate": "Done",
-            "donateBody": "Done texto va aqui"
+            "donateBody": "Done texto va aqui",
+            "followUs": "Síguenos",
+            "newsletter": "Email Newsletter",
+            "info": "Informacion",
+            "socialNetworks": "Redes Sociales"
         },
         "contact": {
             "title": "Contacto",

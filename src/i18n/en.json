@@ -16,10 +16,12 @@
             "missionBody": "Mission body goes here",
             "vision": "Vision",
             "visionBody": "Vision body goes here",
-            "about": "About",
-            "aboutBody": "About body goes here",
             "donate": "Donate",
-            "donateBody": "Donate body goes here"
+            "donateBody": "Donate body goes here",
+            "followUs": "Follow Us",
+            "newsletter": "Email Newsletter",
+            "info": "Information",
+            "socialNetworks": "Social Networks"
         },
         "contact": {
             "title": "Contact Us",
