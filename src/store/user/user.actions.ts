@@ -5,7 +5,7 @@ import {ERROR_RESET_PASSWORD, ERROR_UPDATE_PASSWORD, ERROR_USER, IUser, RECEIVE_
 
 import Storage from "../../constants/firebase/storage";
 import Auth from "../../constants/firebase/auth";
-import SystemActions from "../system/system.actions";
+import {Notify} from "../system/system.actions";
 
 // ------------------------------------
 // User actions
@@ -26,41 +26,47 @@ export function UpdateProfile(user: IUser): Function {
         try {
             if (user.avatar) user.avatar = await storage.save(user.avatar) as IFile;
             await auth.UpdateUser(user);
-            dispatch(SystemActions.Notify('Profile Updated'));
+            dispatch(Notify('Profile Updated'));
         } catch (error) {
-            dispatch(SystemActions.Error(error));
+            // TODO implement error
         }
     }
+}
+
+// ------------------------------------
+// Update Password
+// ------------------------------------
+function ErrorUpdatePassword(payload: Error): TUserActions {
+    return {type: ERROR_UPDATE_PASSWORD, payload}
 }
 
 export function UpdatePassword(password: string): Function {
     return async (dispatch: Dispatch) => {
         try {
-            dispatch(SystemActions.Loading());
             await auth.UpdatePassword(password);
-            dispatch(SystemActions.Notify('Password changed successfully'))
+            dispatch(Notify('Password changed successfully'))
         } catch (error) {
             dispatch(ErrorUpdatePassword(error))
-        } finally {
-            SystemActions.Loading(false)
         }
     }
 }
 
-export function ErrorUpdatePassword(payload: Error): TUserActions {
-    return {type: ERROR_UPDATE_PASSWORD, payload}
+// ------------------------------------
+// Reset Password
+// ------------------------------------
+function ErrorResetPassword(payload: Error): TUserActions {
+    return {type: ERROR_RESET_PASSWORD, payload}
 }
 
 export function ResetPassword(password: string): Function {
-    return (dispatch: Dispatch) => {
-        dispatch(SystemActions.Loading());
-
-        auth.ResetPassword(password)
-            .then(() => dispatch(SystemActions.Notify('Password reset successfully')))
-            .catch(error => dispatch(ErrorResetPassword(error)));
+    return async (dispatch: Dispatch) => {
+        try {
+            await auth.ResetPassword(password);
+            dispatch(Notify('Password reset successfully'));
+        } catch (error) {
+            dispatch(ErrorResetPassword(error));
+        }
     }
 }
 
-export function ErrorResetPassword(payload: Error): TUserActions {
-    return {type: ERROR_RESET_PASSWORD, payload}
-}
+

@@ -25,7 +25,8 @@
             "title": "Contact Us",
             "name": "Name",
             "email": "Email",
-            "message": "Message"
+            "message": "Message",
+            "emailSend": "Contact information has been send successfully"
         },
         "signIn": {
             "title": "Sign In",

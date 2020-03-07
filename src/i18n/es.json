@@ -25,7 +25,8 @@
             "title": "Contacto",
             "name": "Nombre",
             "email": "Email",
-            "message": "Mensaje"
+            "message": "Mensaje",
+            "emailSend": "Informacion de contacto ha sido enviada correctamente"
         },
         "signIn": {
             "title": "Iniciar Session",
