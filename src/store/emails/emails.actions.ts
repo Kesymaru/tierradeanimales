@@ -88,4 +88,3 @@ export function SendContactEmail(contact: IContact): Function {
         }
     }
 }
-
