@@ -64,6 +64,9 @@ const About: FunctionComponent<{}> = props => {
   function handleSubmit(event: FormEvent) {
     event.stopPropagation();
     console.log("news letter", email);
+    const valid = validate(email);
+    // TODO implement the news letter
+    setErrors(null);
   }
 
   function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
