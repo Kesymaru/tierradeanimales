@@ -80,7 +80,7 @@ const Contact: FunctionComponent<{}> = () => {
       >
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h1">{t("contact.title")}</Typography>
+            <Typography variant="h2">{t("contact.title")}</Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
