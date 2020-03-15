@@ -21,10 +21,10 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
     containerText: {
-        marginLeft: 0,
+      marginLeft: 0
     },
     text: {
-        color: 'white'
+      color: "white"
     }
   })
 );
@@ -42,7 +42,12 @@ const About: FunctionComponent<{}> = () => {
         <Typography variant="h5" paragraph={true} className={classes.text}>
           {t("home.about.body1")}
         </Typography>
-        <Typography variant="h4" component="q" paragraph={true} className={classes.text}>
+        <Typography
+          variant="h4"
+          component="q"
+          paragraph={true}
+          className={classes.text}
+        >
           {t("home.about.body2")}
         </Typography>
       </Container>
