@@ -78,7 +78,7 @@ const FollowUs: FunctionComponent<{}> = props => {
       <Container maxWidth="md">
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h1">{t("home.followUs")}</Typography>
+            <Typography variant="h2">{t("home.followUs")}</Typography>
           </Grid>
           <Grid item xs={12}>
             <TextField
