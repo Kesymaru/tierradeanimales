@@ -20,14 +20,17 @@
             "values": {
                 "title": "Valores",
                 "responsability": {
+                    "avatar": "R",
                     "title": "Responsabilidad",
                     "body": "Toda actividad realizada en la organizaci\u00F3n deber\u00E1 realizarse con apego a las normas establecidas en el reglamento de la organizaci\u00F3n y en el reglamento del voluntario. Este acatamiento nos asegura la protecci\u00F3n de los intereses de la Fundaci\u00F3n, as\u00ED como de todos sus integrantes y personas involucradas directa e indirectamente con el ejercicio de nuestra labor."
                 },
                 "compromise": {
+                    "avatar": "C",
                     "title": "Compromiso",
                     "body": "Todas las personas que forman parte de la organizaci\u00F3n nos comprometemos a respetar, velar y promover los derechos los animales as\u00ED como tambi\u00E9n tenemos presente que nuestro compromiso es fomentar una cultura de respeto entre animales y personas."
                 },
                 "respect": {
+                    "avatar": "R",
                     "title": "Respeto",
                     "body": "Todos los integrantes de la Fundaci\u00F3n nos comprometemos a respetar las ideas y mantener igualdad de trato entre todos los miembros de la organizaci\u00F3n, a trav\u00E9s de la generaci\u00F3n de un ambiente que propicie la comunicaci\u00F3n y \u00E1mbitos orientados al bien com\u00FAn."
                 }
