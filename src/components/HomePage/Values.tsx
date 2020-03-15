@@ -21,16 +21,9 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
       paddingTop: 40,
       paddingBottom: 40,
-      backgroundColor: "transparent",
-      background: "url(./images/dog1.jpg) no-repeat center",
-      backgroundSize: "cover",
-      [theme.breakpoints.up("md")]: {
-        // height: "calc(100vh - 42px)",
-        backgroundAttachment: "fixed"
-      }
     },
     card: {
-      maxWidth: 500
+      maxWidth: 300
     },
     avatar: {
       backgroundColor: red[500]
