@@ -20,10 +20,11 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "column",
       alignItems: "center",
       paddingTop: 40,
-      paddingBottom: 40,
+      paddingBottom: 40
     },
     card: {
-      maxWidth: 300
+      width: "100%",
+      backgroundColor: red[500]
     },
     avatar: {
       backgroundColor: red[500]
@@ -39,7 +40,7 @@ const Values: FunctionComponent<{}> = () => {
 
   return (
     <Container maxWidth={false} className={classes.container}>
-      <Carousel maxWidth="md">
+      <Carousel maxWidth={"lg"}>
         {Object.keys(values)
           .filter(key => typeof values[key] === "object")
           .map(key => (

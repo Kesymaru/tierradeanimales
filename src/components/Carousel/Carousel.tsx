@@ -1,19 +1,15 @@
-import React, { FunctionComponent, useState, ReactElement } from "react";
-
-import { autoPlay } from "react-swipeable-views-utils";
-import SwipeableViews from "react-swipeable-views";
-
-import Zoom from "@material-ui/core/Zoom";
-import Container, { ContainerProps } from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
+import Container, { ContainerProps } from "@material-ui/core/Container";
 import Fab from "@material-ui/core/Fab";
-import Pagination from "@material-ui/lab/Pagination";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import useTheme from "@material-ui/core/styles/useTheme";
 import Hidden from "@material-ui/core/Hidden";
-
+import useTheme from "@material-ui/core/styles/useTheme";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import Pagination from "@material-ui/lab/Pagination";
+import React, { FunctionComponent, useState } from "react";
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
 
 interface CarouselProps extends ContainerProps {
   showPagination?: boolean;
@@ -31,8 +27,6 @@ const Carousel: FunctionComponent<CarouselProps> = props => {
     React.Children.count(props.children)
   );
 
-  console.log("is mobile", isMobile);
-
   function setIndex(i: number) {
     if (i <= 0) return _setIndex(total);
     if (i >= total) return _setIndex(1);
@@ -44,7 +38,6 @@ const Carousel: FunctionComponent<CarouselProps> = props => {
   }
 
   function handlePaginationChange(event: any, page: number) {
-    console.log("page", page);
     _setIndex(page - 1);
   }
 
@@ -59,15 +52,17 @@ const Carousel: FunctionComponent<CarouselProps> = props => {
           </Box>
         </Hidden>
 
-        <Box display="flex" flex="1 1 auto">
+        <Box display="flex" flex="1 1 auto" width="100%">
           <AutoPlaySwipeableViews
             index={index}
             interval={5000}
+            style={{ width: "100%" }}
             onChangeIndex={handleChangeIndex}
           >
             {props.children ? props.children : null}
           </AutoPlaySwipeableViews>
         </Box>
+
         <Hidden smDown>
           <Box display="flex" hidden={isMobile}>
             <Fab size="small" onClick={() => setIndex(index + 1)}>
@@ -79,7 +74,7 @@ const Carousel: FunctionComponent<CarouselProps> = props => {
       <Box display="flex" flexDirection="column" alignItems="center">
         <Pagination
           color="primary"
-          size="small"
+          size={isMobile ? "large" : "small"}
           count={total}
           page={index + 1}
           hidePrevButton
