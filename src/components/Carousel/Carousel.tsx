@@ -8,6 +8,9 @@ import Container, { ContainerProps } from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Fab from "@material-ui/core/Fab";
 import Pagination from "@material-ui/lab/Pagination";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import useTheme from "@material-ui/core/styles/useTheme";
+import Hidden from "@material-ui/core/Hidden";
 
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
@@ -20,10 +23,15 @@ interface CarouselProps extends ContainerProps {
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const Carousel: FunctionComponent<CarouselProps> = props => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [index, _setIndex] = useState<number>(0);
   const [total, setTotal] = useState<number>(
     React.Children.count(props.children)
   );
+
+  console.log("is mobile", isMobile);
 
   function setIndex(i: number) {
     if (i <= 0) return _setIndex(total);
@@ -41,15 +49,16 @@ const Carousel: FunctionComponent<CarouselProps> = props => {
   }
 
   return (
-    <Container
-      maxWidth={props.maxWidth ? props.maxWidth : false}
-    >
+    <Container maxWidth={props.maxWidth ? props.maxWidth : false}>
       <Box display="flex" flexDirection="row" alignItems="center">
-        <Box display="flex">
-          <Fab size="small" onClick={() => setIndex(index - 1)}>
-            <ArrowBackIosIcon />
-          </Fab>
-        </Box>
+        <Hidden smDown>
+          <Box display="flex">
+            <Fab size="small" onClick={() => setIndex(index - 1)}>
+              <ArrowBackIosIcon />
+            </Fab>
+          </Box>
+        </Hidden>
+
         <Box display="flex" flex="1 1 auto">
           <AutoPlaySwipeableViews
             index={index}
@@ -59,11 +68,13 @@ const Carousel: FunctionComponent<CarouselProps> = props => {
             {props.children ? props.children : null}
           </AutoPlaySwipeableViews>
         </Box>
-        <Box display="flex">
-          <Fab size="small" onClick={() => setIndex(index + 1)}>
-            <ArrowForwardIosIcon />
-          </Fab>
-        </Box>
+        <Hidden smDown>
+          <Box display="flex" hidden={isMobile}>
+            <Fab size="small" onClick={() => setIndex(index + 1)}>
+              <ArrowForwardIosIcon />
+            </Fab>
+          </Box>
+        </Hidden>
       </Box>
       <Box display="flex" flexDirection="column" alignItems="center">
         <Pagination
