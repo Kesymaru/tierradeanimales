@@ -10,7 +10,6 @@ import Pagination from "@material-ui/lab/Pagination";
 import React, { FunctionComponent, useState } from "react";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 interface CarouselProps extends ContainerProps {
   showPagination?: boolean;
@@ -18,17 +17,6 @@ interface CarouselProps extends ContainerProps {
 }
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    fab: {
-      padding: "0 10px"
-    },
-    pagination: {
-      padding: "10px 0"
-    }
-  })
-);
 
 const Carousel: FunctionComponent<CarouselProps> = props => {
   const classes = useStyles();
