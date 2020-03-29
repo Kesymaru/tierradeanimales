@@ -19,7 +19,6 @@ interface CarouselProps extends ContainerProps {
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const Carousel: FunctionComponent<CarouselProps> = props => {
-  const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
