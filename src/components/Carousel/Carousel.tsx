@@ -10,6 +10,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import React, { FunctionComponent, useState } from "react";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 interface CarouselProps extends ContainerProps {
   showPagination?: boolean;
@@ -18,7 +19,19 @@ interface CarouselProps extends ContainerProps {
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    fab: {
+      padding: "0 10px"
+    },
+    pagination: {
+      padding: "10px 0"
+    }
+  })
+);
+
 const Carousel: FunctionComponent<CarouselProps> = props => {
+  const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -43,8 +56,8 @@ const Carousel: FunctionComponent<CarouselProps> = props => {
     <Container maxWidth={props.maxWidth ? props.maxWidth : false}>
       <Box display="flex" flexDirection="row" alignItems="center">
         <Hidden smDown>
-          <Box display="flex">
-            <Fab size="small" onClick={() => setIndex(index - 1)}>
+          <Box display="flex" margin="0 16px">
+            <Fab size="large" onClick={() => setIndex(index - 1)}>
               <ArrowBackIosIcon />
             </Fab>
           </Box>
@@ -62,14 +75,19 @@ const Carousel: FunctionComponent<CarouselProps> = props => {
         </Box>
 
         <Hidden smDown>
-          <Box display="flex" hidden={isMobile}>
-            <Fab size="small" onClick={() => setIndex(index + 1)}>
+          <Box display="flex" margin="0 16px">
+            <Fab size="large" onClick={() => setIndex(index + 1)}>
               <ArrowForwardIosIcon />
             </Fab>
           </Box>
         </Hidden>
       </Box>
-      <Box display="flex" flexDirection="column" alignItems="center">
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        margin="16px"
+      >
         <Pagination
           color="primary"
           size={isMobile ? "large" : "small"}
