@@ -23,13 +23,11 @@ const Carousel: FunctionComponent<CarouselProps> = props => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [index, _setIndex] = useState<number>(0);
-  const [total, setTotal] = useState<number>(
-    React.Children.count(props.children)
-  );
+  const [total] = useState<number>(React.Children.count(props.children));
 
   function setIndex(i: number) {
-    if (i <= 0) return _setIndex(total);
-    if (i >= total) return _setIndex(1);
+    if (i <= 0) return _setIndex(total - 1);
+    if (i >= total) return _setIndex(0);
     _setIndex(i);
   }
 
