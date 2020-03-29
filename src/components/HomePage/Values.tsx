@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
       paddingTop: 40,
       paddingBottom: 40,
-      backgroundColor: "#EDC45B"
+      backgroundColor: "#FF6F6F"
+      // backgroundColor: "#EDC45B",
       // backgroundColor: "rgba(237, 196, 91, 0.5)",
     },
     card: {
@@ -30,6 +31,17 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     avatar: {
       backgroundColor: red[500]
+    },
+    text: {
+      display: "flex",
+      padding: "0 16px 16px 16px",
+      color: "#ffffff",
+      [theme.breakpoints.up("sm")]: {
+        alignSelf: "center"
+      },
+      [theme.breakpoints.down("sm")]: {
+        alignSelf: "flex-start"
+      }
     }
   })
 );
@@ -42,6 +54,9 @@ const Values: FunctionComponent<{}> = () => {
 
   return (
     <Container maxWidth={false} className={classes.container}>
+      <Typography variant="h2" className={classes.text}>
+        {t("home.values.title")}
+      </Typography>
       <Carousel maxWidth={"lg"}>
         {Object.keys(values)
           .filter(key => typeof values[key] === "object")
