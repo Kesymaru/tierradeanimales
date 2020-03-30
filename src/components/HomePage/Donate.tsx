@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up("md")]: {
         height: "calc(100vh - 42px)",
         backgroundAttachment: "fixed"
-      }
+      },
+      color: "white"
     }
   })
 );
@@ -42,7 +43,7 @@ const Donate: FunctionComponent<{}> = () => {
           <Typography variant="h4">{t("donate.id")}</Typography>
         </Grid>
         {accounts.map((account: any, i: number) => (
-          <Grid item xs={12} md={3}>
+          <Grid item xs={12} md={4}>
             <Typography variant="h5">{account.name}</Typography>
             <Grid container spacing={0}>
               <Grid item xs={12} lg={6}>
