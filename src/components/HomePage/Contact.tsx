@@ -19,6 +19,7 @@ import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import SendIcon from "@material-ui/icons/Send";
 import PersonIcon from "@material-ui/icons/Person";
 import EmailIcon from "@material-ui/icons/Email";
+import PhoneIcon from "@material-ui/icons/Phone";
 import MessageIcon from "@material-ui/icons/Message";
 
 import useValidation from "../../constants/validations";
@@ -46,6 +47,7 @@ const Contact: FunctionComponent<{}> = () => {
     IContactSchema({
       name: t("contact.name"),
       email: t("contact.email"),
+      phone: t("contact.phone"),
       message: t("contact.message")
     }),
     { abortEarly: true }
@@ -82,7 +84,7 @@ const Contact: FunctionComponent<{}> = () => {
           <Grid item xs={12}>
             <Typography variant="h2">{t("contact.title")}</Typography>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} lg={4}>
             <TextField
               label={t("contact.name")}
               placeholder={t("contact.name")}
@@ -101,7 +103,26 @@ const Contact: FunctionComponent<{}> = () => {
               onChange={handleChange("name")}
             />
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} lg={4}>
+            <TextField
+              label={t("contact.phone")}
+              placeholder={t("contact.phone")}
+              variant="outlined"
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <PhoneIcon />
+                  </InputAdornment>
+                )
+              }}
+              value={data.phone}
+              error={!!errors?.phone}
+              helperText={errors?.phone}
+              onChange={handleChange("phone")}
+            />
+          </Grid>
+          <Grid item xs={12} md={12} lg={4}>
             <TextField
               label={t("contact.email")}
               placeholder={t("contact.email")}
