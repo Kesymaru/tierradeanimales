@@ -36,18 +36,13 @@
         }
       },
       "mission": "Mision",
-      "missionBody": "",
-      "donate": "Done",
-      "donateBody": "Done texto va aqui",
-      "followUs": "Síguenos",
-      "newsletter": "Email Newsletter",
-      "info": "Informacion",
-      "socialNetworks": "Redes Sociales"
+      "missionBody": ""
     },
     "contact": {
       "title": "Contacto",
       "name": "Nombre",
       "email": "Email",
+      "phone": "Telefono",
       "message": "Mensaje",
       "emailSend": "Informacion de contacto ha sido enviada correctamente"
     },
@@ -109,6 +104,28 @@
             "sinpe": "10200009186773378",
             "iban": "CR08010200009186773378"
           }
+        }
+      ]
+    },
+    "followUs": {
+      "title": "Síguenos",
+      "newsletter": "Email Newsletter",
+      "info": "Informacion",
+      "socialNetworks": "Redes Sociales",
+      "name": "FUNDACIÓN TIERRA DE ANIMALES COSTA RICA",
+      "id": "Cédula Jurídica: 3-006-638076",
+      "contact": [
+        {
+          "title": "Address",
+          "data": "Direccion aqui"
+        },
+        {
+          "title": "Email",
+          "data": "direccion@tierradeanimales.com"
+        },
+        {
+          "title": "Phone",
+          "data": "123456"
         }
       ]
     }
