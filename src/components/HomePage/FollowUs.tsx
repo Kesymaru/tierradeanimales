@@ -61,6 +61,8 @@ const FollowUs: FunctionComponent<{}> = props => {
     })
   );
 
+  const contact = t("followUs.contact", { returnObjects: true }) as any;
+
   function handleSubmit(event: FormEvent) {
     event.stopPropagation();
     console.log("news letter", email);
@@ -78,7 +80,7 @@ const FollowUs: FunctionComponent<{}> = props => {
       <Container maxWidth="md">
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h2">{t("home.followUs")}</Typography>
+            <Typography variant="h2">{t("followUs.title")}</Typography>
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -109,13 +111,24 @@ const FollowUs: FunctionComponent<{}> = props => {
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <Typography variant="h3">{t("home.info")}</Typography>
-            <Typography variant="body2">Direccion:</Typography>
-            <Typography variant="body2">Email: </Typography>
-            <Typography variant="body2">Telefono:</Typography>
+            <Typography variant="h3">{t("followUs.info")}</Typography>
+            <Typography variant="body2">{t("followUs.name")}</Typography>
+            <Typography variant="body2">{t("followUs.id")}</Typography>
+            <Grid container spacing={0}>
+              {contact.map((info: any, i: number) => (
+                <>
+                  <Grid item xs={12} sm={3}>
+                    {info.title}
+                  </Grid>
+                  <Grid item xs={12} sm={9}>
+                    {info.data}
+                  </Grid>
+                </>
+              ))}
+            </Grid>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Typography variant="h3">{t('home.socialNetworks')}</Typography>
+            <Typography variant="h3">{t("followUs.socialNetworks")}</Typography>
             <Social />
           </Grid>
         </Grid>
