@@ -2,7 +2,6 @@ import React, { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 import Container from "@material-ui/core/Container";
-import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
