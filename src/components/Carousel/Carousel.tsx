@@ -7,12 +7,13 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import Pagination from "@material-ui/lab/Pagination";
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useState, ReactNode } from "react";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 
-interface CarouselProps extends ContainerProps {
+interface CarouselProps extends Pick<ContainerProps, "maxWidth"> {
   showPagination?: boolean;
+  title?: ReactNode;
   //   children?: ReactElement;
 }
 
@@ -41,6 +42,7 @@ const Carousel: FunctionComponent<CarouselProps> = props => {
 
   return (
     <Container maxWidth={props.maxWidth ? props.maxWidth : false}>
+      {props.title ? props.title : null}
       <Box display="flex" flexDirection="row" alignItems="center">
         <Hidden smDown>
           <Box display="flex" margin="0 16px">
