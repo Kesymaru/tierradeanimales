@@ -46,7 +46,7 @@ const Donate: FunctionComponent<{}> = () => {
           <Grid item xs={12} md={4}>
             <Typography variant="h5">{account.name}</Typography>
             <Grid container spacing={0}>
-              <Grid item xs={12} lg={6}>
+              <Grid item xs={12}>
                 <Typography variant="h6">{t("donate.colons")}</Typography>
               </Grid>
               <Grid item xs={3}>
@@ -67,10 +67,9 @@ const Donate: FunctionComponent<{}> = () => {
               <Grid item xs={9}>
                 {account.colon.iban}
               </Grid>
-
-              {account.dolar ? (
+              {account?.dolar ? (
                 <>
-                  <Grid item xs={12} lg={6}>
+                  <Grid item xs={12}>
                     <Typography variant="h6">{t("donate.dolars")}</Typography>
                   </Grid>
                   <Grid item xs={3}>
