@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     text: {
       color: "#ffffff",
-      [theme.breakpoints.up("sm")]: {
+      [theme.breakpoints.up("md")]: {
         marginLeft: 88
       }
     }
