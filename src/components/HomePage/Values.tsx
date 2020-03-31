@@ -35,14 +35,9 @@ const useStyles = makeStyles((theme: Theme) =>
       // backgroundColor: red[500]
     },
     text: {
-      display: "flex",
-      padding: "0 16px 16px 16px",
       color: "#ffffff",
       [theme.breakpoints.up("sm")]: {
-        alignSelf: "center"
-      },
-      [theme.breakpoints.down("sm")]: {
-        alignSelf: "flex-start"
+        marginLeft: 88
       }
     }
   })
@@ -58,10 +53,14 @@ const Values: FunctionComponent<{}> = () => {
 
   return (
     <Container maxWidth={false} className={classes.container}>
-      <Typography variant="h2" className={classes.text}>
-        {t("home.values.title")}
-      </Typography>
-      <Carousel maxWidth={"lg"}>
+      <Carousel
+        maxWidth={"lg"}
+        title={
+          <Typography variant="h2" className={classes.text}>
+            {t("home.values.title")}
+          </Typography>
+        }
+      >
         {Object.keys(values)
           .filter(key => typeof values[key] === "object")
           .map(key => (
