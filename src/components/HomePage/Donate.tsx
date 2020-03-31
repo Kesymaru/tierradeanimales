@@ -34,71 +34,73 @@ const Donate: FunctionComponent<{}> = () => {
 
   return (
     <Container maxWidth={false} className={classes.container}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Typography variant="h2">{t("donate.title")}</Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h4">{t("donate.name")}</Typography>
-          <Typography variant="h4">{t("donate.id")}</Typography>
-        </Grid>
-        {accounts.map((account: any, i: number) => (
-          <Grid item xs={12} md={4}>
-            <Typography variant="h5">{account.name}</Typography>
-            <Grid container spacing={0}>
-              <Grid item xs={12}>
-                <Typography variant="h6">{t("donate.colons")}</Typography>
-              </Grid>
-              <Grid item xs={3}>
-                {t("donate.account")}
-              </Grid>
-              <Grid item xs={9}>
-                {account.colon.account}
-              </Grid>
-              <Grid item xs={3}>
-                Sinpe
-              </Grid>
-              <Grid item xs={9}>
-                {account.colon.sinpe}
-              </Grid>
-              <Grid item xs={3}>
-                IBAN
-              </Grid>
-              <Grid item xs={9}>
-                {account.colon.iban}
-              </Grid>
-              {account?.dolar ? (
-                <>
-                  <Grid item xs={12}>
-                    <Typography variant="h6">{t("donate.dolars")}</Typography>
-                  </Grid>
-                  <Grid item xs={3}>
-                    {t("donate.account")}
-                  </Grid>
-                  <Grid item xs={9}>
-                    {account.dolar.account}
-                  </Grid>
-                  <Grid item xs={3}>
-                    Sinpe
-                  </Grid>
-                  <Grid item xs={9}>
-                    {account.dolar.sinpe}
-                  </Grid>
-                  <Grid item xs={3}>
-                    IBAN
-                  </Grid>
-                  <Grid item xs={9}>
-                    {account.dolar.iban}
-                  </Grid>
-                </>
-              ) : null}
-            </Grid>
+      <Container maxWidth="md">
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h2">{t("donate.title")}</Typography>
           </Grid>
-        ))}
-        <Grid item xs={12}>
-          <Typography variant="body1">{t("donate.body")}</Typography>
+          <Grid item xs={12}>
+            <Typography variant="h4">{t("donate.name")}</Typography>
+            <Typography variant="h4">{t("donate.id")}</Typography>
+          </Grid>
+          {accounts.map((account: any, i: number) => (
+            <Grid item xs={12} md={4}>
+              <Typography variant="h5">{account.name}</Typography>
+              <Grid container spacing={0}>
+                <Grid item xs={12}>
+                  <Typography variant="h6">{t("donate.colons")}</Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  {t("donate.account")}
+                </Grid>
+                <Grid item xs={9}>
+                  {account.colon.account}
+                </Grid>
+                <Grid item xs={3}>
+                  Sinpe
+                </Grid>
+                <Grid item xs={9}>
+                  {account.colon.sinpe}
+                </Grid>
+                <Grid item xs={3}>
+                  IBAN
+                </Grid>
+                <Grid item xs={9}>
+                  {account.colon.iban}
+                </Grid>
+                {account?.dolar ? (
+                  <>
+                    <Grid item xs={12}>
+                      <Typography variant="h6">{t("donate.dolars")}</Typography>
+                    </Grid>
+                    <Grid item xs={3}>
+                      {t("donate.account")}
+                    </Grid>
+                    <Grid item xs={9}>
+                      {account.dolar.account}
+                    </Grid>
+                    <Grid item xs={3}>
+                      Sinpe
+                    </Grid>
+                    <Grid item xs={9}>
+                      {account.dolar.sinpe}
+                    </Grid>
+                    <Grid item xs={3}>
+                      IBAN
+                    </Grid>
+                    <Grid item xs={9}>
+                      {account.dolar.iban}
+                    </Grid>
+                  </>
+                ) : null}
+              </Grid>
+            </Grid>
+          ))}
+          <Grid item xs={12}>
+            <Typography variant="h4">{t("donate.body")}</Typography>
+          </Grid>
         </Grid>
-      </Grid>
+      </Container>
     </Container>
   );
 };
