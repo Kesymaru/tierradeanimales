@@ -20,7 +20,7 @@ export function IEmailFactory(value?: Partial<IEmail>): IEmail {
     to: "",
     message: { subject: "", html: "" },
     ...IDataFactory(),
-    ...value
+    ...value,
   };
 }
 
@@ -37,7 +37,7 @@ export function IEmailsStatsFactory(
   return {
     ...config,
     total: config.total ? config.total : 0,
-    contact: config.contact ? config.contact : 0
+    contact: config.contact ? config.contact : 0,
   };
 }
 
@@ -52,7 +52,13 @@ export interface IContact {
 }
 
 export function IContactFactory(values?: Partial<IContact>): IContact {
-  return { name: "", email: "", phone: "", message: "", ...values };
+  return {
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+    ...values,
+  };
 }
 
 export function IContactSchema(labels?: Partial<IContact>): AnySchema {
@@ -71,7 +77,7 @@ export function IContactSchema(labels?: Partial<IContact>): AnySchema {
     message: Joi.string()
       .min(3)
       .required()
-      .label(labels?.message || "Message")
+      .label(labels?.message || "Message"),
   });
 }
 
