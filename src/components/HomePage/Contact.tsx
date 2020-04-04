@@ -2,7 +2,7 @@ import React, {
   ChangeEvent,
   FormEvent,
   FunctionComponent,
-  useState
+  useState,
 } from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -26,15 +26,15 @@ import useValidation from "../../constants/validations";
 import {
   IContact,
   IContactFactory,
-  IContactSchema
+  IContactSchema,
 } from "../../store/emails/emails.types";
 import { SendContactEmail } from "../../store/emails/emails.actions";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     form: {
-      margin: "40px 0"
-    }
+      margin: "40px 0",
+    },
   })
 );
 
@@ -48,7 +48,7 @@ const Contact: FunctionComponent<{}> = () => {
       name: t("contact.name"),
       email: t("contact.email"),
       phone: t("contact.phone"),
-      message: t("contact.message")
+      message: t("contact.message"),
     }),
     { abortEarly: true }
   );
@@ -57,7 +57,6 @@ const Contact: FunctionComponent<{}> = () => {
     event.preventDefault();
     const valid = validate(data);
     if (valid) {
-      console.log("send contact email");
       distpatch(SendContactEmail(data));
     }
   }
@@ -95,7 +94,7 @@ const Contact: FunctionComponent<{}> = () => {
                   <InputAdornment position="start">
                     <PersonIcon />
                   </InputAdornment>
-                )
+                ),
               }}
               value={data.name}
               error={!!errors?.name}
@@ -114,7 +113,7 @@ const Contact: FunctionComponent<{}> = () => {
                   <InputAdornment position="start">
                     <PhoneIcon />
                   </InputAdornment>
-                )
+                ),
               }}
               value={data.phone}
               error={!!errors?.phone}
@@ -133,7 +132,7 @@ const Contact: FunctionComponent<{}> = () => {
                   <InputAdornment position="start">
                     <EmailIcon />
                   </InputAdornment>
-                )
+                ),
               }}
               value={data.email}
               error={!!errors?.email}
@@ -153,7 +152,7 @@ const Contact: FunctionComponent<{}> = () => {
                   <InputAdornment position="start">
                     <MessageIcon />
                   </InputAdornment>
-                )
+                ),
               }}
               value={data.message}
               error={!!errors?.message}
