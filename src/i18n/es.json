@@ -8,7 +8,8 @@
       "errors": {
         "string.min": "{#label} debe ser de al menos {#limit} caracteres",
         "string.empty": "{#label} no puede estar vacio",
-        "string.email": "{#label} debe ser un email valido"
+        "string.email": "{#label} debe ser un email valido",
+        "number.base": "{#label} debe ser un numero valido"
       }
     },
     "home": {
