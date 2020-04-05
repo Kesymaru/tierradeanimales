@@ -4,10 +4,10 @@ import React, {
   FunctionComponent,
   useState,
 } from "react";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useFirebase } from "react-redux-firebase";
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink, Redirect } from "react-router-dom";
-import { ValidationError, ValidationResult } from "@hapi/joi";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -26,7 +26,6 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import { DASHBOARD_ROUTE } from "../../Dashboard/routes/public.routes";
 import { FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE } from "../routes";
 import { GetError, HasError } from "../../App/constants/firebase/database";
-import { useFirebase } from "react-redux-firebase";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -51,15 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface SignInProps {
-  loading: boolean;
-  logged: boolean;
-}
-
-const SignIn: FunctionComponent<SignInProps> = ({
-  loading = false,
-  logged = true,
-}) => {
+const SignIn: FunctionComponent<{}> = ({ loading = false, logged = true }) => {
   const classes = useStyles();
   const firebase = useFirebase();
   const { t } = useTranslation();
@@ -200,8 +191,4 @@ const SignIn: FunctionComponent<SignInProps> = ({
   );
 };
 
-const mapStateToProps = (state: IAppState) => ({
-  loading: state.system.loading,
-  logged: state.auth.logged,
-});
-export default connect(mapStateToProps)(SignIn);
+export default SignIn;
