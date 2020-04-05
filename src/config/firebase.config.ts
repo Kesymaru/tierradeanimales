@@ -1,14 +1,3 @@
-export interface IFirebaseConfig {
-  apiKey: string;
-  appId: string;
-  projectId: string;
-  authDomain?: string;
-  databaseURL?: string;
-  storageBucket?: string;
-  messagingSenderId?: string;
-  measurementId?: string;
-}
-
 const FirebaseConfig: IFirebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY || "",
   appId: process.env.REACT_APP_FIREBASE_APP_ID || "",
