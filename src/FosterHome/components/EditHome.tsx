@@ -21,18 +21,15 @@ import HomeIcon from "@material-ui/icons/Home";
 import CloseIcon from "@material-ui/icons/Close";
 import SendIcon from "@material-ui/icons/Send";
 
-import IHomeState, { IHome, IHomeFactory } from "../../App/homes/homes.types";
 import IAppState, { TStatus } from "../../App/app.types";
 import { GetHome, SaveHome, UpdateHome } from "../../App/homes/homes.actions";
 import { useId } from "../../routes/hooks";
 import HomeContacts from "./HomeContacts";
 import HomeDogs from "./HomeDogs";
-import Address from "../../components/Address";
+import Address from "../../User/components/Address";
 import { ADMIN_HOMES_ROUTE } from "../routes";
 
-interface EditHomeProps {}
-
-const EditHome: FunctionComponent<EditHomeProps> = (props) => {
+const EditFosterHome: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { isNew, id } = useId();
@@ -181,7 +178,4 @@ const EditHome: FunctionComponent<EditHomeProps> = (props) => {
   );
 };
 
-const mapStateToProps = (state: IAppState): EditHomeProps => ({
-  home: state.homes.home,
-});
-export default connect(mapStateToProps)(EditHome);
+export default EditFosterHome;
