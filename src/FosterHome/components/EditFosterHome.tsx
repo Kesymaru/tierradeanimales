@@ -28,7 +28,7 @@ import HomeDogs from "./HomeDogs";
 import Address from "../../User/components/Address";
 import { FOSTER_HOMES_ROUTE } from "../routes";
 
-const EditFosterHome: FunctionComponent<{}> = (props) => {
+export const EditFosterHome: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { isNew, id } = useId();

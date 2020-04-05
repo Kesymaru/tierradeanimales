@@ -30,7 +30,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AppTable from "../../components/AppTable/AppTable";
 import { EDIT_FOSTER_HOME_ROUTE } from "../routes";
 
-const FosterHomes: FunctionComponent<{}> = (props) => {
+export const FosterHomes: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const theme = useTheme();
