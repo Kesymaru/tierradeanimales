@@ -1,10 +1,11 @@
 import { Route, RouteFactory } from "@/routes";
 
-import NotFound from "@/App/components/NotFound";
+import NotFound from "../components/NotFound";
 import HomePage from "@/HomePage/components/Home";
 
-import LOGIN_ROUTES from "../Auth/components/Login.routes";
-import PUBLIC_ROUTES from "../../Dashboard/routes/public.routes";
+import { ROUTES as AUTH_ROUTES } from "@/Auth/routes";
+import { ROUTES as DASHBOARD_ROUTES } from "@/Dashboard/routes";
+
 // import DOGS_ROUTES from "../components/Dogs/Dogs.routes";
 // import HOMES_ROUTES from "../components/Homes/Homes.routes";
 // import ADMIN_ROUTES from "../components/Admin/Admin.routes";
@@ -32,8 +33,8 @@ export const NOT_FOUND_ROUTE: Route = RouteFactory({
 // Routes Array
 // ------------------------------------
 export const ROUTES: Route[] = [
-  ...LOGIN_ROUTES,
-  ...PUBLIC_ROUTES,
+  ...AUTH_ROUTES,
+  ...DASHBOARD_ROUTES,
 
   // ...DOGS_ROUTES,
   // ...HOMES_ROUTES,

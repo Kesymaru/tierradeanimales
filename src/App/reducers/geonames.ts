@@ -1,6 +1,6 @@
 import { Status, GeonamesState, GeonamesAction } from "@/App/models";
 
-import FlagCountries from "@/App/constants/countries";
+import FlagCountries from "../constants/countries";
 
 const InitState: GeonamesState = {
   countries: {

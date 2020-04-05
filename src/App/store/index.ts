@@ -21,7 +21,7 @@ import {
 import { firestoreReducer, createFirestoreInstance } from "redux-firestore";
 
 import { FirebaseConfig } from "@/config/constants";
-import { GeonamesReducers, GeonamesState } from "@/App/geonames";
+import GeonamesReducers from "../reducers/geonames";
 
 // Store
 export const AppStore: Store = configure();
