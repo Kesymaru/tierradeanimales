@@ -9,8 +9,11 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
-import IAppState from "../../store/app.types.js";
-import { ACCOUNT_ROUTE, SIGN_IN_ROUTE } from "../Login/Login.routes";
+import IAppState from "../../App/app.types.js.js.js";
+import {
+  ACCOUNT_ROUTE,
+  SIGN_IN_ROUTE,
+} from "../../Auth/components/Login.routes";
 
 interface IUserMenuProps {}
 

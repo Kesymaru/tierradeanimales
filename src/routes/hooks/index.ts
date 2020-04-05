@@ -3,7 +3,7 @@ import * as H from "history";
 import { useLocation, useParams } from "react-router-dom";
 
 // import IAppRoute, {IAppRouteDefaults, IAppRouteFactoryParams, IParam} from "./routes.types";
-import ROUTES from "../../App/routes";
+import { ROUTES } from "@/App/routes";
 
 // ------------------------------------
 // Functions
