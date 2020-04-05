@@ -6,9 +6,9 @@ import HomePage from "../components/HomePage/HomePage";
 
 import LOGIN_ROUTES from "../components/Login/Login.routes";
 import DASHBOARD_ROUTES from "../components/Dashboard/Dashboard.routes";
-import DOGS_ROUTES from "../components/Dogs/Dogs.routes";
-import HOMES_ROUTES from "../components/Homes/Homes.routes";
-import ADMIN_ROUTES from "../components/Admin/Admin.routes";
+// import DOGS_ROUTES from "../components/Dogs/Dogs.routes";
+// import HOMES_ROUTES from "../components/Homes/Homes.routes";
+// import ADMIN_ROUTES from "../components/Admin/Admin.routes";
 
 // ------------------------------------
 // 404 no match
