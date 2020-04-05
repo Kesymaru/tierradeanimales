@@ -3,7 +3,7 @@ import {
   GeonamesState,
   GeonamesAction,
   GeonamesTypes,
-} from "@/App/models";
+} from "../models";
 
 import FlagCountries from "../constants/countries";
 
