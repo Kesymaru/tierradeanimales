@@ -1,3 +1,7 @@
+import { Action } from "redux";
+
+import { StateItem } from "@/App/models/app";
+
 export enum GeonamesTypes {
   FETCH_COUNTRIES,
   ERROR_COUNTRIES,
@@ -13,11 +17,56 @@ export enum GeonamesTypes {
   LOAD_CITIES,
 }
 
+export interface GeonamesCountry {
+  continent: string;
+  capital: string;
+  languages: "string";
+  geonameId: number;
+  south: number;
+  isoAlpha3: string;
+  north: number;
+  fipsCode: string;
+  population: string;
+  east: number;
+  isoNumeric: string;
+  areaInSqKm: "string";
+  countryCode: string;
+  west: number;
+  countryName: "string";
+  continentName: string;
+  currencyCode: string;
+  icon?: string;
+}
+
+export interface GeonamesChildren {
+  toponymName: string;
+  name: string;
+  lat: number;
+  lng: number;
+  geonameId: number;
+  countryCode: string;
+  countryName: string;
+  fcl: string;
+  fcode: string;
+}
+
+export interface GeonamesResult<T> {
+  geonames: T[];
+  totalResultsCount?: number;
+}
+
+export default interface GeonamesState {
+  countries: StateItem<Array<GeonamesCountry>>;
+  states: StateItem<Array<GeonamesChildren>>;
+  counties: StateItem<Array<GeonamesChildren>>;
+  cities: StateItem<Array<GeonamesChildren>>;
+}
+
 // ------------------------------------
 // FlagCountries
 // ------------------------------------
-interface FetchCountries {
-  type: typeof GeonamesTypes.FETCH_COUNTRIES;
+interface FetchCountries extends Action<GeonamesTypes.FETCH_COUNTRIES> {
+  // type: typeof GeonamesTypes.FETCH_COUNTRIES;
 }
 
 interface ErrorCountries {
@@ -38,7 +87,7 @@ interface FetchStates {
 }
 
 interface ErrorStates {
-  type: typeof ERROR_STATES;
+  type: typeof GeonamesTypes.ERROR_STATES;
   payload: Error | string;
 }
 
@@ -84,7 +133,7 @@ interface LoadCities {
 // ------------------------------------
 // Geonames Actions
 // ------------------------------------
-type GeonamesAction =
+export type GeonamesAction =
   | FetchCountries
   | ErrorCountries
   | LoadCountries

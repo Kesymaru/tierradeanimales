@@ -1,6 +1,6 @@
 import { RouterState } from "connected-react-router";
 
-import { GeonamesState } from "./geonames";
+import GeonamesState from "@/App/models/geonames";
 
 export default interface State {
   geonames: GeonamesState;
@@ -9,7 +9,7 @@ export default interface State {
 
 export interface StateItem<T> {
   status: Status;
-  data: T | null;
+  data: T | Array<T> | null;
   id: string | number | null;
   error?: string | Error;
 }
@@ -20,3 +20,5 @@ export enum Status {
   Fetching,
   Error,
 }
+
+export interface AppState {}

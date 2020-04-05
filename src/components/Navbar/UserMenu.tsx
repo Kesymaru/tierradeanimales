@@ -9,15 +9,10 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
-import IAppState from "../../App/app.types.js.js.js";
-import {
-  ACCOUNT_ROUTE,
-  SIGN_IN_ROUTE,
-} from "../../Auth/components/Login.routes";
+import { AppState } from "@/App/models";
+import { ACCOUNT_ROUTE, SIGN_IN_ROUTE } from "@/Auth/routes";
 
-interface IUserMenuProps {}
-
-const UserMenu: FunctionComponent<IUserMenuProps> = (props) => {
+const UserMenu: FunctionComponent<{}> = (props) => {
   const firebase = useFirebase();
   const auth = useSelector((state) => state.firebase.auth);
   const location = useLocation();
@@ -86,8 +81,4 @@ const UserMenu: FunctionComponent<IUserMenuProps> = (props) => {
   );
 };
 
-const mapStateToProps = (state: IAppState): IUserMenuProps => ({
-  logged: state.auth.logged,
-  user: state.user.user,
-});
 export default UserMenu;

@@ -70,5 +70,3 @@ function initFirebaseServices() {
   firebase.initializeApp(FirebaseConfig);
   firebase.firestore();
 }
-
-export { Models };
