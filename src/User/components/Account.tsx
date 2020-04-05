@@ -28,11 +28,6 @@ export const Account: FunctionComponent<{}> = (props) => {
   const [password, setPassword] = useState<string>("");
   const fileInput = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (!props.user) return;
-    setUser(props.user);
-  }, [props.user]);
-
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     if (!user || !touched) return;
@@ -40,9 +35,9 @@ export const Account: FunctionComponent<{}> = (props) => {
     // if (password.length) dispatch(UpdatePassword(password));
   }
 
-  function handleUserChange(key: keyof IUser) {
+  function handleUserChange(key: keyof User) {
     return (event: ChangeEvent<HTMLInputElement>) => {
-      setUser({ ...user, [`${key}`]: event.target.value } as IUser);
+      setUser({ ...user, [`${key}`]: event.target.value } as User);
       setTouched(true);
     };
   }
@@ -66,7 +61,7 @@ export const Account: FunctionComponent<{}> = (props) => {
   }
 
   function handlerReset(event: FormEvent) {
-    setUser(props.user);
+    setUser(InitUser);
     setTouched(false);
   }
 
@@ -88,7 +83,7 @@ export const Account: FunctionComponent<{}> = (props) => {
               onChange={handleAvatarChange}
             />
             <Zoom in={true} style={{ transitionDelay: "250ms" }}>
-              <Avatar
+              {/* <Avatar
                 alt={
                   user && user.displayName
                     ? user.displayName
@@ -101,7 +96,7 @@ export const Account: FunctionComponent<{}> = (props) => {
                   margin: "0 auto",
                 }}
                 onClick={clickFileUpload}
-              ></Avatar>
+              ></Avatar> */}
             </Zoom>
           </Grid>
           <Grid item xs={12}>
@@ -111,7 +106,7 @@ export const Account: FunctionComponent<{}> = (props) => {
                 variant="h5"
                 style={{ textAlign: "center" }}
               >
-                {user ? user.displayName : ""}
+                {user ? user.firstName : ""}
               </Typography>
             </Fade>
           </Grid>
@@ -138,8 +133,8 @@ export const Account: FunctionComponent<{}> = (props) => {
               id="Name"
               label="Name"
               autoFocus
-              value={user ? user.displayName : ""}
-              onChange={handleUserChange("displayName")}
+              value={user ? user.firstName : ""}
+              onChange={handleUserChange("firstName")}
             />
           </Grid>
           <Grid item xs={12}>

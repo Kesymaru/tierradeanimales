@@ -11,7 +11,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 import { ACCOUNT_ROUTE, SIGN_IN_ROUTE } from "@/Auth/routes";
 
-export const UserMenu: FunctionComponent<{}> = (props) => {
+export const UserMenu: FunctionComponent<{}> = () => {
   const firebase = useFirebase();
   const auth = useSelector((state) => state.firebase.auth);
   const location = useLocation();
@@ -49,7 +49,7 @@ export const UserMenu: FunctionComponent<{}> = (props) => {
           }}
           onClick={handleClick}
         >
-          {user && user.photoURL ? (
+          {/* {user && user.photoURL ? (
             <img
               alt={user.displayName || "avatar"}
               style={{ height: "100%" }}
@@ -57,7 +57,7 @@ export const UserMenu: FunctionComponent<{}> = (props) => {
             />
           ) : (
             <LockOutlinedIcon />
-          )}
+          )} */}
         </Avatar>
         <Menu
           id="simple-menu"
