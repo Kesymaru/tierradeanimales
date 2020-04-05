@@ -1,4 +1,4 @@
-import { Role } from "@core/Auth/models";
+import { Role } from "@/Auth/models";
 
 interface User {
   firstName: string;
