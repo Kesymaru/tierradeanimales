@@ -93,8 +93,8 @@ interface ErrorStates {
   payload: Error | string;
 }
 
-interface LoadStates {
-  type: typeof GeonamesTypes.ERROR_STATES;
+interface LoadStates extends Action<GeonamesTypes.LOAD_STATES> {
+  // type: typeof GeonamesTypes.LOAD_STATES;
   payload: any[];
 }
 
@@ -110,8 +110,8 @@ interface ErrorCounties {
   payload: Error | string;
 }
 
-interface LoadCounties {
-  type: typeof GeonamesTypes.FETCH_COUNTIES;
+interface LoadCounties extends Action<GeonamesTypes.LOAD_COUNTIES> {
+  // type: typeof GeonamesTypes.LOAD_COUNTIES;
   payload: any[];
 }
 

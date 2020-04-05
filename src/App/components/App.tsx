@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useState, Suspense } from "react";
 import { ConnectedRouter } from "connected-react-router";
 
-import { AppHistory, ROUTES } from "@/App";
+import { AppHistory } from "../store";
+import { ROUTES } from "../routes";
 
 import Router from "../../wrappers/Router";
 import Navbar from "./Navbar";
