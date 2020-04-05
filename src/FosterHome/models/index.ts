@@ -1,3 +1,5 @@
+import { Address } from "@/User/models";
+
 export interface Contact {
   name: string;
   phone: number | string;
@@ -7,8 +9,7 @@ export interface Contact {
 export interface FosterHome {
   name: string;
   active: boolean;
-  address: IAddress;
+  address: Address;
 
   contacts?: Contact[];
-  dogs?: IDog[];
 }
