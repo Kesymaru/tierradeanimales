@@ -1,10 +1,8 @@
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
-import { Route } from "@/App";
-// import IAppRoute from "../../routes/routes.types";
+import { Route, RouteFactory } from "@/routes";
 
-import { RouteFactory } from "../../routes/hooks";
-import { DASHBOARD_ROUTE } from "../../Dashboard/routes/public.routes";
+import { DASHBOARD_ROUTE } from "@/Dashboard/routes";
 
 import SignUp from "../components/SignUp";
 import SignIn from "../components/SignIn";
@@ -14,7 +12,7 @@ import Account from "../../User/components/Account";
 // ------------------------------------
 // Sign Up
 // ------------------------------------
-export const SIGN_UP_ROUTE: IAppRoute = RouteFactory({
+export const SIGN_UP_ROUTE: Route = RouteFactory({
   name: "Sign Up",
   path: "/signup",
   component: SignUp,
@@ -23,7 +21,7 @@ export const SIGN_UP_ROUTE: IAppRoute = RouteFactory({
 // ------------------------------------
 // Sign In
 // ------------------------------------
-export const SIGN_IN_ROUTE: IAppRoute = RouteFactory({
+export const SIGN_IN_ROUTE: Route = RouteFactory({
   name: "Sign In",
   path: "/signin",
   component: SignIn,
@@ -32,7 +30,7 @@ export const SIGN_IN_ROUTE: IAppRoute = RouteFactory({
 // ------------------------------------
 // Forgot Password
 // ------------------------------------
-export const FORGOT_PASSWORD_ROUTE: IAppRoute = RouteFactory({
+export const FORGOT_PASSWORD_ROUTE: Route = RouteFactory({
   name: "Forgot Password",
   path: "/pw-forget",
   component: ForgotPassword,
@@ -41,7 +39,7 @@ export const FORGOT_PASSWORD_ROUTE: IAppRoute = RouteFactory({
 // ------------------------------------
 // Account
 // ------------------------------------
-export const ACCOUNT_ROUTE: IAppRoute = RouteFactory({
+export const ACCOUNT_ROUTE: Route = RouteFactory({
   name: "Account",
   path: "/account",
   auth: true,
@@ -50,11 +48,11 @@ export const ACCOUNT_ROUTE: IAppRoute = RouteFactory({
   parent: DASHBOARD_ROUTE,
 });
 
-const Routes: AppRoute[] = [
+export const ROUTES: AppRoute[] = [
   SIGN_UP_ROUTE,
   SIGN_IN_ROUTE,
   FORGOT_PASSWORD_ROUTE,
   ACCOUNT_ROUTE,
 ];
 
-export default Routes;
+export default ROUTES;
