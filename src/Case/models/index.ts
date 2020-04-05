@@ -13,7 +13,7 @@ export enum CaseStatus {
   DECEASED = "Deceased",
 }
 
-export interface Animal {
+export interface Case {
   type: CaseType;
   sex: Sex;
   status: CaseStatus;

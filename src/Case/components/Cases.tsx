@@ -15,7 +15,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 import { DOG_DETAILS_ROUTE } from "@/Case/routes";
 
-const Dogs: FunctionComponent<{}> = (props) => {
+const Cases: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [dogs, setDogs] = useState<IDog[]>(props.dogs.data);
@@ -26,13 +26,10 @@ const Dogs: FunctionComponent<{}> = (props) => {
   });
 
   useEffect(() => {
-    console.log("use effect dogs");
     setDogs(props.dogs.data);
   }, [props.dogs]);
 
   if (props.dogs.status === Status.Empty) dispatch(GetDogs(pagination));
-
-  console.log("dogs", dogs);
 
   return (
     <Container>
@@ -80,4 +77,4 @@ const Dogs: FunctionComponent<{}> = (props) => {
   );
 };
 
-export default Dogs;
+export default Cases;

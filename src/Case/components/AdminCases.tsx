@@ -30,15 +30,16 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import AppTable from "../../components/AppTable/AppTable";
 import AlertDialog from "../../components/AlertDialog";
 
-import { ADMIN_CASE_EDIT_ROUTE } from "../routes";
+import { Case } from "@/Case/models";
+import { ADMIN_CASE_EDIT_ROUTE } from "@/Case/routes";
 
-const AdminDogs: FunctionComponent<{}> = (props) => {
+const AdminCases: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
-  const [dogs, _setDogs] = useState<IDog[]>(props.dogs.data);
-  const [selected, setSelected] = useState<IDog[]>([]);
+  const [dogs, _setDogs] = useState<Case[]>(props.dogs.data);
+  const [selected, setSelected] = useState<Case[]>([]);
   const [loading, setLoading] = useState<boolean>(getLoading());
   const [openDelete, setOpenDelete] = useState<boolean>(false);
 
@@ -194,4 +195,4 @@ const AdminDogs: FunctionComponent<{}> = (props) => {
   );
 };
 
-export default AdminDogs;
+export default AdminCase;

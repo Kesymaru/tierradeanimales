@@ -4,16 +4,16 @@ import EditIcon from "@material-ui/icons/Edit";
 import { Route, RouteFactory } from "@/routes";
 import { DASHBOARD_ROUTE } from "@/Dashboard/routes";
 
-import AdminDogs from "../components/AdminDogs";
-import EditCase from "../components/EditDog";
-import Dogs from "../components/Dogs";
-import DogDetails from "../components/DogDetails";
+import AdminCase from "../components/AdminCases";
+import EditCase from "../components/EditCase";
+import Cases from "../components/Cases";
+import DogDetails from "../components/CaseDetails";
 
 export const ADMIN_CASE_ROUTE: Route = RouteFactory({
   name: "Dogs",
   path: "/Admin/dogs",
   auth: true,
-  component: AdminDogs,
+  component: AdminCase,
   parent: DASHBOARD_ROUTE,
   icon: PetsIcon,
 });
@@ -31,7 +31,7 @@ export const ADMIN_CASE_EDIT_ROUTE: Route = RouteFactory({
 export const DOG_ROUTE: Route = RouteFactory({
   name: "Dogs",
   path: `/dogs`,
-  component: Dogs,
+  component: Cases,
   parent: DASHBOARD_ROUTE,
   icon: PetsIcon,
 });
