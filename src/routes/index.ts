@@ -1,6 +1,6 @@
 import IAppRoute from "./routes.types";
 
-import {IAppRouteFactory} from "./routes.hooks";
+import { IAppRouteFactory } from "./routes.hooks";
 import NotFound from "../components/NotFound";
 import HomePage from "../components/HomePage/HomePage";
 
@@ -14,34 +14,34 @@ import ADMIN_ROUTES from "../components/Admin/Admin.routes";
 // 404 no match
 // ------------------------------------
 export const HOME_ROUTE: IAppRoute = IAppRouteFactory({
-    name: 'Home',
-    path: '/',
-    exact: true,
-    component: HomePage,
+  name: "Home",
+  path: "/",
+  exact: true,
+  component: HomePage,
 });
 
 // ------------------------------------
 // 404 no match
 // ------------------------------------
 export const NOT_FOUND_ROUTE: IAppRoute = IAppRouteFactory({
-    name: '404',
-    path: '*',
-    component: NotFound
+  name: "404",
+  path: "*",
+  component: NotFound,
 });
 
 // ------------------------------------
 // Routes Array
 // ------------------------------------
 const ROUTES: IAppRoute[] = [
-    ...LOGIN_ROUTES,
-    ...DASHBOARD_ROUTES,
+  ...LOGIN_ROUTES,
+  ...DASHBOARD_ROUTES,
 
-    ...DOGS_ROUTES,
-    ...HOMES_ROUTES,
-    ...ADMIN_ROUTES,
+  // ...DOGS_ROUTES,
+  // ...HOMES_ROUTES,
+  // ...ADMIN_ROUTES,
 
-    HOME_ROUTE,
-    NOT_FOUND_ROUTE,
+  HOME_ROUTE,
+  NOT_FOUND_ROUTE,
 ];
 
 export default ROUTES;
