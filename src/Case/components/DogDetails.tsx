@@ -15,8 +15,6 @@ import Hidden from "@material-ui/core/Hidden";
 import PetsIcon from "@material-ui/icons/Pets";
 
 import { AppState, Status } from "@/App/store";
-import IDogState, { IDog } from "../../App/dogs/dogs.types";
-import { GetDog } from "../../App/dogs/dogs.actions";
 
 interface DogDetailsProps {}
 

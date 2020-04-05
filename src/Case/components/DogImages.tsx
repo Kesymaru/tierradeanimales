@@ -28,9 +28,6 @@ import EditIcon from "@material-ui/icons/Edit";
 import PublishIcon from "@material-ui/icons/Publish";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-import Storage, { IFile } from "../../App/constants/firebase/storage";
-import { IDog } from "../../App/dogs/dogs.types";
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     selected: {
@@ -42,14 +39,14 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface IDogImagesProps {
+interface DogImagesProps {
   dog: IDog;
   loading: boolean;
   onImagesChange: (images: IFile[]) => void;
   onSelectAvatar?: (image: IFile | undefined) => void;
 }
 
-const DogImages: FunctionComponent<IDogImagesProps> = ({
+const DogImages: FunctionComponent<DogImagesProps> = ({
   dog,
   loading,
   onImagesChange,

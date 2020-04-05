@@ -13,15 +13,12 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
-import IAppState, { TStatus } from "../../App/app.types";
-import IDogState, { IDog } from "../../App/dogs/dogs.types";
-import { IPagination } from "../../App/constants/firebase/database";
-import { GetDogs } from "../../App/dogs/dogs.actions";
-import { DOG_DETAILS_ROUTE } from "../routes";
+import { AppState, Status } from "@/App/store";
+import { DOG_DETAILS_ROUTE } from "@/Case/routes";
 
-interface IDogsProps extends Pick<IDogState, "dogs"> {}
+interface DogsProps {}
 
-const Dogs: FunctionComponent<IDogsProps> = (props) => {
+const Dogs: FunctionComponent<DogsProps> = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [dogs, setDogs] = useState<IDog[]>(props.dogs.data);
@@ -36,7 +33,7 @@ const Dogs: FunctionComponent<IDogsProps> = (props) => {
     setDogs(props.dogs.data);
   }, [props.dogs]);
 
-  if (props.dogs.status === TStatus.Empty) dispatch(GetDogs(pagination));
+  if (props.dogs.status === Status.Empty) dispatch(GetDogs(pagination));
 
   console.log("dogs", dogs);
 
@@ -86,7 +83,4 @@ const Dogs: FunctionComponent<IDogsProps> = (props) => {
   );
 };
 
-const mapStateToProps = (state: IAppState): IDogsProps => ({
-  dogs: state.dogs.dogs,
-});
-export default connect(mapStateToProps)(Dogs);
+export default Dogs;

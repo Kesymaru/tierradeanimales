@@ -33,14 +33,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import RotateRightIcon from "@material-ui/icons/RotateRight";
 
 import { AppState, Status } from "@/App/store";
-import IDogState, {
-  IDog,
-  IDogStatus,
-  IDogFactory,
-} from "../../App/dogs/dogs.types";
-import { AddDog, GetDog, UpdateDog } from "../../App/dogs/dogs.actions";
-import { ISex } from "../../App/constants/firebase/database";
-import DogImages from "./DogImages";
+import DogImages from "@/Case/components/DogImages";
 
 const InitAnimal: IDog = {
   id: "",
