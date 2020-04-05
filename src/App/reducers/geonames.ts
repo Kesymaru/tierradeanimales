@@ -1,4 +1,9 @@
-import { Status, GeonamesState, GeonamesAction } from "@/App/models";
+import {
+  Status,
+  GeonamesState,
+  GeonamesAction,
+  GeonamesTypes,
+} from "@/App/models";
 
 import FlagCountries from "../constants/countries";
 
@@ -29,7 +34,7 @@ export function GeonamesReducers(
     // ------------------------------------
     // Countries
     // ------------------------------------
-    case "FETCH_COUNTRIES":
+    case GeonamesTypes.FETCH_COUNTRIES:
       return {
         ...state,
         countries: {
@@ -37,7 +42,7 @@ export function GeonamesReducers(
           status: Status.Fetching,
         },
       };
-    case "ERROR_COUNTRIES":
+    case GeonamesTypes.ERROR_COUNTRIES:
       return {
         ...state,
         countries: {
@@ -46,7 +51,7 @@ export function GeonamesReducers(
           error: action.payload,
         },
       };
-    case "LOAD_COUNTRIES":
+    case GeonamesTypes.LOAD_COUNTRIES:
       return {
         ...state,
         countries: {
@@ -63,7 +68,7 @@ export function GeonamesReducers(
     // ------------------------------------
     // States
     // ------------------------------------
-    case "FETCH_STATES":
+    case GeonamesTypes.FETCH_STATES:
       return {
         ...state,
         states: {
@@ -71,7 +76,7 @@ export function GeonamesReducers(
           status: Status.Fetching,
         },
       };
-    case "ERROR_STATES":
+    case GeonamesTypes.ERROR_STATES:
       return {
         ...state,
         states: {
@@ -80,7 +85,7 @@ export function GeonamesReducers(
           error: action.payload,
         },
       };
-    case "LOAD_STATES":
+    case GeonamesTypes.LOAD_STATES:
       return {
         ...state,
         states: {
@@ -92,7 +97,7 @@ export function GeonamesReducers(
     // ------------------------------------
     // Counties
     // ------------------------------------
-    case "FETCH_COUNTIES":
+    case GeonamesTypes.FETCH_COUNTIES:
       return {
         ...state,
         counties: {
@@ -100,7 +105,7 @@ export function GeonamesReducers(
           status: Status.Fetching,
         },
       };
-    case "ERROR_COUNTIES":
+    case GeonamesTypes.ERROR_COUNTIES:
       return {
         ...state,
         counties: {
@@ -109,7 +114,7 @@ export function GeonamesReducers(
           error: action.payload,
         },
       };
-    case "LOAD_COUNTIES":
+    case GeonamesTypes.LOAD_COUNTIES:
       return {
         ...state,
         counties: {
@@ -121,7 +126,7 @@ export function GeonamesReducers(
     // ------------------------------------
     // Cities
     // ------------------------------------
-    case "FETCH_CITIES":
+    case GeonamesTypes.FETCH_CITIES:
       return {
         ...state,
         cities: {
@@ -129,7 +134,7 @@ export function GeonamesReducers(
           status: Status.Fetching,
         },
       };
-    case "ERROR_CITIES":
+    case GeonamesTypes.ERROR_CITIES:
       return {
         ...state,
         cities: {
@@ -138,7 +143,7 @@ export function GeonamesReducers(
           error: action.payload,
         },
       };
-    case "LOAD_CITIES":
+    case GeonamesTypes.LOAD_CITIES:
       return {
         ...state,
         cities: {
