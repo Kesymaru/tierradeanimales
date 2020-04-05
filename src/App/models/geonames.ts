@@ -55,12 +55,14 @@ export interface GeonamesResult<T> {
   totalResultsCount?: number;
 }
 
-export default interface GeonamesState {
+export interface GeonamesState {
   countries: StateItem<Array<GeonamesCountry>>;
   states: StateItem<Array<GeonamesChildren>>;
   counties: StateItem<Array<GeonamesChildren>>;
   cities: StateItem<Array<GeonamesChildren>>;
 }
+
+export default GeonamesState;
 
 // ------------------------------------
 // FlagCountries

@@ -6,16 +6,15 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 
-import IAppRoute from "../../routes/routes.types";
-import useRoutes from "../../routes/hooks";
+import { Route, useRoutes } from "@/routes";
 
-interface IBreadcrumbsProps {
-  paths?: IAppRoute[];
+interface BreadcrumbsProps {
+  paths?: Route[];
   title?: string;
   children?: ReactElement;
 }
 
-const Breadcrumbs: FunctionComponent<IBreadcrumbsProps> = ({
+const Breadcrumbs: FunctionComponent<BreadcrumbsProps> = ({
   paths,
   title,
   children,

@@ -14,8 +14,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import IAppState from "../../App/app.types";
 import IAuthState from "../../App/auth/auth.types";
-import UserMenu from "../../User/components/UserMenu";
-import useRoutes from "../../routes/hooks";
+import UserMenu from "@/User/components/UserMenu";
+import useRoutes from "@/routes/hooks";
 import LanguageMenu from "./LanguageMenu";
 
 const drawerWidth = 240;
@@ -53,13 +53,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface IAppBarProps extends Pick<IAuthState, "logged"> {
+interface AppBarProps extends Pick<IAuthState, "logged"> {
   open: boolean;
   setOpen: Function;
   anchorId: string;
 }
 
-const AppBar: FunctionComponent<IAppBarProps> = (props) => {
+const AppBar: FunctionComponent<AppBarProps> = (props) => {
   const classes = useStyles();
   const routes = useRoutes();
 
@@ -130,12 +130,12 @@ const AppBar: FunctionComponent<IAppBarProps> = (props) => {
   );
 };
 
-interface IAppBarOwnProps extends Omit<IAppBarProps, "logged"> {}
+interface IAppBarOwnProps extends Omit<AppBarProps, "logged"> {}
 
 const mapStateToProps = (
   state: IAppState,
   ownProps: IAppBarOwnProps
-): IAppBarProps => ({
+): AppBarProps => ({
   ...ownProps,
   logged: state.auth.logged,
 });

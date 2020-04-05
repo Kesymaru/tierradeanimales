@@ -4,9 +4,9 @@ import { ConnectedRouter } from "connected-react-router";
 import { AppHistory, ROUTES } from "@/App";
 
 import Router from "../../wrappers/Router";
-import Navbar from "../../components/Navbar/Navbar";
-import AppBar from "../../components/Navbar/AppBar";
-import ScrollTop from "../../components/Navbar/ScrollTop";
+import Navbar from "./Navbar";
+import AppBar from "./AppBar";
+import ScrollTop from "./ScrollTop";
 
 // loading component for suspense fallback
 const AppLoader: FunctionComponent<{}> = () => (

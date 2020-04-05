@@ -10,7 +10,7 @@ export default interface State {
 export interface StateItem<T> {
   status: Status;
   data: T | Array<T> | null;
-  id: string | number | null;
+  id?: string | number | null;
   error?: string | Error;
 }
 
@@ -21,4 +21,4 @@ export enum Status {
   Error,
 }
 
-export interface AppState {}
+export default interface AppState {}

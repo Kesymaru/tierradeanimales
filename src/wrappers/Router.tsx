@@ -1,19 +1,19 @@
 import React, { FunctionComponent } from "react";
 import { Switch } from "react-router-dom";
 
-import IAppRoute from "../routes/routes.types";
-import Route from "./Route";
+import Route from "@/routes/models/route";
+import AppRoute from "./Route";
 
 interface RoutesProps {
-  routes: IAppRoute[];
+  routes: Route[];
   logged: boolean;
 }
 
 const Router: FunctionComponent<RoutesProps> = ({ routes, logged = false }) => {
   return (
     <Switch>
-      {routes.map((route: IAppRoute, i: number) => (
-        <Route key={i} logged={logged} {...route} />
+      {routes.map((route: Route, i: number) => (
+        <AppRoute key={i} logged={logged} {...route} />
       ))}
     </Switch>
   );

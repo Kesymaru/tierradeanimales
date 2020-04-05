@@ -1,56 +1,41 @@
-import { Status, GeonamesState, GeonamesAction } from "@/App/models";
+import {
+  Status,
+  GeonamesState,
+  GeonamesAction,
+  GeonamesTypes,
+} from "@/App/models";
+import { FlagCountries, InitGeonamesState } from "@/App/constants";
 
-import FlagCountries from "@/App/constants/countries";
-
-const InitState: GeonamesState = {
-  countries: {
-    status: TStatus.Empty,
-    data: [],
-  },
-  states: {
-    status: TStatus.Empty,
-    data: [],
-  },
-  counties: {
-    status: TStatus.Empty,
-    data: [],
-  },
-  cities: {
-    status: TStatus.Empty,
-    data: [],
-  },
-};
-
-function GeonamesReducers(
-  state: GeonamesState = InitState,
+export function GeonamesReducers(
+  state: GeonamesState = InitGeonamesState,
   action: GeonamesAction
-): IGeonamesState {
+): GeonamesState {
   switch (action.type) {
     // ------------------------------------
     // Countries
     // ------------------------------------
-    case "FETCH_COUNTRIES":
+    case GeonamesTypes.FETCH_COUNTRIES:
       return {
         ...state,
         countries: {
-          ...InitState.countries,
-          status: TStatus.Fetching,
+          ...InitGeonamesState.countries,
+          status: Status.Fetching,
         },
       };
-    case "ERROR_COUNTRIES":
+    case GeonamesTypes.ERROR_COUNTRIES:
       return {
         ...state,
         countries: {
-          ...InitState.countries,
-          status: TStatus.Error,
+          ...InitGeonamesState.countries,
+          status: Status.Error,
           error: action.payload,
         },
       };
-    case "LOAD_COUNTRIES":
+    case GeonamesTypes.LOAD_COUNTRIES:
       return {
         ...state,
         countries: {
-          status: TStatus.Loaded,
+          status: Status.Loaded,
           data: action.payload.map((country) => {
             const flag = FlagCountries.find(
               (f) => f.name === country.countryName
@@ -63,28 +48,28 @@ function GeonamesReducers(
     // ------------------------------------
     // States
     // ------------------------------------
-    case "FETCH_STATES":
+    case GeonamesTypes.FETCH_STATES:
       return {
         ...state,
         states: {
-          ...InitState.states,
-          status: TStatus.Fetching,
+          ...InitGeonamesState.states,
+          status: Status.Fetching,
         },
       };
-    case "ERROR_STATES":
+    case GeonamesTypes.ERROR_STATES:
       return {
         ...state,
         states: {
-          ...InitState.states,
-          status: TStatus.Error,
+          ...InitGeonamesState.states,
+          status: Status.Error,
           error: action.payload,
         },
       };
-    case "LOAD_STATES":
+    case GeonamesTypes.LOAD_STATES:
       return {
         ...state,
         states: {
-          status: TStatus.Loaded,
+          status: Status.Loaded,
           data: action.payload,
         },
       };
@@ -92,28 +77,28 @@ function GeonamesReducers(
     // ------------------------------------
     // Counties
     // ------------------------------------
-    case "FETCH_COUNTIES":
+    case GeonamesTypes.FETCH_COUNTIES:
       return {
         ...state,
         counties: {
-          ...InitState.counties,
-          status: TStatus.Fetching,
+          ...InitGeonamesState.counties,
+          status: Status.Fetching,
         },
       };
-    case "ERROR_COUNTIES":
+    case GeonamesTypes.ERROR_COUNTIES:
       return {
         ...state,
         counties: {
-          ...InitState.counties,
-          status: TStatus.Error,
+          ...InitGeonamesState.counties,
+          status: Status.Error,
           error: action.payload,
         },
       };
-    case "LOAD_COUNTIES":
+    case GeonamesTypes.LOAD_COUNTIES:
       return {
         ...state,
         counties: {
-          status: TStatus.Loaded,
+          status: Status.Loaded,
           data: action.payload,
         },
       };
@@ -121,28 +106,28 @@ function GeonamesReducers(
     // ------------------------------------
     // Cities
     // ------------------------------------
-    case "FETCH_CITIES":
+    case GeonamesTypes.FETCH_CITIES:
       return {
         ...state,
         cities: {
-          ...InitState.cities,
-          status: TStatus.Fetching,
+          ...InitGeonamesState.cities,
+          status: Status.Fetching,
         },
       };
-    case "ERROR_CITIES":
+    case GeonamesTypes.ERROR_CITIES:
       return {
         ...state,
         cities: {
-          ...InitState.cities,
-          status: TStatus.Error,
+          ...InitGeonamesState.cities,
+          status: Status.Error,
           error: action.payload,
         },
       };
-    case "LOAD_CITIES":
+    case GeonamesTypes.LOAD_CITIES:
       return {
         ...state,
         cities: {
-          status: TStatus.Loaded,
+          status: Status.Loaded,
           data: action.payload,
         },
       };
