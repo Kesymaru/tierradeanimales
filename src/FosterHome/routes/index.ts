@@ -4,9 +4,9 @@ import EditIcon from "@material-ui/icons/Edit";
 import { RouteFactory } from "@/routes";
 
 import ADMIN_DASHBOARD from "@/Dashboard/components/AdminDashboard";
-import { Homes as FosterHomes, EditHome } from "@/FosterHome/components";
+import { FosterHomes, EditFosterHome } from "@/FosterHome/components";
 
-export const ADMIN_HOMES_ROUTE: Route = RouteFactory({
+export const FOSTER_HOMES_ROUTE: Route = RouteFactory({
   name: "Foster Homes",
   path: "/homes",
   auth: true,
@@ -15,16 +15,16 @@ export const ADMIN_HOMES_ROUTE: Route = RouteFactory({
   icon: HouseIcon,
 });
 
-export const ADMIN_HOME_EDIT_ROUTE: Route = RouteFactory({
+export const EDIT_FOSTER_HOME_ROUTE: Route = RouteFactory({
   name: "Edit Dashboard",
-  path: `${ADMIN_HOMES_ROUTE.path}/:id`,
+  path: `${FOSTER_HOMES_ROUTE.path}/:id`,
   defaultParams: { id: "new" },
   auth: true,
-  component: EditHome,
-  parent: ADMIN_HOMES_ROUTE,
+  component: EditFosterHome,
+  parent: FOSTER_HOMES_ROUTE,
   icon: EditIcon,
 });
 
-const HOMES_ROUTES: Route[] = [ADMIN_HOME_EDIT_ROUTE, ADMIN_HOMES_ROUTE];
+const ROUTES: Route[] = [EDIT_FOSTER_HOME_ROUTE, FOSTER_HOMES_ROUTE];
 
-export default HOMES_ROUTES;
+export default ROUTES;

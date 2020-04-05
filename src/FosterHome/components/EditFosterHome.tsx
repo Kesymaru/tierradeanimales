@@ -21,13 +21,12 @@ import HomeIcon from "@material-ui/icons/Home";
 import CloseIcon from "@material-ui/icons/Close";
 import SendIcon from "@material-ui/icons/Send";
 
-import IAppState, { TStatus } from "../../App/app.types";
-import { GetHome, SaveHome, UpdateHome } from "../../App/homes/homes.actions";
-import { useId } from "../../routes/hooks";
-import HomeContacts from "./HomeContacts";
+import { Status } from "@/App/models";
+import { useId } from "@/routes";
+import HomeContacts from "./ForterHomeContacts";
 import HomeDogs from "./HomeDogs";
 import Address from "../../User/components/Address";
-import { ADMIN_HOMES_ROUTE } from "../routes";
+import { FOSTER_HOMES_ROUTE } from "../routes";
 
 const EditFosterHome: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
@@ -48,8 +47,8 @@ const EditFosterHome: FunctionComponent<{}> = (props) => {
     if (
       !isNew &&
       id &&
-      (props.home.status === TStatus.Empty ||
-        (props.home.status === TStatus.Loaded && props.home.id !== id))
+      (props.home.status === Status.Empty ||
+        (props.home.status === Status.Loaded && props.home.id !== id))
     )
       dispatch(GetHome(id));
   }
@@ -63,7 +62,7 @@ const EditFosterHome: FunctionComponent<{}> = (props) => {
   }
 
   function getLoading(): boolean {
-    return props.home.status === TStatus.Fetching;
+    return props.home.status === Status.Fetching;
   }
 
   function setHome(value: IHome) {
@@ -80,7 +79,7 @@ const EditFosterHome: FunctionComponent<{}> = (props) => {
   }
 
   function handleReset(event: FormEvent) {
-    if (isNew) return history.push(ADMIN_HOMES_ROUTE.getPath());
+    if (isNew) return history.push(FOSTER_HOMES_ROUTE.getPath());
   }
 
   function handleChange(field: keyof IHome) {

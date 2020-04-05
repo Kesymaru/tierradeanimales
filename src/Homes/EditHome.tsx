@@ -32,7 +32,7 @@ import { useId } from "../routes/hooks";
 import HomeContacts from "./HomeContacts";
 import HomeDogs from "./HomeDogs";
 import UserAddress from "../User/components/Address";
-import { ADMIN_HOMES_ROUTE } from "../FosterHome/routes";
+import { FOSTER_HOMES_ROUTE } from "../FosterHome/routes";
 import { GetError, HasError } from "../../constants/firebase/database";
 
 interface IEditHomeProps extends Pick<IHomeState, "home"> {}
@@ -94,7 +94,7 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
   }
 
   function handleReset(event: FormEvent) {
-    if (isNew) return history.push(ADMIN_HOMES_ROUTE.getPath());
+    if (isNew) return history.push(FOSTER_HOMES_ROUTE.getPath());
   }
 
   function handleChange(field: keyof IHome) {

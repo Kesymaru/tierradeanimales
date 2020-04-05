@@ -10,12 +10,12 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 
 import { ACCOUNT_ROUTE } from "@/Auth/routes";
 import { ADMIN_CASE_ROUTE } from "@/Case/routes";
-import { ADMIN_HOMES_ROUTE } from "@/FosterHome/routes";
+import { FOSTER_HOMES_ROUTE } from "@/FosterHome/routes";
 
 const ADMIN_ROUTES: IAppRoute[] = [
   ACCOUNT_ROUTE,
   ADMIN_CASE_ROUTE,
-  ADMIN_HOMES_ROUTE,
+  FOSTER_HOMES_ROUTE,
 ];
 
 const useStyles = makeStyles((theme: Theme) =>

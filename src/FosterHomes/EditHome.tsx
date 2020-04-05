@@ -21,27 +21,17 @@ import HomeIcon from "@material-ui/icons/Home";
 import CloseIcon from "@material-ui/icons/Close";
 import SendIcon from "@material-ui/icons/Send";
 
-import IHomeState, {
-  IHome,
-  IHomeFactory,
-  IHomeValidator,
-} from "../../store/homes/homes.types";
-import IAppState, { TStatus } from "../App/app.types";
-import { GetHome, SaveHome, UpdateHome } from "../../store/homes/homes.actions";
-import { useId } from "../routes/hooks";
+import { useId } from "@/routes";
+import UserAddress from "@/User/components/Address";
+import { FOSTER_HOMES_ROUTE, FosterHome } from "@/FosterHome";
 import HomeContacts from "./HomeContacts";
 import HomeDogs from "./HomeDogs";
-import UserAddress from "../User/components/Address";
-import { ADMIN_HOMES_ROUTE } from "../FosterHome/routes";
-import { GetError, HasError } from "../../constants/firebase/database";
 
-interface IEditHomeProps extends Pick<IHomeState, "home"> {}
-
-const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
+const EditHome: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { isNew, id } = useId();
-  const [home, _setHome] = useState<IHome>(getHome());
+  const [home, _setHome] = useState<FosterHome>(getHome());
   const [loading, setLoading] = useState<boolean>(getLoading());
   const [errors, setErrors] = useState<ValidationError | null>(null);
 
@@ -59,7 +49,6 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
       (props.home.status === TStatus.Empty ||
         (props.home.status === TStatus.Loaded && props.home.id !== id))
     )
-      dispatch(GetHome(id));
   }
 
   function getHome(): IHome {
@@ -89,12 +78,12 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
     event.preventDefault();
     if (!validate()) return;
     console.log("save ->", home);
-    if (isNew) return dispatch(SaveHome(home));
-    dispatch(UpdateHome(home));
+    // if (isNew) return dispatch(SaveHome(home));
+    // dispatch(UpdateHome(home));
   }
 
   function handleReset(event: FormEvent) {
-    if (isNew) return history.push(ADMIN_HOMES_ROUTE.getPath());
+    if (isNew) return history.push(FOSTER_HOMES_ROUTE.getPath());
   }
 
   function handleChange(field: keyof IHome) {
@@ -118,8 +107,6 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
             <TextField
               label="Name"
               variant="outlined"
-              error={HasError(["name"], errors)}
-              helperText={GetError(["name"], errors)}
               fullWidth
               InputProps={{
                 startAdornment: (

@@ -28,7 +28,7 @@ import AlertDialog from "../components/AlertDialog";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import AppTable from "../components/AppTable/AppTable";
-import { ADMIN_HOME_EDIT_ROUTE } from "../FosterHome/routes";
+import { EDIT_FOSTER_HOME_ROUTE } from "../FosterHome/routes";
 
 interface FosterHomeProps {
   homes: Home;
@@ -109,7 +109,7 @@ const FosterHomes: FunctionComponent<FosterHomeProps> = (props) => {
               <IconButton
                 onClick={() =>
                   history.push(
-                    ADMIN_HOME_EDIT_ROUTE.getPath(
+                    EDIT_FOSTER_HOME_ROUTE.getPath(
                       homes.filter((i) => i._selected)[0]
                     )
                   )
@@ -129,7 +129,7 @@ const FosterHomes: FunctionComponent<FosterHomeProps> = (props) => {
           <Fade in={true}>
             <Tooltip title="Add HomePage">
               <IconButton
-                onClick={() => history.push(ADMIN_HOME_EDIT_ROUTE.getPath())}
+                onClick={() => history.push(EDIT_FOSTER_HOME_ROUTE.getPath())}
               >
                 <AddIcon />
               </IconButton>

@@ -1,1 +1,1 @@
-import FosterHomes from "../FosterHome/components/Homes";
+import FosterHomes from "../FosterHome/components/FosterHomes";
