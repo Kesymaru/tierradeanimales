@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -16,6 +20,9 @@
     "jsx": "react",
     "baseUrl": "."
   },
-  "include": ["src", "geonames.d.ts"],
+  "include": [
+    "src",
+    "geonames.d.ts"
+  ],
   "extends": "./tsconfig.paths.json"
 }
