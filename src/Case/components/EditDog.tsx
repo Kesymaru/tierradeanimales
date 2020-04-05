@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import Zoom from "@material-ui/core/Zoom";
@@ -32,7 +32,6 @@ import SendIcon from "@material-ui/icons/Send";
 import SaveIcon from "@material-ui/icons/Save";
 import RotateRightIcon from "@material-ui/icons/RotateRight";
 
-import { AppState, Status } from "@/App/store";
 import DogImages from "@/Case/components/DogImages";
 
 const InitAnimal: IDog = {
@@ -46,9 +45,7 @@ const InitAnimal: IDog = {
   start: false,
 };
 
-interface EditDogProps {}
-
-const EditDog: FunctionComponent<EditDogProps> = (props) => {
+const EditCase: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const isNew = id && id.toLowerCase() === "new";
@@ -291,4 +288,4 @@ const EditDog: FunctionComponent<EditDogProps> = (props) => {
   );
 };
 
-export default EditDog;
+export default EditCase;

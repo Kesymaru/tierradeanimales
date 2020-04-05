@@ -13,12 +13,9 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
-import { AppState, Status } from "@/App/store";
 import { DOG_DETAILS_ROUTE } from "@/Case/routes";
 
-interface DogsProps {}
-
-const Dogs: FunctionComponent<DogsProps> = (props) => {
+const Dogs: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [dogs, setDogs] = useState<IDog[]>(props.dogs.data);
