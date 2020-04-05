@@ -1,8 +1,8 @@
-import { AppRoute, RouteFactory } from "@route";
+import { AppRoute, RouteFactory } from "@/route";
 
 import Dashboard from "../components/Dashboard";
 
-const DASHBOARD_ROUTE: AppRoute = RouteFactory({
+export const DASHBOARD_ROUTE: AppRoute = RouteFactory({
   name: "Dashboard",
   path: "/dashboard",
   exact: true,

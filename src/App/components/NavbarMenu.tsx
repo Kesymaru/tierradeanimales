@@ -9,12 +9,12 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 
 import { ACCOUNT_ROUTE } from "@/Auth/routes";
-import { ADMIN_DOGS_ROUTE } from "@/Case/routes";
+import { ADMIN_CASE_ROUTE } from "@/Case/routes";
 import { ADMIN_HOMES_ROUTE } from "@/FosterHome/routes";
 
 const ADMIN_ROUTES: IAppRoute[] = [
   ACCOUNT_ROUTE,
-  ADMIN_DOGS_ROUTE,
+  ADMIN_CASE_ROUTE,
   ADMIN_HOMES_ROUTE,
 ];
 

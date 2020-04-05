@@ -30,7 +30,7 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import AppTable from "../../components/AppTable/AppTable";
 import AlertDialog from "../../components/AlertDialog";
 
-import { ADMIN_DOG_EDIT_ROUTE } from "../routes";
+import { ADMIN_CASE_EDIT_ROUTE } from "../routes";
 
 const AdminDogs: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
@@ -117,7 +117,7 @@ const AdminDogs: FunctionComponent<{}> = (props) => {
               <IconButton
                 onClick={() =>
                   history.push(
-                    ADMIN_DOG_EDIT_ROUTE.getPath(
+                    ADMIN_CASE_EDIT_ROUTE.getPath(
                       dogs.filter((i) => i._selected)[0]
                     )
                   )
@@ -137,7 +137,7 @@ const AdminDogs: FunctionComponent<{}> = (props) => {
           <Fade in={true}>
             <Tooltip title="Add Dog">
               <IconButton
-                onClick={() => history.push(ADMIN_DOG_EDIT_ROUTE.getPath())}
+                onClick={() => history.push(ADMIN_CASE_EDIT_ROUTE.getPath())}
               >
                 <AddIcon />
               </IconButton>
