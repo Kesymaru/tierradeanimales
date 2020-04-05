@@ -1,12 +1,5 @@
 import { Role } from "@/Auth/models";
 
-export default interface User {
-  firstName: string;
-  lastName: string;
-  email: string;
-  role: Role;
-}
-
 export interface Address {
   country: string;
   state: string;
@@ -14,3 +7,13 @@ export interface Address {
   city: string;
   address: string;
 }
+
+export interface User {
+  role: Role;
+  address?: Address;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
+export default User;
