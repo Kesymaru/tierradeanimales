@@ -1,4 +1,4 @@
-import { AppRoute, RouteFactory } from "@/route";
+import { AppRoute, RouteFactory } from "@/routes";
 
 import Dashboard from "../components/Dashboard";
 

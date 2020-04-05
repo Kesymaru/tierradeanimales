@@ -1,6 +1,6 @@
-export interface CaseType {
+export enum CaseType {
   DOG = "Dog",
-  CAT = "cat",
+  CAT = "Cat",
 }
 
 export type Sex = "male" | "female";

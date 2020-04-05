@@ -1,3 +1,3 @@
-export * as Routes from "./routes";
-export * as Components from "./components";
-export * as Models from "./models";
+export * from "./routes";
+export * from "./components";
+export * from "./models";
