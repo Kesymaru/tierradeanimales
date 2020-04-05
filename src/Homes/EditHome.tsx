@@ -31,7 +31,7 @@ import { GetHome, SaveHome, UpdateHome } from "../../store/homes/homes.actions";
 import { useId } from "../routes/hooks";
 import HomeContacts from "./HomeContacts";
 import HomeDogs from "./HomeDogs";
-import Address from "../components/Address";
+import UserAddress from "../User/components/Address";
 import { ADMIN_HOMES_ROUTE } from "../FosterHome/routes";
 import { GetError, HasError } from "../../constants/firebase/database";
 
@@ -134,7 +134,7 @@ const EditHome: FunctionComponent<IEditHomeProps> = (props) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Address
+            <UserAddress
               address={home.address}
               disabled={loading}
               errors={errors}

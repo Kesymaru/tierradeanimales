@@ -1,14 +1,27 @@
-export interface Race {
-  name: string;
+export interface CaseType {
+  DOG = "Dog",
+  CAT = "cat",
 }
 
-export interface AnimalStatus {
-  name: string;
+export type Sex = "male" | "female";
+
+export enum CaseStatus {
+  RESCUED = "Rescued",
+  HOSPITALIZED = "Hospitalized",
+  FOSTERHOME = "Foster Home",
+  ADOPTED = "Adopted",
+  DECEASED = "Deceased",
 }
 
 export interface Animal {
-  race: Race;
+  type: CaseType;
+  sex: Sex;
+  status: CaseStatus;
   name: string;
   age: number;
-  status: AnimalStatus;
+  description: string;
+  public: boolean;
+  avatar?: any;
+  images?: any[];
+  start?: boolean;
 }

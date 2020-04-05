@@ -5,7 +5,7 @@ import { Route, RouteFactory } from "@/routes";
 import { DASHBOARD_ROUTE } from "@/Dashboard/routes";
 
 import AdminDogs from "../components/AdminDogs";
-import EditDog from "../components/EditDog";
+import EditCase from "../components/EditDog";
 import Dogs from "../components/Dogs";
 import DogDetails from "../components/DogDetails";
 
@@ -23,7 +23,7 @@ export const ADMIN_CASE_EDIT_ROUTE: Route = RouteFactory({
   path: `${ADMIN_CASE_ROUTE.path}/:id`,
   defaultParams: { id: "new" },
   auth: true,
-  component: EditDog,
+  component: EditCase,
   parent: ADMIN_CASE_ROUTE,
   icon: EditIcon,
 });
