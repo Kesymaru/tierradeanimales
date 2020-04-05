@@ -5,7 +5,6 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import Joi, { ValidationError, ValidationResult } from "@hapi/joi";
 
 import Zoom from "@material-ui/core/Zoom";
 import Box from "@material-ui/core/Box";
@@ -21,20 +20,15 @@ import PermContactCalendarIcon from "@material-ui/icons/PermContactCalendar";
 import ContactPhoneIcon from "@material-ui/icons/ContactPhone";
 import ContactMailIcon from "@material-ui/icons/ContactMail";
 
-import {
-  IHomeContact,
-  IHomeContactFactory,
-  IHomeContactValidator,
-} from "../../App/homes/homes.types";
+import { Contact } from "@/FosterHome/models";
 
 export interface HomeContactsProps {
-  contacts: IHomeContact[];
+  contacts: Array<Contact>;
   disabled?: boolean;
-  errors?: ValidationError | null;
-  onChange?: (contacts: IHomeContact[]) => void;
+  onChange?: (contacts: Array<Contact>) => void;
 }
 
-const HomeContacts: FunctionComponent<HomeContactsProps> = (props) => {
+const HomeContacts: FunctionComponent<{}> = (props) => {
   const [contacts, _setContacts] = useState<IHomeContact[]>(props.contacts);
   const [errors, setErrors] = useState<ValidationError | null>(null);
 
