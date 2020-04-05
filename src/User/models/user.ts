@@ -9,7 +9,7 @@ export interface Address {
 }
 
 export interface User {
-  role: Role;
+  role?: Role;
   address?: Address;
   firstName: string;
   lastName: string;
