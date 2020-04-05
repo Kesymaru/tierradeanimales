@@ -4,19 +4,19 @@ import FlagCountries from "../constants/countries";
 
 const InitState: GeonamesState = {
   countries: {
-    status: TStatus.Empty,
+    status: Status.Empty,
     data: [],
   },
   states: {
-    status: TStatus.Empty,
+    status: Status.Empty,
     data: [],
   },
   counties: {
-    status: TStatus.Empty,
+    status: Status.Empty,
     data: [],
   },
   cities: {
-    status: TStatus.Empty,
+    status: Status.Empty,
     data: [],
   },
 };
@@ -24,7 +24,7 @@ const InitState: GeonamesState = {
 export function GeonamesReducers(
   state: GeonamesState = InitState,
   action: GeonamesAction
-): IGeonamesState {
+): GeonamesState {
   switch (action.type) {
     // ------------------------------------
     // Countries
@@ -34,7 +34,7 @@ export function GeonamesReducers(
         ...state,
         countries: {
           ...InitState.countries,
-          status: TStatus.Fetching,
+          status: Status.Fetching,
         },
       };
     case "ERROR_COUNTRIES":
@@ -42,7 +42,7 @@ export function GeonamesReducers(
         ...state,
         countries: {
           ...InitState.countries,
-          status: TStatus.Error,
+          status: Status.Error,
           error: action.payload,
         },
       };
@@ -50,7 +50,7 @@ export function GeonamesReducers(
       return {
         ...state,
         countries: {
-          status: TStatus.Loaded,
+          status: Status.Loaded,
           data: action.payload.map((country) => {
             const flag = FlagCountries.find(
               (f) => f.name === country.countryName
@@ -68,7 +68,7 @@ export function GeonamesReducers(
         ...state,
         states: {
           ...InitState.states,
-          status: TStatus.Fetching,
+          status: Status.Fetching,
         },
       };
     case "ERROR_STATES":
@@ -76,7 +76,7 @@ export function GeonamesReducers(
         ...state,
         states: {
           ...InitState.states,
-          status: TStatus.Error,
+          status: Status.Error,
           error: action.payload,
         },
       };
@@ -84,7 +84,7 @@ export function GeonamesReducers(
       return {
         ...state,
         states: {
-          status: TStatus.Loaded,
+          status: Status.Loaded,
           data: action.payload,
         },
       };
@@ -97,7 +97,7 @@ export function GeonamesReducers(
         ...state,
         counties: {
           ...InitState.counties,
-          status: TStatus.Fetching,
+          status: Status.Fetching,
         },
       };
     case "ERROR_COUNTIES":
@@ -105,7 +105,7 @@ export function GeonamesReducers(
         ...state,
         counties: {
           ...InitState.counties,
-          status: TStatus.Error,
+          status: Status.Error,
           error: action.payload,
         },
       };
@@ -113,7 +113,7 @@ export function GeonamesReducers(
       return {
         ...state,
         counties: {
-          status: TStatus.Loaded,
+          status: Status.Loaded,
           data: action.payload,
         },
       };
@@ -126,7 +126,7 @@ export function GeonamesReducers(
         ...state,
         cities: {
           ...InitState.cities,
-          status: TStatus.Fetching,
+          status: Status.Fetching,
         },
       };
     case "ERROR_CITIES":
@@ -134,7 +134,7 @@ export function GeonamesReducers(
         ...state,
         cities: {
           ...InitState.cities,
-          status: TStatus.Error,
+          status: Status.Error,
           error: action.payload,
         },
       };
@@ -142,7 +142,7 @@ export function GeonamesReducers(
       return {
         ...state,
         cities: {
-          status: TStatus.Loaded,
+          status: Status.Loaded,
           data: action.payload,
         },
       };
