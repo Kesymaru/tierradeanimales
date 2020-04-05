@@ -8,11 +8,12 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 
+import Route from "@/routes/models/route";
 import { ACCOUNT_ROUTE } from "@/Auth/routes";
 import { ADMIN_CASE_ROUTE } from "@/Case/routes";
 import { FOSTER_HOMES_ROUTE } from "@/FosterHome/routes";
 
-const ADMIN_ROUTES: IAppRoute[] = [
+const ADMIN_ROUTES: Route[] = [
   ACCOUNT_ROUTE,
   ADMIN_CASE_ROUTE,
   FOSTER_HOMES_ROUTE,
@@ -33,7 +34,7 @@ const NavbarMenu: FunctionComponent<NavbarMenuProps> = ({ open, setOpen }) => {
   const classes = useStyles();
   const history = useHistory();
 
-  function goTo(route: IAppRoute) {
+  function goTo(route: Route) {
     history.push(route.getPath ? route.getPath() : route.path);
     if (open) setOpen(!open);
   }

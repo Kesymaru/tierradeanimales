@@ -62,8 +62,6 @@ export interface GeonamesState {
   cities: StateItem<Array<GeonamesChildren>>;
 }
 
-export default GeonamesState;
-
 // ------------------------------------
 // FlagCountries
 // ------------------------------------
@@ -148,3 +146,5 @@ export type GeonamesAction =
   | FetchCities
   | ErrorCities
   | LoadCities;
+
+export default GeonamesState;
