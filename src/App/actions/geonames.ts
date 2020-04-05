@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 
-import { ActionType as GeonamesAction, Action } from "@/App/models/geonames";
+import { GeonamesAction, Action } from "@/App/models/geonames";
 
 // ------------------------------------
 // Config
