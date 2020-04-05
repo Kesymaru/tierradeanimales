@@ -26,7 +26,6 @@ import {
   IHomeContactFactory,
   IHomeContactValidator,
 } from "../../App/homes/homes.types";
-import { HasError, GetError } from "../../App/constants/firebase/database";
 
 export interface HomeContactsProps {
   contacts: IHomeContact[];
@@ -112,8 +111,6 @@ const HomeContacts: FunctionComponent<HomeContactsProps> = (props) => {
                     label="Contact Name"
                     variant="outlined"
                     disabled={props.disabled}
-                    error={HasError([index, "name"], errors)}
-                    helperText={GetError([index, "name"], errors)}
                     fullWidth
                     InputProps={{
                       startAdornment: (
@@ -131,8 +128,6 @@ const HomeContacts: FunctionComponent<HomeContactsProps> = (props) => {
                     label="Contact Phone"
                     variant="outlined"
                     disabled={props.disabled}
-                    error={HasError([index, "phone"], errors)}
-                    helperText={GetError([index, "phone"], errors)}
                     fullWidth
                     InputProps={{
                       startAdornment: (
@@ -150,8 +145,6 @@ const HomeContacts: FunctionComponent<HomeContactsProps> = (props) => {
                     label="Contact Email"
                     variant="outlined"
                     disabled={props.disabled}
-                    error={HasError([index, "email"], errors)}
-                    helperText={GetError([index, "email"], errors)}
                     fullWidth
                     InputProps={{
                       startAdornment: (
