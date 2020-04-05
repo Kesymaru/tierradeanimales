@@ -1,7 +1,6 @@
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 import { Route, RouteFactory } from "@/routes";
-
 import { DASHBOARD_ROUTE } from "@/Dashboard/routes";
 
 import SignUp from "../components/SignUp";

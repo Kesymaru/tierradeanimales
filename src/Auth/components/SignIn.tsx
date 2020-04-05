@@ -25,7 +25,6 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 
 import { DASHBOARD_ROUTE } from "../../Dashboard/routes/public.routes";
 import { FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE } from "../routes";
-import { GetError, HasError } from "../../App/constants/firebase/database";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -120,8 +119,6 @@ const SignIn: FunctionComponent<{}> = ({ loading = false, logged = true }) => {
               autoComplete="email"
               autoFocus
               value={data.email}
-              error={HasError(["email"], errors)}
-              helperText={GetError(["email"], errors)}
               onChange={handleEmailChange}
               disabled={loading}
             />
@@ -136,8 +133,6 @@ const SignIn: FunctionComponent<{}> = ({ loading = false, logged = true }) => {
               id="password"
               autoComplete="current-password"
               value={data.password}
-              error={HasError(["password"], errors)}
-              helperText={GetError(["password"], errors)}
               onChange={handlePasswordChange}
               // onBlur={() => validate()}
               disabled={loading}
