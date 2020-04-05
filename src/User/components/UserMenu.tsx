@@ -11,7 +11,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 import { ACCOUNT_ROUTE, SIGN_IN_ROUTE } from "@/Auth/routes";
 
-const UserMenu: FunctionComponent<{}> = (props) => {
+export const UserMenu: FunctionComponent<{}> = (props) => {
   const firebase = useFirebase();
   const auth = useSelector((state) => state.firebase.auth);
   const location = useLocation();

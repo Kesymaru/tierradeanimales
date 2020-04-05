@@ -19,7 +19,7 @@ import Typography from "@material-ui/core/Typography";
 import SaveIcon from "@material-ui/icons/Save";
 import CloseIcon from "@material-ui/icons/Close";
 
-const Account: FunctionComponent<{}> = (props) => {
+export const Account: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
   const [touched, setTouched] = useState<boolean>(false);
   const [user, setUser] = useState<IUser | null>(props.user);
