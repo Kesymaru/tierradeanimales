@@ -1,62 +1,78 @@
-import {applyMiddleware, combineReducers, createStore, Reducer, Store, StoreEnhancer} from "redux";
+import {
+  applyMiddleware,
+  combineReducers,
+  createStore,
+  Reducer,
+  Store,
+} from "redux";
 import thunkMiddleware from "redux-thunk";
-import {composeWithDevTools} from "redux-devtools-extension";
-import {connectRouter, routerMiddleware} from "connected-react-router";
-import {createBrowserHistory, History} from 'history'
+import { composeWithDevTools } from "redux-devtools-extension";
+import {
+  connectRouter,
+  routerMiddleware,
+  RouterState,
+} from "connected-react-router";
+import { createBrowserHistory, History } from "history";
 
-import SystemReducers from "./system/system.reducers";
-import AuthReducers from "./auth/auth.reducers";
-import UserReducers from "./user/user.reducers";
-import DogsReducers from "./dogs/dogs.reducers";
-import HomesReducers from "./homes/homes.reducers";
+import {
+  firebaseReducer,
+  ReactReduxFirebaseProviderProps,
+  ReactReduxFirebaseConfig,
+} from "react-redux-firebase";
+import { firestoreReducer, createFirestoreInstance } from "redux-firestore";
+
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+
+import FirebaseConfig from "./firebase.config";
 import GeonamesReducers from "./geonames/geonames.reducers";
+import IGeonamesState from "./geonames/geonames.types";
 
-class AppStore {
-    public static store: Store;
-    public static history: History;
+// Store
+export const AppStore: Store = configure();
+export const AppHistory: History = createBrowserHistory();
 
-    private static rootReducer: Reducer;
-    private static reducers = {
-        system: SystemReducers,
-        auth: AuthReducers,
-        user: UserReducers,
-        dogs: DogsReducers,
-        homes: HomesReducers,
-        geonames: GeonamesReducers,
-    };
-    private static middlewares = [
-        // AuthMiddleware,
-        thunkMiddleware
-    ];
+// React Redux Firebase
+const RrfConfig: ReactReduxFirebaseConfig = {
+  userProfile: "users",
+  useFirestoreForProfile: true,
+  enableClaims: true,
+};
+export const RrfProps: ReactReduxFirebaseProviderProps = {
+  firebase,
+  config: RrfConfig,
+  dispatch: AppStore.dispatch,
+  createFirestoreInstance,
+};
 
-    public static Configure(): Store {
-        AppStore.history = createBrowserHistory();
-        AppStore.rootReducer = AppStore.CreateRootReducer();
+/**
+ * Configure redux store with firebase database, auth and firestore
+ */
+function configure(): Store {
+  initFirebaseServices();
 
-        // const middleWareEnhancer = applyMiddleware(...AppStore.middlewares);
-        const middleWareEnhancer = AppStore.ApplyMiddleware();
+  const rootReducer: Reducer = combineReducers({
+    firebase: firebaseReducer,
+    firestore: firestoreReducer,
+    router: connectRouter(AppHistory),
+    geonames: GeonamesReducers,
+  });
 
-        AppStore.store = createStore(
-            AppStore.rootReducer,
-            composeWithDevTools(middleWareEnhancer)
-        );
+  const middleWareEnhancer = applyMiddleware(
+    thunkMiddleware,
+    routerMiddleware(AppHistory)
+  );
 
-        return AppStore.store;
-    }
+  const store: Store = createStore(
+    rootReducer,
+    composeWithDevTools(middleWareEnhancer)
+  );
 
-    private static CreateRootReducer(): Reducer {
-        return combineReducers({
-            ...AppStore.reducers,
-            router: connectRouter(AppStore.history),
-        });
-    }
-
-    private static ApplyMiddleware(): StoreEnhancer {
-        return applyMiddleware(
-            ...AppStore.middlewares,
-            routerMiddleware(AppStore.history),
-        );
-    }
+  return store;
 }
 
-export default AppStore;
+function initFirebaseServices() {
+  firebase.initializeApp(FirebaseConfig);
+  firebase.firestore();
+}
