@@ -14,11 +14,7 @@ import Hidden from "@material-ui/core/Hidden";
 
 import PetsIcon from "@material-ui/icons/Pets";
 
-import { AppState, Status } from "@/App/store";
-
-interface DogDetailsProps {}
-
-const DogDetails: FunctionComponent<DogDetailsProps> = (props) => {
+const DogDetails: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [dog, setDog] = useState<IDog | null>(props.dog.data);
@@ -98,7 +94,4 @@ const DogDetails: FunctionComponent<DogDetailsProps> = (props) => {
   );
 };
 
-const mapStateToProps = (state: AppState): DogDetailsProps => ({
-  dog: state.dogs.dog,
-});
-export default connect(mapStateToProps)(DogDetails);
+export default DogDetails;
