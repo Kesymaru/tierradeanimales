@@ -9,7 +9,6 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
-import { AppState } from "@/App/models";
 import { ACCOUNT_ROUTE, SIGN_IN_ROUTE } from "@/Auth/routes";
 
 const UserMenu: FunctionComponent<{}> = (props) => {

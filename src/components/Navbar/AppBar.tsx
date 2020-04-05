@@ -14,7 +14,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import IAppState from "../../App/app.types";
 import IAuthState from "../../App/auth/auth.types";
-import UserMenu from "./UserMenu";
+import UserMenu from "../../User/components/UserMenu";
 import useRoutes from "../../routes/hooks";
 import LanguageMenu from "./LanguageMenu";
 
