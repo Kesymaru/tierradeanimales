@@ -1,30 +1,28 @@
-import React, {FunctionComponent} from 'react';
-import ReactDOM from 'react-dom';
-import {Provider} from "react-redux";
-import {MuiPickersUtilsProvider} from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import React, { FunctionComponent } from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from "@date-io/moment";
 
-import './index.css';
+import "./index.css";
 import "./i18n";
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from "./serviceWorker";
 
 import App from "./App";
-import AppStore from "./store/app.store";
-
-// ------------------------------------
-// Configure App
-// ------------------------------------
-AppStore.Configure();
+import { AppStore, RrfProps } from "./store/app.store";
 
 const AppRoot: FunctionComponent = () => (
-    <Provider store={AppStore.store}>
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-            <App/>
-        </MuiPickersUtilsProvider>
-    </Provider>
+  <Provider store={AppStore}>
+    <ReactReduxFirebaseProvider {...RrfProps}>
+      <MuiPickersUtilsProvider utils={MomentUtils}>
+        <App />
+      </MuiPickersUtilsProvider>
+    </ReactReduxFirebaseProvider>
+  </Provider>
 );
 
-ReactDOM.render(<AppRoot/>, document.getElementById('root'));
+ReactDOM.render(<AppRoot />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
