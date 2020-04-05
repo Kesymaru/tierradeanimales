@@ -19,14 +19,7 @@ import Typography from "@material-ui/core/Typography";
 import SaveIcon from "@material-ui/icons/Save";
 import CloseIcon from "@material-ui/icons/Close";
 
-import Storage, { IFile } from "../../App/constants/firebase/storage";
-import IAppState from "../../App/app.types";
-import IUserState, { IUser } from "../../App/user/user.types";
-import { UpdatePassword, UpdateProfile } from "../../App/user/user.actions";
-
-interface AccountProps extends Pick<IUserState, "user"> {}
-
-const Account: FunctionComponent<AccountProps> = (props) => {
+const Account: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
   const [touched, setTouched] = useState<boolean>(false);
   const [user, setUser] = useState<IUser | null>(props.user);
@@ -41,8 +34,8 @@ const Account: FunctionComponent<AccountProps> = (props) => {
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     if (!user || !touched) return;
-    dispatch(UpdateProfile(user));
-    if (password.length) dispatch(UpdatePassword(password));
+    // dispatch(UpdateProfile(user));
+    // if (password.length) dispatch(UpdatePassword(password));
   }
 
   function handleUserChange(key: keyof IUser) {
@@ -65,9 +58,9 @@ const Account: FunctionComponent<AccountProps> = (props) => {
       !event.target.files[0]
     )
       return;
-    const avatar: IFile = Storage.newFile(event.target.files[0]);
-    setUser({ ...user, avatar } as IUser);
-    setTouched(true);
+    // const avatar: IFile = Storage.newFile(event.target.files[0]);
+    // setUser({ ...user, avatar } as IUser);
+    // setTouched(true);
   }
 
   function handlerReset(event: FormEvent) {
@@ -188,7 +181,4 @@ const Account: FunctionComponent<AccountProps> = (props) => {
   );
 };
 
-const mapStateToProps = (state: IAppState) => ({
-  user: state.user.user,
-});
-export default connect(mapStateToProps)(Account);
+export default Account;
