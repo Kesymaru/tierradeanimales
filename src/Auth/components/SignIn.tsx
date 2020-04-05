@@ -23,8 +23,8 @@ import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
-import { DASHBOARD_ROUTE } from "../../Dashboard/routes/public.routes";
-import { FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE } from "../routes";
+import { DASHBOARD_ROUTE } from "@/Dashboard/routes";
+import { FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE } from "@/Auth/routes";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
