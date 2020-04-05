@@ -47,7 +47,7 @@ export const ACCOUNT_ROUTE: Route = RouteFactory({
   parent: DASHBOARD_ROUTE,
 });
 
-export const ROUTES: AppRoute[] = [
+export const ROUTES: Route[] = [
   SIGN_UP_ROUTE,
   SIGN_IN_ROUTE,
   FORGOT_PASSWORD_ROUTE,

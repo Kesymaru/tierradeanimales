@@ -25,6 +25,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 
 import { DASHBOARD_ROUTE } from "@/Dashboard/routes";
 import { FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE } from "@/Auth/routes";
+import { EmailCredentials } from "@/Auth/models";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const SignIn: FunctionComponent<{}> = ({ loading = false, logged = true }) => {
+const SignIn: FunctionComponent<{}> = ({}) => {
   const classes = useStyles();
   const firebase = useFirebase();
   const { t } = useTranslation();
