@@ -3,9 +3,10 @@ import React, {
   useState,
   FormEvent,
   ChangeEvent,
+  MouseEvent,
 } from "react";
 import { useTranslation } from "react-i18next";
-import Joi from "@hapi/joi";
+import { useFirestoreConnect } from "react-redux-firebase";
 
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -54,8 +55,8 @@ export const FollowUs: FunctionComponent<{}> = (props) => {
 
   const contact = t("followUs.contact", { returnObjects: true }) as any;
 
-  function handleSubmit(event: FormEvent) {
-    event.stopPropagation();
+  function handleNewsletter(event: MouseEvent<HTMLElement>) {
+    console.log("newsletter", email);
   }
 
   function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
@@ -84,7 +85,7 @@ export const FollowUs: FunctionComponent<{}> = (props) => {
                   </InputAdornment>
                 ),
                 endAdornment: (
-                  <InputAdornment position="end">
+                  <InputAdornment position="end" onClick={handleNewsletter}>
                     <Tooltip title={"Subscribe"}>
                       <SendIcon />
                     </Tooltip>
