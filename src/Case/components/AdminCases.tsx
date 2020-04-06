@@ -27,38 +27,37 @@ import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import FilterListIcon from "@material-ui/icons/FilterList";
 
-import AppTable from "../../components/AppTable/AppTable";
-import AlertDialog from "../../components/AlertDialog";
-
 import { Case } from "@/Case/models";
 import { ADMIN_CASE_EDIT_ROUTE } from "@/Case/routes";
 
 export const AdminCases: FunctionComponent<{}> = () => {
-  const dispatch = useDispatch();
+  return <Paper>Here goes the new Admin Cases component</Paper>;
+
+  /* const dispatch = useDispatch();
   const history = useHistory();
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
 
-  // const [dogs, _setDogs] = useState<Case[]>([]);
-  // const [selected, setSelected] = useState<Case[]>([]);
-  // const [loading, setLoading] = useState<boolean>(getLoading());
-  // const [openDelete, setOpenDelete] = useState<boolean>(false);
+  const [dogs, _setDogs] = useState<Case[]>([]);
+  const [selected, setSelected] = useState<Case[]>([]);
+  const [loading, setLoading] = useState<boolean>(getLoading());
+  const [openDelete, setOpenDelete] = useState<boolean>(false);
 
   // TODO
   // user real data here
   const dogs: Case[] = [];
   const loading: boolean = false;
 
-  /* function getLoading(): boolean {
+  function getLoading(): boolean {
     // return props.dogs.status === TStatus.Fetching;
-  } */
+  }
 
-  /* function setDogs(value: IDog[]) {
+  function setDogs(value: IDog[]) {
     setSelected(value.filter((dog) => dog._selected));
     _setDogs(value);
-  } */
+  }
 
-  /* function onChangePage(event: unknown, page: number) {
+  function onChangePage(event: unknown, page: number) {
     if (!props.dogs.pagination || page === props.dogs.pagination.page) return;
     const pagination = { ...props.dogs.pagination, page };
     dispatch(GetDogs(pagination));
@@ -83,11 +82,9 @@ export const AdminCases: FunctionComponent<{}> = () => {
   function handleDelete() {
     // dispatch(DeleteDogs(selected))
     // setOpenDelete(true);
-  } */
+  }
 
-  return <Paper>Here goes the new Admin Cases component</Paper>;
-
-  /* return (
+  return (
     <Paper>
       <AppTable
         data={dogs}
