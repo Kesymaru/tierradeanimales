@@ -12,8 +12,6 @@ import Slide from "@material-ui/core/Slide";
 import Link from "@material-ui/core/Link";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-import IAppState from "../../App/app.types";
-import IAuthState from "../../App/auth/auth.types";
 import UserMenu from "@/User/components/UserMenu";
 import useRoutes from "@/routes/hooks";
 import LanguageMenu from "./LanguageMenu";
@@ -53,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface AppBarProps extends Pick<IAuthState, "logged"> {
+interface AppBarProps {
   open: boolean;
   setOpen: Function;
   anchorId: string;
@@ -130,13 +128,4 @@ const AppBar: FunctionComponent<AppBarProps> = (props) => {
   );
 };
 
-interface IAppBarOwnProps extends Omit<AppBarProps, "logged"> {}
-
-const mapStateToProps = (
-  state: IAppState,
-  ownProps: IAppBarOwnProps
-): AppBarProps => ({
-  ...ownProps,
-  logged: state.auth.logged,
-});
-export default connect(mapStateToProps)(AppBar);
+export default AppBar;
