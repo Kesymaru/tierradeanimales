@@ -1,7 +1,13 @@
 import Geonames from "geonames.js";
 import { Dispatch } from "redux";
 
-import { GeonamesAction } from "../models/geonames";
+import {
+  GeonamesAction,
+  GeonamesTypes,
+  GeonamesCountry,
+  GeonamesChildren,
+  GeonamesResult,
+} from "../models/geonames";
 
 // ------------------------------------
 // Config
@@ -23,13 +29,13 @@ function ErrorCountries(payload: Error): GeonamesAction {
   return { type: GeonamesTypes.ERROR_COUNTRIES, payload };
 }
 
-function LoadCountries(payload: IGeonamesCountry[]): GeonamesAction {
+function LoadCountries(payload: GeonamesCountry[]): GeonamesAction {
   return { type: GeonamesTypes.LOAD_COUNTRIES, payload };
 }
 
-async function RequestCountries(): Promise<IGeonamesCountry[]> {
-  const results = (await geonames.countryInfo()) as IGeonamesResult<
-    IGeonamesCountry
+async function RequestCountries(): Promise<GeonamesCountry[]> {
+  const results = (await geonames.countryInfo()) as GeonamesResult<
+    GeonamesCountry
   >;
   return results.geonames;
 }
@@ -66,7 +72,7 @@ async function RequestStates(
 ): Promise<GeonamesChildren[]> {
   const states = (await geonames.children({
     geonameId: country.geonameId,
-  })) as GeonamesResult<IGeonamesChildren>;
+  })) as GeonamesResult<GeonamesChildren>;
   return states.geonames;
 }
 
@@ -103,7 +109,7 @@ export function GetCounties(state: any): Function {
       dispatch(FetchCounties());
       const counties = (await geonames.children({
         geonameId: state.geonameId,
-      })) as GeonamesResult<IGeonamesChildren>;
+      })) as GeonamesResult<GeonamesChildren>;
       dispatch(LoadCounties(counties.geonames));
     } catch (error) {
       dispatch(ErrorCounties(error));
@@ -115,15 +121,15 @@ export function GetCounties(state: any): Function {
 // Cities
 // ------------------------------------
 function FetchCities(): GeonamesAction {
-  return { type: FETCH_CITIES };
+  return { type: GeonamesTypes.FETCH_CITIES };
 }
 
 function ErrorCities(payload: Error): GeonamesAction {
-  return { type: ERROR_CITIES, payload };
+  return { type: GeonamesTypes.ERROR_CITIES, payload };
 }
 
 function LoadCities(payload: any[]): GeonamesAction {
-  return { type: LOAD_CITIES, payload };
+  return { type: GeonamesTypes.LOAD_CITIES, payload };
 }
 
 export function GetCities(county: any): Function {
@@ -132,7 +138,7 @@ export function GetCities(county: any): Function {
       dispatch(FetchCities());
       const cities = (await geonames.children({
         geonameId: county.geonameId,
-      })) as IGeonamesResult<IGeonamesChildren>;
+      })) as GeonamesResult<GeonamesChildren>;
       dispatch(LoadCities(cities.geonames));
     } catch (error) {
       dispatch(ErrorCities(error));
