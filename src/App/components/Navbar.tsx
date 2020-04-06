@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import { connect } from "react-redux";
 
 import {
   createStyles,
@@ -10,8 +9,6 @@ import {
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 
-import IAppState from "../../App/app.types";
-import IAuthState from "../../App/auth/auth.types";
 import NavbarMenu from "./NavbarMenu";
 
 const drawerWidth = 240;
@@ -30,14 +27,18 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface INavbarProps extends Pick<IAuthState, "logged"> {
+interface NavbarProps {
   open: boolean;
   setOpen: Function;
 }
 
-const Navbar: FunctionComponent<INavbarProps> = ({ logged, open, setOpen }) => {
+const Navbar: FunctionComponent<NavbarProps> = (props) => {
   const classes = useStyles();
   const theme = useTheme();
+
+  // TODO
+  // use real data
+  const logged = false;
 
   if (!logged) return <div></div>;
 
@@ -47,8 +48,8 @@ const Navbar: FunctionComponent<INavbarProps> = ({ logged, open, setOpen }) => {
         <Drawer
           variant="temporary"
           anchor={theme.direction === "rtl" ? "right" : "left"}
-          open={open}
-          onClose={() => setOpen(!open)}
+          open={props.open}
+          onClose={() => props.setOpen(!props.open)}
           classes={{
             paper: classes.drawerPaper,
           }}
@@ -56,7 +57,7 @@ const Navbar: FunctionComponent<INavbarProps> = ({ logged, open, setOpen }) => {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          <NavbarMenu open={open} setOpen={setOpen} />
+          <NavbarMenu open={props.open} setOpen={props.setOpen} />
         </Drawer>
       </Hidden>
       <Hidden smDown implementation="js">
@@ -67,20 +68,11 @@ const Navbar: FunctionComponent<INavbarProps> = ({ logged, open, setOpen }) => {
           variant="permanent"
           open
         >
-          <NavbarMenu open={open} setOpen={setOpen} />
+          <NavbarMenu open={props.open} setOpen={props.setOpen} />
         </Drawer>
       </Hidden>
     </nav>
   );
 };
 
-interface INarvarOwnProps extends Omit<INavbarProps, "logged"> {}
-
-const mapStateToProps = (
-  state: IAppState,
-  ownProps: INarvarOwnProps
-): INavbarProps => ({
-  ...ownProps,
-  logged: state.auth.logged,
-});
-export default connect(mapStateToProps)(Navbar);
+export default Navbar;
