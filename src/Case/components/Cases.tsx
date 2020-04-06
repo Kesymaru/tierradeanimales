@@ -18,20 +18,10 @@ import { DOG_DETAILS_ROUTE } from "@/Case/routes";
 const Cases: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [dogs, setDogs] = useState<IDog[]>(props.dogs.data);
-  const [pagination, setPagination] = useState<IPagination>({
-    page: 0,
-    rowPerPage: 100,
-    count: 0,
-  });
 
-  useEffect(() => {
-    setDogs(props.dogs.data);
-  }, [props.dogs]);
+  return <Container>Here goes the Cases component</Container>;
 
-  if (props.dogs.status === Status.Empty) dispatch(GetDogs(pagination));
-
-  return (
+  /* return (
     <Container>
       <Grid container spacing={2}>
         {dogs.map((dog) => (
@@ -74,7 +64,7 @@ const Cases: FunctionComponent<{}> = (props) => {
         ))}
       </Grid>
     </Container>
-  );
+  ); */
 };
 
 export default Cases;

@@ -19,11 +19,10 @@ import { Case, InitCase } from "@/Case";
 const CaseDetails: FunctionComponent<{}> = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  
+
   // TODO
   // use real data
   const loading = false;
-  const case: Case = {...InitCase};
 
   if (loading)
     return (
@@ -32,10 +31,8 @@ const CaseDetails: FunctionComponent<{}> = () => {
         <LinearProgress color="primary" />
       </Container>
     );
-  
-  return (<Container>
-    Here goes the container details
-  </Container>);
+
+  return <Container>Here goes the container details</Container>;
 
   /* return (
     <Container>
