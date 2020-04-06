@@ -3,7 +3,7 @@ import EditIcon from "@material-ui/icons/Edit";
 
 import { Route, RouteFactory } from "@/routes";
 
-import ADMIN_DASHBOARD from "@/Dashboard/components/AdminDashboard";
+import { ADMIN_DASHBOARD_ROUTE } from "@/Dashboard/routes";
 import { FosterHomes, EditFosterHome } from "@/FosterHome/components";
 
 export const FOSTER_HOMES_ROUTE: Route = RouteFactory({
@@ -11,7 +11,7 @@ export const FOSTER_HOMES_ROUTE: Route = RouteFactory({
   path: "/homes",
   auth: true,
   component: FosterHomes,
-  parent: ADMIN_DASHBOARD,
+  parent: ADMIN_DASHBOARD_ROUTE,
   icon: HouseIcon,
 });
 

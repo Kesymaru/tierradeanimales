@@ -23,16 +23,17 @@ import {
   GetStates,
 } from "@/App/actions/geonames";
 
-interface AddressProps extends GeonamesState {
+interface AddressProps {
   address: Address;
   disabled?: boolean;
   onChange?: (address: Address) => void;
 }
 
 const UserAddress: FunctionComponent<AddressProps> = (props) => {
-  const dispatch = useDispatch();
+  return <>here goes the address component</>;
 
-  const [data, setData] = useState<UserAddress>(props.address);
+  /* const dispatch = useDispatch();
+  const [data, setData] = useState<Address>(props.address);
   const [country, setCountry] = useState<GeonamesCountry | null>(getCountry());
   const [state, setState] = useState<GeonamesChildren | null>(getState());
   const [county, setCounty] = useState<GeonamesChildren | null>(getCounty());
@@ -286,7 +287,7 @@ const UserAddress: FunctionComponent<AddressProps> = (props) => {
         />
       </Grid>
     </Grid>
-  );
+  ); */
 };
 
 export default UserAddress;

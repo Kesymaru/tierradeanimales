@@ -2,7 +2,7 @@ import { generatePath, matchPath } from "react-router";
 import * as H from "history";
 import { useLocation, useParams } from "react-router-dom";
 
-import { RouteParam, RouteFactoryParams, RouteDefaults } from "@/routes";
+import { Route, RouteParam, RouteFactoryParams, RouteDefaults } from "@/routes";
 import { ROUTES } from "@/App/routes";
 
 // ------------------------------------
