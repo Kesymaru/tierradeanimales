@@ -60,6 +60,7 @@ const SignIn: FunctionComponent<{}> = ({}) => {
   // TODO
   // use real data here
   const logged = false;
+  const loading = false;
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -148,7 +149,7 @@ const SignIn: FunctionComponent<{}> = ({}) => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              disabled={!touched || loading || !!errors}
+              disabled={!touched || loading}
             >
               {loading ? t("signIn.loading") : t("signIn.title")}
             </Button>
