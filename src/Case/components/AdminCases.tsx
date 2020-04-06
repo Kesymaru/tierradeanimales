@@ -33,37 +33,32 @@ import AlertDialog from "../../components/AlertDialog";
 import { Case } from "@/Case/models";
 import { ADMIN_CASE_EDIT_ROUTE } from "@/Case/routes";
 
-const AdminCases: FunctionComponent<{}> = (props) => {
+const AdminCases: FunctionComponent<{}> = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
-  const [dogs, _setDogs] = useState<Case[]>(props.dogs.data);
-  const [selected, setSelected] = useState<Case[]>([]);
-  const [loading, setLoading] = useState<boolean>(getLoading());
-  const [openDelete, setOpenDelete] = useState<boolean>(false);
 
-  useEffect(() => {
-    setDogs(props.dogs.data);
-    setLoading(getLoading());
-  }, [props.dogs]);
+  // const [dogs, _setDogs] = useState<Case[]>([]);
+  // const [selected, setSelected] = useState<Case[]>([]);
+  // const [loading, setLoading] = useState<boolean>(getLoading());
+  // const [openDelete, setOpenDelete] = useState<boolean>(false);
 
-  init();
+  // TODO
+  // user real data here
+  const dogs: Case[] = [];
+  const loading: boolean = false;
 
-  function init() {
-    if (props.dogs.status === TStatus.Empty) dispatch(GetDogs());
-  }
+  /* function getLoading(): boolean {
+    // return props.dogs.status === TStatus.Fetching;
+  } */
 
-  function getLoading(): boolean {
-    return props.dogs.status === TStatus.Fetching;
-  }
-
-  function setDogs(value: IDog[]) {
+  /* function setDogs(value: IDog[]) {
     setSelected(value.filter((dog) => dog._selected));
     _setDogs(value);
-  }
+  } */
 
-  function onChangePage(event: unknown, page: number) {
+  /* function onChangePage(event: unknown, page: number) {
     if (!props.dogs.pagination || page === props.dogs.pagination.page) return;
     const pagination = { ...props.dogs.pagination, page };
     dispatch(GetDogs(pagination));
@@ -87,10 +82,12 @@ const AdminCases: FunctionComponent<{}> = (props) => {
 
   function handleDelete() {
     // dispatch(DeleteDogs(selected))
-    setOpenDelete(true);
-  }
+    // setOpenDelete(true);
+  } */
 
-  return (
+  return <Paper>Here goes the new Admin Cases component</Paper>;
+
+  /* return (
     <Paper>
       <AppTable
         data={dogs}
@@ -144,13 +141,13 @@ const AdminCases: FunctionComponent<{}> = (props) => {
               </IconButton>
             </Tooltip>
           </Fade>
-          {/*<Fade in={true}>
+          {<Fade in={true}>
                     <Tooltip title="Filter">
                         <IconButton>
                             <FilterListIcon/>
                         </IconButton>
                     </Tooltip>
-                </Fade>*/}
+                </Fade>}
         </Toolbar>
       </AppTable>
 
@@ -192,7 +189,7 @@ const AdminCases: FunctionComponent<{}> = (props) => {
         )}
       </AlertDialog>
     </Paper>
-  );
+  ); */
 };
 
 export default AdminCase;
