@@ -61,14 +61,15 @@ const AppBar: FunctionComponent<AppBarProps> = (props) => {
   const classes = useStyles();
   const routes = useRoutes();
 
+  // TODO
+  // use real data
+  const logged = false;
+
   return (
     <>
-      <MaterialAppBar
-        position="fixed"
-        className={props.logged ? classes.appBar : ""}
-      >
+      <MaterialAppBar position="fixed" className={logged ? classes.appBar : ""}>
         <Toolbar>
-          {props.logged && (
+          {logged && (
             <IconButton
               color="inherit"
               aria-label="open menu"
@@ -89,7 +90,7 @@ const AppBar: FunctionComponent<AppBarProps> = (props) => {
       <div id={props.anchorId} />
       <Slide
         direction="down"
-        in={props.logged && 1 < routes.length}
+        in={logged && 1 < routes.length}
         mountOnEnter
         unmountOnExit
       >
