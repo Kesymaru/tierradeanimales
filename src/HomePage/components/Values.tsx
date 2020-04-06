@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Values: FunctionComponent<{}> = () => {
+export const Values: FunctionComponent<{}> = () => {
   const theme = useTheme();
   const classes = useStyles();
   const { t } = useTranslation();
