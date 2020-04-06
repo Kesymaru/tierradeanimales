@@ -63,10 +63,10 @@ const SignIn: FunctionComponent<{}> = ({}) => {
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    firebase.login({
+    /* firebase.login({
       email: data.email,
       password: data.password,
-    });
+    }); */
   }
 
   function validate(value: IUserSignIn = data) {

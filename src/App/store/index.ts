@@ -28,7 +28,7 @@ export const AppStore: Store = configure();
 export const AppHistory: History = createBrowserHistory();
 
 // React Redux Firebase
-export const RrfConfig: ReactReduxFirebaseConfig = {
+export const RrfConfig: Partial<ReactReduxFirebaseConfig> = {
   userProfile: "users",
   useFirestoreForProfile: true,
   enableClaims: true,
@@ -47,8 +47,8 @@ function configure(): Store {
   initFirebaseServices();
 
   const rootReducer: Reducer = combineReducers({
-    firebase: firebaseReducer,
-    firestore: firestoreReducer,
+    // firebase: firebaseReducer,
+    // firestore: firestoreReducer,
     router: connectRouter(AppHistory),
     geonames: GeonamesReducers,
   });
