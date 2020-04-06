@@ -1,0 +1,50 @@
+{
+    "translation": {
+        "app": {
+            "changeLanguage": "Change Language",
+            "submit": "Submit",
+            "reset": "Reset",
+            "date": "Date",
+            "errors": {
+                "string.min": "{#label} length must be at least {#limit} characters long",
+                "string.empty": "{#label} is not allowed to be empty",
+                "string.email": "{#label} must be a valid email"
+            }
+        },
+        "home": {
+            "mission": "Mission",
+            "missionBody": "Mission body goes here",
+            "vision": "Vision",
+            "visionBody": "Vision body goes here",
+            "donate": "Donate",
+            "donateBody": "Donate body goes here",
+            "followUs": "Follow Us",
+            "newsletter": "Email Newsletter",
+            "info": "Information",
+            "socialNetworks": "Social Networks"
+        },
+        "contact": {
+            "title": "Contact Us",
+            "name": "Name",
+            "email": "Email",
+            "message": "Message",
+            "emailSend": "Contact information has been send successfully"
+        },
+        "signIn": {
+            "title": "Sign In",
+            "email": "Email Address",
+            "password": "Password",
+            "remember": "Remember me",
+            "loading": "Loading",
+            "forgotPassword": "Forgot password?",
+            "signUp": "Don't have an account? Sign Up"
+        },
+        "signOut": {
+            "title": "Sign Out"
+        },
+        "animals": {
+            "add": "Add Animal",
+            "delete": "Delete Animal"
+        }
+    }
+}
