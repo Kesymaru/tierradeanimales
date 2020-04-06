@@ -1,8 +1,8 @@
-export interface Contact {
+export interface ContactEmail {
   name: string;
   email: string;
   phone: string;
   message: string;
 }
 
-export default Contact;
+export default ContactEmail;

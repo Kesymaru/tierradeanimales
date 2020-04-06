@@ -1,6 +1,6 @@
-import Contact from "@/HomePage/models";
+import ContactEmail from "@/HomePage/models";
 
-export const InitContact: Contact = {
+export const InitContact: ContactEmail = {
   name: "",
   email: "",
   phone: "",

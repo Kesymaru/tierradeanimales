@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const FollowUs: FunctionComponent<{}> = (props) => {
+export const FollowUs: FunctionComponent<{}> = (props) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const [email, setEmail] = useState<string>("");

@@ -22,7 +22,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import PhoneIcon from "@material-ui/icons/Phone";
 import MessageIcon from "@material-ui/icons/Message";
 
-import { Contact, InitContact } from "@/HomePage";
+import { ContactEmail, InitContact } from "@/HomePage";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,11 +32,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Contact: FunctionComponent<{}> = () => {
+export const ContactUs: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const distpatch = useDispatch();
   const { t } = useTranslation();
-  const [data, setData] = useState<Contact>(InitContact);
+  const [data, setData] = useState<ContactEmail>(InitContact);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -46,7 +46,7 @@ const Contact: FunctionComponent<{}> = () => {
     setData(InitContact);
   }
 
-  function handleChange(field: keyof Contact) {
+  function handleChange(field: keyof ContactEmail) {
     return (event: ChangeEvent<HTMLInputElement>) =>
       setData({ ...data, [`${field}`]: event.target.value });
   }
@@ -162,4 +162,4 @@ const Contact: FunctionComponent<{}> = () => {
   );
 };
 
-export default Contact;
+export default ContactUs;

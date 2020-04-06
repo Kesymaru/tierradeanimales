@@ -19,7 +19,7 @@ interface CarouselProps extends Pick<ContainerProps, "maxWidth"> {
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-const Carousel: FunctionComponent<CarouselProps> = props => {
+export const Carousel: FunctionComponent<CarouselProps> = (props) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 

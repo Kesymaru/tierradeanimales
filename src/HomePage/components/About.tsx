@@ -17,19 +17,19 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundSize: "cover",
       [theme.breakpoints.up("md")]: {
         height: "calc(100vh - 42px)",
-        backgroundAttachment: "fixed"
-      }
+        backgroundAttachment: "fixed",
+      },
     },
     containerText: {
-      marginLeft: 0
+      marginLeft: 0,
     },
     text: {
-      color: "white"
-    }
+      color: "white",
+    },
   })
 );
 
-const About: FunctionComponent<{}> = () => {
+export const About: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { t } = useTranslation();
 

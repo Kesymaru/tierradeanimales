@@ -18,14 +18,14 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundSize: "cover",
       [theme.breakpoints.up("md")]: {
         height: "calc(100vh - 42px)",
-        backgroundAttachment: "fixed"
+        backgroundAttachment: "fixed",
       },
-      color: "white"
-    }
+      color: "white",
+    },
   })
 );
 
-const Donate: FunctionComponent<{}> = () => {
+export const Donate: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { t } = useTranslation();
 
