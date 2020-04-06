@@ -27,7 +27,7 @@ export const App: FunctionComponent<{}> = (props) => {
         <AppBar open={open} setOpen={setOpen} anchorId={anchorId} />
         <Navbar open={open} setOpen={setOpen} />
         <main>
-          <Router logged={true} routes={ROUTES} />
+          <Router routes={ROUTES} />
           <ScrollTop anchorId={anchorId} />
         </main>
       </ConnectedRouter>

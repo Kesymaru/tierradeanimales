@@ -5,11 +5,16 @@ import { isLoaded, isEmpty } from "react-redux-firebase";
 
 import { Route as AppRoute } from "@/routes/models/route";
 import { SIGN_IN_ROUTE } from "@/Auth/routes";
+import { AppState } from "@/App";
+import { User } from "@/User";
 
 interface RouteProps extends AppRoute {}
 
 const Route: FunctionComponent<RouteProps> = (route) => {
-  const auth = useSelector((state) => state.firebase.auth);
+  const auth = useSelector<AppState, any>((state) => {
+    console.log("state ->", state);
+    return state.firebase.auth;
+  });
   const logged = isLoaded(auth) && !isEmpty(auth);
   const render =
     route.auth && !logged
@@ -26,4 +31,4 @@ const Route: FunctionComponent<RouteProps> = (route) => {
   return <ReactRouter path={route.path} exact={route.exact} render={render} />;
 };
 
-export default AppRoute;
+export default Route;

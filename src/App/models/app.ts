@@ -1,10 +1,15 @@
+import { combineReducers, Reducer } from "redux";
 import { RouterState } from "connected-react-router";
+import { FirebaseReducer } from "react-redux-firebase";
 
+import User from "@/User/models";
 import GeonamesState from "@/App/models/geonames";
 
-export default interface State {
-  geonames: GeonamesState;
+export interface AppState {
+  firebase: FirebaseReducer.Reducer<User, {}>;
+  firestore: DBSchema;
   router: RouterState;
+  geonames: GeonamesState;
 }
 
 export interface StateItem<T> {
@@ -21,4 +26,9 @@ export enum Status {
   Error,
 }
 
-export default interface AppState {}
+// create schema for the DB
+export interface DBSchema {}
+
+// export type AppState = ReturnType<typeof rootReducer>;
+
+export default AppState;

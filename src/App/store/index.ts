@@ -20,11 +20,12 @@ import {
 } from "react-redux-firebase";
 import { firestoreReducer, createFirestoreInstance } from "redux-firestore";
 
+import { AppState, DBSchema } from "@/App/models";
 import { FirebaseConfig } from "@/config/constants";
 import GeonamesReducers from "../reducers/geonames";
 
 // Store
-export const AppStore: Store = configure();
+export const AppStore: Store = configureStore();
 export const AppHistory: History = createBrowserHistory();
 
 // React Redux Firebase
@@ -40,15 +41,16 @@ export const RrfProps: ReactReduxFirebaseProviderProps = {
   createFirestoreInstance,
 };
 
-/**
- * Configure redux store with firebase database, auth and firestore
- */
-function configure(): Store {
+interface UserProfile {
+  email: string;
+}
+
+export function configureStore(): Store {
   initFirebaseServices();
 
-  const rootReducer: Reducer = combineReducers({
-    // firebase: firebaseReducer,
-    // firestore: firestoreReducer,
+  const rootReducer: Reducer<AppState> = combineReducers<AppState>({
+    firebase: firebaseReducer,
+    firestore: firestoreReducer as Reducer<DBSchema>,
     router: connectRouter(AppHistory),
     geonames: GeonamesReducers,
   });
