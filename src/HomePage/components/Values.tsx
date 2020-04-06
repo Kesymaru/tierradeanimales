@@ -13,7 +13,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 
-import Carousel from "../Carousel/Carousel";
+import Carousel from "@/HomePage/components/Carousel";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,12 +23,12 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
       paddingTop: 40,
       paddingBottom: 40,
-      backgroundColor: "#FF6F6F"
+      backgroundColor: "#FF6F6F",
       // backgroundColor: "#EDC45B",
       // backgroundColor: "rgba(237, 196, 91, 0.5)",
     },
     card: {
-      width: "100%"
+      width: "100%",
       // backgroundColor: blue[500]
     },
     avatar: {
@@ -37,9 +37,9 @@ const useStyles = makeStyles((theme: Theme) =>
     text: {
       color: "#ffffff",
       [theme.breakpoints.up("md")]: {
-        marginLeft: 88
-      }
-    }
+        marginLeft: 88,
+      },
+    },
   })
 );
 
@@ -62,8 +62,8 @@ const Values: FunctionComponent<{}> = () => {
         }
       >
         {Object.keys(values)
-          .filter(key => typeof values[key] === "object")
-          .map(key => (
+          .filter((key) => typeof values[key] === "object")
+          .map((key) => (
             <Card key={key} className={classes.card}>
               <CardHeader
                 avatar={
