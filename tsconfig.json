@@ -21,8 +21,7 @@
     "baseUrl": "."
   },
   "include": [
-    "src",
-    "geonames.d.ts"
+    "src"
   ],
   "extends": "./tsconfig.paths.json"
 }

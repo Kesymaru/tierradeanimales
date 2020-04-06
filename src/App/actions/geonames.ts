@@ -1,3 +1,4 @@
+import Geonames from "geonames.js";
 import { Dispatch } from "redux";
 
 import { GeonamesAction } from "../models/geonames";
