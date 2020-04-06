@@ -7,7 +7,7 @@ import { DASHBOARD_ROUTE } from "@/Dashboard/routes";
 import AdminCase from "../components/AdminCases";
 import EditCase from "../components/EditCase";
 import Cases from "../components/Cases";
-import DogDetails from "../components/CaseDetails";
+import CaseDetails from "../components/CaseDetails";
 
 export const ADMIN_CASE_ROUTE: Route = RouteFactory({
   name: "Dogs",
@@ -39,7 +39,7 @@ export const DOG_ROUTE: Route = RouteFactory({
 export const DOG_DETAILS_ROUTE: Route = RouteFactory({
   name: "Dog",
   path: `/dogs/:id`,
-  component: DogDetails,
+  component: CaseDetails,
   parent: DOG_ROUTE,
 });
 
