@@ -1,7 +1,7 @@
 import { Route, RouteFactory } from "@/routes";
 
 import NotFound from "@/App/components/NotFound";
-import HomePage from "@/HomePage/components/Home";
+import Home from "@/Home/components";
 
 import { ROUTES as AUTH_ROUTES } from "@/Auth/routes";
 import { ROUTES as DASHBOARD_ROUTES } from "@/Dashboard/routes";
@@ -17,7 +17,7 @@ export const HOME_ROUTE: Route = RouteFactory({
   name: "Home",
   path: "/",
   exact: true,
-  component: HomePage,
+  component: Home,
 });
 
 // ------------------------------------

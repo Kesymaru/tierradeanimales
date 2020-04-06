@@ -1,4 +1,4 @@
-import ContactEmail from "@/HomePage/models";
+import ContactEmail from "@/Home/models";
 
 export const InitContact: ContactEmail = {
   name: "",

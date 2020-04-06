@@ -7,7 +7,7 @@ import {
   Donate,
   ContactUs,
   FollowUs,
-} from "@/HomePage/components";
+} from "@/Home/components";
 
 const HomePage: FunctionComponent<{}> = (props) => (
   <div style={{ marginTop: 50 }}>
