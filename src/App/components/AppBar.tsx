@@ -50,14 +50,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
 interface AppBarProps {
   open: boolean;
   setOpen: Function;
   anchorId: string;
 }
 
-const AppBar: FunctionComponent<AppBarProps> = (props) => {
+export const AppBar: FunctionComponent<AppBarProps> = (props) => {
   const classes = useStyles();
   const routes = useRoutes();
 
