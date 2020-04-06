@@ -28,6 +28,8 @@ import EditIcon from "@material-ui/icons/Edit";
 import PublishIcon from "@material-ui/icons/Publish";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+import { Case } from "@/Case/models";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     selected: {

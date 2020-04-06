@@ -32,21 +32,12 @@ import SendIcon from "@material-ui/icons/Send";
 import SaveIcon from "@material-ui/icons/Save";
 import RotateRightIcon from "@material-ui/icons/RotateRight";
 
-import DogImages from "@/Case/components/DogImages";
-
-const InitAnimal: IDog = {
-  id: "",
-  name: "",
-  age: 0,
-  sex: "male",
-  status: IDogStatus.Rescued,
-  description: "",
-  public: false,
-  start: false,
-};
+import CaseImages from "@/Case/components/CaseImages";
 
 const EditCase: FunctionComponent<{}> = (props) => {
-  const dispatch = useDispatch();
+  return <>Here goes the edit case</>;
+
+  /* const dispatch = useDispatch();
   const { id } = useParams();
   const isNew = id && id.toLowerCase() === "new";
   const [dog, setDog] = useState<IDog>(IDogFactory());
@@ -234,7 +225,7 @@ const EditCase: FunctionComponent<{}> = (props) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <DogImages
+            <CaseImages
               dog={dog}
               loading={loading}
               onImagesChange={(images) => setDog({ ...dog, images })}
@@ -285,7 +276,7 @@ const EditCase: FunctionComponent<{}> = (props) => {
         </Grid>
       </form>
     </Container>
-  );
+  ); */
 };
 
 export default EditCase;
