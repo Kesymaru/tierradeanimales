@@ -1,11 +1,11 @@
 import PetsIcon from "@material-ui/icons/Pets";
 
-import { AppRoute, RouteFactory } from "@/routes";
+import { Route, RouteFactory } from "@/routes";
 import { ADMIN_DASHBOARD_ROUTE } from "@/Dashboard/routes";
 
 import AdminCases from "@/Case/components/AdminCases";
 
-export const ADMIN_CASE_ROUTE: AppRoute = RouteFactory({
+export const ADMIN_CASE_ROUTE: Route = RouteFactory({
   name: "Cases",
   path: "/admin/cases",
   auth: true,
