@@ -23,4 +23,4 @@ export interface RouteFactoryParams
   auth?: boolean;
 }
 
-export interface IAppRouteDefaults extends Pick<Route, "exact" | "auth"> {}
+export interface RouteDefaults extends Pick<Route, "exact" | "auth"> {}

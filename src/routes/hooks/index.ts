@@ -2,35 +2,37 @@ import { generatePath, matchPath } from "react-router";
 import * as H from "history";
 import { useLocation, useParams } from "react-router-dom";
 
-// import IAppRoute, {IAppRouteDefaults, IAppRouteFactoryParams, IParam} from "./routes.types";
-import { ROUTES } from "@/App/routes";
+import {
+  ROUTES,
+  RouteParam,
+  RouteFactoryParams,
+  RouteDefaults,
+} from "@/App/routes";
 
 // ------------------------------------
 // Functions
 // ------------------------------------
 export function RouteFactory(
-  params: IAppRouteFactoryParams,
-  defaults: IAppRouteDefaults = { auth: false, exact: false }
-): IAppRoute {
+  params: RouteFactoryParams,
+  defaults: RouteDefaults = { auth: false, exact: false }
+): Route {
   let _getPath = getPath(params.path, params.defaultParams || {});
 
   return {
     ...defaults,
     ...params,
     getPath: _getPath,
-  } as IAppRoute;
+  } as Route;
 }
 
-function getPath(path: string, defaults?: IParam): Function {
-  return (params?: IParam) => {
+function getPath(path: string, defaults?: RouteParam): Function {
+  return (params?: RouteParam) => {
     params = defaults ? { ...defaults, ...(params || {}) } : params;
     return generatePath(path, params);
   };
 }
 
-export function findRoute(
-  location: H.Location | string
-): IAppRoute | undefined {
+export function findRoute(location: H.Location | string): Route | undefined {
   let pathname = typeof location === "string" ? location : location.pathname;
   return ROUTES.find((route) =>
     matchPath(pathname, {
@@ -57,7 +59,7 @@ export function useId(
 /**
  * Hook to get the current matched route
  */
-export function useRoute(): IAppRoute | undefined {
+export function useRoute(): Route | undefined {
   const location = useLocation();
   return findRoute(location);
 }
@@ -65,9 +67,9 @@ export function useRoute(): IAppRoute | undefined {
 /**
  * Hook to get the current route paths in an array
  */
-function useRoutes(): IAppRoute[] {
+export function useRoutes(): Route[] {
   const location = useLocation();
-  const routes: IAppRoute[] = [];
+  const routes: Route[] = [];
   let route = findRoute(location);
 
   if (route) {
