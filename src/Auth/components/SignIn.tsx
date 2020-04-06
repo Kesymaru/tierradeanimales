@@ -25,7 +25,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 
 import { DASHBOARD_ROUTE } from "@/Dashboard/routes";
 import { FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE } from "@/Auth/routes";
-import { EmailCredentials } from "@/Auth/models";
+import { EmailCredentials, InitEmailCredentials } from "@/Auth";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -54,12 +54,12 @@ const SignIn: FunctionComponent<{}> = ({}) => {
   const classes = useStyles();
   const firebase = useFirebase();
   const { t } = useTranslation();
-  const [data, _setData] = useState<EmailCredentials>({
-    email: "",
-    password: "",
-    remember: false,
-  });
+  const [data, _setData] = useState<EmailCredentials>(InitEmailCredentials);
   const [touched, setTouched] = useState<boolean>(false);
+
+  // TODO
+  // use real data here
+  const logged = false;
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -69,14 +69,8 @@ const SignIn: FunctionComponent<{}> = ({}) => {
     }); */
   }
 
-  function validate(value: IUserSignIn = data) {
-    const results = IUserSignInValidator(value) as ValidationResult;
-    setErrors(results.error || null);
-  }
-
-  function setData(value: IUserSignIn) {
+  function setData(value: EmailCredentials) {
     _setData(value);
-    validate(value);
     setTouched(true);
   }
 
@@ -135,7 +129,6 @@ const SignIn: FunctionComponent<{}> = ({}) => {
               autoComplete="current-password"
               value={data.password}
               onChange={handlePasswordChange}
-              // onBlur={() => validate()}
               disabled={loading}
             />
             <FormControlLabel
