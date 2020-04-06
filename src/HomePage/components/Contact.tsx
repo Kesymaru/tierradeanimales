@@ -22,13 +22,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import PhoneIcon from "@material-ui/icons/Phone";
 import MessageIcon from "@material-ui/icons/Message";
 
-import useValidation from "../../constants/validations";
-import {
-  IContact,
-  IContactFactory,
-  IContactSchema,
-} from "../../store/emails/emails.types";
-import { SendContactEmail } from "../../store/emails/emails.actions";
+import { Contact, InitContact } from "@/HomePage";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,31 +36,17 @@ const Contact: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const distpatch = useDispatch();
   const { t } = useTranslation();
-  const [data, setData] = useState<IContact>(IContactFactory());
-  const { errors, setErrors, validate } = useValidation<IContact>(
-    IContactSchema({
-      name: t("contact.name"),
-      email: t("contact.email"),
-      phone: t("contact.phone"),
-      message: t("contact.message"),
-    }),
-    { abortEarly: true }
-  );
+  const [data, setData] = useState<Contact>(InitContact);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    const valid = validate(data);
-    if (valid) {
-      distpatch(SendContactEmail(data));
-    }
   }
 
   function handleReset() {
-    setData(IContactFactory());
-    setErrors(null);
+    setData(InitContact);
   }
 
-  function handleChange(field: keyof IContact) {
+  function handleChange(field: keyof Contact) {
     return (event: ChangeEvent<HTMLInputElement>) =>
       setData({ ...data, [`${field}`]: event.target.value });
   }
@@ -97,8 +77,6 @@ const Contact: FunctionComponent<{}> = () => {
                 ),
               }}
               value={data.name}
-              error={!!errors?.name}
-              helperText={errors?.name}
               onChange={handleChange("name")}
             />
           </Grid>
@@ -116,8 +94,6 @@ const Contact: FunctionComponent<{}> = () => {
                 ),
               }}
               value={data.phone}
-              error={!!errors?.phone}
-              helperText={errors?.phone}
               onChange={handleChange("phone")}
             />
           </Grid>
@@ -135,8 +111,6 @@ const Contact: FunctionComponent<{}> = () => {
                 ),
               }}
               value={data.email}
-              error={!!errors?.email}
-              helperText={errors?.email}
               onChange={handleChange("email")}
             />
           </Grid>
@@ -155,8 +129,6 @@ const Contact: FunctionComponent<{}> = () => {
                 ),
               }}
               value={data.message}
-              error={!!errors?.message}
-              helperText={errors?.message}
               onChange={handleChange("message")}
             />
           </Grid>

@@ -2,7 +2,7 @@ import React, {
   FunctionComponent,
   useState,
   FormEvent,
-  ChangeEvent
+  ChangeEvent,
 } from "react";
 import { useTranslation } from "react-i18next";
 import Joi from "@hapi/joi";
@@ -18,7 +18,6 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import EmailIcon from "@material-ui/icons/Email";
 import SendIcon from "@material-ui/icons/Send";
 
-import useValidation from "../../constants/validations";
 import Social from "./Social";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,43 +31,31 @@ const useStyles = makeStyles((theme: Theme) =>
       background: "url(./images/dog4.jpg) no-repeat center",
       backgroundSize: "cover",
       [theme.breakpoints.up("md")]: {
-        backgroundAttachment: "fixed"
-      }
+        backgroundAttachment: "fixed",
+      },
     },
     article: {
       display: "flex",
       flexDirection: "row",
-      alignItems: "center"
+      alignItems: "center",
     },
     textField: {
       backgroundColor: "rgba(255,255,255,1)",
       marginTop: 20,
-      marginBottom: 20
-    }
+      marginBottom: 20,
+    },
   })
 );
 
-const FollowUs: FunctionComponent<{}> = props => {
+const FollowUs: FunctionComponent<{}> = (props) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const [email, setEmail] = useState<string>("");
-  const { errors, setErrors, validate } = useValidation<string>(
-    Joi.object({
-      email: Joi.string()
-        .email({ tlds: { allow: false } })
-        .required()
-        .label("Email")
-    })
-  );
 
   const contact = t("followUs.contact", { returnObjects: true }) as any;
 
   function handleSubmit(event: FormEvent) {
     event.stopPropagation();
-    console.log("news letter", email);
-    const valid = validate(email);
-    // TODO implement the news letter
-    setErrors(null);
   }
 
   function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
@@ -102,11 +89,9 @@ const FollowUs: FunctionComponent<{}> = props => {
                       <SendIcon />
                     </Tooltip>
                   </InputAdornment>
-                )
+                ),
               }}
               value={email}
-              error={!!errors?.email}
-              helperText={errors?.email}
               onChange={handleEmailChange}
             />
           </Grid>
