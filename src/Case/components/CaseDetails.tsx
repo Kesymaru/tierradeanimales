@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -19,9 +19,7 @@ import { Case, InitCase } from "@/Case";
 const DogDetails: FunctionComponent<{}> = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  // const [dog, setDog] = useState<IDog | null>(props.dog.data);
-  // const [loading, setLoading] = useState<boolean>(_getLoading());
-
+  
   // TODO
   // use real data
   const loading = false;
@@ -34,8 +32,12 @@ const DogDetails: FunctionComponent<{}> = () => {
         <LinearProgress color="primary" />
       </Container>
     );
+  
+  return (<Container>
+    Here goes the container details
+  </Container>);
 
-  return (
+  /* return (
     <Container>
       <Grid container spacing={2}>
         <Grid item xs={12}>
@@ -87,7 +89,7 @@ const DogDetails: FunctionComponent<{}> = () => {
         </Hidden>
       </Grid>
     </Container>
-  );
+  ); */
 };
 
 export default DogDetails;
