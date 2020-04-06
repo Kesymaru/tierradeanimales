@@ -39,20 +39,16 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface DogImagesProps {
-  dog: IDog;
+interface CaseImagesProps {
+  case: Case;
   loading: boolean;
-  onImagesChange: (images: IFile[]) => void;
-  onSelectAvatar?: (image: IFile | undefined) => void;
+  // onImagesChange: (images: IFile[]) => void;
+  // onSelectAvatar?: (image: IFile | undefined) => void;
 }
 
-const DogImages: FunctionComponent<DogImagesProps> = ({
-  dog,
-  loading,
-  onImagesChange,
-  onSelectAvatar,
-}) => {
-  const classes = useStyles();
+const CaseImages: FunctionComponent<CaseImagesProps> = (props) => {
+  return <>Here goes the case image component</>;
+  /* const classes = useStyles();
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   const isMd = useMediaQuery(theme.breakpoints.down("md"));
@@ -225,7 +221,7 @@ const DogImages: FunctionComponent<DogImagesProps> = ({
         </Grid>
       ) : null}
     </Grid>
-  );
+  ); */
 };
 
-export default DogImages;
+export default CaseImages;
