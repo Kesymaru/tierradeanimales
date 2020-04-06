@@ -1,4 +1,3 @@
-import { Case } from "@/Case/models";
 export enum CaseType {
   DOG = "Dog",
   CAT = "Cat",
@@ -23,6 +22,6 @@ export interface Case {
   description: string;
   public: boolean;
   avatar?: any;
-  images?: any[];
+  images?: any[]; // TODO populate images
   start?: boolean;
 }

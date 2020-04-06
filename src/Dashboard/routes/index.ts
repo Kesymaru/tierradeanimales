@@ -9,6 +9,12 @@ export const DASHBOARD_ROUTE: Route = RouteFactory({
   component: Dashboard,
 });
 
-export const ROUTES: Route[] = [DASHBOARD_ROUTE];
+export const ADMIN_DASHBOARD_ROUTE: Route = RouteFactory({
+  name: "Dashboard",
+  path: "/admin",
+  exact: true,
+  component: Dashboard,
+});
 
+export const ROUTES: Route[] = [DASHBOARD_ROUTE, ADMIN_DASHBOARD_ROUTE];
 export default ROUTES;
