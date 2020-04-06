@@ -24,14 +24,14 @@ import ListItemText from "@material-ui/core/ListItemText";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
-import AlertDialog from "../../components/AlertDialog";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import AppTable from "../../components/AppTable/AppTable";
-import { EDIT_FOSTER_HOME_ROUTE } from "../routes";
+// import { EDIT_FOSTER_HOME_ROUTE } from "@/FosterHome/routes";
 
 export const FosterHomes: FunctionComponent<{}> = (props) => {
-  const dispatch = useDispatch();
+  return <>Here goes the foster home</>;
+
+  /* const dispatch = useDispatch();
   const history = useHistory();
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
@@ -131,13 +131,13 @@ export const FosterHomes: FunctionComponent<{}> = (props) => {
               </IconButton>
             </Tooltip>
           </Fade>
-          {/*<Fade in={true}>
+          {<Fade in={true}>
                     <Tooltip title="Filter">
                         <IconButton>
                             <FilterListIcon/>
                         </IconButton>
                     </Tooltip>
-                </Fade>*/}
+                </Fade>}
         </Toolbar>
       </AppTable>
 
@@ -182,7 +182,7 @@ export const FosterHomes: FunctionComponent<{}> = (props) => {
         )}
       </AlertDialog>
     </Paper>
-  );
+  ); */
 };
 
 export default FosterHomes;
