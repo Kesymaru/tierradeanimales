@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import Zoom from "@material-ui/core/Zoom";
@@ -14,22 +14,18 @@ import Hidden from "@material-ui/core/Hidden";
 
 import PetsIcon from "@material-ui/icons/Pets";
 
-const DogDetails: FunctionComponent<{}> = (props) => {
+import { Case, InitCase } from "@/Case";
+
+const DogDetails: FunctionComponent<{}> = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const [dog, setDog] = useState<IDog | null>(props.dog.data);
-  const [loading, setLoading] = useState<boolean>(_getLoading());
+  // const [dog, setDog] = useState<IDog | null>(props.dog.data);
+  // const [loading, setLoading] = useState<boolean>(_getLoading());
 
-  useEffect(() => {
-    setDog(props.dog.data);
-    setLoading(_getLoading());
-  }, [props.dog]);
-
-  if (id && props.dog.status === Status.Empty) dispatch(GetDog(id));
-
-  function _getLoading(): boolean {
-    return props.dog.status === Status.Fetching;
-  }
+  // TODO
+  // use real data
+  const loading = false;
+  const case: Case = {...InitCase};
 
   if (loading)
     return (
@@ -46,7 +42,7 @@ const DogDetails: FunctionComponent<{}> = (props) => {
           <Zoom in={true} style={{ transitionDelay: "250ms" }}>
             <Avatar
               alt="Dog Profile Image"
-              src={dog && dog.avatar ? dog.avatar.src : undefined}
+              src={case && case.avatar ? case.avatar.src : undefined}
               style={{
                 height: 100,
                 width: 100,
@@ -62,7 +58,7 @@ const DogDetails: FunctionComponent<{}> = (props) => {
               variant="h5"
               style={{ textAlign: "center" }}
             >
-              {dog ? dog.name : ""}
+              {case ? case.name : ""}
             </Typography>
           </Fade>
         </Grid>

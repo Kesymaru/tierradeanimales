@@ -192,4 +192,4 @@ const AdminCases: FunctionComponent<{}> = () => {
   ); */
 };
 
-export default AdminCase;
+export default AdminCases;

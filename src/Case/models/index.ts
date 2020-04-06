@@ -1,9 +1,10 @@
+import { Case } from "@/Case/models";
 export enum CaseType {
   DOG = "Dog",
   CAT = "Cat",
 }
 
-export type Sex = "male" | "female";
+export type Sex = "Male" | "Female";
 
 export enum CaseStatus {
   RESCUED = "Rescued",
