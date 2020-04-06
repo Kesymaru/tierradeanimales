@@ -21,7 +21,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
 import { SIGN_IN_ROUTE } from "../routes";
-import { IUserSignUp } from "../../App/user/user.types";
+import { User, InitUser } from "@/User";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -47,12 +47,7 @@ const SignUp: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const firebase = useFirebase();
 
-  const [user, setUser] = useState<IUserSignUp>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
+  const [user, setUser] = useState<User>(InitUser);
   const [terms, setTerms] = useState<boolean>(false);
 
   function handleSubmit(event: FormEvent) {
@@ -64,7 +59,7 @@ const SignUp: FunctionComponent<{}> = () => {
     });
   }
 
-  function handleUserChange(key: keyof IUserSignUp) {
+  function handleUserChange(key: keyof User) {
     return (event: ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value;
       setUser({ ...user, [`${key}`]: value });

@@ -4,4 +4,5 @@ export const InitUser: User = {
   firstName: "",
   lastName: "",
   email: "",
+  password: "",
 };
