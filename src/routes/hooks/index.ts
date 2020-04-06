@@ -2,12 +2,8 @@ import { generatePath, matchPath } from "react-router";
 import * as H from "history";
 import { useLocation, useParams } from "react-router-dom";
 
-import {
-  ROUTES,
-  RouteParam,
-  RouteFactoryParams,
-  RouteDefaults,
-} from "@/App/routes";
+import { RouteParam, RouteFactoryParams, RouteDefaults } from "@/routes";
+import { ROUTES } from "@/App/routes";
 
 // ------------------------------------
 // Functions

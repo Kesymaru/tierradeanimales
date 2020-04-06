@@ -1,6 +1,6 @@
 import { Route, RouteFactory } from "@/routes";
 
-import NotFound from "../components/NotFound";
+import NotFound from "@/App/components/NotFound";
 import HomePage from "@/HomePage/components/Home";
 
 import { ROUTES as AUTH_ROUTES } from "@/Auth/routes";

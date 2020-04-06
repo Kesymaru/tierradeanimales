@@ -4,7 +4,7 @@ export interface RouteParam {
   [paramName: string]: string | number | boolean | undefined;
 }
 
-export default interface Route {
+export interface Route {
   name: string;
   path: string;
   getPath: Function;
@@ -24,3 +24,5 @@ export interface RouteFactoryParams
 }
 
 export interface RouteDefaults extends Pick<Route, "exact" | "auth"> {}
+
+export default Route;
