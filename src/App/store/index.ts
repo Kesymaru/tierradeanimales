@@ -25,8 +25,8 @@ import { FirebaseConfig } from "@/config/constants";
 import GeonamesReducers from "../reducers/geonames";
 
 // Store
-export const AppStore: Store = configureStore();
 export const AppHistory: History = createBrowserHistory();
+export const AppStore: Store = configureStore();
 
 // React Redux Firebase
 export const RrfConfig: Partial<ReactReduxFirebaseConfig> = {
