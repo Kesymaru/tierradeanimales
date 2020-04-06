@@ -29,7 +29,9 @@ export interface HomeContactsProps {
 }
 
 const HomeContacts: FunctionComponent<{}> = (props) => {
-  const [contacts, _setContacts] = useState<IHomeContact[]>(props.contacts);
+  return <>here goes the foster home contacts</>;
+
+  /* const [contacts, _setContacts] = useState<IHomeContact[]>(props.contacts);
   const [errors, setErrors] = useState<ValidationError | null>(null);
 
   useEffect(() => {
@@ -37,12 +39,6 @@ const HomeContacts: FunctionComponent<{}> = (props) => {
     if (props.errors) validate(props.contacts);
     else setErrors(null);
   }, [props]);
-
-  function validate(value: IHomeContact[]): boolean {
-    const results = IHomeContactValidator(value) as ValidationResult;
-    setErrors(results.error || null);
-    return !results.error;
-  }
 
   function setContacts(value: IHomeContact[]) {
     _setContacts(value);
@@ -162,7 +158,7 @@ const HomeContacts: FunctionComponent<{}> = (props) => {
         </Zoom>
       ))}
     </>
-  );
+  ); */
 };
 
 export default HomeContacts;

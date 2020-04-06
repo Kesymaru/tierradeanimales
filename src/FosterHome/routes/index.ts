@@ -1,7 +1,7 @@
 import HouseIcon from "@material-ui/icons/House";
 import EditIcon from "@material-ui/icons/Edit";
 
-import { RouteFactory } from "@/routes";
+import { Route, RouteFactory } from "@/routes";
 
 import ADMIN_DASHBOARD from "@/Dashboard/components/AdminDashboard";
 import { FosterHomes, EditFosterHome } from "@/FosterHome/components";

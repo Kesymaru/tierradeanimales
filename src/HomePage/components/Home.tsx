@@ -5,7 +5,7 @@ import Mission from "./Mission";
 import About from "./About";
 import Donate from "./Donate";
 
-const HomePage: FunctionComponent<{}> = (props) => (
+export const HomePage: FunctionComponent<{}> = (props) => (
   <div style={{ marginTop: 50 }}>
     <Vision />
     <Mission />

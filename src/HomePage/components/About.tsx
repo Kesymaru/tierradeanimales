@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 
 interface IAboutProps {}
 
-const About: FunctionComponent<IAboutProps> = (props) => {
+export const About: FunctionComponent<IAboutProps> = (props) => {
   const { t, i18n } = useTranslation();
 
   return (

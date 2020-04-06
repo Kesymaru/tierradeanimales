@@ -1,4 +1,5 @@
-import About from "./About";
-import Home from "./Home";
-
-export { About, Home };
+export * from "./About";
+export * from "./Donate";
+export * from "./Home";
+export * from "./Mission";
+export * from "./Vision";
