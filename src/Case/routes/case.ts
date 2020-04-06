@@ -1,19 +1,16 @@
+import { AdminCases } from "@/Case/components/AdminCases";
 import PetsIcon from "@material-ui/icons/Pets";
 import EditIcon from "@material-ui/icons/Edit";
 
 import { Route, RouteFactory } from "@/routes";
 import { DASHBOARD_ROUTE, ADMIN_DASHBOARD_ROUTE } from "@/Dashboard/routes";
-
-import AdminDogs from "./AdminDogs";
-import EditDog from "./EditDog";
-import Dogs from "./Dogs";
-import DogDetails from "./DogDetails";
+import { AdminCases, EditCase, Cases, CaseDetails } from "@/Case/components";
 
 export const ADMIN_CASE_ROUTE: Route = RouteFactory({
   name: "Cases",
   path: "/admin/cases",
   auth: true,
-  component: AdminDogs,
+  component: AdminCases,
   parent: ADMIN_DASHBOARD_ROUTE,
   icon: PetsIcon,
 });
@@ -23,7 +20,7 @@ export const ADMIN_DOG_EDIT_ROUTE: Route = RouteFactory({
   path: `${ADMIN_CASE_ROUTE.path}/:id`,
   defaultParams: { id: "new" },
   auth: true,
-  component: EditDog,
+  component: EditCase,
   parent: ADMIN_CASE_ROUTE,
   icon: EditIcon,
 });
@@ -31,7 +28,7 @@ export const ADMIN_DOG_EDIT_ROUTE: Route = RouteFactory({
 export const DOG_ROUTE: Route = RouteFactory({
   name: "Dogs",
   path: `/dogs`,
-  component: Dogs,
+  component: Cases,
   parent: DASHBOARD_ROUTE,
   icon: PetsIcon,
 });
@@ -39,7 +36,7 @@ export const DOG_ROUTE: Route = RouteFactory({
 export const DOG_DETAILS_ROUTE: Route = RouteFactory({
   name: "Dog",
   path: `/dogs/:id`,
-  component: DogDetails,
+  component: CaseDetails,
   parent: DOG_ROUTE,
 });
 

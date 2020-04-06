@@ -30,7 +30,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 import { Case } from "@/Case/models";
 
-const useStyles = makeStyles((theme: Theme) =>
+export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     selected: {
       border: "2px solid blue",

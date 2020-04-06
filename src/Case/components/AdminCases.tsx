@@ -33,7 +33,7 @@ import AlertDialog from "../../components/AlertDialog";
 import { Case } from "@/Case/models";
 import { ADMIN_CASE_EDIT_ROUTE } from "@/Case/routes";
 
-const AdminCases: FunctionComponent<{}> = () => {
+export const AdminCases: FunctionComponent<{}> = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const theme = useTheme();

@@ -15,7 +15,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 import { DOG_DETAILS_ROUTE } from "@/Case/routes";
 
-const Cases: FunctionComponent<{}> = (props) => {
+export const Cases: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
 

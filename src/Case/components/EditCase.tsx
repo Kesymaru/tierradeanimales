@@ -34,7 +34,7 @@ import RotateRightIcon from "@material-ui/icons/RotateRight";
 
 import CaseImages from "@/Case/components/CaseImages";
 
-const EditCase: FunctionComponent<{}> = (props) => {
+export const EditCase: FunctionComponent<{}> = (props) => {
   return <>Here goes the edit case</>;
 
   /* const dispatch = useDispatch();
