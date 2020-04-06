@@ -23,13 +23,16 @@ import SendIcon from "@material-ui/icons/Send";
 
 import { Status } from "@/App/models";
 import { useId } from "@/routes";
+
 import HomeContacts from "./ForterHomeContacts";
-import HomeDogs from "./HomeDogs";
+// import HomeDogs from "./HomeDogs";
 import Address from "../../User/components/Address";
 import { FOSTER_HOMES_ROUTE } from "../routes";
 
 export const EditFosterHome: FunctionComponent<{}> = (props) => {
-  const dispatch = useDispatch();
+  return <Container>here goes the edit forster home</Container>;
+
+  /* const dispatch = useDispatch();
   const history = useHistory();
   const { isNew, id } = useId();
   const [home, _setHome] = useState<IHome>(getHome());
@@ -174,7 +177,7 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
         </Grid>
       </form>
     </Container>
-  );
+  ); */
 };
 
 export default EditFosterHome;

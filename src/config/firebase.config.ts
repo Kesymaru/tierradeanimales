@@ -1,4 +1,6 @@
-const FirebaseConfig: IFirebaseConfig = {
+import { FirebaseConfiguration } from "@/config/models";
+
+export const FirebaseConfig: FirebaseConfiguration = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY || "",
   appId: process.env.REACT_APP_FIREBASE_APP_ID || "",
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID || "",
