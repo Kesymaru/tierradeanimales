@@ -1,4 +1,6 @@
 import React, { FunctionComponent } from "react";
+import { useSelector } from "react-redux";
+import { isLoaded, isEmpty } from "react-redux-firebase";
 
 import {
   createStyles,
@@ -9,7 +11,8 @@ import {
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 
-import NavbarMenu from "./NavbarMenu";
+import { AppState } from "@/App/models";
+import { NavbarMenu } from "@/App/components";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
@@ -35,10 +38,8 @@ interface NavbarProps {
 const Navbar: FunctionComponent<NavbarProps> = (props) => {
   const classes = useStyles();
   const theme = useTheme();
-
-  // TODO
-  // use real data
-  const logged = false;
+  const auth = useSelector<AppState, any>((state) => state.firebase.auth);
+  const logged = isLoaded(auth) && !isEmpty(auth);
 
   if (!logged) return <div></div>;
 

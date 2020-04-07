@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
+import { isEmpty, isLoaded } from "react-redux-firebase";
 
 import { default as MaterialAppBar } from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -12,9 +13,9 @@ import Slide from "@material-ui/core/Slide";
 import Link from "@material-ui/core/Link";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-import UserMenu from "@/User/components/UserMenu";
 import useRoutes from "@/routes/hooks";
 import LanguageMenu from "./LanguageMenu";
+import { AppState } from "../models";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
@@ -59,10 +60,8 @@ interface AppBarProps {
 export const AppBar: FunctionComponent<AppBarProps> = (props) => {
   const classes = useStyles();
   const routes = useRoutes();
-
-  // TODO
-  // use real data
-  const logged = false;
+  const auth = useSelector<AppState, any>((state) => state.firebase.auth);
+  const logged = isLoaded(auth) && !isEmpty(auth);
 
   return (
     <>
@@ -83,7 +82,6 @@ export const AppBar: FunctionComponent<AppBarProps> = (props) => {
             {process.env.REACT_APP_NAME}
           </Typography>
           <LanguageMenu />
-          <UserMenu />
         </Toolbar>
       </MaterialAppBar>
       <div id={props.anchorId} />

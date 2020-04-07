@@ -12,6 +12,7 @@ import Route from "@/routes/models/route";
 import { ACCOUNT_ROUTE } from "@/Auth/routes";
 import { ADMIN_CASE_ROUTE } from "@/Case/routes";
 import { FOSTER_HOMES_ROUTE } from "@/FosterHome/routes";
+import { UserMenu } from "@/User/components";
 
 const ADMIN_ROUTES: Route[] = [
   ACCOUNT_ROUTE,
@@ -25,12 +26,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface NavbarMenuProps {
+export interface NavbarMenuProps {
   open: boolean;
   setOpen: Function;
 }
 
-const NavbarMenu: FunctionComponent<NavbarMenuProps> = ({ open, setOpen }) => {
+export const NavbarMenu: FunctionComponent<NavbarMenuProps> = ({
+  open,
+  setOpen,
+}) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -41,6 +45,7 @@ const NavbarMenu: FunctionComponent<NavbarMenuProps> = ({ open, setOpen }) => {
 
   return (
     <div>
+      <UserMenu />
       <div className={classes.toolbar} />
       {ADMIN_ROUTES.length && <Divider />}
       <List>
