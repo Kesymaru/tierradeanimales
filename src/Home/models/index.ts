@@ -1,3 +1,6 @@
+// import * as firebase from "firebase/app";
+// import "firebase/firestore";
+
 export interface Contact {
   name: string;
   email: string;
@@ -7,6 +10,8 @@ export interface Contact {
 
 export interface Newsletter {
   email: string;
+  // createdAt: firebase.firestore.FieldValue.serverTimestamp;
+  createdAt: Date | string;
 }
 
 export interface NewsletterState {

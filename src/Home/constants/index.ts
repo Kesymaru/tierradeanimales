@@ -1,4 +1,4 @@
-import { Contact } from "@/Home/models";
+import { Contact, Newsletter } from "@/Home/models";
 
 export const InitContact: Contact = {
   name: "",
@@ -8,3 +8,8 @@ export const InitContact: Contact = {
 };
 
 export const HomeImages: string[] = ["image/here.png", "image/2.png"];
+
+export const InitNewsletter: Newsletter = {
+  email: "",
+  createdAt: "",
+};

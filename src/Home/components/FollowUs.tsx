@@ -1,12 +1,12 @@
 import React, {
   FunctionComponent,
   useState,
-  FormEvent,
   ChangeEvent,
   MouseEvent,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { useFirestoreConnect } from "react-redux-firebase";
+import { useFirestore } from "react-redux-firebase";
+import { get } from "lodash";
 
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -19,6 +19,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import EmailIcon from "@material-ui/icons/Email";
 import SendIcon from "@material-ui/icons/Send";
 
+import { Newsletter, InitNewsletter } from "@/Home";
 import Social from "./Social";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -51,16 +52,21 @@ const useStyles = makeStyles((theme: Theme) =>
 export const FollowUs: FunctionComponent<{}> = (props) => {
   const classes = useStyles();
   const { t } = useTranslation();
-  const [email, setEmail] = useState<string>("");
+  const firestore = useFirestore();
 
+  const [newsletter, setNewsletter] = useState<Newsletter>(InitNewsletter);
   const contact = t("followUs.contact", { returnObjects: true }) as any;
 
   function handleNewsletter(event: MouseEvent<HTMLElement>) {
-    console.log("newsletter", email);
+    console.log("newsletter", newsletter);
+    return firestore.add("newsletter", newsletter);
   }
 
   function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
-    setEmail(event.target.value);
+    setNewsletter({
+      ...newsletter,
+      email: get(event, "target.value", ""),
+    });
   }
 
   return (
@@ -92,7 +98,7 @@ export const FollowUs: FunctionComponent<{}> = (props) => {
                   </InputAdornment>
                 ),
               }}
-              value={email}
+              value={newsletter}
               onChange={handleEmailChange}
             />
           </Grid>
