@@ -4,8 +4,8 @@ import React, {
   FunctionComponent,
   useState,
 } from "react";
-import { useDispatch } from "react-redux";
-import { useFirebase } from "react-redux-firebase";
+import { useSelector } from "react-redux";
+import { useFirebase, isEmpty, isLoaded } from "react-redux-firebase";
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink, Redirect } from "react-router-dom";
 
@@ -23,9 +23,14 @@ import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
+import { AppState } from "@/App/models";
 import { DASHBOARD_ROUTE } from "@/Dashboard/routes";
-import { FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE } from "@/Auth/routes";
-import { EmailCredentials, InitEmailCredentials } from "@/Auth";
+import {
+  EmailCredentials,
+  FORGOT_PASSWORD_ROUTE,
+  SIGN_UP_ROUTE,
+  INIT_EMAIL_CREDENTIALS,
+} from "@/Auth";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -54,20 +59,20 @@ const SignIn: FunctionComponent<{}> = ({}) => {
   const classes = useStyles();
   const firebase = useFirebase();
   const { t } = useTranslation();
-  const [data, _setData] = useState<EmailCredentials>(InitEmailCredentials);
+  const [data, _setData] = useState<EmailCredentials>(INIT_EMAIL_CREDENTIALS);
   const [touched, setTouched] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  // TODO
-  // use real data here
-  const logged = false;
-  const loading = false;
+  const auth = useSelector<AppState, any>((state) => state.firebase.auth);
+  const logged = isLoaded(auth) && !isEmpty(auth);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    /* firebase.login({
+    setLoading(true);
+    firebase.login({
       email: data.email,
       password: data.password,
-    }); */
+    });
   }
 
   function setData(value: EmailCredentials) {

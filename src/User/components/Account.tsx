@@ -19,12 +19,12 @@ import Typography from "@material-ui/core/Typography";
 import SaveIcon from "@material-ui/icons/Save";
 import CloseIcon from "@material-ui/icons/Close";
 
-import { User, InitUser } from "@/User";
+import { User, INIT_USER } from "@/User";
 
 export const Account: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
   const [touched, setTouched] = useState<boolean>(false);
-  const [user, setUser] = useState<User | null>(InitUser);
+  const [user, setUser] = useState<User | null>(INIT_USER);
   const [password, setPassword] = useState<string>("");
   const fileInput = useRef<HTMLInputElement>(null);
 
@@ -61,7 +61,7 @@ export const Account: FunctionComponent<{}> = (props) => {
   }
 
   function handlerReset(event: FormEvent) {
-    setUser(InitUser);
+    setUser(INIT_USER);
     setTouched(false);
   }
 

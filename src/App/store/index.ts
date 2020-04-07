@@ -41,10 +41,6 @@ export const RrfProps: ReactReduxFirebaseProviderProps = {
   createFirestoreInstance,
 };
 
-interface UserProfile {
-  email: string;
-}
-
 export function configureStore(): Store {
   initFirebaseServices();
 

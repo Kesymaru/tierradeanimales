@@ -5,7 +5,11 @@ import React, {
   useState,
 } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { useFirebase } from "react-redux-firebase";
+import { useSelector } from "react-redux";
+import { useFirebase, isLoaded } from "react-redux-firebase";
+import get from "lodash/get";
+
+import * as firebase from "firebase";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -20,8 +24,10 @@ import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
+import { AppState } from "@/App/models";
+
 import { SIGN_IN_ROUTE } from "../routes";
-import { User, InitUser } from "@/User";
+import { User, INIT_USER } from "@/User";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -46,13 +52,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 const SignUp: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const firebase = useFirebase();
+  // const auth = useSelector<AppState, firebase.auth.Auth>(
+  const auth = useSelector<AppState, any>((state) => state.firebase.auth);
 
-  const [user, setUser] = useState<User>(InitUser);
+  const [user, setUser] = useState<User>(INIT_USER);
   const [terms, setTerms] = useState<boolean>(false);
+
+  console.log("auth", auth);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-
     firebase.createUser({
       email: user.email,
       password: user.password,
@@ -61,14 +70,14 @@ const SignUp: FunctionComponent<{}> = () => {
 
   function handleUserChange(key: keyof User) {
     return (event: ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
-      setUser({ ...user, [`${key}`]: value });
+      setUser({ ...user, [`${key}`]: get(event, "target.value", "") });
     };
   }
 
   const handleTermsChange = (event: ChangeEvent<HTMLInputElement>) => {
-    let { checked } = event.target;
-    setTerms(checked);
+    // let { checked } = event.target;
+    // setTerms(checked);
+    setTerms(get(event, "target.checked", false) as boolean);
   };
 
   return (

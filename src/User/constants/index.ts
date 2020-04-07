@@ -1,6 +1,6 @@
 import { User } from "@/User/models";
 
-export const InitUser: User = {
+export const INIT_USER: User = {
   firstName: "",
   lastName: "",
   email: "",
