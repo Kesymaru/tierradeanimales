@@ -1,25 +1,12 @@
-import React, {
-  FunctionComponent,
-  useState,
-  ChangeEvent,
-  MouseEvent,
-} from "react";
+import React, { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { useFirestore } from "react-redux-firebase";
-import { get } from "lodash";
 
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Tooltip from "@material-ui/core/Tooltip";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-import EmailIcon from "@material-ui/icons/Email";
-import SendIcon from "@material-ui/icons/Send";
-
-import { Newsletter, InitNewsletter } from "@/Home";
+import NewsletterSubscriber from "@/Newsletter";
 import Social from "./Social";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -41,33 +28,14 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "row",
       alignItems: "center",
     },
-    textField: {
-      backgroundColor: "rgba(255,255,255,1)",
-      marginTop: 20,
-      marginBottom: 20,
-    },
   })
 );
 
 export const FollowUs: FunctionComponent<{}> = (props) => {
   const classes = useStyles();
   const { t } = useTranslation();
-  const firestore = useFirestore();
 
-  const [newsletter, setNewsletter] = useState<Newsletter>(InitNewsletter);
   const contact = t("followUs.contact", { returnObjects: true }) as any;
-
-  function handleNewsletter(event: MouseEvent<HTMLElement>) {
-    console.log("newsletter", newsletter);
-    return firestore.add("newsletter", newsletter);
-  }
-
-  function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
-    setNewsletter({
-      ...newsletter,
-      email: get(event, "target.value", ""),
-    });
-  }
 
   return (
     <Container maxWidth={false} className={classes.container}>
@@ -77,30 +45,7 @@ export const FollowUs: FunctionComponent<{}> = (props) => {
             <Typography variant="h2">{t("followUs.title")}</Typography>
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              label={t("home.newsletter")}
-              placeholder={t("home.newsletter")}
-              className={classes.textField}
-              variant="filled"
-              size="medium"
-              fullWidth
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <EmailIcon />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end" onClick={handleNewsletter}>
-                    <Tooltip title={"Subscribe"}>
-                      <SendIcon />
-                    </Tooltip>
-                  </InputAdornment>
-                ),
-              }}
-              value={newsletter}
-              onChange={handleEmailChange}
-            />
+            <NewsletterSubscriber />
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="h3">{t("followUs.info")}</Typography>
