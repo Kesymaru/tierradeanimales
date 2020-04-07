@@ -5,6 +5,7 @@ import Home from "@/Home/components";
 
 import { ROUTES as AUTH_ROUTES } from "@/Auth/routes";
 import { ROUTES as DASHBOARD_ROUTES } from "@/Dashboard/routes";
+import { ROUTES as NEWSLETTER_ROUTES } from "@/Newsletter/routes";
 
 // import DOGS_ROUTES from "../components/Dogs/Dogs.routes";
 // import HOMES_ROUTES from "../components/Homes/Homes.routes";
@@ -35,6 +36,7 @@ export const NOT_FOUND_ROUTE: Route = RouteFactory({
 export const ROUTES: Route[] = [
   ...AUTH_ROUTES,
   ...DASHBOARD_ROUTES,
+  ...NEWSLETTER_ROUTES,
 
   // ...DOGS_ROUTES,
   // ...HOMES_ROUTES,
@@ -43,3 +45,5 @@ export const ROUTES: Route[] = [
   HOME_ROUTE,
   NOT_FOUND_ROUTE,
 ];
+
+export default ROUTES;
