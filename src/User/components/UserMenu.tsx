@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState, MouseEvent } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useFirebase, isLoaded, isEmpty } from "react-redux-firebase";
+import { useTranslation } from "react-i18next";
 
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
@@ -30,11 +31,10 @@ const useStyles = makeStyles((theme: Theme) =>
 export const UserMenu: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const firebase = useFirebase();
+  const { t, i18n } = useTranslation();
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);
   const history = useHistory();
   const logged = isLoaded(auth) && !isEmpty(auth);
-
-  console.log("auth", isLoaded(auth), !isEmpty(auth), logged);
 
   async function logout() {
     await firebase.logout();
@@ -55,7 +55,7 @@ export const UserMenu: FunctionComponent<{}> = () => {
         ) : null}
         {logged ? (
           <Button color="primary" variant="contained" onClick={logout}>
-            SignOut
+            {t("signOut.title")}
           </Button>
         ) : (
           <Button
@@ -63,7 +63,7 @@ export const UserMenu: FunctionComponent<{}> = () => {
             variant="contained"
             onClick={() => history.push(SIGN_IN_ROUTE.getPath())}
           >
-            SignIn
+            {t("signIn.title")}
           </Button>
         )}
       </Box>
