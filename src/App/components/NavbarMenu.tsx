@@ -8,14 +8,14 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 
-import Route from "@/App/models/route";
-import { ACCOUNT_ROUTE } from "@/Auth/routes";
+import Route from "@core/models/route";
+import { ACCOUNT_ROUTE_TEST } from "@/Auth/routes";
 import { ADMIN_CASE_ROUTE } from "@/Case/routes";
 import { FOSTER_HOMES_ROUTE } from "@/FosterHome/routes";
 import { UserMenu } from "@/User/components";
 
-const ADMIN_ROUTES: Route[] = [
-  ACCOUNT_ROUTE,
+const NAVBAR_ROUTES: Route[] = [
+  ACCOUNT_ROUTE_TEST,
   ADMIN_CASE_ROUTE,
   FOSTER_HOMES_ROUTE,
 ];
@@ -42,9 +42,9 @@ export const NavbarMenu: FunctionComponent<NavbarMenuProps> = (props) => {
   return (
     <div>
       <UserMenu />
-      {ADMIN_ROUTES.length && <Divider />}
+      {NAVBAR_ROUTES.length && <Divider />}
       <List>
-        {ADMIN_ROUTES.map((route, index) => (
+        {NAVBAR_ROUTES.map((route, index) => (
           <ListItem button key={index} onClick={() => goTo(route)}>
             <ListItemIcon>
               {route.icon ? <route.icon /> : <InboxIcon />}

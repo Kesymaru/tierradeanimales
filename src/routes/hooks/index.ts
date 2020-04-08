@@ -7,7 +7,7 @@ import {
   RouteParam,
   RouteFactoryParams,
   RouteDefaults,
-} from "@/App/models/route";
+} from "@core/models/route";
 import ROUTES from "@/App/routes";
 
 // ------------------------------------

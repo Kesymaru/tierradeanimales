@@ -1,5 +1,5 @@
-import Route from "@/App/models/route";
-import { RouteFactory } from "@/App/hooks";
+import Route from "@core/models/route";
+import { RouteFactory } from "@core/hooks/route";
 
 import { NewsletterUnsubscriber } from "@/Newsletter/components";
 

@@ -1,5 +1,5 @@
-import Route from "@/App/models/route";
-import { RouteFactory } from "@/App/hooks";
+import { Route } from "@core/models";
+import { RouteFactory } from "@core/hooks/route";
 
 import NotFound from "@/App/components/NotFound";
 import Home from "@/Home/components";
@@ -30,6 +30,15 @@ export const NOT_FOUND_ROUTE: Route = RouteFactory({
   path: "*",
   component: NotFound,
 });
+
+// ------------------------------------
+// Navbar Routes
+// ------------------------------------
+/* export const NAVBAR_ROUTES: Route[] = [
+  ACCOUNT_ROUTE,
+  ADMIN_CASE_ROUTE,
+  FOSTER_HOMES_ROUTE,
+]; */
 
 // ------------------------------------
 // Routes Array

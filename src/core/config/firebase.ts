@@ -1,4 +1,4 @@
-import { FirebaseConfiguration } from "@/config/models";
+import { FirebaseConfiguration } from "@core/models";
 
 export const FirebaseConfig: FirebaseConfiguration = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY || "",

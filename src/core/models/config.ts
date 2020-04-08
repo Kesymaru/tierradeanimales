@@ -8,3 +8,5 @@ export interface FirebaseConfiguration {
   messagingSenderId?: string;
   measurementId?: string;
 }
+
+export default FirebaseConfiguration;

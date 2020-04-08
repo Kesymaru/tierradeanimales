@@ -4,8 +4,8 @@ import get from "lodash/get";
 import { Typography, Link } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-import Route from "@/App/models/route";
-import { useRoute } from "@/App/hooks";
+import Route from "@core/models/route";
+import { useRoute } from "@core/hooks/route";
 import { HOME_ROUTE } from "@/App/routes";
 
 const useStyles = makeStyles((theme: Theme) =>

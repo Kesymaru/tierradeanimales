@@ -1,7 +1,7 @@
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
-import Route from "@/App/models/route";
-import { RouteFactory } from "@/App/hooks";
+import Route from "@core/models/route";
+import { RouteFactory } from "@core/hooks/route";
 import { DASHBOARD_ROUTE } from "@/Dashboard/routes";
 
 import SignUp from "../components/SignUp";
@@ -39,7 +39,9 @@ export const FORGOT_PASSWORD_ROUTE: Route = RouteFactory({
 // ------------------------------------
 // Account
 // ------------------------------------
-export const ACCOUNT_ROUTE: Route = RouteFactory({
+console.log("account before factory");
+
+export const ACCOUNT_ROUTE_TEST: Route = RouteFactory({
   name: "Account",
   path: "/account",
   auth: true,
@@ -48,11 +50,13 @@ export const ACCOUNT_ROUTE: Route = RouteFactory({
   parent: DASHBOARD_ROUTE,
 });
 
+console.log("account route", ACCOUNT_ROUTE_TEST);
+
 export const ROUTES: Route[] = [
   SIGN_UP_ROUTE,
   SIGN_IN_ROUTE,
   FORGOT_PASSWORD_ROUTE,
-  ACCOUNT_ROUTE,
+  ACCOUNT_ROUTE_TEST,
 ];
 
 export default ROUTES;

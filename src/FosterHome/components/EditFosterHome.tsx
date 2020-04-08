@@ -22,7 +22,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import SendIcon from "@material-ui/icons/Send";
 
 import { Status } from "@/App/models";
-import { useId } from "@/App/hooks";
+import { useId } from "@core/hooks/route";
 
 import HomeContacts from "./ForterHomeContacts";
 // import HomeDogs from "./HomeDogs";
