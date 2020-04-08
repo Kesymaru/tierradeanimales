@@ -9,7 +9,6 @@ import {
   useTheme,
 } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
 
 import { AppState } from "@/App/models";
 import { NavbarMenu } from "@/App/components";
