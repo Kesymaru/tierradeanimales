@@ -18,10 +18,11 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     drawer: {
-      [theme.breakpoints.up("md")]: {
+      width: drawerWidth,
+      /* [theme.breakpoints.up("md")]: {
         width: drawerWidth,
         flexShrink: 0,
-      },
+      }, */
     },
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface NavbarProps {
   open: boolean;
-  setOpen: Function;
+  setOpen: (open: boolean) => void;
 }
 
 const Navbar: FunctionComponent<NavbarProps> = (props) => {
@@ -41,10 +42,15 @@ const Navbar: FunctionComponent<NavbarProps> = (props) => {
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);
   const logged = isLoaded(auth) && !isEmpty(auth);
 
+  console.log("navbar ", props.open);
+
   if (!logged) return <div></div>;
 
   return (
-    <nav className={classes.drawer} aria-label="mailbox folders">
+    <nav className={classes.drawer} aria-label="menu navbar">
+      {/* <Drawer open={props.open}>
+        <NavbarMenu open={props.open} setOpen={props.setOpen} />
+      </Drawer> */}
       <Hidden mdUp implementation="js">
         <Drawer
           variant="temporary"
@@ -67,7 +73,7 @@ const Navbar: FunctionComponent<NavbarProps> = (props) => {
             paper: classes.drawerPaper,
           }}
           variant="permanent"
-          open
+          open={props.open}
         >
           <NavbarMenu open={props.open} setOpen={props.setOpen} />
         </Drawer>

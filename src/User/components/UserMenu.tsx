@@ -9,16 +9,16 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
-import { ACCOUNT_ROUTE, SIGN_IN_ROUTE } from "@/Auth/routes";
+import { AppState } from "@/App";
+import { ACCOUNT_ROUTE, SIGN_IN_ROUTE } from "@/Auth";
 
 export const UserMenu: FunctionComponent<{}> = () => {
-  return <>user menu goes here</>;
-
-  /* const firebase = useFirebase();
-  const auth = useSelector((state) => state.firebase.auth);
+  const firebase = useFirebase();
+  const auth = useSelector<AppState, any>((state) => state.firebase.auth);
   const location = useLocation();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const logged = isLoaded(auth) && !isEmpty(auth);
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -26,7 +26,6 @@ export const UserMenu: FunctionComponent<{}> = () => {
 
   const handleClose = (item: string | null) => (event: MouseEvent) => {
     setAnchorEl(null);
-
     switch (item) {
       case "Profile":
         return history.push(ACCOUNT_ROUTE.path);
@@ -39,10 +38,10 @@ export const UserMenu: FunctionComponent<{}> = () => {
     }
   };
 
-  if (isLoaded(auth) && !isEmpty(auth)) {
+  if (logged) {
     return (
       <div>
-        <Avatar
+        {/* <Avatar
           style={{
             height: "40px",
             width: "40px",
@@ -60,7 +59,7 @@ export const UserMenu: FunctionComponent<{}> = () => {
           ) : (
             <LockOutlinedIcon />
           )}}
-        </Avatar>
+        </Avatar> */}
         <Menu
           id="simple-menu"
           anchorEl={anchorEl}
@@ -79,7 +78,7 @@ export const UserMenu: FunctionComponent<{}> = () => {
     <Button color="inherit" onClick={() => history.push(SIGN_IN_ROUTE.path)}>
       SignIn
     </Button>
-  ); */
+  );
 };
 
 export default UserMenu;

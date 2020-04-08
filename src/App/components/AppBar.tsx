@@ -38,9 +38,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     menuButton: {
       marginRight: theme.spacing(2),
-      [theme.breakpoints.up("md")]: {
+      /* [theme.breakpoints.up("md")]: {
         display: "none",
-      },
+      }, */
     },
     title: {
       flexGrow: 1,
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 interface AppBarProps {
   open: boolean;
-  setOpen: Function;
+  setOpen: (open: boolean) => void;
   anchorId: string;
 }
 

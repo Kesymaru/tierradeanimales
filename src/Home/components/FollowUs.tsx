@@ -8,6 +8,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import NewsletterSubscriber from "@/Newsletter";
 import Social from "./Social";
+import { Copyright } from "@/App/components";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,6 +71,7 @@ export const FollowUs: FunctionComponent<{}> = (props) => {
           </Grid>
         </Grid>
       </Container>
+      <Copyright />
     </Container>
   );
 };

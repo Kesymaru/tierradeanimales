@@ -17,7 +17,7 @@ const AppLoader: FunctionComponent<{}> = () => (
   </div>
 );
 
-export const App: FunctionComponent<{}> = (props) => {
+export const App: FunctionComponent<{}> = () => {
   const [open, setOpen] = useState<boolean>(false);
   const anchorId: string = "back-to-top-anchor";
 
