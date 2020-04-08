@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Route as ReactRouter, Redirect } from "react-router-dom";
 import { isLoaded, isEmpty } from "react-redux-firebase";
 
-import { Route as AppRoute } from "@/routes/models/route";
+import { Route as AppRoute } from "@/routes/models";
 import { SIGN_IN_ROUTE } from "@/Auth/routes";
 import { AppState } from "@/App";
 import { User } from "@/User";

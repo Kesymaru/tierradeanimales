@@ -19,7 +19,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import CloseIcon from "@material-ui/icons/Close";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
-import { AppState } from "@/App";
+import { AppState, Copyright } from "@/App";
 import { User, INIT_USER } from "@/User";
 
 export const Account: FunctionComponent<{}> = (props) => {
@@ -173,6 +173,7 @@ export const Account: FunctionComponent<{}> = (props) => {
           </Grid>
         </Grid>
       </form>
+      <Copyright />
     </Container>
   );
 };

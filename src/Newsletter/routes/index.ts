@@ -1,4 +1,5 @@
-import { Route, RouteFactory } from "@/routes";
+import { Route } from "@/routes/models";
+import { RouteFactory } from "@/routes/hooks";
 
 import { NewsletterUnsubscriber } from "@/Newsletter/components";
 

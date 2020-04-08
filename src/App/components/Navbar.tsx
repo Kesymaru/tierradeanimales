@@ -27,12 +27,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface NavbarProps {
+export interface NavbarProps {
   open: boolean;
   setOpen: (open: boolean) => void;
 }
 
-const Navbar: FunctionComponent<NavbarProps> = (props) => {
+export const Navbar: FunctionComponent<NavbarProps> = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);

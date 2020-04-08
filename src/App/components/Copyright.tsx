@@ -3,29 +3,33 @@ import get from "lodash/get";
 
 import { Typography, Link } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { ENODEV } from "constants";
 
-const drawerWidth = 240;
+import { useRoute, Route } from "@/routes";
+import { HOME_ROUTE } from "@/App/routes";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     copyRight: {
       margin: "20px 0",
-      /* [theme.breakpoints.up("md")]: {
-        marginLeft: drawerWidth,
-      }, */
-      [".white"]: {
-        color: "white",
-      },
     },
   })
 );
 
 export interface CopyrightProps {
-  color?: "white" | "black";
+  hideRoutes?: Array<Route>;
 }
 
 export const Copyright: FunctionComponent<CopyrightProps> = (props) => {
   const classes = useStyles();
+  const route = useRoute();
+
+  console.log("route", route);
+
+  if (Array.isArray(props.hideRoutes)) {
+    const found = props.hideRoutes.find((r) => r === route);
+    console.log("found route", route);
+    if (found) return <></>;
+  }
   return (
     <Typography
       variant="body2"
