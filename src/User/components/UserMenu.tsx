@@ -1,83 +1,73 @@
 import React, { FunctionComponent, useState, MouseEvent } from "react";
 import { useSelector } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useFirebase, isLoaded, isEmpty } from "react-redux-firebase";
 
 import Avatar from "@material-ui/core/Avatar";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 import { AppState } from "@/App";
 import { ACCOUNT_ROUTE, SIGN_IN_ROUTE } from "@/Auth";
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    userMenu: {
+      padding: "20px 0 0 0",
+    },
+    avatar: {
+      height: 90,
+      width: 90,
+      margin: "0 auto 10px auto",
+    },
+  })
+);
+
 export const UserMenu: FunctionComponent<{}> = () => {
+  const classes = useStyles();
   const firebase = useFirebase();
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);
-  const location = useLocation();
   const history = useHistory();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const logged = isLoaded(auth) && !isEmpty(auth);
 
-  const handleClick = (event: MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  console.log("auth", isLoaded(auth), !isEmpty(auth), logged);
 
-  const handleClose = (item: string | null) => (event: MouseEvent) => {
-    setAnchorEl(null);
-    switch (item) {
-      case "Profile":
-        return history.push(ACCOUNT_ROUTE.path);
-
-      case "SignOut":
-        return firebase.logout();
-
-      default:
-        break;
-    }
-  };
-
-  if (logged) {
-    return (
-      <div>
-        {/* <Avatar
-          style={{
-            height: "40px",
-            width: "40px",
-            margin: "0 auto",
-            cursor: "pointer",
-          }}
-          onClick={handleClick}
-        >
-          {{user && user.photoURL ? (
-            <img
-              alt={user.displayName || "avatar"}
-              style={{ height: "100%" }}
-              src={user.photoURL}
-            />
-          ) : (
-            <LockOutlinedIcon />
-          )}}
-        </Avatar> */}
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose(null)}
-        >
-          <MenuItem onClick={handleClose("Profile")}>Profile</MenuItem>
-          <MenuItem onClick={handleClose("SignOut")}>SignOut</MenuItem>
-        </Menu>
-      </div>
-    );
-  } else if (location.pathname === SIGN_IN_ROUTE.path) return null;
+  async function logout() {
+    await firebase.logout();
+    console.log("logout", firebase);
+    history.push(SIGN_IN_ROUTE.getPath());
+  }
 
   return (
-    <Button color="inherit" onClick={() => history.push(SIGN_IN_ROUTE.path)}>
-      SignIn
-    </Button>
+    <Box className={classes.userMenu}>
+      <Avatar className={classes.avatar}>
+        <LockOutlinedIcon />
+      </Avatar>
+      <Box display="flex" flexDirection="column" alignItems="center">
+        {logged ? (
+          <Typography variant="h5" align="center">
+            {auth.displayName}
+          </Typography>
+        ) : null}
+        {logged ? (
+          <Button color="primary" variant="contained" onClick={logout}>
+            SignOut
+          </Button>
+        ) : (
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() => history.push(SIGN_IN_ROUTE.getPath())}
+          >
+            SignIn
+          </Button>
+        )}
+      </Box>
+    </Box>
   );
 };
 

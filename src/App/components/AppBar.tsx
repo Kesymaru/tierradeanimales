@@ -22,19 +22,12 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     subBar: {
       marginTop: 64,
-      /* [theme.breakpoints.up("md")]: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
-      }, */
       [theme.breakpoints.down("xs")]: {
         marginTop: 56,
       },
     },
     menuButton: {
       marginRight: theme.spacing(2),
-      /* [theme.breakpoints.up("md")]: {
-        display: "none",
-      }, */
     },
     title: {
       flexGrow: 1,
@@ -61,17 +54,15 @@ export const AppBar: FunctionComponent<AppBarProps> = (props) => {
     <>
       <MaterialAppBar position="fixed">
         <Toolbar>
-          {logged && (
-            <IconButton
-              color="inherit"
-              aria-label="open menu"
-              edge="start"
-              onClick={() => props.setOpen(!props.open)}
-              className={classes.menuButton}
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
+          <IconButton
+            color="inherit"
+            aria-label="open menu"
+            edge="start"
+            onClick={() => props.setOpen(!props.open)}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
           <Typography variant="h6" noWrap className={classes.title}>
             {process.env.REACT_APP_NAME}
           </Typography>
