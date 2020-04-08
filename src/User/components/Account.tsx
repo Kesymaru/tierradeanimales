@@ -2,11 +2,10 @@ import React, {
   ChangeEvent,
   FormEvent,
   FunctionComponent,
-  useEffect,
   useRef,
   useState,
 } from "react";
-import { connect, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Zoom from "@material-ui/core/Zoom";
 import Fade from "@material-ui/core/Fade";
@@ -18,7 +17,9 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import SaveIcon from "@material-ui/icons/Save";
 import CloseIcon from "@material-ui/icons/Close";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
+import { AppState } from "@/App";
 import { User, INIT_USER } from "@/User";
 
 export const Account: FunctionComponent<{}> = (props) => {
@@ -27,6 +28,7 @@ export const Account: FunctionComponent<{}> = (props) => {
   const [user, setUser] = useState<User | null>(INIT_USER);
   const [password, setPassword] = useState<string>("");
   const fileInput = useRef<HTMLInputElement>(null);
+  const auth = useSelector<AppState, any>((state) => state.firebase.auth);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -83,20 +85,17 @@ export const Account: FunctionComponent<{}> = (props) => {
               onChange={handleAvatarChange}
             />
             <Zoom in={true} style={{ transitionDelay: "250ms" }}>
-              {/* <Avatar
-                alt={
-                  user && user.displayName
-                    ? user.displayName
-                    : "Profile Picture"
-                }
-                src={user && user.photoURL ? user.photoURL : undefined}
+              <Avatar
+                alt="Profile Picture"
                 style={{
                   height: 100,
                   width: 100,
                   margin: "0 auto",
                 }}
                 onClick={clickFileUpload}
-              ></Avatar> */}
+              >
+                <AccountCircleIcon />
+              </Avatar>
             </Zoom>
           </Grid>
           <Grid item xs={12}>
