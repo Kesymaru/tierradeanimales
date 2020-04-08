@@ -1,6 +1,7 @@
-import { Route, RouteFactory } from "@/routes";
+import Route from "@/App/models/route";
+import { RouteFactory } from "@/App/hooks";
 
-import Dashboard from "../components/Dashboard";
+import Dashboard from "@/Dashboard/components/Dashboard";
 
 export const DASHBOARD_ROUTE: Route = RouteFactory({
   name: "Dashboard",

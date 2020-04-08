@@ -3,7 +3,7 @@ import { ConnectedRouter } from "connected-react-router";
 
 import Router from "../../wrappers/Router";
 
-import Route from "@/routes/models";
+import Route from "@/App/models/route";
 import { AppHistory } from "@/App/store";
 import { AppBar, Navbar, ScrollTop, Copyright } from "@/App/components";
 import { ROUTES, HOME_ROUTE } from "@/App/routes";

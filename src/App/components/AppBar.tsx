@@ -13,7 +13,7 @@ import Slide from "@material-ui/core/Slide";
 import Link from "@material-ui/core/Link";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-import useRoutes from "@/routes/hooks";
+import useRoutes from "@/App/hooks";
 import LanguageMenu from "./LanguageMenu";
 import { AppState } from "../models";
 

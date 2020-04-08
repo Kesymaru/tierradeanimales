@@ -1,7 +1,8 @@
 import PetsIcon from "@material-ui/icons/Pets";
 import EditIcon from "@material-ui/icons/Edit";
 
-import { Route, RouteFactory } from "@/routes";
+import Route from "@/App/models/route";
+import { RouteFactory } from "@/App/hooks";
 import { DASHBOARD_ROUTE } from "@/Dashboard/routes";
 
 import AdminCase from "../components/AdminCases";

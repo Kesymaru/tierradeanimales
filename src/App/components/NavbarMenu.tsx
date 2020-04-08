@@ -8,7 +8,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 
-import Route from "@/routes/models";
+import Route from "@/App/models/route";
 import { ACCOUNT_ROUTE } from "@/Auth/routes";
 import { ADMIN_CASE_ROUTE } from "@/Case/routes";
 import { FOSTER_HOMES_ROUTE } from "@/FosterHome/routes";

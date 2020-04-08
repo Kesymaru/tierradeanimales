@@ -1,4 +1,5 @@
-import { Route, RouteFactory } from "@/routes";
+import Route from "@/App/models/route";
+import { RouteFactory } from "@/App/hooks";
 
 import NotFound from "@/App/components/NotFound";
 import Home from "@/Home/components";

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { Switch } from "react-router-dom";
 
-import Route from "@/routes/models";
+import Route from "@/App/models/route";
 import AppRoute from "./Route";
 
 interface RouterProps {
