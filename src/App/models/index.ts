@@ -1,2 +1,2 @@
 export * from "./geonames";
-export * from "./app";
+export * from "./store";

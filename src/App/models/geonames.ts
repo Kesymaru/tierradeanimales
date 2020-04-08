@@ -1,6 +1,6 @@
 import { Action } from "redux";
 
-import { StateItem } from "@/App/models/app";
+import { StateItem } from "@/App/models/store";
 
 export enum GeonamesTypes {
   FETCH_COUNTRIES,
