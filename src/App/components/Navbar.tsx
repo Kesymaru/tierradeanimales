@@ -19,10 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     drawer: {
       width: drawerWidth,
-      /* [theme.breakpoints.up("md")]: {
-        width: drawerWidth,
-        flexShrink: 0,
-      }, */
     },
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
@@ -42,42 +38,22 @@ const Navbar: FunctionComponent<NavbarProps> = (props) => {
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);
   const logged = isLoaded(auth) && !isEmpty(auth);
 
-  console.log("navbar ", props.open);
-
-  if (!logged) return <div></div>;
-
   return (
-    <nav className={classes.drawer} aria-label="menu navbar">
-      {/* <Drawer open={props.open}>
+    <nav aria-label="menu navbar">
+      <Drawer
+        variant="temporary"
+        anchor={theme.direction === "rtl" ? "right" : "left"}
+        open={props.open}
+        onClose={() => props.setOpen(!props.open)}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+      >
         <NavbarMenu open={props.open} setOpen={props.setOpen} />
-      </Drawer> */}
-      <Hidden mdUp implementation="js">
-        <Drawer
-          variant="temporary"
-          anchor={theme.direction === "rtl" ? "right" : "left"}
-          open={props.open}
-          onClose={() => props.setOpen(!props.open)}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-        >
-          <NavbarMenu open={props.open} setOpen={props.setOpen} />
-        </Drawer>
-      </Hidden>
-      <Hidden smDown implementation="js">
-        <Drawer
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          variant="permanent"
-          open={props.open}
-        >
-          <NavbarMenu open={props.open} setOpen={props.setOpen} />
-        </Drawer>
-      </Hidden>
+      </Drawer>
     </nav>
   );
 };

@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       marginTop: 50,
-      [theme.breakpoints.up("md")]: {
+      /* [theme.breakpoints.up("md")]: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
-      },
+      }, */
     },
   })
 );

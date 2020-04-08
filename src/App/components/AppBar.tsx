@@ -20,18 +20,12 @@ import { AppState } from "../models";
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    appBar: {
-      [theme.breakpoints.up("md")]: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
-      },
-    },
     subBar: {
       marginTop: 64,
-      [theme.breakpoints.up("md")]: {
+      /* [theme.breakpoints.up("md")]: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
-      },
+      }, */
       [theme.breakpoints.down("xs")]: {
         marginTop: 56,
       },
@@ -65,7 +59,7 @@ export const AppBar: FunctionComponent<AppBarProps> = (props) => {
 
   return (
     <>
-      <MaterialAppBar position="fixed" className={logged ? classes.appBar : ""}>
+      <MaterialAppBar position="fixed">
         <Toolbar>
           {logged && (
             <IconButton

@@ -7,6 +7,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
+import Button from "@material-ui/core/Button";
 
 import Route from "@/routes/models/route";
 import { ACCOUNT_ROUTE } from "@/Auth/routes";
@@ -28,19 +29,15 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export interface NavbarMenuProps {
   open: boolean;
-  setOpen: Function;
+  setOpen: (open: boolean) => void;
 }
 
-export const NavbarMenu: FunctionComponent<NavbarMenuProps> = ({
-  open,
-  setOpen,
-}) => {
+export const NavbarMenu: FunctionComponent<NavbarMenuProps> = (props) => {
   const classes = useStyles();
   const history = useHistory();
 
   function goTo(route: Route) {
     history.push(route.getPath ? route.getPath() : route.path);
-    if (open) setOpen(!open);
   }
 
   return (
