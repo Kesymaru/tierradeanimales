@@ -26,7 +26,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 
 import { AppState } from "@/core/models";
 import { SIGN_IN_ROUTE } from "../routes";
-import { User, INIT_USER } from "@/user";
+import { User, INIT_USER } from "@app/user";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {

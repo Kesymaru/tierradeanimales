@@ -4,8 +4,8 @@ import { Route as ReactRouter, Redirect } from "react-router-dom";
 import { isLoaded, isEmpty } from "react-redux-firebase";
 
 import { Route as AppRoute, AppState } from "@core/models";
-import { SIGN_IN_ROUTE } from "@app/Auth/routes";
-import { User } from "@app/User";
+import { SIGN_IN_ROUTE } from "@app/auth/routes";
+import { User } from "@app/user";
 
 interface RouteProps extends AppRoute {}
 

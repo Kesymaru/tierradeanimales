@@ -1,4 +1,4 @@
-import AccountBoxIcon from "@/user/routes/node_modules/@material-ui/icons/AccountBox";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 import Route from "@core/models/route";
 import { DASHBOARD_ROUTE } from "@app/dashboard/routes";
