@@ -23,6 +23,8 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles, Theme } from "@material-ui/core/styles";
+import useTheme from "@material-ui/core/styles/useTheme";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { AppState } from "@core/models";
 import { DASHBOARD_ROUTE } from "@app/dashboard";
@@ -66,6 +68,8 @@ const SignIn: FunctionComponent<{}> = ({}) => {
   const classes = useStyles();
   const firebase = useFirebase();
   const { t } = useTranslation();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [data, _setData] = useState<CreateUserCredentials>(
     INIT_EMAIL_CREDENTIALS
   );
@@ -74,6 +78,13 @@ const SignIn: FunctionComponent<{}> = ({}) => {
 
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);
   const logged = isLoaded(auth) && !isEmpty(auth);
+
+  console.log("is mobile", isMobile);
+  if (isMobile) {
+    facebook.type = google.type = "redirect";
+  } else {
+    facebook.type = google.type = "popup";
+  }
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
