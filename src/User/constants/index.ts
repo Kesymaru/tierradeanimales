@@ -6,3 +6,5 @@ export const INIT_USER: User = {
   email: "",
   password: "",
 };
+
+export default INIT_USER;

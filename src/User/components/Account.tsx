@@ -20,8 +20,8 @@ import CloseIcon from "@material-ui/icons/Close";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import { AppState } from "@core/models";
-import { Copyright } from "@core/components";
-import { User, INIT_USER } from "@app/user";
+import User from "../models/user";
+import INIT_USER from "../constants";
 
 export const Account: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
@@ -34,8 +34,6 @@ export const Account: FunctionComponent<{}> = (props) => {
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     if (!user || !touched) return;
-    // dispatch(UpdateProfile(user));
-    // if (password.length) dispatch(UpdatePassword(password));
   }
 
   function handleUserChange(key: keyof User) {
@@ -174,7 +172,6 @@ export const Account: FunctionComponent<{}> = (props) => {
           </Grid>
         </Grid>
       </form>
-      <Copyright />
     </Container>
   );
 };

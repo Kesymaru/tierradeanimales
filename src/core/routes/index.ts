@@ -1,11 +1,11 @@
 import Route from "@core/models/route";
 import NotFound from "@core/components/NotFound";
 
-import HOME_ROUTES from "@app/home/routes";
 import AUTH_ROUTES from "@app/auth/routes";
 import DASHBOARD_ROUTES from "@app/dashboard/routes";
-import USER_ROUTES from "@app/user/routes";
+import HOME_ROUTES from "@app/home/routes";
 import NEWSLETTER_ROUTES from "@app/newsletter/routes";
+import USER_ROUTES from "@app/user/routes";
 
 // ------------------------------------
 // 404 no match
@@ -20,14 +20,19 @@ export const NOT_FOUND_ROUTE: Route = {
 // App Routes
 // ------------------------------------
 export const ROUTES: Array<Route> = [
-  ...HOME_ROUTES,
+  ...AUTH_ROUTES,
   ...DASHBOARD_ROUTES,
+  ...HOME_ROUTES,
   ...NEWSLETTER_ROUTES,
   ...USER_ROUTES,
-  ...AUTH_ROUTES,
 
   NOT_FOUND_ROUTE,
 ];
 
 export * from "@app/auth/routes";
+export * from "@app/dashboard/routes";
+export * from "@app/home/routes";
+export * from "@app/newsletter/routes";
+export * from "@app/user/routes";
+
 export default ROUTES;
