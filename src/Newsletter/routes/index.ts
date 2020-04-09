@@ -1,16 +1,15 @@
-import Route from "@/newsletter/routes/node_modules/@/core/components/node_modules/@core/models/route";
-import { RouteFactory } from "@/newsletter/routes/node_modules/@/core/routes/node_modules/@core/hooks/route";
+import Route from "@core/models/route";
 
-import { NewsletterUnsubscriber } from "@/newsletter/components";
+import NewsletterUnsubscriber from "../components/NewsletterUnsubscriber";
 
 // ------------------------------------
 // Unsubscribe newsletter
 // ------------------------------------
-export const NEWSLETTER_UNSUBSCRIBE: Route = RouteFactory({
+export const NEWSLETTER_UNSUBSCRIBE: Route = {
   name: "Newsletter Unsubscribe",
   path: "/unsubscribe",
   component: NewsletterUnsubscriber,
-});
+};
 
 export const ROUTES: Route[] = [NEWSLETTER_UNSUBSCRIBE];
 
