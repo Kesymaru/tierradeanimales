@@ -1,26 +1,19 @@
-import React, {
-  FunctionComponent,
-  useEffect,
-  useState,
-} from "@/case/components/node_modules/react";
-import {
-  connect,
-  useDispatch,
-} from "@/case/components/node_modules/react-redux";
-import { useHistory } from "@/case/components/node_modules/react-router-dom";
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { connect, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-import { Container } from "@/case/components/node_modules/@material-ui/core";
-import Card from "@/case/components/node_modules/@material-ui/core/Card";
-import CardActionArea from "@/case/components/node_modules/@material-ui/core/CardActionArea";
-import CardActions from "@/case/components/node_modules/@material-ui/core/CardActions";
-import CardContent from "@/case/components/node_modules/@material-ui/core/CardContent";
-import CardMedia from "@/case/components/node_modules/@material-ui/core/CardMedia";
-import Button from "@/case/components/node_modules/@material-ui/core/Button";
-import Typography from "@/case/components/node_modules/@material-ui/core/Typography";
-import Grid from "@/case/components/node_modules/@material-ui/core/Grid";
-import LinearProgress from "@/case/components/node_modules/@material-ui/core/LinearProgress";
+import { Container } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
-import { DOG_DETAILS_ROUTE } from "@/case/routes";
+import { DOG_DETAILS_ROUTE } from "@app/case/routes";
 
 export const Cases: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();

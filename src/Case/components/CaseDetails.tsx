@@ -1,20 +1,20 @@
-import React, { FunctionComponent } from "@/case/components/node_modules/react";
-import { useDispatch } from "@/case/components/node_modules/react-redux";
-import { useParams } from "@/case/components/node_modules/react-router-dom";
+import React, { FunctionComponent } from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
-import Zoom from "@/case/components/node_modules/@material-ui/core/Zoom";
-import Fade from "@/case/components/node_modules/@material-ui/core/Fade";
-import Container from "@/case/components/node_modules/@material-ui/core/Container";
-import Avatar from "@/case/components/node_modules/@material-ui/core/Avatar";
-import Grid from "@/case/components/node_modules/@material-ui/core/Grid";
-import Typography from "@/case/components/node_modules/@material-ui/core/Typography";
-import LinearProgress from "@/case/components/node_modules/@material-ui/core/LinearProgress";
-import Button from "@/case/components/node_modules/@material-ui/core/Button";
-import Hidden from "@/case/components/node_modules/@material-ui/core/Hidden";
+import Zoom from "@material-ui/core/Zoom";
+import Fade from "@material-ui/core/Fade";
+import Container from "@material-ui/core/Container";
+import Avatar from "@material-ui/core/Avatar";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import Button from "@material-ui/core/Button";
+import Hidden from "@material-ui/core/Hidden";
 
-import PetsIcon from "@/case/components/node_modules/@material-ui/icons/Pets";
+import PetsIcon from "@material-ui/icons/Pets";
 
-import { Case, InitCase } from "@/case";
+import { Case, InitCase } from "@app/case";
 
 export const CaseDetails: FunctionComponent<{}> = () => {
   const dispatch = useDispatch();
