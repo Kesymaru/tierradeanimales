@@ -1,9 +1,8 @@
-import { EmailCredentials } from "../models/auth";
+import { CreateUserCredentials } from "react-redux-firebase";
 
-export const INIT_EMAIL_CREDENTIALS: EmailCredentials = {
+export const INIT_EMAIL_CREDENTIALS: CreateUserCredentials = {
   email: "",
   password: "",
-  remember: false,
 };
 
 export default INIT_EMAIL_CREDENTIALS;

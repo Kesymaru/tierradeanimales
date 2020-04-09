@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useFirebase, isEmpty, isLoaded } from "react-redux-firebase";
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink, Redirect } from "react-router-dom";
+import get from "lodash/get";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -27,7 +28,7 @@ import { AppState } from "@core/models";
 import { DASHBOARD_ROUTE } from "@app/dashboard";
 import INIT_EMAIL_CREDENTIALS from "../constants";
 import { FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE } from "../routes";
-import { EmailCredentials } from "../models";
+import { Credentials, CreateUserCredentials } from "react-redux-firebase";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -52,11 +53,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+const google: Credentials = {
+  provider: "google",
+  type: "popup",
+};
+const facebook: Credentials = {
+  provider: "facebook",
+  type: "popup",
+};
+
 const SignIn: FunctionComponent<{}> = ({}) => {
   const classes = useStyles();
   const firebase = useFirebase();
   const { t } = useTranslation();
-  const [data, _setData] = useState<EmailCredentials>(INIT_EMAIL_CREDENTIALS);
+  const [data, _setData] = useState<CreateUserCredentials>(
+    INIT_EMAIL_CREDENTIALS
+  );
   const [touched, setTouched] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -66,30 +78,24 @@ const SignIn: FunctionComponent<{}> = ({}) => {
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     setLoading(true);
-    firebase.login({
-      email: data.email,
-      password: data.password,
-    });
+    signIn(data);
   }
 
-  function setData(value: EmailCredentials) {
+  function setData(value: CreateUserCredentials) {
     _setData(value);
     setTouched(true);
   }
 
   function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
-    const email = event.target.value;
-    setData({ ...data, email });
+    setData({ ...data, email: get(event, "target.value", data.email) });
   }
 
   function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
-    const password = event.target.value;
-    setData({ ...data, password });
+    setData({ ...data, password: get(event, "target.value", data.password) });
   }
 
-  function handleRememberChange(event: ChangeEvent<HTMLInputElement>) {
-    const remember = event.target.checked;
-    setData({ ...data, remember });
+  function signIn(credentials: Credentials) {
+    firebase.login(credentials);
   }
 
   if (logged) return <Redirect to={DASHBOARD_ROUTE.path} />;
@@ -104,6 +110,26 @@ const SignIn: FunctionComponent<{}> = ({}) => {
           <Typography component="h1" variant="h5">
             {t("signIn.title")}
           </Typography>
+          <Grid container>
+            <Grid xs={12}>
+              <Button
+                variant="outlined"
+                fullWidth
+                onClick={() => signIn(google)}
+              >
+                Google
+              </Button>
+            </Grid>
+            <Grid xs={12}>
+              <Button
+                variant="outlined"
+                fullWidth
+                onClick={() => signIn(facebook)}
+              >
+                Facebook
+              </Button>
+            </Grid>
+          </Grid>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
@@ -133,17 +159,6 @@ const SignIn: FunctionComponent<{}> = ({}) => {
               value={data.password}
               onChange={handlePasswordChange}
               disabled={loading}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  value="remember"
-                  color="primary"
-                  onChange={handleRememberChange}
-                  disabled={loading}
-                />
-              }
-              label={t("signIn.remember")}
             />
             <Button
               type="submit"
