@@ -1,4 +1,4 @@
-import { EmailCredentials } from "@/auth/models";
+import { EmailCredentials } from "@app/auth/models";
 
 export const INIT_EMAIL_CREDENTIALS: EmailCredentials = {
   email: "",

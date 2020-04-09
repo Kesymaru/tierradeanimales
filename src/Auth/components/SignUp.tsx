@@ -24,9 +24,9 @@ import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
-import { AppState } from "@/core/models";
-import { SIGN_IN_ROUTE } from "../routes";
+import { AppState } from "@app/core/models";
 import { User, INIT_USER } from "@app/user";
+import { SIGN_IN_ROUTE } from "../routes";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {

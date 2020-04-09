@@ -1,4 +1,4 @@
-import { CreateUserCredentials } from "@/auth/models/node_modules/react-redux-firebase";
+import { CreateUserCredentials } from "react-redux-firebase";
 
 export interface EmailCredentials {
   email: string;
