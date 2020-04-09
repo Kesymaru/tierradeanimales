@@ -7,8 +7,8 @@ import {
   RouteParam,
   RouteFactoryParams,
   RouteDefaults,
-} from "./node_modules/@core/models/route";
-import ROUTES from "./node_modules/@/Core/routes";
+} from "@core/models/route";
+import ROUTES from "@/Core/routes";
 
 // ------------------------------------
 // Functions

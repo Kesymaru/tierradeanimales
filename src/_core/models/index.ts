@@ -1,2 +1,2 @@
-export * from "./config";
-export * from "./route";
+export * from "../../Core/models/config";
+export * from "../../Core/models/route";
