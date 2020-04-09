@@ -5,8 +5,8 @@ import { Typography, Link } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import Route from "@core/models/route";
+import ROUTES from "@core/routes";
 import { useRoute } from "@core/hooks/route";
-import { HOME_ROUTE } from "@app/home";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,7 +22,7 @@ export interface CopyrightProps {
 
 export const Copyright: FunctionComponent<CopyrightProps> = (props) => {
   const classes = useStyles();
-  const route = useRoute();
+  const route = useRoute(ROUTES);
 
   console.log("route", route);
 

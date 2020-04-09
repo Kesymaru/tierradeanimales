@@ -7,8 +7,7 @@ import {
   RouteParam,
   RouteFactoryParams,
   RouteDefaults,
-} from "@core/models/route";
-import ROUTES from "@core/routes";
+} from "../models/route";
 
 // ------------------------------------
 // Functions
@@ -34,9 +33,12 @@ function getPath(path: string, defaults?: RouteParam): Function {
   };
 }
 
-export function findRoute(location: H.Location | string): Route | undefined {
+export function findRoute(
+  routes: Array<Route>,
+  location: H.Location | string
+): Route | undefined {
   let pathname = typeof location === "string" ? location : location.pathname;
-  return ROUTES.find((route) =>
+  return routes.find((route) =>
     matchPath(pathname, {
       path: route.path,
       exact: typeof route.exact === "boolean" ? route.exact : false,
@@ -61,27 +63,27 @@ export function useId(
 /**
  * Hook to get the current matched route
  */
-export function useRoute(): Route | undefined {
+export function useRoute(routes: Array<Route>): Route | undefined {
   const location = useLocation();
-  return findRoute(location);
+  return findRoute(routes, location);
 }
 
 /**
  * Hook to get the current route paths in an array
  */
-export function useRoutes(): Route[] {
+export function useRoutes(routes: Array<Route>): Route[] {
   const location = useLocation();
-  const routes: Route[] = [];
-  let route = findRoute(location);
+  const found: Route[] = [];
+  let route = findRoute(routes, location);
 
   if (route) {
-    routes.push(route);
+    found.push(route);
     while (route && route.parent) {
       route = route.parent;
-      routes.push(route);
+      found.push(route);
     }
   }
-  return routes.reverse();
+  return found.reverse();
 }
 
 export default useRoutes;

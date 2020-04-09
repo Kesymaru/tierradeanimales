@@ -11,6 +11,6 @@ export const HOME_ROUTE: Route = {
   component: Home,
 };
 
-export const ROUTES: Route[] = [HOME_ROUTE];
+export const HOME_ROUTES: Route[] = [HOME_ROUTE];
 
-export default ROUTES;
+export default HOME_ROUTES;

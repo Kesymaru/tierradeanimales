@@ -17,6 +17,6 @@ export const ACCOUNT_ROUTE: Route = {
   parent: DASHBOARD_ROUTE,
 };
 
-export const ROUTES: Route[] = [ACCOUNT_ROUTE];
+export const USER_ROUTES: Route[] = [ACCOUNT_ROUTE];
 
-export default ROUTES;
+export default USER_ROUTES;

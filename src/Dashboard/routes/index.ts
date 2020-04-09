@@ -16,6 +16,9 @@ export const ADMIN_DASHBOARD_ROUTE: Route = {
   component: Dashboard,
 };
 
-export const ROUTES: Route[] = [DASHBOARD_ROUTE, ADMIN_DASHBOARD_ROUTE];
+export const DASHBOARD_ROUTES: Route[] = [
+  DASHBOARD_ROUTE,
+  ADMIN_DASHBOARD_ROUTE,
+];
 
-export default ROUTES;
+export default DASHBOARD_ROUTES;

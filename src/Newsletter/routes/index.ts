@@ -11,6 +11,6 @@ export const NEWSLETTER_UNSUBSCRIBE: Route = {
   component: NewsletterUnsubscriber,
 };
 
-export const ROUTES: Route[] = [NEWSLETTER_UNSUBSCRIBE];
+export const NEWSLETTER_ROUTES: Route[] = [NEWSLETTER_UNSUBSCRIBE];
 
-export default ROUTES;
+export default NEWSLETTER_ROUTES;

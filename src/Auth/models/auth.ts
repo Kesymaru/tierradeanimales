@@ -5,3 +5,5 @@ export interface EmailCredentials {
   password: string;
   remember?: boolean;
 }
+
+export default EmailCredentials;

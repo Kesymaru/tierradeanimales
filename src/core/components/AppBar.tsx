@@ -13,6 +13,7 @@ import Slide from "@material-ui/core/Slide";
 import Link from "@material-ui/core/Link";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
+import ROUTES from "@core/routes";
 import useRoutes from "@core/hooks/route";
 import LanguageMenu from "./LanguageMenu";
 import { AppState } from "../models";
@@ -46,7 +47,7 @@ interface AppBarProps {
 
 export const AppBar: FunctionComponent<AppBarProps> = (props) => {
   const classes = useStyles();
-  const routes = useRoutes();
+  const routes = useRoutes(ROUTES);
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);
   const logged = isLoaded(auth) && !isEmpty(auth);
 

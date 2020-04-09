@@ -25,12 +25,9 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 
 import { AppState } from "@core/models";
 import { DASHBOARD_ROUTE } from "@app/dashboard";
-import {
-  EmailCredentials,
-  FORGOT_PASSWORD_ROUTE,
-  SIGN_UP_ROUTE,
-  INIT_EMAIL_CREDENTIALS,
-} from "@app/auth";
+import INIT_EMAIL_CREDENTIALS from "../constants";
+import { FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE } from "../routes";
+import { EmailCredentials } from "../models";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {

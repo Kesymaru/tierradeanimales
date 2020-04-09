@@ -31,10 +31,10 @@ export const FORGOT_PASSWORD_ROUTE: Route = {
   component: ForgotPassword,
 };
 
-export const ROUTES: Route[] = [
+export const AUTH_ROUTES: Array<Route> = [
   SIGN_UP_ROUTE,
   SIGN_IN_ROUTE,
   FORGOT_PASSWORD_ROUTE,
 ];
 
-export default ROUTES;
+export default AUTH_ROUTES;

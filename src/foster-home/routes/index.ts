@@ -24,6 +24,9 @@ export const EDIT_FOSTER_HOME_ROUTE: Route = {
   icon: EditIcon,
 };
 
-const ROUTES: Route[] = [EDIT_FOSTER_HOME_ROUTE, FOSTER_HOMES_ROUTE];
+const FOSTER_HOME_ROUTES: Route[] = [
+  EDIT_FOSTER_HOME_ROUTE,
+  FOSTER_HOMES_ROUTE,
+];
 
-export default ROUTES;
+export default FOSTER_HOME_ROUTES;

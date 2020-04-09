@@ -14,7 +14,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 import { AppState } from "@core/models";
 import { SIGN_IN_ROUTE } from "@app/auth";
-import { ACCOUNT_ROUTE } from "../routes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
