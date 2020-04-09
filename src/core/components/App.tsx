@@ -6,7 +6,8 @@ import Router from "../../wrappers/Router";
 import Route from "@core/models/route";
 import { AppHistory } from "@core/store";
 import { AppBar, Navbar, ScrollTop, Copyright } from "@core/components";
-import { ROUTES, HOME_ROUTE } from "@core/routes";
+import { ROUTES } from "@core/routes";
+import { HOME_ROUTE } from "@app/home";
 
 // loading component for suspense fallback
 const AppLoader: FunctionComponent<{}> = () => (

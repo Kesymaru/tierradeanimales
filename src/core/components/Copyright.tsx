@@ -6,7 +6,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import Route from "@core/models/route";
 import { useRoute } from "@core/hooks/route";
-import { HOME_ROUTE } from "@core/routes";
+import { HOME_ROUTE } from "@app/home";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
