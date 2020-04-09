@@ -51,20 +51,23 @@ const useStyles = makeStyles((theme: Theme) => ({
 const SignUp: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const firebase = useFirebase();
-  // const auth = useSelector<AppState, firebase.auth.Auth>(
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);
 
   const [user, setUser] = useState<User>(INIT_USER);
+  const [password, setPassword] = useState<string>("");
   const [terms, setTerms] = useState<boolean>(false);
 
   console.log("auth", auth);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    firebase.createUser({
-      email: user.email,
-      password: user.password,
-    });
+    firebase.createUser(
+      {
+        email: user.email,
+        password,
+      },
+      user
+    );
   }
 
   function handleUserChange(key: keyof User) {
@@ -73,11 +76,13 @@ const SignUp: FunctionComponent<{}> = () => {
     };
   }
 
-  const handleTermsChange = (event: ChangeEvent<HTMLInputElement>) => {
-    // let { checked } = event.target;
-    // setTerms(checked);
+  function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
+    setPassword(get(event, "target.value", ""));
+  }
+
+  function handleTermsChange(event: ChangeEvent<HTMLInputElement>) {
     setTerms(get(event, "target.checked", false) as boolean);
-  };
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -141,8 +146,8 @@ const SignUp: FunctionComponent<{}> = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                value={user.password}
-                onChange={handleUserChange("password")}
+                value={password}
+                onChange={handlePasswordChange}
               />
             </Grid>
             <Grid item xs={12}>

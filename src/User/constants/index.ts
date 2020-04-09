@@ -4,7 +4,6 @@ export const INIT_USER: User = {
   firstName: "",
   lastName: "",
   email: "",
-  password: "",
 };
 
 export default INIT_USER;
