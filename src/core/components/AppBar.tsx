@@ -1,26 +1,19 @@
-import React, { FunctionComponent } from "@/core/components/node_modules/react";
-import { useSelector } from "@/core/components/node_modules/react-redux";
-import { Link as RouterLink } from "@/core/components/node_modules/react-router-dom";
-import {
-  isEmpty,
-  isLoaded,
-} from "@/core/components/node_modules/react-redux-firebase";
+import React, { FunctionComponent } from "react";
+import { useSelector } from "react-redux";
+import { Link as RouterLink } from "react-router-dom";
+import { isEmpty, isLoaded } from "react-redux-firebase";
 
-import { default as MaterialAppBar } from "@/core/components/node_modules/@material-ui/core/AppBar";
-import Toolbar from "@/core/components/node_modules/@material-ui/core/Toolbar";
-import Typography from "@/core/components/node_modules/@material-ui/core/Typography";
-import IconButton from "@/core/components/node_modules/@material-ui/core/IconButton";
-import MenuIcon from "@/core/components/node_modules/@material-ui/icons/Menu";
-import Breadcrumbs from "@/core/components/node_modules/@material-ui/core/Breadcrumbs";
-import Slide from "@/core/components/node_modules/@material-ui/core/Slide";
-import Link from "@/core/components/node_modules/@material-ui/core/Link";
-import {
-  createStyles,
-  makeStyles,
-  Theme,
-} from "@/core/components/node_modules/@material-ui/core/styles";
+import { default as MaterialAppBar } from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Slide from "@material-ui/core/Slide";
+import Link from "@material-ui/core/Link";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-import useRoutes from "@/core/components/node_modules/@core/hooks/route";
+import useRoutes from "@core/hooks/route";
 import LanguageMenu from "./LanguageMenu";
 import { AppState } from "../models";
 
