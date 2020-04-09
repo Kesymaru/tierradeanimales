@@ -1,4 +1,4 @@
-import { Case, CaseType, CaseStatus } from "@/case/models";
+import { Case, CaseType, CaseStatus } from "../models";
 
 export const InitCase: Case = {
   type: CaseType.DOG,

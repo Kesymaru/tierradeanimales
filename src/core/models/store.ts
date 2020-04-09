@@ -2,10 +2,9 @@ import { combineReducers, Reducer } from "redux";
 import { RouterState } from "connected-react-router";
 import { FirebaseReducer } from "react-redux-firebase";
 
-import User from "@/User/models";
-
-import GeonamesState from "@/Core/models/geonames";
-import NewsletterState from "@/Home/models";
+import GeonamesState from "@core/models/geonames";
+import User from "@app/User/models";
+import NewsletterState from "@app/home/models";
 
 export interface AppState {
   firebase: FirebaseReducer.Reducer<User, {}>;

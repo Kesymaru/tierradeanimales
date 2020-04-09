@@ -4,31 +4,31 @@ import React, {
   useState,
   MouseEvent,
   useEffect,
-} from "@/case/components/node_modules/react";
+} from "react";
 
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
-} from "@/case/components/node_modules/@material-ui/core/styles";
-import useMediaQuery from "@/case/components/node_modules/@material-ui/core/useMediaQuery";
+} from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-import Fade from "@/case/components/node_modules/@material-ui/core/Fade";
-import Zoom from "@/case/components/node_modules/@material-ui/core/Zoom";
-import Grid from "@/case/components/node_modules/@material-ui/core/Grid";
-import GridList from "@/case/components/node_modules/@material-ui/core/GridList";
-import GridListTile from "@/case/components/node_modules/@material-ui/core/GridListTile";
-import GridListTileBar from "@/case/components/node_modules/@material-ui/core/GridListTileBar";
-import IconButton from "@/case/components/node_modules/@material-ui/core/IconButton";
-import Button from "@/case/components/node_modules/@material-ui/core/Button";
+import Fade from "@material-ui/core/Fade";
+import Zoom from "@material-ui/core/Zoom";
+import Grid from "@material-ui/core/Grid";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 
-import AccountCircleIcon from "@/case/components/node_modules/@material-ui/icons/AccountCircle";
-import EditIcon from "@/case/components/node_modules/@material-ui/icons/Edit";
-import PublishIcon from "@/case/components/node_modules/@material-ui/icons/Publish";
-import DeleteIcon from "@/case/components/node_modules/@material-ui/icons/Delete";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import EditIcon from "@material-ui/icons/Edit";
+import PublishIcon from "@material-ui/icons/Publish";
+import DeleteIcon from "@material-ui/icons/Delete";
 
-import { Case } from "@/case/models";
+import { Case } from "@app/case/models";
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({

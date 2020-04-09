@@ -1,4 +1,4 @@
-import Route from "@core/model/route";
+import Route from "@core/models/route";
 
 import SignUp from "../components/SignUp";
 import SignIn from "../components/SignIn";

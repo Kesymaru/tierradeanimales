@@ -1,8 +1,4 @@
-import {
-  ComponentClass,
-  ComponentType,
-  FunctionComponent,
-} from "@/core/models/node_modules/react";
+import { ComponentClass, ComponentType, FunctionComponent } from "react";
 
 export interface RouteParam {
   [paramName: string]: string | number | boolean | undefined;
@@ -11,8 +7,8 @@ export interface RouteParam {
 export interface Route {
   name: string;
   path: string;
-  exact: boolean;
-  auth: boolean;
+  exact?: boolean;
+  auth?: boolean;
   component: FunctionComponent<any> | ComponentClass<any>;
 
   icon?: ComponentType<any>;

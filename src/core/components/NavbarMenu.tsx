@@ -36,7 +36,7 @@ export const NavbarMenu: FunctionComponent<NavbarMenuProps> = (props) => {
   const history = useHistory();
 
   function goTo(route: Route) {
-    history.push(route.getPath ? route.getPath() : route.path);
+    history.push(route.path);
   }
 
   return (

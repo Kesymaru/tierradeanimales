@@ -1,16 +1,15 @@
-import PetsIcon from "@/case/routes/node_modules/@material-ui/icons/Pets";
+import PetsIcon from "@material-ui/icons/Pets";
 
-import Route from "@/case/routes/node_modules/@core/models/route";
-import { RouteFactory } from "@/case/routes/node_modules/@core/hooks/route";
-import { ADMIN_DASHBOARD_ROUTE } from "@/dashboard/routes";
+import Route from "@core/models/route";
+import { ADMIN_DASHBOARD_ROUTE } from "@app/dashboard/routes";
 
-import AdminCases from "@/case/components/AdminCases";
+import AdminCases from "../components/AdminCases";
 
-export const ADMIN_CASE_ROUTE: Route = RouteFactory({
+export const ADMIN_CASE_ROUTE: Route = {
   name: "Cases",
   path: "/admin/cases",
   auth: true,
   component: AdminCases,
   parent: ADMIN_DASHBOARD_ROUTE,
   icon: PetsIcon,
-});
+};
