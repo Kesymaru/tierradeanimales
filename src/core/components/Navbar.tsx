@@ -10,8 +10,8 @@ import {
 } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 
-import { AppState } from "@/App/models";
-import { NavbarMenu } from "@/App/components";
+import { AppState } from "@/Core/models";
+import { NavbarMenu } from "@/Core/components";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>

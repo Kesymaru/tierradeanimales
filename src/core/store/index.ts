@@ -20,7 +20,7 @@ import {
 } from "react-redux-firebase";
 import { firestoreReducer, createFirestoreInstance } from "redux-firestore";
 
-import { AppState, DBSchema } from "@/App/models";
+import { AppState, DBSchema } from "@/Core/models";
 import { FirebaseConfig } from "@core/config";
 import GeonamesReducers from "../reducers/geonames";
 

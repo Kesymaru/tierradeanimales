@@ -8,7 +8,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import NewsletterSubscriber from "@/Newsletter";
 import Social from "./Social";
-import { Copyright } from "@/App/components";
+import { Copyright } from "@/Core/components";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

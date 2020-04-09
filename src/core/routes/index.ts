@@ -1,7 +1,7 @@
 import { Route } from "@core/models";
 import { RouteFactory } from "@core/hooks/route";
 
-import NotFound from "@/App/components/NotFound";
+import NotFound from "@/Core/components/NotFound";
 import Home from "@/Home/components";
 
 import { ROUTES as DASHBOARD_ROUTES } from "@/Dashboard/routes";

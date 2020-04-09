@@ -5,7 +5,7 @@ import { isLoaded, isEmpty } from "react-redux-firebase";
 
 import { Route as AppRoute } from "@core/models/route";
 import { SIGN_IN_ROUTE } from "@/Auth/routes";
-import { AppState } from "@/App";
+import { AppState } from "@/Core";
 import { User } from "@/User";
 
 interface RouteProps extends AppRoute {}

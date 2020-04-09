@@ -3,8 +3,8 @@ import {
   GeonamesState,
   GeonamesAction,
   GeonamesTypes,
-} from "@/App/models";
-import { FlagCountries, InitGeonamesState } from "@/App/constants";
+} from "@/Core/models";
+import { FlagCountries, InitGeonamesState } from "@/Core/constants";
 
 export function GeonamesReducers(
   state: GeonamesState = InitGeonamesState,

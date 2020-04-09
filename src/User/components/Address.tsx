@@ -14,14 +14,14 @@ import TextField from "@material-ui/core/TextField";
 import FlagIcon from "@material-ui/icons/Flag";
 import RoomIcon from "@material-ui/icons/Room";
 
-import { GeonamesCountry, GeonamesChildren } from "@/App/models";
+import { GeonamesCountry, GeonamesChildren } from "@/Core/models";
 import { Address } from "@/User/models";
 import {
   GetCities,
   GetCounties,
   GetCountries,
   GetStates,
-} from "@/App/actions/geonames";
+} from "@/Core/actions/geonames";
 
 interface AddressProps {
   address: Address;

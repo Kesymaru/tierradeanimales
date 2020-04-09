@@ -23,7 +23,7 @@ import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
-import { AppState } from "@/App/models";
+import { AppState } from "@/Core/models";
 import { DASHBOARD_ROUTE } from "@/Dashboard/routes";
 import {
   EmailCredentials,

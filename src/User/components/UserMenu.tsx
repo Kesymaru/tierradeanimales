@@ -12,7 +12,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
-import { AppState } from "@/App";
+import { AppState } from "@/Core";
 import { ACCOUNT_ROUTE, SIGN_IN_ROUTE } from "@/Auth";
 
 const useStyles = makeStyles((theme: Theme) =>

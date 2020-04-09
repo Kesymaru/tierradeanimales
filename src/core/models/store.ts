@@ -4,7 +4,7 @@ import { FirebaseReducer } from "react-redux-firebase";
 
 import User from "@/User/models";
 
-import GeonamesState from "@/App/models/geonames";
+import GeonamesState from "@/Core/models/geonames";
 import NewsletterState from "@/Home/models";
 
 export interface AppState {

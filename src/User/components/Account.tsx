@@ -19,7 +19,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import CloseIcon from "@material-ui/icons/Close";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
-import { AppState, Copyright } from "@/App";
+import { AppState, Copyright } from "@/Core";
 import { User, INIT_USER } from "@/User";
 
 export const Account: FunctionComponent<{}> = (props) => {
