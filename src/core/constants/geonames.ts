@@ -1,4 +1,4 @@
-import { Status, GeonamesState } from "@/Core/models";
+import { Status, GeonamesState } from "@core/models";
 
 export const InitGeonamesState: GeonamesState = {
   countries: {

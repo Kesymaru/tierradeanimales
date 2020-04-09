@@ -5,34 +5,34 @@ import React, {
   MouseEvent,
   useEffect,
   useState,
-} from "@/case/components/node_modules/react";
-import { useDispatch } from "@/case/components/node_modules/react-redux";
-import { useParams } from "@/case/components/node_modules/react-router-dom";
+} from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
-import Zoom from "@/case/components/node_modules/@material-ui/core/Zoom";
-import Fade from "@/case/components/node_modules/@material-ui/core/Fade";
-import Grid from "@/case/components/node_modules/@material-ui/core/Grid";
-import TextField from "@/case/components/node_modules/@material-ui/core/TextField";
-import Button from "@/case/components/node_modules/@material-ui/core/Button";
-import Avatar from "@/case/components/node_modules/@material-ui/core/Avatar";
-import FormControlLabel from "@/case/components/node_modules/@material-ui/core/FormControlLabel";
-import Switch from "@/case/components/node_modules/@material-ui/core/Switch";
-import IconButton from "@/case/components/node_modules/@material-ui/core/IconButton";
-import LinearProgress from "@/case/components/node_modules/@material-ui/core/LinearProgress";
+import Zoom from "@material-ui/core/Zoom";
+import Fade from "@material-ui/core/Fade";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Avatar from "@material-ui/core/Avatar";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
+import IconButton from "@material-ui/core/IconButton";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
-import Container from "@/case/components/node_modules/@material-ui/core/Container";
-import InputLabel from "@/case/components/node_modules/@material-ui/core/InputLabel";
-import MenuItem from "@/case/components/node_modules/@material-ui/core/MenuItem";
-import FormControl from "@/case/components/node_modules/@material-ui/core/FormControl";
-import Select from "@/case/components/node_modules/@material-ui/core/Select";
+import Container from "@material-ui/core/Container";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
-import StarIcon from "@/case/components/node_modules/@material-ui/icons/Star";
-import StarBorderIcon from "@/case/components/node_modules/@material-ui/icons/StarBorder";
-import SendIcon from "@/case/components/node_modules/@material-ui/icons/Send";
-import SaveIcon from "@/case/components/node_modules/@material-ui/icons/Save";
-import RotateRightIcon from "@/case/components/node_modules/@material-ui/icons/RotateRight";
+import StarIcon from "@material-ui/icons/Star";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
+import SendIcon from "@material-ui/icons/Send";
+import SaveIcon from "@material-ui/icons/Save";
+import RotateRightIcon from "@material-ui/icons/RotateRight";
 
-import CaseImages from "@/case/components/CaseImages";
+import CaseImages from "@app/case/components/CaseImages";
 
 export const EditCase: FunctionComponent<{}> = (props) => {
   return <>Here goes the edit case</>;

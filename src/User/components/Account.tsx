@@ -4,26 +4,23 @@ import React, {
   FunctionComponent,
   useRef,
   useState,
-} from "@/user/components/node_modules/react";
-import {
-  useSelector,
-  useDispatch,
-} from "@/user/components/node_modules/react-redux";
+} from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import Zoom from "@/user/components/node_modules/@material-ui/core/Zoom";
-import Fade from "@/user/components/node_modules/@material-ui/core/Fade";
-import Container from "@/user/components/node_modules/@material-ui/core/Container";
-import Grid from "@/user/components/node_modules/@material-ui/core/Grid";
-import Avatar from "@/user/components/node_modules/@material-ui/core/Avatar";
-import Button from "@/user/components/node_modules/@material-ui/core/Button";
-import TextField from "@/user/components/node_modules/@material-ui/core/TextField";
-import Typography from "@/user/components/node_modules/@material-ui/core/Typography";
-import SaveIcon from "@/user/components/node_modules/@material-ui/icons/Save";
-import CloseIcon from "@/user/components/node_modules/@material-ui/icons/Close";
-import AccountCircleIcon from "@/user/components/node_modules/@material-ui/icons/AccountCircle";
+import Zoom from "@material-ui/core/Zoom";
+import Fade from "@material-ui/core/Fade";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import SaveIcon from "@material-ui/icons/Save";
+import CloseIcon from "@material-ui/icons/Close";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
-import { AppState, Copyright } from "@/core";
-import { User, INIT_USER } from "@/user";
+import { AppState, Copyright } from "@core";
+import { User, INIT_USER } from "@app/user";
 
 export const Account: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
