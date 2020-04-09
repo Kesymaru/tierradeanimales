@@ -1,20 +1,14 @@
-import {
-  generatePath,
-  matchPath,
-} from "@/core/hooks/node_modules/react-router";
-import * as H from "@/core/hooks/node_modules/history";
-import {
-  useLocation,
-  useParams,
-} from "@/core/hooks/node_modules/react-router-dom";
+import { generatePath, matchPath } from "react-router";
+import * as H from "history";
+import { useLocation, useParams } from "react-router-dom";
 
 import {
   Route,
   RouteParam,
   RouteFactoryParams,
   RouteDefaults,
-} from "@/core/hooks/node_modules/@core/models/route";
-import ROUTES from "@/core/routes";
+} from "@core/models/route";
+import ROUTES from "@core/routes";
 
 // ------------------------------------
 // Functions

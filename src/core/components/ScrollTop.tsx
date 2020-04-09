@@ -1,13 +1,9 @@
-import React, { MouseEvent } from "@/core/components/node_modules/react";
-import useScrollTrigger from "@/core/components/node_modules/@material-ui/core/useScrollTrigger";
-import {
-  createStyles,
-  makeStyles,
-  Theme,
-} from "@/core/components/node_modules/@material-ui/core/styles";
-import Fab from "@/core/components/node_modules/@material-ui/core/Fab";
-import KeyboardArrowUpIcon from "@/core/components/node_modules/@material-ui/icons/KeyboardArrowUp";
-import Zoom from "@/core/components/node_modules/@material-ui/core/Zoom";
+import React, { MouseEvent } from "react";
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Fab from "@material-ui/core/Fab";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import Zoom from "@material-ui/core/Zoom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
