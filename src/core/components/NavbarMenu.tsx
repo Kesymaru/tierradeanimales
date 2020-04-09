@@ -9,10 +9,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 
 import Route from "@core/models/route";
-import { ACCOUNT_ROUTE } from "@/User/routes";
-import { ADMIN_CASE_ROUTE } from "@/case/routes";
-import { FOSTER_HOMES_ROUTE } from "@/FosterHome/routes";
-import { UserMenu } from "@/User/components";
+import { ACCOUNT_ROUTE } from "@app/user/routes";
+import { ADMIN_CASE_ROUTE } from "@app/case/routes";
+import { FOSTER_HOMES_ROUTE } from "@app/foster-home/routes";
+import { UserMenu } from "@app/user/components";
 
 const NAVBAR_ROUTES: Route[] = [
   ACCOUNT_ROUTE,

@@ -1,8 +1,6 @@
 import Route from "@core/models/route";
 
-import Dashboard from "@/Dashboard/components/Dashboard";
-
-console.log("dashboard routes");
+import Dashboard from "../components/Dashboard";
 
 export const DASHBOARD_ROUTE: Route = {
   name: "Dashboard",

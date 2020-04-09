@@ -10,8 +10,8 @@ import "./i18n";
 import * as serviceWorker from "./serviceWorker";
 
 // import { App, AppStore, RrfProps } from "@/App";
-import App from "./core/components/App";
-import { AppStore, RrfProps } from "@/core/store";
+import App from "@core/components/App";
+import { AppStore, RrfProps } from "@core/store";
 
 const AppRoot: FunctionComponent = () => (
   <Provider store={AppStore}>
