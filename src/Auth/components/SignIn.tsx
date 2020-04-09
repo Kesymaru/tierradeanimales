@@ -3,38 +3,28 @@ import React, {
   FormEvent,
   FunctionComponent,
   useState,
-} from "@/auth/components/node_modules/react";
-import { useSelector } from "@/auth/components/node_modules/react-redux";
-import {
-  useFirebase,
-  isEmpty,
-  isLoaded,
-} from "@/auth/components/node_modules/react-redux-firebase";
-import { useTranslation } from "@/auth/components/node_modules/react-i18next";
-import {
-  Link as RouterLink,
-  Redirect,
-} from "@/auth/components/node_modules/react-router-dom";
+} from "react";
+import { useSelector } from "react-redux";
+import { useFirebase, isEmpty, isLoaded } from "react-redux-firebase";
+import { useTranslation } from "react-i18next";
+import { Link as RouterLink, Redirect } from "react-router-dom";
 
-import Avatar from "@/auth/components/node_modules/@material-ui/core/Avatar";
-import Button from "@/auth/components/node_modules/@material-ui/core/Button";
-import Checkbox from "@/auth/components/node_modules/@material-ui/core/Checkbox";
-import Container from "@/auth/components/node_modules/@material-ui/core/Container";
-import CssBaseline from "@/auth/components/node_modules/@material-ui/core/CssBaseline";
-import FormControlLabel from "@/auth/components/node_modules/@material-ui/core/FormControlLabel";
-import Grid from "@/auth/components/node_modules/@material-ui/core/Grid";
-import LinearProgress from "@/auth/components/node_modules/@material-ui/core/LinearProgress";
-import Link from "@/auth/components/node_modules/@material-ui/core/Link";
-import TextField from "@/auth/components/node_modules/@material-ui/core/TextField";
-import Typography from "@/auth/components/node_modules/@material-ui/core/Typography";
-import LockOutlinedIcon from "@/auth/components/node_modules/@material-ui/icons/LockOutlined";
-import {
-  makeStyles,
-  Theme,
-} from "@/auth/components/node_modules/@material-ui/core/styles";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import Checkbox from "@material-ui/core/Checkbox";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Grid from "@material-ui/core/Grid";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import Link from "@material-ui/core/Link";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
-import { AppState } from "@/auth/components/node_modules/@core/models";
-import { DASHBOARD_ROUTE } from "@/dashboard/routes";
+import { AppState } from "@core/models";
+import { DASHBOARD_ROUTE } from "@app/dashboard";
 import {
   EmailCredentials,
   FORGOT_PASSWORD_ROUTE,

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "@/auth/components/node_modules/react";
+import React, { FunctionComponent } from "react";
 
 const ForgotPassword: FunctionComponent<{}> = () => <div>Forgot password</div>;
 

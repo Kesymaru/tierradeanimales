@@ -1,8 +1,8 @@
-import { Route } from "@/core/routes/node_modules/@core/models";
-import { RouteFactory } from "@/core/routes/node_modules/@core/hooks/route";
+import { Route } from "@core/models";
+import { RouteFactory } from "@core/hooks/route";
 
-import NotFound from "@/core/components/NotFound";
-import Home from "@/home/components";
+import NotFound from "@core/components/NotFound";
+import Home from "@app/home/components";
 
 import { ROUTES as DASHBOARD_ROUTES } from "@/dashboard/routes";
 import { ROUTES as AUTH_ROUTES } from "@/auth/routes";
