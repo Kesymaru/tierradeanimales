@@ -3,9 +3,9 @@ import NotFound from "@core/components/NotFound";
 
 import AUTH_ROUTES from "@app/auth/routes";
 import DASHBOARD_ROUTES from "@app/dashboard/routes";
-import HOME_ROUTES from "@app/home/routes";
+import { HOME_ROUTES, HOME_ROUTE } from "@app/home/routes";
 import NEWSLETTER_ROUTES from "@app/newsletter/routes";
-import USER_ROUTES from "@app/user/routes";
+import { USER_ROUTES, ACCOUNT_ROUTE } from "@app/user/routes";
 
 // ------------------------------------
 // 404 no match
@@ -15,6 +15,11 @@ export const NOT_FOUND_ROUTE: Route = {
   path: "*",
   component: NotFound,
 };
+
+// ------------------------------------
+// Navbar Routes
+// ------------------------------------
+export const NAVBAR_ROUTES: Array<Route> = [HOME_ROUTE, ACCOUNT_ROUTE];
 
 // ------------------------------------
 // App Routes

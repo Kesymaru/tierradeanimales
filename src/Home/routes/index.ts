@@ -1,3 +1,5 @@
+import HomeIcon from "@material-ui/icons/Home";
+
 import Route from "@core/models/route";
 import Home from "../components/Home";
 
@@ -9,6 +11,7 @@ export const HOME_ROUTE: Route = {
   path: "/",
   exact: true,
   component: Home,
+  icon: HomeIcon,
 };
 
 export const HOME_ROUTES: Route[] = [HOME_ROUTE];
