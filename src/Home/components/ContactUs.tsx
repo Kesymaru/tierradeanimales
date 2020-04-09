@@ -22,7 +22,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import PhoneIcon from "@material-ui/icons/Phone";
 import MessageIcon from "@material-ui/icons/Message";
 
-import { Contact, InitContact } from "@/home";
+import { Contact, InitContact } from "@app/home";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

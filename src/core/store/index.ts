@@ -4,27 +4,21 @@ import {
   createStore,
   Reducer,
   Store,
-} from "@/core/store/node_modules/redux";
-import firebase from "@/core/store/node_modules/firebase/app";
-import "@/core/store/node_modules/firebase/auth";
-import "@/core/store/node_modules/firebase/firestore";
-import thunkMiddleware from "@/core/store/node_modules/redux-thunk";
-import { composeWithDevTools } from "@/core/store/node_modules/redux-devtools-extension";
+} from "redux";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import thunkMiddleware from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 import { connectRouter, routerMiddleware } from "connected-react-router";
-import {
-  createBrowserHistory,
-  History,
-} from "@/core/store/node_modules/history";
+import { createBrowserHistory, History } from "history";
 
 import {
   firebaseReducer,
   ReactReduxFirebaseProviderProps,
   ReactReduxFirebaseConfig,
-} from "@/core/store/node_modules/react-redux-firebase";
-import {
-  firestoreReducer,
-  createFirestoreInstance,
-} from "@/core/store/node_modules/redux-firestore";
+} from "react-redux-firebase";
+import { firestoreReducer, createFirestoreInstance } from "redux-firestore";
 
 import { AppState, DBSchema } from "../models";
 import { FirebaseConfig } from "../config";

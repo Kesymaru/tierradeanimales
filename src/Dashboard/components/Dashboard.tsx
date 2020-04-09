@@ -1,10 +1,8 @@
-import React, {
-  FunctionComponent,
-} from "@/dashboard/components/node_modules/react";
+import React, { FunctionComponent } from "react";
 
-import Container from "@/dashboard/components/node_modules/@material-ui/core/Container";
+import Container from "@material-ui/core/Container";
 
-const Dashboard: FunctionComponent<{}> = (props) => {
+const Dashboard: FunctionComponent<{}> = () => {
   return <Container>Here goes the public home page</Container>;
 };
 
