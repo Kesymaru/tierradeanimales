@@ -1,10 +1,10 @@
-import PetsIcon from "@material-ui/icons/Pets";
-import EditIcon from "@material-ui/icons/Edit";
+import PetsIcon from "@/case/routes/node_modules/@material-ui/icons/Pets";
+import EditIcon from "@/case/routes/node_modules/@material-ui/icons/Edit";
 
-import Route from "@core/models/route";
-import { RouteFactory } from "@core/hooks/route";
-import { DASHBOARD_ROUTE, ADMIN_DASHBOARD_ROUTE } from "@/Dashboard/routes";
-import { AdminCases, EditCase, Cases, CaseDetails } from "@/Case/components";
+import Route from "@/case/routes/node_modules/@core/models/route";
+import { RouteFactory } from "@/case/routes/node_modules/@core/hooks/route";
+import { DASHBOARD_ROUTE, ADMIN_DASHBOARD_ROUTE } from "@/dashboard/routes";
+import { AdminCases, EditCase, Cases, CaseDetails } from "@/case/components";
 
 export const ADMIN_CASE_ROUTE: Route = RouteFactory({
   name: "Cases",

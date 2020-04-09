@@ -1,7 +1,7 @@
-import Route from "@core/models/route";
-import { RouteFactory } from "@core/hooks/route";
+import Route from "@/dashboard/routes/node_modules/@/core/components/node_modules/@core/models/route";
+import { RouteFactory } from "@/dashboard/routes/node_modules/@/core/routes/node_modules/@core/hooks/route";
 
-import Dashboard from "@/Dashboard/components/Dashboard";
+import Dashboard from "@/dashboard/components/Dashboard";
 
 console.log("dashboard routes");
 

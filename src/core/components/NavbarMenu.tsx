@@ -1,18 +1,22 @@
-import React, { FunctionComponent } from "react";
-import { useHistory } from "react-router-dom";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Divider from "@material-ui/core/Divider";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+import React, { FunctionComponent } from "@/core/components/node_modules/react";
+import { useHistory } from "@/core/components/node_modules/react-router-dom";
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+} from "@/core/components/node_modules/@material-ui/core/styles";
+import Divider from "@/core/components/node_modules/@material-ui/core/Divider";
+import List from "@/core/components/node_modules/@material-ui/core/List";
+import ListItem from "@/core/components/node_modules/@material-ui/core/ListItem";
+import ListItemIcon from "@/core/components/node_modules/@material-ui/core/ListItemIcon";
+import ListItemText from "@/core/components/node_modules/@material-ui/core/ListItemText";
+import InboxIcon from "@/core/components/node_modules/@material-ui/icons/MoveToInbox";
 
-import Route from "@core/models/route";
-import { ACCOUNT_ROUTE } from "@/User/routes";
-import { ADMIN_CASE_ROUTE } from "@/Case/routes";
-import { FOSTER_HOMES_ROUTE } from "@/FosterHome/routes";
-import { UserMenu } from "@/User/components";
+import Route from "@/core/components/node_modules/@core/models/route";
+import { ACCOUNT_ROUTE } from "@/user/routes";
+import { ADMIN_CASE_ROUTE } from "@/case/routes";
+import { FOSTER_HOMES_ROUTE } from "@/foster-home/routes";
+import { UserMenu } from "@/user/components";
 
 const NAVBAR_ROUTES: Route[] = [
   ACCOUNT_ROUTE,

@@ -1,9 +1,9 @@
-import PetsIcon from "@material-ui/icons/Pets";
-import EditIcon from "@material-ui/icons/Edit";
+import PetsIcon from "@/case/routes/node_modules/@material-ui/icons/Pets";
+import EditIcon from "@/case/routes/node_modules/@material-ui/icons/Edit";
 
-import Route from "@core/models/route";
-import { RouteFactory } from "@core/hooks/route";
-import { DASHBOARD_ROUTE } from "@/Dashboard/routes";
+import Route from "@/case/routes/node_modules/@core/models/route";
+import { RouteFactory } from "@/case/routes/node_modules/@core/hooks/route";
+import { DASHBOARD_ROUTE } from "@/dashboard/routes";
 
 import AdminCase from "../components/AdminCases";
 import EditCase from "../components/EditCase";

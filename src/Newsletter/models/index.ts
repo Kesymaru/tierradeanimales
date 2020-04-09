@@ -1,5 +1,5 @@
-import * as firebase from "firebase";
-import "firebase/firestore";
+import * as firebase from "@/newsletter/models/node_modules/firebase";
+import "@/newsletter/models/node_modules/firebase/firestore";
 
 export interface Newsletter {
   email: string;

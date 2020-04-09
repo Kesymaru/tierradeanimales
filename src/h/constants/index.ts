@@ -1,4 +1,4 @@
-import Contact from "@/home/models";
+import Contact from "./node_modules/@/h/models";
 
 export const InitContact: Contact = {
   name: "",

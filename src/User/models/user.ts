@@ -1,4 +1,4 @@
-import { Role } from "@/Auth/models";
+import { Role } from "@/auth/models";
 
 export interface Address {
   country: string;

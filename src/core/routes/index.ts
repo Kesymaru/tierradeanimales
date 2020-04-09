@@ -1,12 +1,12 @@
-import { Route } from "@core/models";
-import { RouteFactory } from "@core/hooks/route";
+import { Route } from "@/core/routes/node_modules/@core/models";
+import { RouteFactory } from "@/core/routes/node_modules/@core/hooks/route";
 
-import NotFound from "@/Core/components/NotFound";
-import Home from "@/Home/components";
+import NotFound from "@/core/components/NotFound";
+import Home from "@/home/components";
 
-import { ROUTES as DASHBOARD_ROUTES } from "@/Dashboard/routes";
-import { ROUTES as AUTH_ROUTES } from "@/Auth/routes";
-import { ROUTES as NEWSLETTER_ROUTES } from "@/Newsletter/routes";
+import { ROUTES as DASHBOARD_ROUTES } from "@/dashboard/routes";
+import { ROUTES as AUTH_ROUTES } from "@/auth/routes";
+import { ROUTES as NEWSLETTER_ROUTES } from "@/newsletter/routes";
 
 // import DOGS_ROUTES from "../components/Dogs/Dogs.routes";
 // import HOMES_ROUTES from "../components/Homes/Homes.routes";

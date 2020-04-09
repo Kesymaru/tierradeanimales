@@ -1,5 +1,5 @@
 import Geonames from "geonames.js";
-import { Dispatch } from "redux";
+import { Dispatch } from "@/core/actions/node_modules/redux";
 
 import {
   GeonamesAction,

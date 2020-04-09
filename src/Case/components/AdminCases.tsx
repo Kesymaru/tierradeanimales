@@ -3,32 +3,35 @@ import React, {
   useEffect,
   useState,
   FunctionComponent,
-} from "react";
-import { connect, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useTheme } from "@material-ui/core/styles";
+} from "@/case/components/node_modules/react";
+import {
+  connect,
+  useDispatch,
+} from "@/case/components/node_modules/react-redux";
+import { useHistory } from "@/case/components/node_modules/react-router-dom";
+import useMediaQuery from "@/case/components/node_modules/@material-ui/core/useMediaQuery";
+import { useTheme } from "@/case/components/node_modules/@material-ui/core/styles";
 
-import Fade from "@material-ui/core/Fade";
-import Paper from "@material-ui/core/Paper";
-import Toolbar from "@material-ui/core/Toolbar";
-import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import DeleteIcon from "@material-ui/icons/Delete";
-import AddIcon from "@material-ui/icons/Add";
-import EditIcon from "@material-ui/icons/Edit";
-import FilterListIcon from "@material-ui/icons/FilterList";
+import Fade from "@/case/components/node_modules/@material-ui/core/Fade";
+import Paper from "@/case/components/node_modules/@material-ui/core/Paper";
+import Toolbar from "@/case/components/node_modules/@material-ui/core/Toolbar";
+import Tooltip from "@/case/components/node_modules/@material-ui/core/Tooltip";
+import IconButton from "@/case/components/node_modules/@material-ui/core/IconButton";
+import Typography from "@/case/components/node_modules/@material-ui/core/Typography";
+import ExpansionPanel from "@/case/components/node_modules/@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@/case/components/node_modules/@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@/case/components/node_modules/@material-ui/core/ExpansionPanelDetails";
+import List from "@/case/components/node_modules/@material-ui/core/List";
+import ListItem from "@/case/components/node_modules/@material-ui/core/ListItem";
+import ListItemText from "@/case/components/node_modules/@material-ui/core/ListItemText";
+import ExpandMoreIcon from "@/case/components/node_modules/@material-ui/icons/ExpandMore";
+import DeleteIcon from "@/case/components/node_modules/@material-ui/icons/Delete";
+import AddIcon from "@/case/components/node_modules/@material-ui/icons/Add";
+import EditIcon from "@/case/components/node_modules/@material-ui/icons/Edit";
+import FilterListIcon from "@/case/components/node_modules/@material-ui/icons/FilterList";
 
-import { Case } from "@/Case/models";
-import { ADMIN_CASE_EDIT_ROUTE } from "@/Case/routes";
+import { Case } from "@/case/models";
+import { ADMIN_CASE_EDIT_ROUTE } from "@/case/routes";
 
 export const AdminCases: FunctionComponent<{}> = () => {
   return <Paper>Here goes the new Admin Cases component</Paper>;

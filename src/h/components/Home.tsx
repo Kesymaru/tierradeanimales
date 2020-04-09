@@ -10,7 +10,7 @@ import {
   Donate,
   ContactUs,
   FollowUs,
-} from "@/home/components";
+} from "./node_modules/@/h/components";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>

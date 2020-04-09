@@ -13,7 +13,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 
-import Carousel from "@/home/components/Carousel";
+import Carousel from "./node_modules/@/h/components/Carousel";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

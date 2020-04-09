@@ -1,4 +1,4 @@
-import { Address } from "@/User/models";
+import { Address } from "@/user/models";
 
 export interface Contact {
   name: string;

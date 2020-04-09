@@ -3,10 +3,9 @@ import { useSelector } from "react-redux";
 import { Route as ReactRouter, Redirect } from "react-router-dom";
 import { isLoaded, isEmpty } from "react-redux-firebase";
 
-import { Route as AppRoute } from "@core/models/route";
-import { SIGN_IN_ROUTE } from "@/Auth/routes";
-import { AppState } from "@/Core";
-import { User } from "@/User";
+import { Route as AppRoute, AppState } from "@core/models";
+import { SIGN_IN_ROUTE } from "@app/Auth/routes";
+import { User } from "@app/User";
 
 interface RouteProps extends AppRoute {}
 

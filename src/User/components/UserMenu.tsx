@@ -1,19 +1,31 @@
-import React, { FunctionComponent, useState, MouseEvent } from "react";
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { useFirebase, isLoaded, isEmpty } from "react-redux-firebase";
-import { useTranslation } from "react-i18next";
+import React, {
+  FunctionComponent,
+  useState,
+  MouseEvent,
+} from "@/user/components/node_modules/react";
+import { useSelector } from "@/user/components/node_modules/react-redux";
+import { useHistory } from "@/user/components/node_modules/react-router-dom";
+import {
+  useFirebase,
+  isLoaded,
+  isEmpty,
+} from "@/user/components/node_modules/react-redux-firebase";
+import { useTranslation } from "@/user/components/node_modules/react-i18next";
 
-import Avatar from "@material-ui/core/Avatar";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Avatar from "@/user/components/node_modules/@material-ui/core/Avatar";
+import Box from "@/user/components/node_modules/@material-ui/core/Box";
+import Typography from "@/user/components/node_modules/@material-ui/core/Typography";
+import Button from "@/user/components/node_modules/@material-ui/core/Button";
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+} from "@/user/components/node_modules/@material-ui/core/styles";
 
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import LockOutlinedIcon from "@/user/components/node_modules/@material-ui/icons/LockOutlined";
 
-import { AppState } from "@/Core";
-import { ACCOUNT_ROUTE, SIGN_IN_ROUTE } from "@/Auth";
+import { AppState } from "@/core";
+import { ACCOUNT_ROUTE, SIGN_IN_ROUTE } from "@/auth";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

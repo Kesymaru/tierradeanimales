@@ -1,6 +1,4 @@
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
-
-import { Route, RouteFactory } from "@app/core";
+import { Route, RouteFactory } from "@/auth/routes/node_modules/@core";
 
 import SignUp from "../components/SignUp";
 import SignIn from "../components/SignIn";

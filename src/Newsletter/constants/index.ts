@@ -1,7 +1,7 @@
-import * as firebase from "firebase";
-import "firebase/firestore";
+import * as firebase from "@/newsletter/constants/node_modules/firebase";
+import "@/newsletter/constants/node_modules/firebase/firestore";
 
-import { Newsletter } from "@/Newsletter/models";
+import { Newsletter } from "@/newsletter/models";
 
 export const NEWSLETTER_STORE: string = "newsletter";
 

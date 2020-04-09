@@ -1,9 +1,9 @@
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import AccountBoxIcon from "@/user/routes/node_modules/@material-ui/icons/AccountBox";
 
-import { Route, RouteFactory } from "@app/core";
-import { DASHBOARD_ROUTE } from "@app/Dashboard/routes";
+import { Route, RouteFactory } from "@/user/routes/node_modules/@app/core";
+import { DASHBOARD_ROUTE } from "@/user/routes/node_modules/@app/Dashboard/routes";
 
-import Account from "../../User/components/Account";
+import Account from "../components/Account";
 
 // ------------------------------------
 // Account

@@ -3,20 +3,24 @@ import React, {
   useState,
   ChangeEvent,
   MouseEvent,
-} from "react";
-import { useTranslation } from "react-i18next";
-import { useFirestore } from "react-redux-firebase";
-import get from "lodash/get";
+} from "@/newsletter/components/node_modules/react";
+import { useTranslation } from "@/newsletter/components/node_modules/react-i18next";
+import { useFirestore } from "@/newsletter/components/node_modules/react-redux-firebase";
+import get from "@/newsletter/components/node_modules/lodash/get";
 
-import TextField from "@material-ui/core/TextField";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Tooltip from "@material-ui/core/Tooltip";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import TextField from "@/newsletter/components/node_modules/@material-ui/core/TextField";
+import InputAdornment from "@/newsletter/components/node_modules/@material-ui/core/InputAdornment";
+import Tooltip from "@/newsletter/components/node_modules/@material-ui/core/Tooltip";
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+} from "@/newsletter/components/node_modules/@material-ui/core/styles";
 
-import EmailIcon from "@material-ui/icons/Email";
-import SendIcon from "@material-ui/icons/Send";
+import EmailIcon from "@/newsletter/components/node_modules/@material-ui/icons/Email";
+import SendIcon from "@/newsletter/components/node_modules/@material-ui/icons/Send";
 
-import { Newsletter, INIT_NEWSLETTER, NEWSLETTER_STORE } from "@/Newsletter";
+import { Newsletter, INIT_NEWSLETTER, NEWSLETTER_STORE } from "@/newsletter";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
