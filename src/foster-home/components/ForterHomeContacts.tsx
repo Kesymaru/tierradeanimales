@@ -20,7 +20,7 @@ import PermContactCalendarIcon from "@material-ui/icons/PermContactCalendar";
 import ContactPhoneIcon from "@material-ui/icons/ContactPhone";
 import ContactMailIcon from "@material-ui/icons/ContactMail";
 
-import { Contact } from "@/foster-home/models";
+import { Contact } from "../models";
 
 export interface HomeContactsProps {
   contacts: Array<Contact>;

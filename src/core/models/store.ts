@@ -3,7 +3,7 @@ import { RouterState } from "connected-react-router";
 import { FirebaseReducer } from "react-redux-firebase";
 
 import GeonamesState from "@core/models/geonames";
-import User from "@app/User/models";
+import User from "@app/user/models/user";
 import NewsletterState from "@app/home/models";
 
 export interface AppState {
