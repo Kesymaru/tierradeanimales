@@ -11,7 +11,6 @@ export interface RouteParam {
 export interface Route {
   name: string;
   path: string;
-  getPath: Function;
   exact: boolean;
   auth: boolean;
   component: FunctionComponent<any> | ComponentClass<any>;
