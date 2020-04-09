@@ -3,31 +3,25 @@ import React, {
   FunctionComponent,
   useEffect,
   useState,
-} from "@/user/components/node_modules/react";
-import {
-  useSelector,
-  useDispatch,
-} from "@/user/components/node_modules/react-redux";
-import { isEmpty } from "@/user/components/node_modules/lodash";
+} from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { isEmpty } from "lodash";
 
-import Grid from "@/user/components/node_modules/@material-ui/core/Grid";
-import Autocomplete from "@/user/components/node_modules/@material-ui/lab/Autocomplete";
-import InputAdornment from "@/user/components/node_modules/@material-ui/core/InputAdornment";
-import TextField from "@/user/components/node_modules/@material-ui/core/TextField";
-import FlagIcon from "@/user/components/node_modules/@material-ui/icons/Flag";
-import RoomIcon from "@/user/components/node_modules/@material-ui/icons/Room";
+import Grid from "@material-ui/core/Grid";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import TextField from "@material-ui/core/TextField";
+import FlagIcon from "@material-ui/icons/Flag";
+import RoomIcon from "@material-ui/icons/Room";
 
-import {
-  GeonamesCountry,
-  GeonamesChildren,
-} from "../../foster-home/components/node_modules/@/core/models";
-import { Address } from "@/user/models";
+import { GeonamesCountry, GeonamesChildren } from "@core/models";
+import { Address } from "@app/user/models";
 import {
   GetCities,
   GetCounties,
   GetCountries,
   GetStates,
-} from "@/core/actions/geonames";
+} from "@core/actions/geonames";
 
 interface AddressProps {
   address: Address;
