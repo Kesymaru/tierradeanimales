@@ -32,15 +32,6 @@ export const NOT_FOUND_ROUTE: Route = RouteFactory({
 });
 
 // ------------------------------------
-// Navbar Routes
-// ------------------------------------
-/* export const NAVBAR_ROUTES: Route[] = [
-  ACCOUNT_ROUTE,
-  ADMIN_CASE_ROUTE,
-  FOSTER_HOMES_ROUTE,
-]; */
-
-// ------------------------------------
 // Routes Array
 // ------------------------------------
 export const ROUTES: Route[] = [

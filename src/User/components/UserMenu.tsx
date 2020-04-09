@@ -13,7 +13,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 import { AppState } from "@core/models";
-import { ACCOUNT_ROUTE, SIGN_IN_ROUTE } from "@app/auth";
+import { SIGN_IN_ROUTE } from "@app/auth";
+import { ACCOUNT_ROUTE } from "../routes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,7 +40,7 @@ export const UserMenu: FunctionComponent<{}> = () => {
   async function logout() {
     await firebase.logout();
     console.log("logout", firebase);
-    history.push(SIGN_IN_ROUTE.getPath());
+    history.push(SIGN_IN_ROUTE.path);
   }
 
   return (
@@ -61,7 +62,7 @@ export const UserMenu: FunctionComponent<{}> = () => {
           <Button
             color="primary"
             variant="contained"
-            onClick={() => history.push(SIGN_IN_ROUTE.getPath())}
+            onClick={() => history.push(SIGN_IN_ROUTE.path)}
           >
             {t("signIn.title")}
           </Button>

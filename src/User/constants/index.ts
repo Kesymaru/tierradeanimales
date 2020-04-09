@@ -1,4 +1,4 @@
-import { User } from "@/user/models";
+import { User } from "../models";
 
 export const INIT_USER: User = {
   firstName: "",
