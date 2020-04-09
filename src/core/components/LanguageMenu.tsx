@@ -1,18 +1,15 @@
-import React, {
-  FunctionComponent,
-  useState,
-} from "@/core/components/node_modules/react";
-import { useTranslation } from "@/core/components/node_modules/react-i18next";
-import useTheme from "@/core/components/node_modules/@material-ui/core/styles/useTheme";
-import useMediaQuery from "@/core/components/node_modules/@material-ui/core/useMediaQuery";
+import React, { FunctionComponent, useState } from "react";
+import { useTranslation } from "react-i18next";
+import useTheme from "@material-ui/core/styles/useTheme";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-import Button from "@/core/components/node_modules/@material-ui/core/Button";
-import Menu from "@/core/components/node_modules/@material-ui/core/Menu";
-import MenuItem from "@/core/components/node_modules/@material-ui/core/MenuItem";
-import Tooltip from "@/core/components/node_modules/@material-ui/core/Tooltip";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Tooltip from "@material-ui/core/Tooltip";
 
-import TranslateIcon from "@/core/components/node_modules/@material-ui/icons/Translate";
-import ExpandMoreIcon from "@/core/components/node_modules/@material-ui/icons/ExpandMore";
+import TranslateIcon from "@material-ui/icons/Translate";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 enum Language {
   English = "en",
