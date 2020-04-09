@@ -38,14 +38,16 @@ export const UserMenu: FunctionComponent<{}> = () => {
 
   async function logout() {
     await firebase.logout();
-    console.log("logout", firebase);
     history.push(SIGN_IN_ROUTE.path);
   }
 
   return (
     <Box className={classes.userMenu}>
-      <Avatar className={classes.avatar}>
-        <LockOutlinedIcon />
+      <Avatar
+        className={classes.avatar}
+        src={logged ? auth.photoURL : undefined}
+      >
+        {!logged ? <LockOutlinedIcon /> : null}
       </Avatar>
       <Box display="flex" flexDirection="column" alignItems="center">
         {logged ? (
