@@ -17,6 +17,7 @@ export function RouteFactory(
   params: RouteFactoryParams,
   defaults: RouteDefaults = { auth: false, exact: false }
 ): Route {
+  console.log("factory name:", params.name, params.path);
   let _getPath = getPath(params.path, params.defaultParams || {});
 
   return {

@@ -16,7 +16,7 @@ export const FOSTER_HOMES_ROUTE: Route = RouteFactory({
 });
 
 export const EDIT_FOSTER_HOME_ROUTE: Route = RouteFactory({
-  name: "Edit Dashboard",
+  name: "Edit Foster Home",
   path: `${FOSTER_HOMES_ROUTE.path}/:id`,
   defaultParams: { id: "new" },
   auth: true,

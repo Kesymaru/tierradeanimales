@@ -4,8 +4,8 @@ import { RouteFactory } from "@core/hooks/route";
 import NotFound from "@/App/components/NotFound";
 import Home from "@/Home/components";
 
-import { ROUTES as AUTH_ROUTES } from "@/Auth/routes";
 import { ROUTES as DASHBOARD_ROUTES } from "@/Dashboard/routes";
+import { ROUTES as AUTH_ROUTES } from "@/Auth/routes";
 import { ROUTES as NEWSLETTER_ROUTES } from "@/Newsletter/routes";
 
 // import DOGS_ROUTES from "../components/Dogs/Dogs.routes";

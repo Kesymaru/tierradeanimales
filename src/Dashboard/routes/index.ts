@@ -3,6 +3,8 @@ import { RouteFactory } from "@core/hooks/route";
 
 import Dashboard from "@/Dashboard/components/Dashboard";
 
+console.log("dashboard routes");
+
 export const DASHBOARD_ROUTE: Route = RouteFactory({
   name: "Dashboard",
   path: "/dashboard",

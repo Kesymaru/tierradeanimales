@@ -4,7 +4,7 @@
     "paths": {
       "@core/*": ["src/core/*"],
       "@/*": ["src/*"],
-      "@app/*": ["src/*"]
+      "@app/*": ["src/*", "src/App/*"]
     }
   }
 }
