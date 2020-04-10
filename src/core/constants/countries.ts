@@ -1,4 +1,4 @@
-export interface IFlagCountry {
+export interface FlagCountry {
   abbr: string;
   code: string;
   icon: string;
@@ -6,7 +6,7 @@ export interface IFlagCountry {
   suggested?: boolean;
 }
 
-export const FlagCountries: Array<IFlagCountry> = [
+export const FLAG_CPUNTRIES: Array<FlagCountry> = [
   { icon: "🇦🇫", name: "Afghanistan", abbr: "AF", code: "93" },
   { icon: "🇦🇽", name: "Alland Islands", abbr: "AX", code: "358" },
   { icon: "🇦🇱", name: "Albania", abbr: "AL", code: "355" },
@@ -313,18 +313,18 @@ export const FlagCountries: Array<IFlagCountry> = [
 ];
 
 // separate countries into groups
-export const GroupedCountries: Array<{
+export const GROUPED_COUNTRIES: Array<{
   label: string;
-  options: Array<IFlagCountry>;
+  options: Array<FlagCountry>;
 }> = [
   {
     label: "Suggested",
-    options: FlagCountries.filter((c) => c.suggested),
+    options: FLAG_CPUNTRIES.filter((c) => c.suggested),
   },
   {
     label: "All FlagCountries",
-    options: FlagCountries.filter((c) => !c.suggested),
+    options: FLAG_CPUNTRIES.filter((c) => !c.suggested),
   },
 ];
 
-export default FlagCountries;
+export default FLAG_CPUNTRIES;

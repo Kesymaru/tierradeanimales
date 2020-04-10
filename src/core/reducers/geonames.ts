@@ -5,7 +5,7 @@ import {
   GeonamesTypes,
 } from "../models";
 
-import { FlagCountries, INIT_GEONAMES_STATE } from "../constants";
+import { FLAG_CPUNTRIES, INIT_GEONAMES_STATE } from "../constants";
 
 export function GeonamesReducers(
   state: GeonamesState = INIT_GEONAMES_STATE,
@@ -38,7 +38,7 @@ export function GeonamesReducers(
         countries: {
           status: Status.Loaded,
           data: action.payload.map((country) => {
-            const flag = FlagCountries.find(
+            const flag = FLAG_CPUNTRIES.find(
               (f) => f.name === country.countryName
             );
             return { ...country, icon: flag ? flag.icon : undefined };
