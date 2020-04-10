@@ -1,12 +1,15 @@
-import Route from "@core/models/route";
+import DashboardIcon from "@material-ui/icons/Dashboard";
 
+import Route from "@core/models/route";
 import Dashboard from "../components/Dashboard";
 
 export const DASHBOARD_ROUTE: Route = {
   name: "Dashboard",
   path: "/dashboard",
+  auth: true,
   exact: true,
   component: Dashboard,
+  icon: DashboardIcon,
 };
 
 export const ADMIN_DASHBOARD_ROUTE: Route = {

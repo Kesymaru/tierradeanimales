@@ -1,0 +1,14 @@
+{
+  "admin": {
+    "name": "admin",
+    "permissions": ["dashboard.*", "foster-home.*", "newsletter.*"]
+  },
+  "rescuer": {
+    "name": "rescuer",
+    "permissions": ["dashboard.*", "foster-home.*"]
+  },
+  "user": {
+    "name": "user",
+    "permissions": []
+  }
+}

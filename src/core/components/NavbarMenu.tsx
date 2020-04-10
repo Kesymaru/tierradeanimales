@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { isEmpty, isLoaded } from "react-redux-firebase";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 
 import Route from "@core/models/route";
@@ -30,11 +30,13 @@ export const NavbarMenu: FunctionComponent<NavbarMenuProps> = (props) => {
   const classes = useStyles();
   const history = useHistory();
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);
-  const logged = isLoaded(auth) && !isEmpty(auth);
+  const logged = auth.isLoaded && !auth.isEmpty;
 
   function goTo(route: Route) {
     history.push(route.path);
   }
+
+  console.log("navbar routes", NAVBAR_ROUTES);
 
   return (
     <div>
@@ -52,6 +54,7 @@ export const NavbarMenu: FunctionComponent<NavbarMenuProps> = (props) => {
           )
         )}
       </List>
+      {NAVBAR_ROUTES.length && <Divider />}
     </div>
   );
 };

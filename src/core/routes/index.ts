@@ -2,7 +2,7 @@ import Route from "@core/models/route";
 import NotFound from "@core/components/NotFound";
 
 import AUTH_ROUTES from "@app/auth/routes";
-import DASHBOARD_ROUTES from "@app/dashboard/routes";
+import { DASHBOARD_ROUTES, DASHBOARD_ROUTE } from "@app/dashboard/routes";
 import { HOME_ROUTES, HOME_ROUTE } from "@app/home/routes";
 import NEWSLETTER_ROUTES from "@app/newsletter/routes";
 import { USER_ROUTES, ACCOUNT_ROUTE } from "@app/user/routes";
@@ -19,7 +19,11 @@ export const NOT_FOUND_ROUTE: Route = {
 // ------------------------------------
 // Navbar Routes
 // ------------------------------------
-export const NAVBAR_ROUTES: Array<Route> = [HOME_ROUTE, ACCOUNT_ROUTE];
+export const NAVBAR_ROUTES: Array<Route> = [
+  ACCOUNT_ROUTE,
+  DASHBOARD_ROUTE,
+  HOME_ROUTE,
+];
 
 // ------------------------------------
 // App Routes
