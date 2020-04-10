@@ -1,21 +1,25 @@
-import { Status, GeonamesState } from "../models";
+import GeonamesState from "../models/geonames";
 
 export const INIT_GEONAMES_STATE: GeonamesState = {
   countries: {
-    status: Status.Empty,
     data: [],
+    isLoaded: false,
+    isEmpty: true,
   },
   states: {
-    status: Status.Empty,
     data: [],
+    isLoaded: false,
+    isEmpty: true,
   },
   counties: {
-    status: Status.Empty,
     data: [],
+    isLoaded: false,
+    isEmpty: true,
   },
   cities: {
-    status: Status.Empty,
     data: [],
+    isLoaded: false,
+    isEmpty: true,
   },
 };
 

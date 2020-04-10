@@ -21,7 +21,6 @@ import HomeIcon from "@material-ui/icons/Home";
 import CloseIcon from "@material-ui/icons/Close";
 import SendIcon from "@material-ui/icons/Send";
 
-import { Status } from "@core/models";
 import { useId } from "@core/hooks/route";
 
 import HomeContacts from "./ForterHomeContacts";

@@ -1,6 +1,6 @@
 import { Action } from "redux";
 
-import { StateItem } from "../models/store";
+import { State } from "../models/store";
 
 export enum GeonamesTypes {
   FETCH_COUNTRIES,
@@ -56,10 +56,10 @@ export interface GeonamesResult<T> {
 }
 
 export interface GeonamesState {
-  countries: StateItem<Array<GeonamesCountry>>;
-  states: StateItem<Array<GeonamesChildren>>;
-  counties: StateItem<Array<GeonamesChildren>>;
-  cities: StateItem<Array<GeonamesChildren>>;
+  countries: State<Array<GeonamesCountry>>;
+  states: State<Array<GeonamesChildren>>;
+  counties: State<Array<GeonamesChildren>>;
+  cities: State<Array<GeonamesChildren>>;
 }
 
 // ------------------------------------

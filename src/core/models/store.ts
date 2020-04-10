@@ -14,18 +14,10 @@ export interface AppState {
   geonames: GeonamesState;
 }
 
-export interface StateItem<T> {
-  status: Status;
+export interface State<T> {
   data: T | Array<T> | null;
-  id?: string | number | null;
-  error?: string | Error;
-}
-
-export enum Status {
-  Empty,
-  Loaded,
-  Fetching,
-  Error,
+  isLoaded: boolean;
+  isEmpty: boolean;
 }
 
 // create schema for the DB
