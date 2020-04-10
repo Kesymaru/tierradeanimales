@@ -1,6 +1,6 @@
-import { Status, GeonamesState } from "@core/models";
+import { Status, GeonamesState } from "../models";
 
-export const InitGeonamesState: GeonamesState = {
+export const INIT_GEONAMES_STATE: GeonamesState = {
   countries: {
     status: Status.Empty,
     data: [],
@@ -19,4 +19,4 @@ export const InitGeonamesState: GeonamesState = {
   },
 };
 
-export default InitGeonamesState;
+export default INIT_GEONAMES_STATE;

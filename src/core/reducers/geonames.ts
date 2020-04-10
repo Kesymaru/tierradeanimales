@@ -5,29 +5,10 @@ import {
   GeonamesTypes,
 } from "../models";
 
-import FlagCountries from "../constants/countries";
-
-const InitState: GeonamesState = {
-  countries: {
-    status: Status.Empty,
-    data: [],
-  },
-  states: {
-    status: Status.Empty,
-    data: [],
-  },
-  counties: {
-    status: Status.Empty,
-    data: [],
-  },
-  cities: {
-    status: Status.Empty,
-    data: [],
-  },
-};
+import { FlagCountries, INIT_GEONAMES_STATE } from "../constants";
 
 export function GeonamesReducers(
-  state: GeonamesState = InitState,
+  state: GeonamesState = INIT_GEONAMES_STATE,
   action: GeonamesAction
 ): GeonamesState {
   switch (action.type) {
@@ -38,7 +19,7 @@ export function GeonamesReducers(
       return {
         ...state,
         countries: {
-          ...InitState.countries,
+          ...INIT_GEONAMES_STATE.countries,
           status: Status.Fetching,
         },
       };
@@ -46,7 +27,7 @@ export function GeonamesReducers(
       return {
         ...state,
         countries: {
-          ...InitState.countries,
+          ...INIT_GEONAMES_STATE.countries,
           status: Status.Error,
           error: action.payload,
         },
@@ -72,7 +53,7 @@ export function GeonamesReducers(
       return {
         ...state,
         states: {
-          ...InitState.states,
+          ...INIT_GEONAMES_STATE.states,
           status: Status.Fetching,
         },
       };
@@ -80,7 +61,7 @@ export function GeonamesReducers(
       return {
         ...state,
         states: {
-          ...InitState.states,
+          ...INIT_GEONAMES_STATE.states,
           status: Status.Error,
           error: action.payload,
         },
@@ -101,7 +82,7 @@ export function GeonamesReducers(
       return {
         ...state,
         counties: {
-          ...InitState.counties,
+          ...INIT_GEONAMES_STATE.counties,
           status: Status.Fetching,
         },
       };
@@ -109,7 +90,7 @@ export function GeonamesReducers(
       return {
         ...state,
         counties: {
-          ...InitState.counties,
+          ...INIT_GEONAMES_STATE.counties,
           status: Status.Error,
           error: action.payload,
         },
@@ -130,7 +111,7 @@ export function GeonamesReducers(
       return {
         ...state,
         cities: {
-          ...InitState.cities,
+          ...INIT_GEONAMES_STATE.cities,
           status: Status.Fetching,
         },
       };
@@ -138,7 +119,7 @@ export function GeonamesReducers(
       return {
         ...state,
         cities: {
-          ...InitState.cities,
+          ...INIT_GEONAMES_STATE.cities,
           status: Status.Error,
           error: action.payload,
         },
