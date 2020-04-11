@@ -6,6 +6,7 @@ import { DASHBOARD_ROUTES, DASHBOARD_ROUTE } from "@app/dashboard/routes";
 import { HOME_ROUTES, HOME_ROUTE } from "@app/home/routes";
 import NEWSLETTER_ROUTES from "@app/newsletter/routes";
 import { USER_ROUTES, ACCOUNT_ROUTE } from "@app/user/routes";
+import ADOPT_ROUTES from "@app/adopt/routes";
 
 // ------------------------------------
 // 404 no match
@@ -34,6 +35,7 @@ export const ROUTES: Array<Route> = [
   ...HOME_ROUTES,
   ...NEWSLETTER_ROUTES,
   ...USER_ROUTES,
+  ...ADOPT_ROUTES,
 
   NOT_FOUND_ROUTE,
 ];
