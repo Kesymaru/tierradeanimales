@@ -45,7 +45,10 @@
       "email": "Email",
       "phone": "Telefono",
       "message": "Mensaje",
-      "emailSend": "Informacion de contacto ha sido enviada correctamente"
+      "_success": "Contact message send successfully",
+      "success": "Mensaje de contacto enviado exitosamente",
+      "_error": "Error sending contact message"
+      "error": "Error enviando el mensaje de contacto"
     },
     "signIn": {
       "title": "Iniciar Session",
@@ -110,7 +113,6 @@
     },
     "followUs": {
       "title": "Síguenos",
-      "newsletter": "Email Newsletter",
       "info": "Informacion",
       "socialNetworks": "Redes Sociales",
       "name": "FUNDACIÓN TIERRA DE ANIMALES COSTA RICA",
@@ -129,6 +131,11 @@
           "data": "123456"
         }
       ]
+    },
+    "newsletter": {
+      "title": "Suscripción de Noticias",
+      "email": "Email",
+      "subscribe": "Suscribirse"
     }
   }
 }

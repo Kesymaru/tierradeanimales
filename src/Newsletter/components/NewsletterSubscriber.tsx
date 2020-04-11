@@ -11,6 +11,7 @@ import get from "lodash/get";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import EmailIcon from "@material-ui/icons/Email";
@@ -23,7 +24,7 @@ import { INIT_NEWSLETTER, NEWSLETTER_PATH } from "../constants";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     textField: {
-      backgroundColor: "rgba(255,255,255,1)",
+      backgroundColor: "white",
       marginTop: 20,
       marginBottom: 20,
     },
@@ -68,9 +69,10 @@ export const NewsletterSubscriber: FunctionComponent<{}> = () => {
 
   return (
     <>
+      <Typography variant="h3">{t("newsletter.title")}</Typography>
       <TextField
-        label={t("home.newsletter")}
-        placeholder={t("home.newsletter")}
+        label={t("newsletter.email")}
+        placeholder={t("newsletter.email")}
         className={classes.textField}
         variant="filled"
         size="medium"
@@ -83,7 +85,7 @@ export const NewsletterSubscriber: FunctionComponent<{}> = () => {
           ),
           endAdornment: (
             <InputAdornment position="end" onClick={handleNewsletter}>
-              <Tooltip title={"Subscribe"}>
+              <Tooltip title={t("newsletter.subscribe")}>
                 <SendIcon />
               </Tooltip>
             </InputAdornment>

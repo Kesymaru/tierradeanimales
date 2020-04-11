@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import Tooltip from "@material-ui/core/Tooltip";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
@@ -52,13 +53,13 @@ export const ContactUs: FunctionComponent<{}> = () => {
       setAlert({
         ...alert,
         open: true,
-        message: "Contact message send successfully",
+        message: t("contact.success"),
       });
     } catch (err) {
       setAlert({
         ...alert,
         open: true,
-        message: "Error sending contact message",
+        message: t("contact.error"),
       });
     }
   }
@@ -162,26 +163,30 @@ export const ContactUs: FunctionComponent<{}> = () => {
           </Grid>
           <Grid container item spacing={2}>
             <Grid item xs={6}>
-              <Button
-                variant="contained"
-                color="secondary"
-                type="reset"
-                fullWidth
-                startIcon={<RotateLeftIcon />}
-              >
-                {t("app.reset")}
-              </Button>
+              <Tooltip title={t("app.reset")}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  type="reset"
+                  fullWidth
+                  startIcon={<RotateLeftIcon />}
+                >
+                  {t("app.reset")}
+                </Button>
+              </Tooltip>
             </Grid>
             <Grid item xs={6}>
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                fullWidth
-                startIcon={<SendIcon />}
-              >
-                {t("app.submit")}
-              </Button>
+              <Tooltip title={t("app.submit")}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  fullWidth
+                  startIcon={<SendIcon />}
+                >
+                  {t("app.submit")}
+                </Button>
+              </Tooltip>
             </Grid>
           </Grid>
         </Grid>
