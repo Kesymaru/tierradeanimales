@@ -79,7 +79,6 @@ const SignIn: FunctionComponent<{}> = ({}) => {
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);
   const logged = isLoaded(auth) && !isEmpty(auth);
 
-  console.log("is mobile", isMobile);
   if (isMobile) {
     facebook.type = google.type = "redirect";
   } else {
