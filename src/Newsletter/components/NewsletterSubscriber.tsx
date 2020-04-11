@@ -62,7 +62,7 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
     where: ["email", "==", newsletter.email],
     limit: 1,
   });
-  const found = useSelector<AppState, Array<Newsletter> | null>((state) =>
+  const found = useSelector<AppState, Array<Newsletter>>((state) =>
     get(state, `firestore.data.${NEWSLETTER_PATH}`, [])
   );
   const error = getError();
@@ -99,15 +99,22 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
 
   async function handleUnsubscribe() {
     try {
-      await firestore.add(NEWSLETTER_PATH, newsletter);
+      await firestore.delete({
+        collection: NEWSLETTER_PATH,
+        doc: Object.keys(found)[0],
+      });
       setAlert({
         ...alert,
         open: true,
-        message: t("newsletter.success"),
+        message: t(`newsletter.${props.mode}.success`),
       });
       setNewsletter(INIT_NEWSLETTER);
     } catch (err) {
-      setAlert({ ...alert, open: true, message: t("newsletter.error") });
+      setAlert({
+        ...alert,
+        open: true,
+        message: t(`newsletter.${props.mode}.error`),
+      });
     }
   }
 
