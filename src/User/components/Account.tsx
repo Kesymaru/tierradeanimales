@@ -21,7 +21,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import { AppState } from "@core/models";
 import User from "../models/user";
-import INIT_USER from "../constants";
+import INIT_USER from "../constants/user";
 
 export const Account: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();

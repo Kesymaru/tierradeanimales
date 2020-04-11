@@ -1,12 +1,5 @@
-import { Role } from "@app/auth/models";
-
-export interface Address {
-  country: string;
-  state: string;
-  county: string;
-  city: string;
-  address: string;
-}
+import Role from "@app/auth/models/role";
+import Address from "./address";
 
 export interface User {
   role?: Role;
