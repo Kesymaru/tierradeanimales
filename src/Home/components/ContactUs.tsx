@@ -49,9 +49,17 @@ export const ContactUs: FunctionComponent<{}> = () => {
     event.preventDefault();
     try {
       await firestore.add("contact", contact);
-      setAlert({ ...alert, message: "Contact message send successfully" });
+      setAlert({
+        ...alert,
+        open: true,
+        message: "Contact message send successfully",
+      });
     } catch (err) {
-      setAlert({ ...alert, message: "Error sending contact message" });
+      setAlert({
+        ...alert,
+        open: true,
+        message: "Error sending contact message",
+      });
     }
   }
 
