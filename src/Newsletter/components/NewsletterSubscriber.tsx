@@ -52,11 +52,11 @@ export const NewsletterSubscriber: FunctionComponent<{}> = () => {
       setAlert({
         ...alert,
         open: true,
-        message: "Email subscribed successfully",
+        message: t("newsletter.success"),
       });
       setNewsletter(INIT_NEWSLETTER);
     } catch (err) {
-      setAlert({ ...alert, open: true, message: "Error subcribing email" });
+      setAlert({ ...alert, open: true, message: t("newsletter.error") });
     }
   }
 

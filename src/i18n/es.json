@@ -47,7 +47,7 @@
       "message": "Mensaje",
       "_success": "Contact message send successfully",
       "success": "Mensaje de contacto enviado exitosamente",
-      "_error": "Error sending contact message"
+      "_error": "Error sending contact message",
       "error": "Error enviando el mensaje de contacto"
     },
     "signIn": {
@@ -133,9 +133,13 @@
       ]
     },
     "newsletter": {
-      "title": "Suscripción de Noticias",
+      "title": "Boletin Informativo",
       "email": "Email",
-      "subscribe": "Suscribirse"
+      "subscribe": "Suscribirse",
+      "_success": "Newsletter subscribed successfully",
+      "success": "Suscripción al boletin exitosa",
+      "_error": "Error subscribing to newsletter",
+      "error": "Error al suscripbir el boletin"
     }
   }
 }
