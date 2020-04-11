@@ -2,17 +2,18 @@ import HouseIcon from "@material-ui/icons/House";
 import EditIcon from "@material-ui/icons/Edit";
 
 import Route from "@core/models/route";
+import createRoute from "@core/utils/createRoute";
 import { ADMIN_DASHBOARD_ROUTE } from "@app/dashboard/routes";
 import { FosterHomes, EditFosterHome } from "../screens";
 
-export const FOSTER_HOMES_ROUTE: Route = {
+export const FOSTER_HOMES_ROUTE = createRoute({
   name: "Foster Homes",
   path: "/homes",
   auth: true,
   component: FosterHomes,
   parent: ADMIN_DASHBOARD_ROUTE,
   icon: HouseIcon,
-};
+});
 
 export const EDIT_FOSTER_HOME_ROUTE: Route = {
   name: "Edit Foster Home",

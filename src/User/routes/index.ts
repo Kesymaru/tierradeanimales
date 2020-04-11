@@ -1,7 +1,7 @@
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 import Route from "@core/models/route";
-import { RouteFactory } from "@core/hooks/route";
+import createRoute from "@core/utils/createRoute";
 import { DASHBOARD_ROUTE } from "@app/dashboard/routes";
 
 import Account from "../components/Account";
@@ -9,7 +9,7 @@ import Account from "../components/Account";
 // ------------------------------------
 // Account
 // ------------------------------------
-export const ACCOUNT_ROUTE: Route = RouteFactory({
+export const ACCOUNT_ROUTE: Route = createRoute({
   name: "Account",
   path: "/account",
   auth: true,

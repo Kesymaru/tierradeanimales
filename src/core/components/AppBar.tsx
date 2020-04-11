@@ -14,9 +14,9 @@ import Link from "@material-ui/core/Link";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import ROUTES from "@core/routes";
-import useRoutes from "@core/hooks/route";
+import useRoutes from "@core/hooks/useRoutes";
 import LanguageMenu from "./LanguageMenu";
-import { AppState } from "../models";
+import AppState from "../models/store";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
