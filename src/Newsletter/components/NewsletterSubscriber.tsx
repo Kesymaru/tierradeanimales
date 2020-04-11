@@ -1,14 +1,19 @@
 import React, {
   FunctionComponent,
   useState,
-  useEffect,
   ChangeEvent,
   MouseEvent,
 } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
-import { get, isEmpty } from "lodash";
+import {
+  useFirestore,
+  useFirestoreConnect,
+  isLoaded,
+  isEmpty,
+} from "react-redux-firebase";
+import get from "lodash/get";
+import debounce from "lodash/debounce";
 
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -58,10 +63,10 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
     where: ["email", "==", newsletter.email],
     limit: 1,
   });
-  const [error, setError] = useState<boolean>(false);
   const found = useSelector<AppState, Array<Newsletter> | null>((state) =>
     get(state, `firestore.data.${NEWSLETTER_PATH}`, [])
   );
+  const error = getError();
   const title = get(props, "title", t("newsletter.title"));
   const subtitle = get(
     props,
@@ -70,13 +75,13 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
   );
   const translations = t(`newsletter.${props.mode}`, { returnObjects: true });
 
-  useEffect(() => {
-    console.log("use effect", !isEmpty(found));
-    setError(!isEmpty(found));
-  }, [found]);
-
   function setOpen(value: boolean) {
     setAlert({ ...alert, open: value });
+  }
+
+  function getError(): boolean {
+    if (!isLoaded(found) || newsletter.email.length < 3) return false;
+    return props.mode === "subscribe" ? !isEmpty(found) : isEmpty(found);
   }
 
   async function handleSubscribe(event: MouseEvent<HTMLElement>) {
@@ -114,8 +119,6 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
     });
   }
 
-  console.log("found", found);
-
   return (
     <>
       {title && <Typography variant="h3">{title}</Typography>}
@@ -140,8 +143,8 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
                 props.mode === "subscribe" ? handleSubscribe : handleUnsubscribe
               }
             >
-              <Tooltip title={t("newsletter.subscribe.title")}>
-                <IconButton disabled={!isEmpty(found)}>
+              <Tooltip title={t(`newsletter.${props.mode}.title`)}>
+                <IconButton disabled={error}>
                   <SendIcon />
                 </IconButton>
               </Tooltip>
@@ -150,10 +153,8 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
         }}
         value={newsletter.email}
         onChange={handleChange}
-        helperText={
-          !isEmpty(found) ? t(`newsletter.${props.mode}.invalid`) : undefined
-        }
-        error={!isEmpty(found)}
+        helperText={error ? t(`newsletter.${props.mode}.invalid`) : undefined}
+        error={error}
       />
       <Alert {...alert} />
     </>
