@@ -36,8 +36,6 @@ export const NavbarMenu: FunctionComponent<NavbarMenuProps> = (props) => {
     history.push(route.path);
   }
 
-  console.log("navbar routes", NAVBAR_ROUTES);
-
   return (
     <div>
       <UserMenu />
