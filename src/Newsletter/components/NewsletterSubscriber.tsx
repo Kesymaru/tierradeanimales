@@ -13,7 +13,6 @@ import {
   isEmpty,
 } from "react-redux-firebase";
 import get from "lodash/get";
-import debounce from "lodash/debounce";
 
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
