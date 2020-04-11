@@ -135,11 +135,20 @@
     "newsletter": {
       "title": "Boletin Informativo",
       "email": "Email",
-      "subscribe": "Suscribirse",
-      "_success": "Newsletter subscribed successfully",
-      "success": "Suscripción al boletin exitosa",
-      "_error": "Error subscribing to newsletter",
-      "error": "Error al suscripbir el boletin"
+      "subscribe": {
+        "title": "Suscribirse",
+        "subtitle": "Ingrese email para suscribirse al boletin informativo",
+        "success": "Suscripción al boletin exitosa",
+        "error": "Error al suscripbir el boletin",
+        "invalid": "Email invalido"
+      },
+      "unsubscribe": {
+        "title": "Desuscribirse",
+        "subtitle": "Ingrese email para desuscribirse al boletin informativo",
+        "success": "Desuscripción al boletin exitosa",
+        "error": "Error al desuscribirse el boletin",
+        "invalid": "Email invalido"
+      }
     }
   }
 }

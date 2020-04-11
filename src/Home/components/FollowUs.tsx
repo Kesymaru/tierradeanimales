@@ -46,7 +46,7 @@ export const FollowUs: FunctionComponent<{}> = (props) => {
             <Typography variant="h2">{t("followUs.title")}</Typography>
           </Grid>
           <Grid item xs={12}>
-            <NewsletterSubscriber />
+            <NewsletterSubscriber mode="subscribe" />
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="h3">{t("followUs.info")}</Typography>

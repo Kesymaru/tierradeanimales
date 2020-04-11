@@ -1,6 +1,6 @@
 import Route from "@core/models/route";
 
-import NewsletterUnsubscriber from "../components/NewsletterUnsubscriber";
+import Unsubscribe from "../screens/Unsubscribe";
 
 // ------------------------------------
 // Unsubscribe newsletter
@@ -8,7 +8,7 @@ import NewsletterUnsubscriber from "../components/NewsletterUnsubscriber";
 export const NEWSLETTER_UNSUBSCRIBE: Route = {
   name: "Newsletter Unsubscribe",
   path: "/unsubscribe",
-  component: NewsletterUnsubscriber,
+  component: Unsubscribe,
 };
 
 export const NEWSLETTER_ROUTES: Route[] = [NEWSLETTER_UNSUBSCRIBE];
