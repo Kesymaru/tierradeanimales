@@ -1,3 +1,4 @@
+export * from "./Alert";
 export * from "./App";
 export * from "./AppBar";
 export * from "./Copyright";
