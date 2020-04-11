@@ -24,11 +24,8 @@ export const Copyright: FunctionComponent<CopyrightProps> = (props) => {
   const classes = useStyles();
   const route = useRoute(ROUTES);
 
-  console.log("route", route);
-
   if (Array.isArray(props.hideRoutes)) {
     const found = props.hideRoutes.find((r) => r === route);
-    console.log("found route", route);
     if (found) return <></>;
   }
   return (
