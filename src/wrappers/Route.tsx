@@ -16,7 +16,7 @@ const Route: FunctionComponent<RouteProps> = (route) => {
       ? (props: any) => (
           <Redirect
             to={{
-              pathname: SIGN_IN_ROUTE.path,
+              pathname: SIGN_IN_ROUTE.getPath(),
               state: { from: props.location },
             }}
           />

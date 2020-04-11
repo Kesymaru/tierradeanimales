@@ -15,7 +15,7 @@ export const FOSTER_HOMES_ROUTE = createRoute({
   icon: HouseIcon,
 });
 
-export const EDIT_FOSTER_HOME_ROUTE: Route = {
+export const EDIT_FOSTER_HOME_ROUTE: Route = createRoute({
   name: "Edit Foster Home",
   path: `${FOSTER_HOMES_ROUTE.path}/:id`,
   defaultParams: { id: "new" },
@@ -23,7 +23,7 @@ export const EDIT_FOSTER_HOME_ROUTE: Route = {
   component: EditFosterHome,
   parent: FOSTER_HOMES_ROUTE,
   icon: EditIcon,
-};
+});
 
 const FOSTER_HOME_ROUTES: Route[] = [
   EDIT_FOSTER_HOME_ROUTE,

@@ -14,10 +14,10 @@ export interface Route {
   icon?: ComponentType<any>;
   parent?: Route;
   defaultParams?: RouteParam;
+  getPath: (params?: RouteParam) => string;
 }
 
-export interface RouteFactoryParams
-  extends Omit<Route, "getPath" | "exact" | "auth"> {
+export interface CreateRoute extends Omit<Route, "getPath" | "exact" | "auth"> {
   exact?: boolean;
   auth?: boolean;
 }

@@ -1,4 +1,5 @@
 import Route from "@core/models/route";
+import createRoute from "@core/utils/createRoute";
 import NotFound from "@core/components/NotFound";
 
 import AUTH_ROUTES from "@app/auth/routes";
@@ -12,11 +13,11 @@ import FOSTER_HOME_ROUTES from "@app/foster-home/routes";
 // ------------------------------------
 // 404 no match
 // ------------------------------------
-export const NOT_FOUND_ROUTE: Route = {
+export const NOT_FOUND_ROUTE: Route = createRoute({
   name: "404",
   path: "*",
   component: NotFound,
-};
+});
 
 // ------------------------------------
 // Navbar Routes

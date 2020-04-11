@@ -1,14 +1,9 @@
 import { generatePath } from "react-router";
 
-import {
-  Route,
-  RouteParam,
-  RouteFactoryParams,
-  RouteDefaults,
-} from "../models/route";
+import { Route, RouteParam, CreateRoute, RouteDefaults } from "../models/route";
 
 export function createRoute(
-  params: RouteFactoryParams,
+  params: CreateRoute,
   defaults: RouteDefaults = { auth: false, exact: false }
 ): Route {
   let _getPath = getPath(params.path, params.defaultParams || {});
