@@ -32,7 +32,7 @@ const HomePage: FunctionComponent<{}> = () => {
     <div className={classes.container}>
       <About />
       <Values />
-      <Mission />
+      {/* <Mission /> */}
       <Donate />
       <ContactUs />
       <FollowUs />

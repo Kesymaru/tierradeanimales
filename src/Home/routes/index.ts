@@ -1,7 +1,7 @@
 import HomeIcon from "@material-ui/icons/Home";
 
 import Route from "@core/models/route";
-import Home from "../components/Home";
+import Home from "../screens/Home";
 
 // ------------------------------------
 // Home
