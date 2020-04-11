@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useState, Suspense, ReactNode } from "react";
+import React, { FunctionComponent, useState, Suspense } from "react";
 import { ConnectedRouter } from "connected-react-router";
 import { useSelector } from "react-redux";
-import { isLoaded, isEmpty } from "react-redux-firebase";
+import { isLoaded } from "react-redux-firebase";
 
 import Container from "@material-ui/core/Container";
 import LinearProgress from "@material-ui/core/LinearProgress";
