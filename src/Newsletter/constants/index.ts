@@ -3,7 +3,7 @@ import "firebase/firestore";
 
 import { Newsletter } from "../models";
 
-export const NEWSLETTER_STORE: string = "newsletter";
+export const NEWSLETTER_PATH: string = "newsletter";
 
 export const INIT_NEWSLETTER: Newsletter = {
   email: "",

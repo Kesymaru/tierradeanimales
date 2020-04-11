@@ -18,7 +18,7 @@ import SendIcon from "@material-ui/icons/Send";
 
 import { Newsletter } from "../models";
 import { Alert, AlertProps } from "@core/components/Alert";
-import { INIT_NEWSLETTER, NEWSLETTER_STORE } from "../constants";
+import { INIT_NEWSLETTER, NEWSLETTER_PATH } from "../constants";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,7 +47,7 @@ export const NewsletterSubscriber: FunctionComponent<{}> = () => {
 
   async function handleNewsletter(event: MouseEvent<HTMLElement>) {
     try {
-      await firestore.add(NEWSLETTER_STORE, newsletter);
+      await firestore.add(NEWSLETTER_PATH, newsletter);
       setAlert({
         ...alert,
         open: true,

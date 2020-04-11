@@ -1,10 +1,14 @@
+import * as firebase from "firebase";
+import "firebase/firestore";
+
 import Contact from "../models";
 
-export const InitContact: Contact = {
+export const INIT_CONTACT: Contact = {
   name: "",
   email: "",
   phone: "",
   message: "",
+  createdAt: firebase.firestore.FieldValue.serverTimestamp(),
 };
 
-export const HomeImages: string[] = ["image/here.png", "image/2.png"];
+export default INIT_CONTACT;

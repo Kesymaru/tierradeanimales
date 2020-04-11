@@ -17,7 +17,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import SendIcon from "@material-ui/icons/Send";
 
 import { Newsletter } from "../models";
-import { INIT_NEWSLETTER, NEWSLETTER_STORE } from "../constants";
+import { INIT_NEWSLETTER, NEWSLETTER_PATH } from "../constants";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,7 +39,7 @@ export const NewsletterUnsubscriber: FunctionComponent<{}> = () => {
   });
 
   function handleNewsletter(event: MouseEvent<HTMLElement>) {
-    return firestore.add(NEWSLETTER_STORE, newsletter);
+    return firestore.add(NEWSLETTER_PATH, newsletter);
   }
 
   function handleNewsletterChange(event: ChangeEvent<HTMLInputElement>) {

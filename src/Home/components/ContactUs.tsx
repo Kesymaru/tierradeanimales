@@ -4,7 +4,7 @@ import React, {
   FunctionComponent,
   useState,
 } from "react";
-import { useDispatch } from "react-redux";
+import { useFirestore } from "react-redux-firebase";
 import { useTranslation } from "react-i18next";
 
 import Container from "@material-ui/core/Container";
@@ -22,7 +22,9 @@ import EmailIcon from "@material-ui/icons/Email";
 import PhoneIcon from "@material-ui/icons/Phone";
 import MessageIcon from "@material-ui/icons/Message";
 
-import { Contact, InitContact } from "@app/home";
+import { Alert, AlertProps } from "@core/components/Alert";
+import Contact from "../models";
+import INIT_CONTACT from "../constants";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,21 +36,39 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const ContactUs: FunctionComponent<{}> = () => {
   const classes = useStyles();
-  const distpatch = useDispatch();
+  const firestore = useFirestore();
   const { t } = useTranslation();
-  const [data, setData] = useState<Contact>(InitContact);
+  const [contact, setContact] = useState<Contact>(INIT_CONTACT);
+  const [alert, setAlert] = useState<AlertProps>({
+    open: false,
+    message: "",
+    setOpen,
+  });
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    try {
+      await firestore.add("contact", contact);
+      setAlert({ ...alert, message: "Contact message send successfully" });
+    } catch (err) {
+      setAlert({ ...alert, message: "Error sending contact message" });
+    }
   }
 
   function handleReset() {
-    setData(InitContact);
+    setContact(INIT_CONTACT);
   }
 
   function handleChange(field: keyof Contact) {
     return (event: ChangeEvent<HTMLInputElement>) =>
-      setData({ ...data, [`${field}`]: event.target.value });
+      setContact({ ...contact, [`${field}`]: event.target.value });
+  }
+
+  function setOpen(value: boolean) {
+    setAlert({
+      ...alert,
+      open: value,
+    });
   }
 
   return (
@@ -76,7 +96,7 @@ export const ContactUs: FunctionComponent<{}> = () => {
                   </InputAdornment>
                 ),
               }}
-              value={data.name}
+              value={contact.name}
               onChange={handleChange("name")}
             />
           </Grid>
@@ -93,7 +113,7 @@ export const ContactUs: FunctionComponent<{}> = () => {
                   </InputAdornment>
                 ),
               }}
-              value={data.phone}
+              value={contact.phone}
               onChange={handleChange("phone")}
             />
           </Grid>
@@ -110,7 +130,7 @@ export const ContactUs: FunctionComponent<{}> = () => {
                   </InputAdornment>
                 ),
               }}
-              value={data.email}
+              value={contact.email}
               onChange={handleChange("email")}
             />
           </Grid>
@@ -128,7 +148,7 @@ export const ContactUs: FunctionComponent<{}> = () => {
                   </InputAdornment>
                 ),
               }}
-              value={data.message}
+              value={contact.message}
               onChange={handleChange("message")}
             />
           </Grid>
@@ -158,6 +178,7 @@ export const ContactUs: FunctionComponent<{}> = () => {
           </Grid>
         </Grid>
       </form>
+      <Alert {...alert} />
     </Container>
   );
 };
