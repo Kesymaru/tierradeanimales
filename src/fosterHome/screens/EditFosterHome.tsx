@@ -30,11 +30,11 @@ import SendIcon from "@material-ui/icons/Send";
 import CollectionsConfig from "@core/config/firestore";
 import AppState from "@core/models/store";
 import useId from "@core/hooks/useId";
-import FosterHome from "../models/foster-home";
+import FosterHome from "../models/fosterHome";
 import HomeContacts from "../components/ForterHomeContacts";
 import Address from "@app/user/components/Address";
 import { FOSTER_HOMES_ROUTE } from "../routes";
-import INIT_HOME from "../constants/foster-home";
+import INIT_HOME from "../constants/fosterHome";
 
 const { fosterHome: COLLECTION_PATH } = CollectionsConfig;
 
