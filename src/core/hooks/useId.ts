@@ -6,7 +6,7 @@ export function useId(path: string = "id"): RouteParams {
   const params = useParams() as any;
   let id = params[path];
   const isNew = id && id.toLowerCase() === "new";
-  id = isNew ? undefined : isNew;
+  id = isNew ? undefined : id;
 
   return { id, isNew, params };
 }
