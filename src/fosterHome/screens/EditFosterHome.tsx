@@ -88,7 +88,6 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
     <Container>
       <AppTitle
         title={isNew ? t("fosterHome.addTitle") : t("fosterHome.editTitle")}
-        route={true}
       />
       <Alert {...alert} />
       <form

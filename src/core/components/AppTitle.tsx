@@ -8,7 +8,6 @@ import { ChangeTitle } from "@core/actions/route";
 export interface AppTitleProps {
   title: string;
   prefix?: boolean;
-  route?: boolean;
   children?: ReactElement;
 }
 
@@ -17,7 +16,7 @@ export const AppTitle: FunctionComponent<AppTitleProps> = (props) => {
   const route = useRoute();
   const dispatch = useDispatch();
 
-  if (props.route && route) {
+  if (route) {
     route.title = props.title;
     dispatch(ChangeTitle(route));
   }
