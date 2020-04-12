@@ -109,7 +109,6 @@ interface ErrorCounties {
 }
 
 interface LoadCounties extends Action<GeonamesTypes.LOAD_COUNTIES> {
-  // type: typeof GeonamesTypes.LOAD_COUNTIES;
   payload: any[];
 }
 
