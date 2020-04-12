@@ -82,7 +82,7 @@ export const AppBar: FunctionComponent<AppBarProps> = (props) => {
         </Toolbar>
       </MaterialAppBar>
       <div id={props.anchorId} />
-      <Slide direction="down" in={!!routes.length} mountOnEnter unmountOnExit>
+      <Slide direction="down" in={routes.length > 1} mountOnEnter unmountOnExit>
         <MaterialAppBar
           color="primary"
           position="static"
