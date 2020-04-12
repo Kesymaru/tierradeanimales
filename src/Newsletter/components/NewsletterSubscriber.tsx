@@ -25,7 +25,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import SendIcon from "@material-ui/icons/Send";
 
 import AppState from "@core/models/store";
-import { Alert, AlertProps } from "@core/components/AppAlert";
+import { AppAlert, AppAlertProps } from "@core/components/AppAlert";
 import { Newsletter } from "../models";
 import { INIT_NEWSLETTER, NEWSLETTER_PATH } from "../constants";
 
@@ -52,7 +52,7 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
   const { t } = useTranslation();
   const firestore = useFirestore();
   const [newsletter, setNewsletter] = useState<Newsletter>(INIT_NEWSLETTER);
-  const [alert, setAlert] = useState<AlertProps>({ message: "" });
+  const [alert, setAlert] = useState<AppAlertProps>({ message: "" });
   useFirestoreConnect({
     collection: NEWSLETTER_PATH,
     where: ["email", "==", newsletter.email],
@@ -148,7 +148,7 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
         helperText={error ? t(`newsletter.${props.mode}.invalid`) : undefined}
         error={error}
       />
-      <Alert {...alert} />
+      <AppAlert {...alert} />
     </>
   );
 };

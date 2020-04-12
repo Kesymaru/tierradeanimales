@@ -8,11 +8,11 @@ import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert, { AlertProps as MuiAlertProps } from "@material-ui/lab/Alert";
 
-export interface AlertProps extends MuiAlertProps {
+export interface AppAlertProps extends MuiAlertProps {
   message: string;
 }
 
-export const Alert: FunctionComponent<AlertProps> = (props) => {
+export const AppAlert: FunctionComponent<AppAlertProps> = (props) => {
   const { message, ...muiAlert } = props;
   const [open, setOpen] = useState<boolean>(!!props.message.length);
   useEffect(() => {
@@ -33,4 +33,4 @@ export const Alert: FunctionComponent<AlertProps> = (props) => {
   );
 };
 
-export default Alert;
+export default AppAlert;

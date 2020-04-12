@@ -23,7 +23,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import PhoneIcon from "@material-ui/icons/Phone";
 import MessageIcon from "@material-ui/icons/Message";
 
-import { Alert, AlertProps } from "@core/components/AppAlert";
+import { AppAlert, AppAlertProps } from "@core/components/AppAlert";
 import Contact from "../models";
 import INIT_CONTACT from "../constants";
 
@@ -40,7 +40,7 @@ export const ContactUs: FunctionComponent<{}> = () => {
   const firestore = useFirestore();
   const { t } = useTranslation();
   const [contact, setContact] = useState<Contact>(INIT_CONTACT);
-  const [alert, setAlert] = useState<AlertProps>({ message: "" });
+  const [alert, setAlert] = useState<AppAlertProps>({ message: "" });
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -178,7 +178,7 @@ export const ContactUs: FunctionComponent<{}> = () => {
           </Grid>
         </Grid>
       </form>
-      <Alert {...alert} />
+      <AppAlert {...alert} />
     </Container>
   );
 };

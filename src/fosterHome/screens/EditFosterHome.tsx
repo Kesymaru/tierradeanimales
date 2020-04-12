@@ -36,7 +36,7 @@ import HomeContacts from "../components/ForterHomeContacts";
 import Address from "@app/user/components/Address";
 import { FOSTER_HOMES_ROUTE } from "../routes";
 import INIT_HOME from "../constants/fosterHome";
-import { AppTitle, Alert, AlertProps } from "@core/components";
+import { AppTitle, AppAlert, AppAlertProps } from "@core/components";
 
 import { EDIT_FOSTER_HOME_ROUTE } from "../routes";
 import AppLoading from "@core/components/AppLoading";
@@ -58,7 +58,7 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
       : get(state, `firestore.data.${COLLECTION_PATH}.${id}`, INIT_HOME)
   );
   const [home, setHome] = useState<FosterHome>(initHome);
-  const [alert, setAlert] = useState<AlertProps>({ message: "" });
+  const [alert, setAlert] = useState<AppAlertProps>({ message: "" });
   const { t } = useTranslation();
   const loading = !isNew && !isLoaded(initHome);
 
@@ -100,7 +100,7 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
         <AppTitle
           title={isNew ? t("fosterHome.addTitle") : t("fosterHome.editTitle")}
         />
-        <Alert {...alert} />
+        <AppAlert {...alert} />
         <form
           noValidate
           autoComplete="off"
