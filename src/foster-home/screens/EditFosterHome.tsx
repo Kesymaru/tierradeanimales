@@ -27,7 +27,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import CloseIcon from "@material-ui/icons/Close";
 import SendIcon from "@material-ui/icons/Send";
 
-import { CollectionsConfig } from "@core/config";
+import CollectionsConfig from "@core/config/firestore";
 import AppState from "@core/models/store";
 import useId from "@core/hooks/useId";
 import FosterHome from "../models/foster-home";
@@ -36,12 +36,14 @@ import Address from "@app/user/components/Address";
 import { FOSTER_HOMES_ROUTE } from "../routes";
 import INIT_HOME from "../constants/foster-home";
 
+const { fosterHome: COLLECTION_PATH } = CollectionsConfig;
+
 export const EditFosterHome: FunctionComponent<{}> = (props) => {
   const history = useHistory();
   const firestore = useFirestore();
   const { isNew, id } = useId();
   /* const query: ReduxFirestoreQuerySetting = {
-    collection: FirestorePathConfig.fosterHome,
+    collection: COLLECTION_PATH,
     limit: 1,
     doc: id,
   };
@@ -56,7 +58,7 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
     event.preventDefault();
     const save = isNew ? firestore.add : firestore.update;
     try {
-      await save(CollectionsConfig.fosterHome, home);
+      await save(COLLECTION_PATH, home);
       console.log("added/updated", home);
     } catch (err) {
       console.error("error saving/updating", home);
@@ -64,7 +66,6 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
   }
 
   function handleReset(event: FormEvent) {
-    // if (isNew) return history.push(FOSTER_HOMES_ROUTE.getPath());
     setHome(initHome);
   }
 
@@ -134,7 +135,7 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
                 startIcon={<CloseIcon />}
                 fullWidth
               >
-                Cancel
+                Reset
               </Button>
             </Tooltip>
           </Grid>
