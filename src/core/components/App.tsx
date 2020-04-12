@@ -9,7 +9,13 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import Router from "../../wrappers/Router";
 import Route from "@core/models/route";
 import { AppHistory } from "@core/store";
-import { AppBar, Navbar, ScrollTop, Copyright } from "@core/components";
+import {
+  AppBar,
+  AppLoading,
+  Navbar,
+  ScrollTop,
+  Copyright,
+} from "@core/components";
 import { ROUTES } from "@core/routes";
 import { HOME_ROUTE } from "@app/home";
 import AppState from "@core/models/store";
@@ -27,12 +33,8 @@ const AppLoader: FunctionComponent = () => (
 
 const AuthIsLoaded: FunctionComponent<any> = (props) => {
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);
-  if (!isLoaded(auth))
-    return (
-      <Container style={{ marginTop: 150 }}>
-        <LinearProgress color="primary" variant="indeterminate" />
-      </Container>
-    );
+  const loading = !isLoaded(auth);
+  if (loading) return <AppLoading loading={loading} />;
   return props.children;
 };
 
@@ -43,7 +45,7 @@ export const App: FunctionComponent<{}> = () => {
       <ConnectedRouter history={AppHistory}>
         <AppBar open={open} setOpen={setOpen} anchorId={anchorId} />
         <Navbar open={open} setOpen={setOpen} />
-        <main style={{ marginTop: 60 }}>
+        <main>
           <AuthIsLoaded>
             <Router routes={ROUTES} />
           </AuthIsLoaded>
