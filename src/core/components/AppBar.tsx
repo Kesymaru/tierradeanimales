@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import { isEmpty, isLoaded } from "react-redux-firebase";
-import { useTranslation } from "react-i18next";
+import get from "lodash/get";
 
 import { default as MaterialAppBar } from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -14,12 +13,12 @@ import Slide from "@material-ui/core/Slide";
 import Link from "@material-ui/core/Link";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
+import AppState from "@core/models/store";
+import { Route, RouteState } from "@core/models/route";
 import ROUTES from "@core/routes";
 import useRoutes from "@core/hooks/useRoutes";
 import LanguageMenu from "./LanguageMenu";
-import AppState from "../models/store";
-import useId from "@core/hooks/useId";
-import { CustomName } from "@core/models/route";
+import { useTranslation } from "react-i18next";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
@@ -50,12 +49,18 @@ interface AppBarProps {
 
 export const AppBar: FunctionComponent<AppBarProps> = (props) => {
   const classes = useStyles();
-  const routes = useRoutes(ROUTES);
-  const params = useId();
   const { t } = useTranslation();
-  const customName: CustomName = { ...params, t };
-  const auth = useSelector<AppState, any>((state) => state.firebase.auth);
-  const logged = isLoaded(auth) && !isEmpty(auth);
+  const routes = useRoutes(ROUTES);
+  const state = useSelector<AppState, RouteState>((state) => state.route);
+
+  console.log("app bar route", state);
+
+  function getName(route: Route): string {
+    const name = t(route.name);
+    return route.path === get(state, "current.path")
+      ? get(state, "current.title", name)
+      : name;
+  }
 
   return (
     <>
@@ -77,12 +82,7 @@ export const AppBar: FunctionComponent<AppBarProps> = (props) => {
         </Toolbar>
       </MaterialAppBar>
       <div id={props.anchorId} />
-      <Slide
-        direction="down"
-        in={logged && 1 < routes.length}
-        mountOnEnter
-        unmountOnExit
-      >
+      <Slide direction="down" in={!!routes.length} mountOnEnter unmountOnExit>
         <MaterialAppBar
           color="primary"
           position="static"
@@ -97,9 +97,7 @@ export const AppBar: FunctionComponent<AppBarProps> = (props) => {
               {routes.map((route, index) =>
                 index === routes.length - 1 ? (
                   <Typography key={index} style={{ color: "#FFF" }}>
-                    {route.customName
-                      ? route.customName(customName, route)
-                      : route.name}
+                    {getName(route)}
                   </Typography>
                 ) : (
                   <Link
@@ -108,9 +106,7 @@ export const AppBar: FunctionComponent<AppBarProps> = (props) => {
                     to={route.path}
                     className={classes.breadcrumbs}
                   >
-                    {route.customName
-                      ? route.customName(customName, route)
-                      : route.name}
+                    {getName(route)}
                   </Link>
                 )
               )}

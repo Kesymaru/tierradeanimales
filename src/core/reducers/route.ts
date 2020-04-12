@@ -9,7 +9,7 @@ export function RouteReducer(
     case RouteActions.CHANGE_TITLE:
       return {
         ...state,
-        route: action.payload,
+        current: action.payload,
       };
 
     case RouteActions.RESET:
