@@ -52,11 +52,7 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
   const { t } = useTranslation();
   const firestore = useFirestore();
   const [newsletter, setNewsletter] = useState<Newsletter>(INIT_NEWSLETTER);
-  const [alert, setAlert] = useState<AlertProps>({
-    open: false,
-    message: "",
-    setOpen,
-  });
+  const [alert, setAlert] = useState<AlertProps>({ message: "" });
   useFirestoreConnect({
     collection: NEWSLETTER_PATH,
     where: ["email", "==", newsletter.email],
@@ -74,10 +70,6 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
   );
   const translations = t(`newsletter.${props.mode}`, { returnObjects: true });
 
-  function setOpen(value: boolean) {
-    setAlert({ ...alert, open: value });
-  }
-
   function getError(): boolean {
     if (!isLoaded(found) || newsletter.email.length < 3) return false;
     return props.mode === "subscribe" ? !isEmpty(found) : isEmpty(found);
@@ -86,14 +78,10 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
   async function handleSubscribe(event: MouseEvent<HTMLElement>) {
     try {
       await firestore.add(NEWSLETTER_PATH, newsletter);
-      setAlert({
-        ...alert,
-        open: true,
-        message: t("newsletter.success"),
-      });
+      setAlert({ color: "success", message: t("newsletter.success") });
       setNewsletter(INIT_NEWSLETTER);
     } catch (err) {
-      setAlert({ ...alert, open: true, message: t("newsletter.error") });
+      setAlert({ color: "error", message: t("newsletter.error") });
     }
   }
 
@@ -104,15 +92,13 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
         doc: Object.keys(found)[0],
       });
       setAlert({
-        ...alert,
-        open: true,
+        color: "success",
         message: t(`newsletter.${props.mode}.success`),
       });
       setNewsletter(INIT_NEWSLETTER);
     } catch (err) {
       setAlert({
-        ...alert,
-        open: true,
+        color: "error",
         message: t(`newsletter.${props.mode}.error`),
       });
     }

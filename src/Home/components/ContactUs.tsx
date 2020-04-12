@@ -40,25 +40,19 @@ export const ContactUs: FunctionComponent<{}> = () => {
   const firestore = useFirestore();
   const { t } = useTranslation();
   const [contact, setContact] = useState<Contact>(INIT_CONTACT);
-  const [alert, setAlert] = useState<AlertProps>({
-    open: false,
-    message: "",
-    setOpen,
-  });
+  const [alert, setAlert] = useState<AlertProps>({ message: "" });
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     try {
       await firestore.add("contact", contact);
       setAlert({
-        ...alert,
-        open: true,
+        color: "success",
         message: t("contact.success"),
       });
     } catch (err) {
       setAlert({
-        ...alert,
-        open: true,
+        color: "error",
         message: t("contact.error"),
       });
     }
@@ -71,13 +65,6 @@ export const ContactUs: FunctionComponent<{}> = () => {
   function handleChange(field: keyof Contact) {
     return (event: ChangeEvent<HTMLInputElement>) =>
       setContact({ ...contact, [`${field}`]: event.target.value });
-  }
-
-  function setOpen(value: boolean) {
-    setAlert({
-      ...alert,
-      open: value,
-    });
   }
 
   return (
