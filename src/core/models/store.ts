@@ -4,12 +4,14 @@ import { FirebaseReducer } from "react-redux-firebase";
 
 import GeonamesState from "@core/models/geonames";
 import User from "@app/user/models/user";
+import { RouteState } from "../models/route";
 import FirestoreSchema from "./firestore";
 
 export interface AppState {
   firebase: FirebaseReducer.Reducer<User, {}>;
   firestore: FirestoreSchema;
   router: RouterState;
+  route: RouteState;
   geonames: GeonamesState;
 }
 
@@ -19,7 +21,6 @@ export interface State<T> {
   isEmpty: boolean;
 }
 
-// create schema for the DB
 // export interface DBSchema extends NewsletterState {}
 // export type AppState = ReturnType<typeof rootReducer>;
 

@@ -23,6 +23,7 @@ import { firestoreReducer, createFirestoreInstance } from "redux-firestore";
 import AppState from "../models/store";
 import FirestoreSchema from "../models/firestore";
 import { FirebaseConfig } from "../config";
+import RouteReducer from "../reducers/route";
 import GeonamesReducers from "../reducers/geonames";
 
 // Store
@@ -49,6 +50,7 @@ export function configureStore(): Store {
     firebase: firebaseReducer,
     firestore: firestoreReducer as Reducer<FirestoreSchema>,
     router: connectRouter(AppHistory),
+    route: RouteReducer,
     geonames: GeonamesReducers,
   });
 
