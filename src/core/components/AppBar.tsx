@@ -91,7 +91,7 @@ export const AppBar: FunctionComponent<AppBarProps> = (props) => {
           <Toolbar variant="dense">
             <Breadcrumbs
               aria-label="breadcrumb"
-              maxItems={2}
+              maxItems={3}
               className={classes.breadcrumbs}
             >
               {routes.map((route, index) =>
