@@ -27,21 +27,25 @@ import AddIcon from "@material-ui/icons/Add";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 // import { EDIT_FOSTER_HOME_ROUTE } from "@/FosterHome/routes";
+import AppTitle from "@core/components/AppTitle";
 
 export const FosterHomes: FunctionComponent<{}> = (props) => {
   return (
-    <div>
-      <p>here goes the foster home list</p>
-      <p>here goes the foster home list</p>
-      <p>here goes the foster home list</p>
-      <p>here goes the foster home list</p>
-      <p>here goes the foster home list</p>
-      <p>here goes the foster home list</p>
-      <p>here goes the foster home list</p>
-      <p>here goes the foster home list</p>
-      <p>here goes the foster home list</p>
-      <p>here goes the foster home list</p>
-    </div>
+    <>
+      <AppTitle title="Prueba" />
+      <div>
+        <p>here goes the foster home list</p>
+        <p>here goes the foster home list</p>
+        <p>here goes the foster home list</p>
+        <p>here goes the foster home list</p>
+        <p>here goes the foster home list</p>
+        <p>here goes the foster home list</p>
+        <p>here goes the foster home list</p>
+        <p>here goes the foster home list</p>
+        <p>here goes the foster home list</p>
+        <p>here goes the foster home list</p>
+      </div>
+    </>
   );
 
   /* const dispatch = useDispatch();

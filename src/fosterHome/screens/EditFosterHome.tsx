@@ -13,6 +13,7 @@ import {
   isEmpty,
   ReduxFirestoreQuerySetting,
 } from "react-redux-firebase";
+import { useTranslation } from "react-i18next";
 import get from "lodash/get";
 
 import Container from "@material-ui/core/Container";
@@ -35,6 +36,9 @@ import HomeContacts from "../components/ForterHomeContacts";
 import Address from "@app/user/components/Address";
 import { FOSTER_HOMES_ROUTE } from "../routes";
 import INIT_HOME from "../constants/fosterHome";
+import { AppTitle, Alert, AlertProps } from "@core/components";
+
+import { EDIT_FOSTER_HOME_ROUTE } from "../routes";
 
 const { fosterHome: COLLECTION_PATH } = CollectionsConfig;
 
@@ -52,6 +56,8 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
     get(state, "firestore.data.foster-home", INIT_HOME)
   );
   const [home, setHome] = useState<FosterHome>(initHome);
+  const [alert, setAlert] = useState<AlertProps>({ message: "" });
+  const { t } = useTranslation();
   const loading = !isNew && !isLoaded(home);
 
   async function handleSubmit(event: FormEvent) {
@@ -59,9 +65,10 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
     const save = isNew ? firestore.add : firestore.update;
     try {
       await save(COLLECTION_PATH, home);
-      console.log("added/updated", home);
+      setAlert({ color: "success", message: `Home added succesfuly` });
     } catch (err) {
       console.error("error saving/updating", home);
+      setAlert({ color: "error", message: t("newsletter.success") });
     }
   }
 
@@ -79,6 +86,11 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
 
   return (
     <Container>
+      <AppTitle
+        title={isNew ? t("fosterHome.addTitle") : t("fosterHome.editTitle")}
+        route={true}
+      />
+      <Alert {...alert} />
       <form
         noValidate
         autoComplete="off"

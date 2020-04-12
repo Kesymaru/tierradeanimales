@@ -9,7 +9,6 @@ import { FosterHomes, EditFosterHome } from "../screens";
 export const FOSTER_HOMES_ROUTE = createRoute({
   name: "Foster Homes",
   path: "/homes",
-  customName: ({ t }) => t("fosterHome.title"),
   auth: true,
   component: FosterHomes,
   parent: ADMIN_DASHBOARD_ROUTE,
@@ -18,10 +17,6 @@ export const FOSTER_HOMES_ROUTE = createRoute({
 
 export const EDIT_FOSTER_HOME_ROUTE: Route = createRoute({
   name: "Edit Foster Home",
-  customName: ({ isNew, t }, route) => {
-    console.log("is new", isNew);
-    return isNew ? t("fosterHome.addTitle") : t("fosterHome.editTitle");
-  },
   path: `${FOSTER_HOMES_ROUTE.path}/:id`,
   defaultParams: { id: "new" },
   auth: true,
