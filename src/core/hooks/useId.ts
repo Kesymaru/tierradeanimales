@@ -1,13 +1,14 @@
 import { useParams } from "react-router-dom";
 
-export function useId(
-  field: string = "id"
-): { isNew: boolean; id: string | undefined } {
-  const params = useParams() as any;
-  const id = params[field];
-  const isNew = id && id.toLowerCase() === "new";
+import { RouteParams } from "../models/route";
 
-  return { isNew, id };
+export function useId(path: string = "id"): RouteParams {
+  const params = useParams() as any;
+  let id = params[path];
+  const isNew = id && id.toLowerCase() === "new";
+  id = isNew ? undefined : isNew;
+
+  return { id, isNew, params };
 }
 
 export default useId;

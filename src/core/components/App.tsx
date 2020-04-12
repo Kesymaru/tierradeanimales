@@ -38,13 +38,12 @@ const AuthIsLoaded: FunctionComponent<any> = (props) => {
 
 export const App: FunctionComponent<{}> = () => {
   const [open, setOpen] = useState<boolean>(false);
-
   return (
     <Suspense fallback={<AppLoader />}>
       <ConnectedRouter history={AppHistory}>
         <AppBar open={open} setOpen={setOpen} anchorId={anchorId} />
         <Navbar open={open} setOpen={setOpen} />
-        <main>
+        <main style={{ marginTop: 60 }}>
           <AuthIsLoaded>
             <Router routes={ROUTES} />
           </AuthIsLoaded>

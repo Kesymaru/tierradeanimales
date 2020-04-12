@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import { useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { isEmpty, isLoaded } from "react-redux-firebase";
+import { useTranslation } from "react-i18next";
 
 import { default as MaterialAppBar } from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -17,6 +18,8 @@ import ROUTES from "@core/routes";
 import useRoutes from "@core/hooks/useRoutes";
 import LanguageMenu from "./LanguageMenu";
 import AppState from "../models/store";
+import useId from "@core/hooks/useId";
+import { CustomName } from "@core/models/route";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
@@ -48,6 +51,9 @@ interface AppBarProps {
 export const AppBar: FunctionComponent<AppBarProps> = (props) => {
   const classes = useStyles();
   const routes = useRoutes(ROUTES);
+  const params = useId();
+  const { t } = useTranslation();
+  const customName: CustomName = { ...params, t };
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);
   const logged = isLoaded(auth) && !isEmpty(auth);
 
@@ -85,13 +91,15 @@ export const AppBar: FunctionComponent<AppBarProps> = (props) => {
           <Toolbar variant="dense">
             <Breadcrumbs
               aria-label="breadcrumb"
-              maxItems={4}
+              maxItems={2}
               className={classes.breadcrumbs}
             >
               {routes.map((route, index) =>
                 index === routes.length - 1 ? (
                   <Typography key={index} style={{ color: "#FFF" }}>
-                    {route.name}
+                    {route.customName
+                      ? route.customName(customName, route)
+                      : route.name}
                   </Typography>
                 ) : (
                   <Link
@@ -100,7 +108,9 @@ export const AppBar: FunctionComponent<AppBarProps> = (props) => {
                     to={route.path}
                     className={classes.breadcrumbs}
                   >
-                    {route.name}
+                    {route.customName
+                      ? route.customName(customName, route)
+                      : route.name}
                   </Link>
                 )
               )}

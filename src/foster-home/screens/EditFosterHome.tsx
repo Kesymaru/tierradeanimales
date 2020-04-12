@@ -39,12 +39,12 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
   const history = useHistory();
   const firestore = useFirestore();
   const { isNew, id } = useId();
-  const query: ReduxFirestoreQuerySetting = {
+  /* const query: ReduxFirestoreQuerySetting = {
     collection: "foster-home",
     limit: 1,
     doc: id,
   };
-  useFirestoreConnect(query);
+  useFirestoreConnect(query); */
   const initHome = useSelector<AppState, FosterHome>((state) =>
     get(state, "firestore.data.foster-home", INIT_HOME)
   );

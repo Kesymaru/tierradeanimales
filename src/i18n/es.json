@@ -149,6 +149,11 @@
         "error": "Error al desuscribirse el boletin",
         "invalid": "Email invalido"
       }
+    },
+    "fosterHome": {
+      "title": "Casa Cuna",
+      "editTitle": "Editar Casa Cuna",
+      "addTitle": "Crear Casa Cuna"
     }
   }
 }
