@@ -44,7 +44,7 @@ export enum RouteActions {
 }
 
 export interface RouteState {
-  route: Route | null;
+  current: Route | null;
 }
 
 interface ChangeTitle extends Action<RouteActions.CHANGE_TITLE> {
