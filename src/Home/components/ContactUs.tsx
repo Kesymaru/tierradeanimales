@@ -23,7 +23,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import PhoneIcon from "@material-ui/icons/Phone";
 import MessageIcon from "@material-ui/icons/Message";
 
-import { Alert, AlertProps } from "@core/components/Alert";
+import { Alert, AlertProps } from "@core/components/AppAlert";
 import Contact from "../models";
 import INIT_CONTACT from "../constants";
 

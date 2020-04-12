@@ -1,5 +1,5 @@
-export * from "./Alert";
 export * from "./App";
+export * from "./AppAlert";
 export * from "./AppBar";
 export * from "./AppLoading";
 export * from "./AppTitle";

@@ -25,7 +25,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import SendIcon from "@material-ui/icons/Send";
 
 import AppState from "@core/models/store";
-import { Alert, AlertProps } from "@core/components/Alert";
+import { Alert, AlertProps } from "@core/components/AppAlert";
 import { Newsletter } from "../models";
 import { INIT_NEWSLETTER, NEWSLETTER_PATH } from "../constants";
 
