@@ -9,4 +9,8 @@ export interface FirebaseConfiguration {
   measurementId?: string;
 }
 
+export interface CollectionsConfiguration {
+  [key: string]: string;
+}
+
 export default FirebaseConfiguration;

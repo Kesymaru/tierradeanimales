@@ -27,20 +27,21 @@ import HomeIcon from "@material-ui/icons/Home";
 import CloseIcon from "@material-ui/icons/Close";
 import SendIcon from "@material-ui/icons/Send";
 
+import { CollectionsConfig } from "@core/config";
 import AppState from "@core/models/store";
 import useId from "@core/hooks/useId";
 import FosterHome from "../models/foster-home";
 import HomeContacts from "../components/ForterHomeContacts";
 import Address from "@app/user/components/Address";
 import { FOSTER_HOMES_ROUTE } from "../routes";
-import { INIT_HOME } from "../constants";
+import INIT_HOME from "../constants/foster-home";
 
 export const EditFosterHome: FunctionComponent<{}> = (props) => {
   const history = useHistory();
   const firestore = useFirestore();
   const { isNew, id } = useId();
   /* const query: ReduxFirestoreQuerySetting = {
-    collection: "foster-home",
+    collection: FirestorePathConfig.fosterHome,
     limit: 1,
     doc: id,
   };
@@ -55,7 +56,7 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
     event.preventDefault();
     const save = isNew ? firestore.add : firestore.update;
     try {
-      await save("foster-home", home);
+      await save(CollectionsConfig.fosterHome, home);
       console.log("added/updated", home);
     } catch (err) {
       console.error("error saving/updating", home);

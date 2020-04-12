@@ -20,7 +20,8 @@ import {
 } from "react-redux-firebase";
 import { firestoreReducer, createFirestoreInstance } from "redux-firestore";
 
-import { AppState, DBSchema } from "../models";
+import AppState from "../models/store";
+import FirestoreSchema from "../models/firestore";
 import { FirebaseConfig } from "../config";
 import GeonamesReducers from "../reducers/geonames";
 
@@ -46,7 +47,7 @@ export function configureStore(): Store {
 
   const rootReducer: Reducer<AppState> = combineReducers<AppState>({
     firebase: firebaseReducer,
-    firestore: firestoreReducer as Reducer<DBSchema>,
+    firestore: firestoreReducer as Reducer<FirestoreSchema>,
     router: connectRouter(AppHistory),
     geonames: GeonamesReducers,
   });
