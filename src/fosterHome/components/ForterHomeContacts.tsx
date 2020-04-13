@@ -32,6 +32,9 @@ export interface HomeContactsProps {
 
 const HomeContacts: FunctionComponent<HomeContactsProps> = (props) => {
   const [contacts, setContacts] = useState<Contact[]>(props.contacts);
+  useEffect(() => {
+    setContacts(props.contacts);
+  }, [props]);
 
   function handleAdd(event: MouseEvent<HTMLButtonElement>) {
     const _contacts = [...contacts, { ...INIT_CONTACT }];
@@ -49,7 +52,7 @@ const HomeContacts: FunctionComponent<HomeContactsProps> = (props) => {
 
   function handleChange(index: number, field: keyof Contact) {
     return (event: ChangeEvent<HTMLInputElement>) => {
-      const contact = contacts[index] || undefined;
+      const contact = contacts[index] ? { ...contacts[index] } : null;
       if (!contact) return;
 
       contact[field] = get(event, "target.value", contact[field]);
