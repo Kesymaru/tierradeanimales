@@ -9,9 +9,10 @@ import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
-import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
-
-import Route from "../models/route";
+import InfoIcon from "@material-ui/icons/Info";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import WarningIcon from "@material-ui/icons/Warning";
+import ErrorIcon from "@material-ui/icons/Error";
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
@@ -30,31 +31,49 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export interface AppInfoProps {
   title: string;
-  message: string;
+  message?: string;
+  color?: "success" | "info" | "warning" | "error";
 }
 
 export const AppInfo: FunctionComponent<AppInfoProps> = (props) => {
   const classes = useStyles();
+  const color = props.color || "info";
+  const iconStyle = { height: 75, width: 75 };
+  let icon = <InfoIcon color="inherit" style={iconStyle} />;
+  if (color === "success")
+    icon = <CheckCircleIcon color="secondary" style={iconStyle} />;
+  if (color === "warning")
+    icon = <WarningIcon color="secondary" style={iconStyle} />;
+  if (color === "error") icon = <ErrorIcon color="action" style={iconStyle} />;
 
   return (
     <Slide in={true} direction="down">
       <Container style={{ padding: "20px 10" }}>
         <Card variant="elevation" raised={true} className={classes.card}>
-          <Box display="flex" flexDirection="column" alignSelf="center">
-            <ErrorOutlineIcon style={{ height: 85, width: 85 }} />
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignSelf="center"
+            style={{ padding: "16px" }}
+          >
+            {icon}
           </Box>
           <Box display="flex" flexDirection="column" flex="1 0 auto">
             <CardContent>
               <Typography component="h5" variant="h5">
                 {props.title}
               </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
-                {props.message}
-              </Typography>
+              {props.message && (
+                <Typography variant="subtitle1" color="textSecondary">
+                  {props.message}
+                </Typography>
+              )}
+              {props.children && (
+                <CardActions style={{ paddingLeft: 0 }}>
+                  {props.children}
+                </CardActions>
+              )}
             </CardContent>
-            {props.children ? (
-              <CardActions>{props.children}</CardActions>
-            ) : null}
           </Box>
         </Card>
       </Container>
