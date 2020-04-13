@@ -165,6 +165,10 @@
       "errors": {
         "empty": "Error: Casa Cuna",
         "emptyMessage": "No fue posible cargar la casa cuna solicitada"
+      },
+      "success": {
+        "add": "Casa Cuna creada",
+        "update": "Casa Cuna actualizada"
       }
     }
   }

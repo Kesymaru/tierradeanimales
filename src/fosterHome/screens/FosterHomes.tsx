@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useFirestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { useTranslation } from "react-i18next";
@@ -37,7 +37,7 @@ export const FosterHomes: FunctionComponent<{}> = (props) => {
   );
 
   if (!isLoaded(homes)) return <AppLoading loading={true} />;
-  if (isLoaded(homes) && isEmpty(homes))
+  if (isLoaded(homes) && isEmpty(homes)) {
     return (
       <AppInfo
         title={t("fosterHomes.errors.empty")}
@@ -54,6 +54,7 @@ export const FosterHomes: FunctionComponent<{}> = (props) => {
         </Button>
       </AppInfo>
     );
+  }
 
   return (
     <Container>

@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   useFirestore,
   useFirestoreConnect,
@@ -40,12 +40,14 @@ import INIT_HOME from "../constants/fosterHome";
 import { AppTitle } from "@core/components";
 
 import AppLoading from "@core/components/AppLoading";
+import { AddAlert } from "@core/actions/alert";
 import AppInfo from "@core/components/AppInfo";
 
 const { fosterHome: COLLECTION } = CollectionsConfig;
 
 export const EditFosterHome: FunctionComponent<{}> = (props) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const firestore = useFirestore();
   const { isNew, id } = useId();
   useFirestoreConnect({
@@ -67,6 +69,13 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
     try {
       if (isNew) await firestore.add(COLLECTION, home);
       else await firestore.update(`${COLLECTION}/${id}`, home);
+
+      dispatch(
+        AddAlert({
+          message: t(`fosterHome.success.${isNew ? "add" : "update"}`),
+          color: "success",
+        })
+      );
       history.push(FOSTER_HOMES_ROUTE.getPath());
     } catch (err) {
       console.error(err);
