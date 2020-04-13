@@ -65,10 +65,12 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    const save = isNew ? firestore.add : firestore.update;
     try {
-      await save(COLLECTION_PATH, home);
-    } catch (err) {}
+      if (isNew) await firestore.add(COLLECTION_PATH, home);
+      else await firestore.update(`${COLLECTION_PATH}/${id}`, home);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   function handleReset(event: FormEvent) {
