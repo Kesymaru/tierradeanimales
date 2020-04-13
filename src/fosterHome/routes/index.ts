@@ -8,7 +8,7 @@ import { FosterHomes, EditFosterHome } from "../screens";
 
 export const FOSTER_HOMES_ROUTE = createRoute({
   name: "Foster Homes",
-  path: "/homes",
+  path: "/fosterHomes",
   auth: true,
   component: FosterHomes,
   parent: ADMIN_DASHBOARD_ROUTE,
