@@ -40,6 +40,7 @@ import { AppTitle, AppAlert, AppAlertProps } from "@core/components";
 
 import { EDIT_FOSTER_HOME_ROUTE } from "../routes";
 import AppLoading from "@core/components/AppLoading";
+import AppInfo from "@core/components/AppInfo";
 
 const { fosterHome: COLLECTION_PATH } = CollectionsConfig;
 
@@ -49,41 +50,37 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
   const { isNew, id } = useId();
   useFirestoreConnect({
     collection: COLLECTION_PATH,
-    // limit: 1,
     doc: id,
   });
   const initHome = useSelector<AppState, FosterHome>((state) =>
-    isNew
-      ? INIT_HOME
-      : get(state, `firestore.data.${COLLECTION_PATH}.${id}`, INIT_HOME)
+    get(state, `firestore.data.${COLLECTION_PATH}.${id}`, null)
   );
-  const [home, setHome] = useState<FosterHome>(initHome);
-  const [alert, setAlert] = useState<AppAlertProps>({ message: "" });
-  const { t } = useTranslation();
   const loading = !isNew && !isLoaded(initHome);
+  const empty = !loading && isEmpty(initHome);
+  const [home, setHome] = useState<FosterHome>(!empty ? initHome : INIT_HOME);
+  const { t } = useTranslation();
 
-  useEffect(() => {
-    setHome(initHome);
-  }, [initHome]);
-
+  console.log("----------------");
   console.log("isNew", isNew);
   console.log("id", id);
   console.log("init", initHome);
+  console.log("home", home);
+  console.log("loading", loading);
+  console.log("is empty", isEmpty(initHome));
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     const save = isNew ? firestore.add : firestore.update;
     try {
       await save(COLLECTION_PATH, home);
-      setAlert({ color: "success", message: `Home added succesfuly` });
+      // setAlert({ color: "success", message: `Home added succesfuly` });
     } catch (err) {
-      console.error("error saving/updating", home);
-      setAlert({ color: "error", message: t("newsletter.success") });
+      // setAlert({ color: "error", message: t("newsletter.success") });
     }
   }
 
   function handleReset(event: FormEvent) {
-    setHome(initHome);
+    // setHome(initHome);
   }
 
   function handleChange(field: keyof FosterHome, value: any) {
@@ -96,11 +93,23 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
 
   return (
     <AppLoading loading={loading}>
+      <AppTitle
+        title={isNew ? t("fosterHome.addTitle") : t("fosterHome.editTitle")}
+      />
+      {/* <AppInfo
+        show={!loading && empty}
+        title={t("fosterHome.errors.loading")}
+        message={"Test \ntEST"}
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => history.push(FOSTER_HOMES_ROUTE.getPath())}
+        >
+          Ir Atras
+        </Button>
+      </AppInfo> */}
       <Container>
-        <AppTitle
-          title={isNew ? t("fosterHome.addTitle") : t("fosterHome.editTitle")}
-        />
-        <AppAlert {...alert} />
         <form
           noValidate
           autoComplete="off"
@@ -121,14 +130,14 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
                   ),
                 }}
                 value={home.name}
-                disabled={loading}
+                disabled={loading || empty}
                 onChange={handleChange("name", "")}
               />
             </Grid>
             <Grid item xs={12}>
               <Address
                 address={home.address}
-                disabled={loading}
+                disabled={loading || empty}
                 onChange={(address) => setHome({ ...home, address })}
               />
             </Grid>
@@ -150,29 +159,34 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
 
             <Grid item xs={6}>
               <Tooltip title="Cancel">
-                <Button
-                  type="reset"
-                  variant="contained"
-                  color="secondary"
-                  startIcon={<CloseIcon />}
-                  fullWidth
-                >
-                  Reset
-                </Button>
+                <>
+                  <Button
+                    type="reset"
+                    variant="contained"
+                    color="secondary"
+                    disabled={loading || empty}
+                    startIcon={<CloseIcon />}
+                    fullWidth
+                  >
+                    Reset
+                  </Button>
+                </>
               </Tooltip>
             </Grid>
             <Grid item xs={6}>
               <Tooltip title="Submit">
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  disabled={loading}
-                  startIcon={<SendIcon />}
-                  fullWidth
-                >
-                  {loading ? "Loading" : isNew ? "Submit" : "Update"}
-                </Button>
+                <>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    disabled={loading || empty}
+                    startIcon={<SendIcon />}
+                    fullWidth
+                  >
+                    {loading ? "Loading" : isNew ? "Submit" : "Update"}
+                  </Button>
+                </>
               </Tooltip>
               {loading ? <LinearProgress color="primary" /> : null}
             </Grid>
