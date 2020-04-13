@@ -7,9 +7,9 @@ export function AlertReducer(
 ): AlertState {
   switch (action.type) {
     case AlertActions.ADD:
-      return [...state, action.payload];
+      return { ...action.payload };
     case AlertActions.DELETE:
-      return state.filter((alert) => alert.id !== action.payload.id);
+      return INIT_ALERT_STATE;
     default:
       return state;
   }

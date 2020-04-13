@@ -7,12 +7,13 @@ export enum AlertActions {
 
 export interface Alert {
   id?: string;
-  title: string;
+  title?: string;
   message: string;
+  shown?: boolean;
   color: "info" | "success" | "warning" | "error";
 }
 
-export type AlertState = Array<Alert>;
+export type AlertState = Alert | null;
 
 interface Add extends Action<AlertActions.ADD> {
   payload: Alert;

@@ -4,7 +4,7 @@ import React, {
   ChangeEvent,
   MouseEvent,
 } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import {
   useFirestore,
@@ -25,7 +25,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import SendIcon from "@material-ui/icons/Send";
 
 import AppState from "@core/models/store";
-import { AppAlert, AppAlertProps } from "@core/components/AppAlert";
+import { AddAlert } from "@core/actions/alert";
 import { Newsletter } from "../models";
 import { INIT_NEWSLETTER, NEWSLETTER_PATH } from "../constants";
 
@@ -49,10 +49,10 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
   props
 ) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const firestore = useFirestore();
   const [newsletter, setNewsletter] = useState<Newsletter>(INIT_NEWSLETTER);
-  const [alert, setAlert] = useState<AppAlertProps>({ message: "" });
   useFirestoreConnect({
     collection: NEWSLETTER_PATH,
     where: ["email", "==", newsletter.email],
@@ -78,10 +78,12 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
   async function handleSubscribe(event: MouseEvent<HTMLElement>) {
     try {
       await firestore.add(NEWSLETTER_PATH, newsletter);
-      setAlert({ color: "success", message: t("newsletter.success") });
+      dispatch(
+        AddAlert({ color: "success", message: t("newsletter.success") })
+      );
       setNewsletter(INIT_NEWSLETTER);
     } catch (err) {
-      setAlert({ color: "error", message: t("newsletter.error") });
+      dispatch(AddAlert({ color: "error", message: t("newsletter.error") }));
     }
   }
 
@@ -91,16 +93,20 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
         collection: NEWSLETTER_PATH,
         doc: Object.keys(found)[0],
       });
-      setAlert({
-        color: "success",
-        message: t(`newsletter.${props.mode}.success`),
-      });
+      dispatch(
+        AddAlert({
+          color: "success",
+          message: t(`newsletter.${props.mode}.success`),
+        })
+      );
       setNewsletter(INIT_NEWSLETTER);
     } catch (err) {
-      setAlert({
-        color: "error",
-        message: t(`newsletter.${props.mode}.error`),
-      });
+      dispatch(
+        AddAlert({
+          color: "error",
+          message: t(`newsletter.${props.mode}.error`),
+        })
+      );
     }
   }
 
@@ -148,7 +154,6 @@ export const NewsletterSubscriber: FunctionComponent<NewsletterProps> = (
         helperText={error ? t(`newsletter.${props.mode}.invalid`) : undefined}
         error={error}
       />
-      <AppAlert {...alert} />
     </>
   );
 };

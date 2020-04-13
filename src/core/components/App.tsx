@@ -19,6 +19,7 @@ import {
 import { ROUTES } from "@core/routes";
 import { HOME_ROUTE } from "@app/home";
 import AppState from "@core/models/store";
+import AppAlert from "./AppAlert";
 
 const HIDE_ROUTES: Array<Route> = [HOME_ROUTE];
 const anchorId: string = "back-to-top-anchor";
@@ -51,6 +52,7 @@ export const App: FunctionComponent<{}> = () => {
           </AuthIsLoaded>
           <ScrollTop anchorId={anchorId} />
           <Copyright hideRoutes={HIDE_ROUTES} />
+          <AppAlert />
         </main>
       </ConnectedRouter>
     </Suspense>

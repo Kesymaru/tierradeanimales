@@ -4,31 +4,33 @@ import React, {
   FunctionComponent,
   SyntheticEvent,
 } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert, { AlertProps as MuiAlertProps } from "@material-ui/lab/Alert";
+import MuiAlert from "@material-ui/lab/Alert";
 
-export interface AppAlertProps extends MuiAlertProps {
-  message: string;
-}
+import { AppState, AlertState } from "@core/models";
+import { DeleteAlert } from "@core/actions/alert";
 
-export const AppAlert: FunctionComponent<AppAlertProps> = (props) => {
-  const { message, ...muiAlert } = props;
-  const [open, setOpen] = useState<boolean>(!!props.message.length);
-  useEffect(() => {
-    setOpen(!!props.message.length);
-  }, [props]);
+export const AppAlert: FunctionComponent<{}> = (props) => {
+  const dispatch = useDispatch();
+  const alert = useSelector<AppState, AlertState>((state) => state.alert);
 
   function handleClose(event?: SyntheticEvent, reason?: string) {
     if (reason === "clickaway") return;
-    setOpen(false);
+    if (alert) dispatch(DeleteAlert(alert));
   }
 
   return (
-    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-      <MuiAlert elevation={6} variant="filled" {...muiAlert}>
-        {message}
-      </MuiAlert>
-    </Snackbar>
+    <>
+      {!!alert && (
+        <Snackbar open={true} autoHideDuration={6000} onClose={handleClose}>
+          <MuiAlert elevation={6} variant="filled">
+            {alert.message}
+          </MuiAlert>
+        </Snackbar>
+      )}
+    </>
   );
 };
 

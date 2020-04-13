@@ -4,6 +4,7 @@ import React, {
   FunctionComponent,
   useState,
 } from "react";
+import { useDispatch } from "react-redux";
 import { useFirestore } from "react-redux-firebase";
 import { useTranslation } from "react-i18next";
 
@@ -23,7 +24,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import PhoneIcon from "@material-ui/icons/Phone";
 import MessageIcon from "@material-ui/icons/Message";
 
-import { AppAlert, AppAlertProps } from "@core/components/AppAlert";
+import { AddAlert } from "@core/actions/alert";
 import Contact from "../models";
 import INIT_CONTACT from "../constants";
 
@@ -37,24 +38,28 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const ContactUs: FunctionComponent<{}> = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const firestore = useFirestore();
   const { t } = useTranslation();
   const [contact, setContact] = useState<Contact>(INIT_CONTACT);
-  const [alert, setAlert] = useState<AppAlertProps>({ message: "" });
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     try {
       await firestore.add("contact", contact);
-      setAlert({
-        color: "success",
-        message: t("contact.success"),
-      });
+      dispatch(
+        AddAlert({
+          color: "success",
+          message: t("contact.success"),
+        })
+      );
     } catch (err) {
-      setAlert({
-        color: "error",
-        message: t("contact.error"),
-      });
+      dispatch(
+        AddAlert({
+          color: "error",
+          message: t("contact.error"),
+        })
+      );
     }
   }
 
@@ -178,7 +183,6 @@ export const ContactUs: FunctionComponent<{}> = () => {
           </Grid>
         </Grid>
       </form>
-      <AppAlert {...alert} />
     </Container>
   );
 };
