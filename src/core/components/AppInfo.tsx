@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  FunctionComponent,
-  ReactElement,
-} from "react";
-import delay from "lodash/delay";
+import React, { useState, useEffect, FunctionComponent } from "react";
 
 import Slide from "@material-ui/core/Slide";
 import Container from "@material-ui/core/Container";
@@ -35,46 +29,37 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface AppInfoProps {
-  show: boolean;
   title: string;
   message: string;
-  actions?: ReactElement;
 }
 
 export const AppInfo: FunctionComponent<AppInfoProps> = (props) => {
   const classes = useStyles();
-  const [show, setShow] = useState<boolean>(props.show);
-  useEffect(() => {
-    console.log("effect", props.show);
-    delay(() => setShow(props.show), 500);
-  }, [props.show]);
 
-  if (props.show)
-    return (
-      <Slide in={props.show} direction="down">
-        <Container style={{ padding: "20px 10" }}>
-          <Card variant="elevation" raised={true} className={classes.card}>
-            <Box display="flex" flexDirection="column" alignSelf="center">
-              <ErrorOutlineIcon style={{ height: 85, width: 85 }} />
-            </Box>
-            <Box display="flex" flexDirection="column" flex="1 0 auto">
-              <CardContent>
-                <Typography component="h5" variant="h5">
-                  {props.title}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  {props.message}
-                </Typography>
-              </CardContent>
-              {props.children ? (
-                <CardActions>{props.children}</CardActions>
-              ) : null}
-            </Box>
-          </Card>
-        </Container>
-      </Slide>
-    );
-  return <></>;
+  return (
+    <Slide in={true} direction="down">
+      <Container style={{ padding: "20px 10" }}>
+        <Card variant="elevation" raised={true} className={classes.card}>
+          <Box display="flex" flexDirection="column" alignSelf="center">
+            <ErrorOutlineIcon style={{ height: 85, width: 85 }} />
+          </Box>
+          <Box display="flex" flexDirection="column" flex="1 0 auto">
+            <CardContent>
+              <Typography component="h5" variant="h5">
+                {props.title}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                {props.message}
+              </Typography>
+            </CardContent>
+            {props.children ? (
+              <CardActions>{props.children}</CardActions>
+            ) : null}
+          </Box>
+        </Card>
+      </Container>
+    </Slide>
+  );
 };
 
 export default AppInfo;

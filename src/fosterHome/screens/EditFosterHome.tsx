@@ -15,6 +15,7 @@ import {
 } from "react-redux-firebase";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
+import delay from "lodash/delay";
 
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -52,35 +53,26 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
     collection: COLLECTION_PATH,
     doc: id,
   });
+  const [home, setHome] = useState<FosterHome>(INIT_HOME);
   const initHome = useSelector<AppState, FosterHome>((state) =>
     get(state, `firestore.data.${COLLECTION_PATH}.${id}`, null)
   );
-  const loading = !isNew && !isLoaded(initHome);
-  const empty = !loading && isEmpty(initHome);
-  const [home, setHome] = useState<FosterHome>(!empty ? initHome : INIT_HOME);
   const { t } = useTranslation();
 
-  console.log("----------------");
-  console.log("isNew", isNew);
-  console.log("id", id);
-  console.log("init", initHome);
-  console.log("home", home);
-  console.log("loading", loading);
-  console.log("is empty", isEmpty(initHome));
+  useEffect(() => {
+    if (!isNew && isLoaded(initHome) && !isEmpty(initHome)) setHome(initHome);
+  }, [isNew, initHome]);
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     const save = isNew ? firestore.add : firestore.update;
     try {
       await save(COLLECTION_PATH, home);
-      // setAlert({ color: "success", message: `Home added succesfuly` });
-    } catch (err) {
-      // setAlert({ color: "error", message: t("newsletter.success") });
-    }
+    } catch (err) {}
   }
 
   function handleReset(event: FormEvent) {
-    // setHome(initHome);
+    setHome(initHome ? initHome : INIT_HOME);
   }
 
   function handleChange(field: keyof FosterHome, value: any) {
@@ -91,16 +83,11 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
       });
   }
 
-  return (
-    <AppLoading loading={loading}>
-      <AppTitle
-        title={isNew ? t("fosterHome.addTitle") : t("fosterHome.editTitle")}
-      />
-      {/* <AppInfo
-        show={!loading && empty}
-        title={t("fosterHome.errors.loading")}
-        message={"Test \ntEST"}
-      >
+  if (!isNew && (!isLoaded(initHome) || isEmpty(initHome)))
+    return <AppLoading loading={true} />;
+  if (!isNew && isEmpty(initHome))
+    return (
+      <AppInfo title={t("fosterHome.errors.loading")} message={"Test message"}>
         <Button
           variant="contained"
           color="primary"
@@ -108,92 +95,92 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
         >
           Ir Atras
         </Button>
-      </AppInfo> */}
-      <Container>
-        <form
-          noValidate
-          autoComplete="off"
-          onSubmit={handleSubmit}
-          onReset={handleReset}
-        >
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                label="Name"
-                variant="outlined"
-                fullWidth
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <HomeIcon />
-                    </InputAdornment>
-                  ),
-                }}
-                value={home.name}
-                disabled={loading || empty}
-                onChange={handleChange("name", "")}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Address
-                address={home.address}
-                disabled={loading || empty}
-                onChange={(address) => setHome({ ...home, address })}
-              />
-            </Grid>
+      </AppInfo>
+    );
 
-            {/* <Grid item xs={12}>
+  return (
+    <Container>
+      <AppTitle
+        title={isNew ? t("fosterHome.addTitle") : t("fosterHome.editTitle")}
+      />
+      <form
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+        onReset={handleReset}
+      >
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
+              label="Name"
+              variant="outlined"
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <HomeIcon />
+                  </InputAdornment>
+                ),
+              }}
+              value={home.name}
+              onChange={handleChange("name", "")}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Address
+              address={home.address}
+              onChange={(address) => setHome({ ...home, address })}
+            />
+          </Grid>
+
+          {/* <Grid item xs={12}>
             <HomeDogs
               selected={fosterHome.dogs || []}
               disabled={loading}
               onChange={(dogs) => setHome({ ...fosterHome, dogs })}
             />
           </Grid> */}
-            <Grid item xs={12}>
-              {/* <HomeContacts
+          <Grid item xs={12}>
+            {/* <HomeContacts
               contacts={fosterHome.contacts || []}
               disabled={loading}
               onChange={(contacts) => setHome({ ...fosterHome, contacts })}
             /> */}
-            </Grid>
-
-            <Grid item xs={6}>
-              <Tooltip title="Cancel">
-                <>
-                  <Button
-                    type="reset"
-                    variant="contained"
-                    color="secondary"
-                    disabled={loading || empty}
-                    startIcon={<CloseIcon />}
-                    fullWidth
-                  >
-                    Reset
-                  </Button>
-                </>
-              </Tooltip>
-            </Grid>
-            <Grid item xs={6}>
-              <Tooltip title="Submit">
-                <>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    disabled={loading || empty}
-                    startIcon={<SendIcon />}
-                    fullWidth
-                  >
-                    {loading ? "Loading" : isNew ? "Submit" : "Update"}
-                  </Button>
-                </>
-              </Tooltip>
-              {loading ? <LinearProgress color="primary" /> : null}
-            </Grid>
           </Grid>
-        </form>
-      </Container>
-    </AppLoading>
+
+          <Grid item xs={6}>
+            <Tooltip title="Cancel">
+              <>
+                <Button
+                  type="reset"
+                  variant="contained"
+                  color="secondary"
+                  startIcon={<CloseIcon />}
+                  fullWidth
+                >
+                  Reset
+                </Button>
+              </>
+            </Tooltip>
+          </Grid>
+          <Grid item xs={6}>
+            <Tooltip title="Submit">
+              <>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  startIcon={<SendIcon />}
+                  fullWidth
+                >
+                  {isNew ? "Submit" : "Update"}
+                </Button>
+              </>
+            </Tooltip>
+          </Grid>
+        </Grid>
+      </form>
+    </Container>
   );
 };
 
