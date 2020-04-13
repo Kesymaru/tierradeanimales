@@ -57,10 +57,10 @@ export const FosterHomes: FunctionComponent<{}> = (props) => {
 
   return (
     <Container>
+      <AppTitle title={t("fosterHomes.title")} />
       <Paper
         style={{ overflowX: "auto", marginRight: "auto", marginLeft: "auto" }}
       >
-        <AppTitle title="Test" />
         <Table>
           <TableHead>
             <TableRow>
@@ -70,7 +70,13 @@ export const FosterHomes: FunctionComponent<{}> = (props) => {
           </TableHead>
           <TableBody>
             {homes.map((home) => (
-              <TableRow key={home.id}>
+              <TableRow
+                key={home.id}
+                hover
+                onClick={() =>
+                  history.push(EDIT_FOSTER_HOME_ROUTE.getPath({ id: home.id }))
+                }
+              >
                 <TableCell component="th" scope="row">
                   {home.name}
                 </TableCell>
