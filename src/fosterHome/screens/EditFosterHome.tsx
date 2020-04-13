@@ -22,6 +22,7 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
 
 import HomeIcon from "@material-ui/icons/Home";
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
@@ -124,6 +125,9 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
   return (
     <Container>
       <AppTitle title={isNew ? t("fosterHome.add") : t("fosterHome.edit")} />
+      <Typography variant="h3">
+        {isNew ? t("fosterHome.add") : t("fosterHome.edit")}
+      </Typography>
       <form
         noValidate
         autoComplete="off"

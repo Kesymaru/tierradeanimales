@@ -46,7 +46,7 @@ export const App: FunctionComponent<{}> = () => {
       <ConnectedRouter history={AppHistory}>
         <AppBar open={open} setOpen={setOpen} anchorId={anchorId} />
         <Navbar open={open} setOpen={setOpen} />
-        <main>
+        <main style={{ marginTop: 20 }}>
           <AuthIsLoaded>
             <Router routes={ROUTES} />
           </AuthIsLoaded>
