@@ -39,8 +39,8 @@ export interface RouteParams {
 // ------------------------------------
 
 export enum RouteActions {
-  CHANGE_TITLE,
-  RESET,
+  CHANGE_TITLE = "ROUTE_CHANGE_TITLE",
+  RESET = "ROUTE_RESET",
 }
 
 export interface RouteState {

@@ -1,8 +1,8 @@
 import { Action } from "redux";
 
 export enum AlertActions {
-  ADD,
-  DELETE,
+  ADD = "ALERT_ADD",
+  DELETE = "ALERT_DELETE",
 }
 
 export interface Alert {

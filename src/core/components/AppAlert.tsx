@@ -25,7 +25,7 @@ export const AppAlert: FunctionComponent<{}> = (props) => {
     <>
       {!!alert && (
         <Snackbar open={true} autoHideDuration={6000} onClose={handleClose}>
-          <MuiAlert elevation={6} variant="filled">
+          <MuiAlert elevation={6} variant="filled" color={alert.color}>
             {alert.message}
           </MuiAlert>
         </Snackbar>
