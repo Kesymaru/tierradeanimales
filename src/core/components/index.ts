@@ -1,6 +1,7 @@
 export * from "./App";
 export * from "./AppAlert";
 export * from "./AppBar";
+export * from "./AppInfo";
 export * from "./AppLoading";
 export * from "./AppTitle";
 export * from "./Copyright";
