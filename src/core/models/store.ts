@@ -6,6 +6,7 @@ import GeonamesState from "@core/models/geonames";
 import User from "@app/user/models/user";
 import { RouteState } from "../models/route";
 import FirestoreSchema from "./firestore";
+import AlertState from "./alert";
 
 export interface AppState {
   firebase: FirebaseReducer.Reducer<User, {}>;
@@ -13,6 +14,7 @@ export interface AppState {
   router: RouterState;
   route: RouteState;
   geonames: GeonamesState;
+  alert: AlertState;
 }
 
 export interface State<T> {

@@ -25,6 +25,7 @@ import FirestoreSchema from "../models/firestore";
 import { FirebaseConfig } from "../config";
 import RouteReducer from "../reducers/route";
 import GeonamesReducers from "../reducers/geonames";
+import AlertReducer from "../reducers/alert";
 
 // Store
 export const AppHistory: History = createBrowserHistory();
@@ -52,6 +53,7 @@ export function configureStore(): Store {
     router: connectRouter(AppHistory),
     route: RouteReducer,
     geonames: GeonamesReducers,
+    alert: AlertReducer,
   });
 
   const middleWareEnhancer = applyMiddleware(
