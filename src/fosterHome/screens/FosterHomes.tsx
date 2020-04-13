@@ -1,205 +1,87 @@
-import React, {
-  ChangeEvent,
-  FunctionComponent,
-  useEffect,
-  useState,
-} from "react";
-import { connect, useDispatch } from "react-redux";
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { useTheme } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useFirestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
+import { useTranslation } from "react-i18next";
+import get from "lodash/get";
 
 import Paper from "@material-ui/core/Paper";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Fade from "@material-ui/core/Fade";
-import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+import Container from "@material-ui/core/Container";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-// import { EDIT_FOSTER_HOME_ROUTE } from "@/FosterHome/routes";
 import AppTitle from "@core/components/AppTitle";
 
+import CollectionsConfig from "@core/config/firestore";
+import FosterHome from "../models/fosterHome";
+import { EDIT_FOSTER_HOME_ROUTE } from "../routes";
+import { AppState } from "@core/models";
+import { AppLoading, AppInfo } from "@core/components";
+
+const { fosterHome: COLLECTION } = CollectionsConfig;
+
 export const FosterHomes: FunctionComponent<{}> = (props) => {
-  return (
-    <>
-      <AppTitle title="Prueba" />
-      <div>
-        <p>here goes the foster home list</p>
-        <p>here goes the foster home list</p>
-        <p>here goes the foster home list</p>
-        <p>here goes the foster home list</p>
-        <p>here goes the foster home list</p>
-        <p>here goes the foster home list</p>
-        <p>here goes the foster home list</p>
-        <p>here goes the foster home list</p>
-        <p>here goes the foster home list</p>
-        <p>here goes the foster home list</p>
-      </div>
-    </>
+  const history = useHistory();
+  const { t } = useTranslation();
+  useFirestoreConnect({
+    collection: COLLECTION,
+    limit: 10,
+  });
+  const homes = useSelector<AppState, Array<FosterHome>>((state) =>
+    get(state, `firestore.ordered.${COLLECTION}`, [])
   );
 
-  /* const dispatch = useDispatch();
-  const history = useHistory();
-  const theme = useTheme();
-  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
-  const [homes, _setHomes] = useState<Home[]>(props.homes.data);
-  const [selected, seSelected] = useState<Home[]>([]);
-  const [loading, setLoading] = useState<boolean>(getLoading());
-  const [openDelete, setOpenDelete] = useState<boolean>(false);
-
-  useEffect(() => {
-    setHomes(props.homes.data);
-    setLoading(getLoading());
-  }, [props.homes]);
-
-  init();
-
-  function init() {
-    if (props.homes.status === TStatus.Empty) dispatch(GetHomes());
-  }
-
-  function getLoading(): boolean {
-    return props.homes.status === TStatus.Fetching;
-  }
-
-  function setHomes(value: Home[]) {
-    seSelected(value.filter((home) => home._selected));
-    _setHomes(value);
-  }
-
-  function onSort(sort: ISort) {
-    console.log("sort", sort);
-  }
-
-  function onChangePage(event: unknown, page: number) {
-    console.log("onChangePage", page);
-  }
-
-  function onChangeRowsPerPage(event: ChangeEvent<HTMLInputElement>) {
-    const rowPerPage = parseInt(event.target.value);
-    console.log("onChangeRowsPerPage", rowPerPage);
-  }
-
-  function handleDelete() {
-    console.log("delete homes", selected);
-  }
+  if (!isLoaded(homes)) return <AppLoading loading={true} />;
+  if (isLoaded(homes) && isEmpty(homes))
+    return (
+      <AppInfo
+        title={t("fosterHomes.errors.empty")}
+        message={t("fosterHomes.errors.emptyMessage")}
+        color="warning"
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => history.push(EDIT_FOSTER_HOME_ROUTE.getPath())}
+          startIcon={<AddIcon />}
+        >
+          {t("fosterHome.add")}
+        </Button>
+      </AppInfo>
+    );
 
   return (
-    <Paper>
-      <AppTable
-        data={homes}
-        cells={["name"]}
-        loading={loading}
-        pagination={props.homes.pagination}
-        onSelect={(selected) => setHomes(selected)}
-        onSort={onSort}
-        onChangePage={onChangePage}
-        onChangeRowsPerPage={onChangeRowsPerPage}
+    <Container>
+      <Paper
+        style={{ overflowX: "auto", marginRight: "auto", marginLeft: "auto" }}
       >
-        <Toolbar variant={isSm ? "dense" : "regular"}>
-          {selected.length ? (
-            <Typography variant="subtitle1" style={{ flex: "1 1 100%" }}>
-              {selected.length} homes selected
-            </Typography>
-          ) : (
-            <Typography variant="h6" style={{ flex: "1 1 100%" }}>
-              Homes
-            </Typography>
-          )}
-
-          <Fade in={selected.length === 1}>
-            <Tooltip title="Edit HomePage">
-              <IconButton
-                onClick={() =>
-                  history.push(
-                    EDIT_FOSTER_HOME_ROUTE.getPath(
-                      homes.filter((i) => i._selected)[0]
-                    )
-                  )
-                }
-              >
-                <EditIcon />
-              </IconButton>
-            </Tooltip>
-          </Fade>
-          <Fade in={!!selected.length}>
-            <Tooltip title={`Delete HomePage${selected.length > 1 ? "s" : ""}`}>
-              <IconButton onClick={() => setOpenDelete(true)}>
-                <DeleteIcon />
-              </IconButton>
-            </Tooltip>
-          </Fade>
-          <Fade in={true}>
-            <Tooltip title="Add HomePage">
-              <IconButton
-                onClick={() => history.push(EDIT_FOSTER_HOME_ROUTE.getPath())}
-              >
-                <AddIcon />
-              </IconButton>
-            </Tooltip>
-          </Fade>
-          {<Fade in={true}>
-                    <Tooltip title="Filter">
-                        <IconButton>
-                            <FilterListIcon/>
-                        </IconButton>
-                    </Tooltip>
-                </Fade>}
-        </Toolbar>
-      </AppTable>
-
-      <AlertDialog
-        title={selected.length > 1 ? "Delete Homes" : "Delete HomePage"}
-        open={openDelete}
-        okTitle="Delete"
-        okColor="secondary"
-        okIcon={<DeleteIcon />}
-        cancelColor="primary"
-        onClose={(reason) => {
-          if (reason) handleDelete();
-          setOpenDelete(false);
-        }}
-      >
-        {selected.length > 1 ? (
-          <>
-            <Typography variant="subtitle1">
-              This action will delete {selected.length} homes permanently.
-            </Typography>
-            <ExpansionPanel>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>Delete details</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails style={{ padding: "0 8px" }}>
-                <List dense={true}>
-                  {selected.map((home, index) => (
-                    <ListItem key={index}>
-                      <ListItemText primary={home.name} />
-                    </ListItem>
-                  ))}
-                </List>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          </>
-        ) : (
-          <Typography variant="subtitle1">
-            {selected[0]
-              ? `This action will delete ${selected[0].name} permanently`
-              : "Selected dog will be deleted permanently."}
-          </Typography>
-        )}
-      </AlertDialog>
-    </Paper>
-  ); */
+        <AppTitle title="Test" />
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Test</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {homes.map((home) => (
+              <TableRow key={home.id}>
+                <TableCell component="th" scope="row">
+                  {home.name}
+                </TableCell>
+                <TableCell>10</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Paper>
+    </Container>
+  );
 };
 
 export default FosterHomes;

@@ -5,6 +5,7 @@
       "submit": "Enviar",
       "reset": "Limpiar",
       "date": "Fecha",
+      "goBack": "Regresar",
       "errors": {
         "string.min": "{#label} debe ser de al menos {#limit} caracteres",
         "string.empty": "{#label} no puede estar vacio",
@@ -150,10 +151,21 @@
         "invalid": "Email invalido"
       }
     },
+    "fosterHomes": {
+      "title": "Casa Cunas",
+      "errors": {
+        "empty": "No existen Casas Cuna",
+        "emptyMessage": "Intenta creando una casa cuna nueva"
+      }
+    },
     "fosterHome": {
       "title": "Casa Cuna",
-      "editTitle": "Editar Casa Cuna",
-      "addTitle": "Crear Casa Cuna"
+      "edit": "Editar Casa Cuna",
+      "add": "Crear Casa Cuna",
+      "errors": {
+        "empty": "Error: Casa Cuna",
+        "emptyMessage": "No fue posible cargar la casa cuna solicitada"
+      }
     }
   }
 }

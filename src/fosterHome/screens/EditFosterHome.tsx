@@ -15,7 +15,6 @@ import {
 } from "react-redux-firebase";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
-import delay from "lodash/delay";
 
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -23,11 +22,12 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
-import LinearProgress from "@material-ui/core/LinearProgress";
 
 import HomeIcon from "@material-ui/icons/Home";
-import CloseIcon from "@material-ui/icons/Close";
+import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import SendIcon from "@material-ui/icons/Send";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import AddIcon from "@material-ui/icons/Add";
 
 import CollectionsConfig from "@core/config/firestore";
 import AppState from "@core/models/store";
@@ -35,27 +35,26 @@ import useId from "@core/hooks/useId";
 import FosterHome from "../models/fosterHome";
 import HomeContacts from "../components/ForterHomeContacts";
 import Address from "@app/user/components/Address";
-import { FOSTER_HOMES_ROUTE } from "../routes";
+import { FOSTER_HOMES_ROUTE, EDIT_FOSTER_HOME_ROUTE } from "../routes";
 import INIT_HOME from "../constants/fosterHome";
-import { AppTitle, AppAlert, AppAlertProps } from "@core/components";
+import { AppTitle } from "@core/components";
 
-import { EDIT_FOSTER_HOME_ROUTE } from "../routes";
 import AppLoading from "@core/components/AppLoading";
 import AppInfo from "@core/components/AppInfo";
 
-const { fosterHome: COLLECTION_PATH } = CollectionsConfig;
+const { fosterHome: COLLECTION } = CollectionsConfig;
 
 export const EditFosterHome: FunctionComponent<{}> = (props) => {
   const history = useHistory();
   const firestore = useFirestore();
   const { isNew, id } = useId();
   useFirestoreConnect({
-    collection: COLLECTION_PATH,
+    collection: COLLECTION,
     doc: id,
   });
   const [home, setHome] = useState<FosterHome>(INIT_HOME);
   const initHome = useSelector<AppState, FosterHome>((state) =>
-    get(state, `firestore.data.${COLLECTION_PATH}.${id}`, null)
+    get(state, `firestore.data.${COLLECTION}.${id}`, null)
   );
   const { t } = useTranslation();
 
@@ -66,8 +65,9 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     try {
-      if (isNew) await firestore.add(COLLECTION_PATH, home);
-      else await firestore.update(`${COLLECTION_PATH}/${id}`, home);
+      if (isNew) await firestore.add(COLLECTION, home);
+      else await firestore.update(`${COLLECTION}/${id}`, home);
+      history.push(FOSTER_HOMES_ROUTE.getPath());
     } catch (err) {
       console.error(err);
     }
@@ -85,26 +85,36 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
       });
   }
 
-  if (!isNew && (!isLoaded(initHome) || isEmpty(initHome)))
-    return <AppLoading loading={true} />;
+  if (!isNew && !isLoaded(initHome)) return <AppLoading loading={true} />;
   if (!isNew && isEmpty(initHome))
     return (
-      <AppInfo title={t("fosterHome.errors.loading")} message={"Test message"}>
+      <AppInfo
+        title={t("fosterHome.errors.empty")}
+        message={t("fosterHome.errors.emptyMessage")}
+        color="error"
+      >
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => history.push(FOSTER_HOMES_ROUTE.getPath())}
+          startIcon={<ArrowBackIcon />}
+        >
+          {t("app.goBack")}
+        </Button>
         <Button
           variant="contained"
           color="primary"
-          onClick={() => history.push(FOSTER_HOMES_ROUTE.getPath())}
+          onClick={() => history.push(EDIT_FOSTER_HOME_ROUTE.getPath())}
+          startIcon={<AddIcon />}
         >
-          Ir Atras
+          {t("fosterHome.add")}
         </Button>
       </AppInfo>
     );
 
   return (
     <Container>
-      <AppTitle
-        title={isNew ? t("fosterHome.addTitle") : t("fosterHome.editTitle")}
-      />
+      <AppTitle title={isNew ? t("fosterHome.add") : t("fosterHome.edit")} />
       <form
         noValidate
         autoComplete="off"
@@ -157,7 +167,7 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
                   type="reset"
                   variant="contained"
                   color="secondary"
-                  startIcon={<CloseIcon />}
+                  startIcon={<RotateLeftIcon />}
                   fullWidth
                 >
                   Reset
