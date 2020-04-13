@@ -153,20 +153,11 @@ export const EditFosterHome: FunctionComponent<{}> = (props) => {
               onChange={(address) => setHome({ ...home, address })}
             />
           </Grid>
-
-          {/* <Grid item xs={12}>
-            <HomeDogs
-              selected={fosterHome.dogs || []}
-              disabled={loading}
-              onChange={(dogs) => setHome({ ...fosterHome, dogs })}
-            />
-          </Grid> */}
           <Grid item xs={12}>
-            {/* <HomeContacts
-              contacts={fosterHome.contacts || []}
-              disabled={loading}
-              onChange={(contacts) => setHome({ ...fosterHome, contacts })}
-            /> */}
+            <HomeContacts
+              contacts={home.contacts || []}
+              onChange={(contacts) => setHome({ ...home, contacts })}
+            />
           </Grid>
 
           <Grid item xs={6}>

@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import get from "lodash/get";
 
 import Zoom from "@material-ui/core/Zoom";
 import Box from "@material-ui/core/Box";
@@ -21,6 +22,7 @@ import ContactPhoneIcon from "@material-ui/icons/ContactPhone";
 import ContactMailIcon from "@material-ui/icons/ContactMail";
 
 import { Contact } from "../models";
+import { INIT_CONTACT } from "../constants";
 
 export interface HomeContactsProps {
   contacts: Array<Contact>;
@@ -28,45 +30,31 @@ export interface HomeContactsProps {
   onChange?: (contacts: Array<Contact>) => void;
 }
 
-const HomeContacts: FunctionComponent<{}> = (props) => {
-  return <>here goes the foster home contacts</>;
-
-  /* const [contacts, _setContacts] = useState<IHomeContact[]>(props.contacts);
-  const [errors, setErrors] = useState<ValidationError | null>(null);
-
-  useEffect(() => {
-    _setContacts(props.contacts);
-    if (props.errors) validate(props.contacts);
-    else setErrors(null);
-  }, [props]);
-
-  function setContacts(value: IHomeContact[]) {
-    _setContacts(value);
-    validate(value);
-  }
+const HomeContacts: FunctionComponent<HomeContactsProps> = (props) => {
+  const [contacts, setContacts] = useState<Contact[]>(props.contacts);
 
   function handleAdd(event: MouseEvent<HTMLButtonElement>) {
-    const _contacts = [...contacts, IHomeContactFactory()];
+    const _contacts = [...contacts, { ...INIT_CONTACT }];
     setContacts(_contacts);
     if (props.onChange) props.onChange(_contacts);
   }
 
-  function handleDelete(contact: IHomeContact) {
+  function handleDelete(index: number) {
     return (event: MouseEvent<HTMLButtonElement>) => {
-      const _contacts = contacts.map((c) =>
-        contact.id === c.id ? { ...contact, _deleted: true } : c
-      );
+      const _contacts = contacts.filter((c, i) => i !== index);
       setContacts(_contacts);
       if (props.onChange) props.onChange(_contacts);
     };
   }
 
-  function handleChange(contact: IHomeContact, field: keyof IHomeContact) {
+  function handleChange(index: number, field: keyof Contact) {
     return (event: ChangeEvent<HTMLInputElement>) => {
-      contact[field] = event.target.value;
-      const _contacts = contacts.map((c) =>
-        contact.id === c.id ? contact : c
-      );
+      const contact = contacts[index] || undefined;
+      if (!contact) return;
+
+      contact[field] = get(event, "target.value", contact[field]);
+      const _contacts = contacts.map((c, i) => (i === index ? contact : c));
+
       setContacts(_contacts);
       if (props.onChange) props.onChange(_contacts);
     };
@@ -75,7 +63,7 @@ const HomeContacts: FunctionComponent<{}> = (props) => {
   return (
     <>
       {contacts.map((contact, index) => (
-        <Zoom in={!contact._deleted} unmountOnExit={true} key={contact.id}>
+        <Zoom in={true} unmountOnExit={true} key={index}>
           <Grid container spacing={2}>
             <Grid item xs={2} sm={1}>
               <Box display="flex" flexDirection="row-reverse">
@@ -87,7 +75,7 @@ const HomeContacts: FunctionComponent<{}> = (props) => {
                   </Tooltip>
                 ) : (
                   <Tooltip title="Remove Contact">
-                    <IconButton onClick={handleDelete(contact)}>
+                    <IconButton onClick={handleDelete(index)}>
                       <RemoveIcon />
                     </IconButton>
                   </Tooltip>
@@ -110,7 +98,7 @@ const HomeContacts: FunctionComponent<{}> = (props) => {
                       ),
                     }}
                     value={contact.name}
-                    onChange={handleChange(contact, "name")}
+                    onChange={handleChange(index, "name")}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6} md={6} lg={4}>
@@ -127,7 +115,7 @@ const HomeContacts: FunctionComponent<{}> = (props) => {
                       ),
                     }}
                     value={contact.phone}
-                    onChange={handleChange(contact, "phone")}
+                    onChange={handleChange(index, "phone")}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={4}>
@@ -144,7 +132,7 @@ const HomeContacts: FunctionComponent<{}> = (props) => {
                       ),
                     }}
                     value={contact.email}
-                    onChange={handleChange(contact, "email")}
+                    onChange={handleChange(index, "email")}
                   />
                 </Grid>
               </Grid>
@@ -158,7 +146,7 @@ const HomeContacts: FunctionComponent<{}> = (props) => {
         </Zoom>
       ))}
     </>
-  ); */
+  );
 };
 
 export default HomeContacts;
