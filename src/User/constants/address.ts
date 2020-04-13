@@ -1,10 +1,10 @@
 import Address from "../models/address";
 
 export const INIT_ADDRESS: Address = {
-  country: "",
-  state: "",
-  county: "",
-  city: "",
+  country: null,
+  state: null,
+  county: null,
+  city: null,
   address: "",
 };
 

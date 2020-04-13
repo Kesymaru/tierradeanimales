@@ -33,6 +33,15 @@ function LoadCountries(payload: GeonamesCountry[]): GeonamesAction {
   return { type: GeonamesTypes.LOAD_COUNTRIES, payload };
 }
 
+async function RequestChildren(
+  parent: GeonamesChildren
+): Promise<GeonamesChildren[]> {
+  const children = (await geonames.children({
+    geonameId: parent.geonameId,
+  })) as GeonamesResult<GeonamesChildren>;
+  return children.geonames;
+}
+
 async function RequestCountries(): Promise<GeonamesCountry[]> {
   const results = (await geonames.countryInfo()) as GeonamesResult<
     GeonamesCountry
@@ -40,12 +49,32 @@ async function RequestCountries(): Promise<GeonamesCountry[]> {
   return results.geonames;
 }
 
-export function GetCountries(): Function {
+export function GetCountries(
+  country?: GeonamesCountry | null,
+  state?: GeonamesChildren | null,
+  county?: GeonamesChildren | null
+): Function {
   return async (dispatch: Dispatch) => {
     try {
       await dispatch(FetchCountries());
       const countries = await RequestCountries();
       dispatch(LoadCountries(countries));
+
+      // await new Promise((resolve) => setTimeout(resolve, 5000));
+      // dispatch(LoadCountries([]));
+
+      /* if (country) {
+        const states = await RequestStates(country);
+        dispatch(LoadStates(states));
+      }
+      if (state) {
+        const counties = await RequestChildren(state);
+        dispatch(LoadCounties(counties));
+      }
+      if (county) {
+        const cities = await RequestChildren(county);
+        dispatch(LoadCities(cities));
+      } */
     } catch (error) {
       dispatch(ErrorCountries(error));
     }
@@ -76,7 +105,7 @@ async function RequestStates(
   return states.geonames;
 }
 
-export function GetStates(country: any): Function {
+export function GetStates(country: GeonamesCountry): Function {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(FetchStates());
@@ -103,13 +132,14 @@ function LoadCounties(payload: any[]): GeonamesAction {
   return { type: GeonamesTypes.LOAD_COUNTIES, payload };
 }
 
-export function GetCounties(state: any): Function {
+export function GetCounties(state: GeonamesChildren): Function {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(FetchCounties());
       const counties = (await geonames.children({
         geonameId: state.geonameId,
       })) as GeonamesResult<GeonamesChildren>;
+
       dispatch(LoadCounties(counties.geonames));
     } catch (error) {
       dispatch(ErrorCounties(error));
@@ -132,13 +162,14 @@ function LoadCities(payload: any[]): GeonamesAction {
   return { type: GeonamesTypes.LOAD_CITIES, payload };
 }
 
-export function GetCities(county: any): Function {
+export function GetCities(county: GeonamesChildren): Function {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(FetchCities());
       const cities = (await geonames.children({
         geonameId: county.geonameId,
       })) as GeonamesResult<GeonamesChildren>;
+
       dispatch(LoadCities(cities.geonames));
     } catch (error) {
       dispatch(ErrorCities(error));

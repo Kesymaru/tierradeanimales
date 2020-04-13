@@ -18,9 +18,9 @@ export interface AppState {
 }
 
 export interface State<T> {
-  data: T | Array<T> | null;
-  isLoaded: boolean;
-  isEmpty: boolean;
+  data: T | null;
+  loading: boolean;
+  loaded: boolean;
 }
 
 // export interface DBSchema extends NewsletterState {}

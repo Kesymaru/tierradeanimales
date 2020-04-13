@@ -1,8 +1,10 @@
+import { GeonamesCountry, GeonamesChildren } from "@core/models";
+
 export interface Address {
-  country: string;
-  state: string;
-  county: string;
-  city: string;
+  country: GeonamesCountry | null;
+  state: GeonamesChildren | null;
+  county: GeonamesChildren | null;
+  city: GeonamesChildren | null;
   address: string;
 }
 

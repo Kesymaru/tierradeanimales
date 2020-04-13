@@ -3,23 +3,23 @@ import GeonamesState from "../models/geonames";
 export const INIT_GEONAMES_STATE: GeonamesState = {
   countries: {
     data: [],
-    isLoaded: false,
-    isEmpty: true,
+    loading: false,
+    loaded: false,
   },
   states: {
     data: [],
-    isLoaded: false,
-    isEmpty: true,
+    loading: false,
+    loaded: false,
   },
   counties: {
     data: [],
-    isLoaded: false,
-    isEmpty: true,
+    loading: false,
+    loaded: false,
   },
   cities: {
     data: [],
-    isLoaded: false,
-    isEmpty: true,
+    loading: false,
+    loaded: false,
   },
 };
 

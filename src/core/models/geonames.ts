@@ -55,11 +55,16 @@ export interface GeonamesResult<T> {
   totalResultsCount?: number;
 }
 
+export interface GeonamesCountriesState extends State<Array<GeonamesCountry>> {}
+export interface GeonamesStatesState extends State<Array<GeonamesChildren>> {}
+export interface GeonamesCountiesState extends State<Array<GeonamesChildren>> {}
+export interface GeonamesCitiesState extends State<Array<GeonamesChildren>> {}
+
 export interface GeonamesState {
-  countries: State<Array<GeonamesCountry>>;
-  states: State<Array<GeonamesChildren>>;
-  counties: State<Array<GeonamesChildren>>;
-  cities: State<Array<GeonamesChildren>>;
+  countries: GeonamesCountriesState;
+  states: GeonamesStatesState;
+  counties: GeonamesCountiesState;
+  cities: GeonamesCitiesState;
 }
 
 // ------------------------------------

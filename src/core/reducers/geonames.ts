@@ -11,15 +11,19 @@ export function GeonamesReducers(
     // Countries
     // ------------------------------------
     case GeonamesTypes.FETCH_COUNTRIES:
-    case GeonamesTypes.ERROR_COUNTRIES:
+    case GeonamesTypes.ERROR_COUNTRIES: {
+      console.log("fetch and error countries", action);
       return {
         ...state,
         countries: {
           ...INIT_GEONAMES_STATE.countries,
+          loading: true,
         },
       };
+    }
 
-    case GeonamesTypes.LOAD_COUNTRIES:
+    case GeonamesTypes.LOAD_COUNTRIES: {
+      console.log("load countries", action);
       return {
         ...state,
         countries: {
@@ -29,10 +33,11 @@ export function GeonamesReducers(
             );
             return { ...country, icon: flag ? flag.icon : undefined };
           }),
-          isLoaded: true,
-          isEmpty: false,
+          loading: false,
+          loaded: true,
         },
       };
+    }
 
     // ------------------------------------
     // States
@@ -43,6 +48,7 @@ export function GeonamesReducers(
         ...state,
         states: {
           ...INIT_GEONAMES_STATE.states,
+          loading: true,
         },
       };
 
@@ -51,8 +57,8 @@ export function GeonamesReducers(
         ...state,
         states: {
           data: action.payload,
-          isLoaded: true,
-          isEmpty: false,
+          loading: false,
+          loaded: true,
         },
       };
 
@@ -65,8 +71,7 @@ export function GeonamesReducers(
         ...state,
         counties: {
           ...INIT_GEONAMES_STATE.counties,
-          isLoaded: false,
-          isEmpty: true,
+          loading: true,
         },
       };
 
@@ -75,8 +80,8 @@ export function GeonamesReducers(
         ...state,
         counties: {
           data: action.payload,
-          isLoaded: false,
-          isEmpty: true,
+          loading: false,
+          loaded: true,
         },
       };
 
@@ -89,6 +94,7 @@ export function GeonamesReducers(
         ...state,
         cities: {
           ...INIT_GEONAMES_STATE.cities,
+          loading: true,
         },
       };
 
@@ -97,8 +103,8 @@ export function GeonamesReducers(
         ...state,
         cities: {
           data: action.payload,
-          isLoaded: true,
-          isEmpty: false,
+          loading: false,
+          loaded: true,
         },
       };
 
