@@ -48,6 +48,7 @@ import INIT_CASE from "../constants";
 import { ADMIN_CASES_ROUTE } from "../routes";
 import FosterHomeSelect from "@app/fosterHome/components/FosterHomeSelect";
 import CaseImages from "../components/CaseImages";
+import AppFileManager from "@core/components/AppFileManager";
 
 const { case: COLLECTION } = CollectionsConfig;
 
@@ -113,12 +114,13 @@ export const EditCase: FunctionComponent<{}> = (props) => {
   }
 
   function handleFosterHomeChange(id: string) {
-    console.log("select foster home id", id);
     setData({
       ...data,
       fosterHomeId: id,
     });
   }
+
+  return <AppFileManager />;
 
   return (
     <Container>
