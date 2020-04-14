@@ -7,6 +7,7 @@ import React, {
   useState,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   useFirestore,
@@ -43,8 +44,8 @@ import useId from "@core/hooks/useId";
 import { AddAlert } from "@core/actions/alert";
 
 import { Case, Sex, CaseStatus } from "../models";
-import { FosterHome } from "@app/fosterHome/models";
 import INIT_CASE from "../constants";
+import { ADMIN_CASES_ROUTE } from "../routes";
 import FosterHomeSelect from "@app/fosterHome/components/FosterHomeSelect";
 import CaseImages from "../components/CaseImages";
 
@@ -52,6 +53,7 @@ const { case: COLLECTION } = CollectionsConfig;
 
 export const EditCase: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { t } = useTranslation();
   const { isNew, id } = useId();
   const firestore = useFirestore();
@@ -77,13 +79,14 @@ export const EditCase: FunctionComponent<{}> = (props) => {
         await firestore.update(`${COLLECTION}/${id}`, data);
       }
       dispatch(AddAlert({ message: "Success", color: "error" }));
+      history.push(ADMIN_CASES_ROUTE.getPath());
     } catch (err) {
       dispatch(AddAlert({ message: "Error", color: "error" }));
     }
   }
 
   function handleReset() {
-    setData(INIT_CASE);
+    setData(initData ? initData : INIT_CASE);
   }
 
   function handleDataChange(key: keyof Case, type: string = "string") {
