@@ -25,7 +25,8 @@ export interface AppTableProps {
   loading?: boolean;
   onSelectItem?: (item: any, index: number) => void;
 }
-export const FosterHomes: FunctionComponent<AppTableProps> = (props) => {
+
+export const AppTable: FunctionComponent<AppTableProps> = (props) => {
   if (props.loading) return <AppLoading loading={true} />;
 
   return (
@@ -70,4 +71,4 @@ export const FosterHomes: FunctionComponent<AppTableProps> = (props) => {
   );
 };
 
-export default FosterHomes;
+export default AppTable;
