@@ -8,12 +8,13 @@ export type Sex = "Male" | "Female";
 export enum CaseStatus {
   RESCUED = "Rescued",
   HOSPITALIZED = "Hospitalized",
-  FOSTERHOME = "Foster Home",
+  FOSTER_HOME = "Foster Home",
   ADOPTED = "Adopted",
   DECEASED = "Deceased",
 }
 
 export interface Case {
+  id?: string;
   type: CaseType;
   sex: Sex;
   status: CaseStatus;
@@ -24,4 +25,7 @@ export interface Case {
   avatar?: any;
   images?: any[]; // TODO populate images
   start?: boolean;
+  fosterHomeId: string;
 }
+
+export default Case;

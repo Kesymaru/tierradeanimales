@@ -6,11 +6,17 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import {
+  useFirestore,
+  useFirestoreConnect,
+  isLoaded,
+  isEmpty,
+} from "react-redux-firebase";
+import get from "lodash/get";
 
 import Zoom from "@material-ui/core/Zoom";
-import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -18,7 +24,6 @@ import Avatar from "@material-ui/core/Avatar";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import IconButton from "@material-ui/core/IconButton";
-import LinearProgress from "@material-ui/core/LinearProgress";
 
 import Container from "@material-ui/core/Container";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -32,67 +37,84 @@ import SendIcon from "@material-ui/icons/Send";
 import SaveIcon from "@material-ui/icons/Save";
 import RotateRightIcon from "@material-ui/icons/RotateRight";
 
-import CaseImages from "@app/case/components/CaseImages";
+import { AppState } from "@core/models";
+import { CollectionsConfig } from "@core/config";
+import useId from "@core/hooks/useId";
+import { AddAlert } from "@core/actions/alert";
+
+import { Case, Sex, CaseStatus } from "../models";
+import { FosterHome } from "@app/fosterHome/models";
+import INIT_CASE from "../constants";
+import FosterHomeSelect from "@app/fosterHome/components/FosterHomeSelect";
+import CaseImages from "../components/CaseImages";
+
+const { case: COLLECTION } = CollectionsConfig;
 
 export const EditCase: FunctionComponent<{}> = (props) => {
-  return <>Here goes the edit case</>;
-
-  /* const dispatch = useDispatch();
-  const { id } = useParams();
-  const isNew = id && id.toLowerCase() === "new";
-  const [dog, setDog] = useState<IDog>(IDogFactory());
-  const [loading, setLoading] = useState<boolean>(_getLoading());
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const { isNew, id } = useId();
+  const firestore = useFirestore();
+  useFirestoreConnect({
+    collection: COLLECTION,
+    doc: id,
+  });
+  const initData = useSelector<AppState, Case>((state) =>
+    get(state, `firestore.data.${COLLECTION}.${id}`, null)
+  );
+  const [data, setData] = useState<Case>(INIT_CASE);
 
   useEffect(() => {
-    setLoading(_getLoading());
-    if (!isNew && props.dog.data) setDog(props.dog.data);
-  }, [props.dog]);
+    if (!isNew && isLoaded(initData) && !isEmpty(initData)) setData(initData);
+  }, [isNew, initData]);
 
-  if (
-    !isNew &&
-    id &&
-    (props.dog.status === Status.Empty || (props.dog.id && props.dog.id !== id))
-  ) {
-    if (id) dispatch(GetDog(id));
-  }
-
-  function _getLoading(): boolean {
-    return props.dog.status === Status.Fetching;
-  }
-
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    if (isNew) dispatch(AddDog(dog));
-    else dispatch(UpdateDog(dog));
-    setLoading((value) => !value);
+    try {
+      if (isNew) {
+        await firestore.add(COLLECTION, data);
+      } else {
+        await firestore.update(`${COLLECTION}/${id}`, data);
+      }
+      dispatch(AddAlert({ message: "Success", color: "error" }));
+    } catch (err) {
+      dispatch(AddAlert({ message: "Error", color: "error" }));
+    }
   }
 
   function handleReset() {
-    setDog(isNew ? InitAnimal : props.dog.data || InitAnimal);
+    setData(INIT_CASE);
   }
 
-  function handleDogChange(key: keyof IDog, type: string = "string") {
+  function handleDataChange(key: keyof Case, type: string = "string") {
     return (event: ChangeEvent<HTMLInputElement>, checked?: boolean) => {
       let value: any = event.target.value;
       if (type === "number") value = parseInt(event.target.value);
       if (typeof checked === "boolean") value = checked;
 
-      setDog({ ...dog, [`${key}`]: value });
+      setData({ ...data, [`${key}`]: value });
     };
   }
 
   function handleSexChange(event: ChangeEvent<{ value: unknown }>) {
-    let sex = event.target.value as ISex;
-    setDog({ ...dog, sex });
+    setData({ ...data, sex: get(event, "target.value", data.sex) as Sex });
   }
 
   function handleStatusChange(event: ChangeEvent<{ value: unknown }>) {
-    let status = event.target.value as IDogStatus;
-    setDog({ ...dog, status });
+    const status = get(event, "target.value", data.status) as CaseStatus;
+    setData({ ...data, status });
   }
 
-  function handleStartDog(event: MouseEvent<HTMLButtonElement>) {
-    setDog({ ...dog, ...{ start: !dog.start } });
+  function handleStartCase(event: MouseEvent<HTMLButtonElement>) {
+    setData({ ...data, ...{ start: !data.start } });
+  }
+
+  function handleFosterHomeChange(id: string) {
+    console.log("select foster home id", id);
+    setData({
+      ...data,
+      fosterHomeId: id,
+    });
   }
 
   return (
@@ -117,17 +139,16 @@ export const EditCase: FunctionComponent<{}> = (props) => {
               color="primary"
               size="medium"
               aria-label="Start Dog"
-              disabled={loading}
-              onClick={handleStartDog}
+              onClick={handleStartCase}
             >
-              {dog.start ? <StarIcon /> : <StarBorderIcon />}
+              {data.start ? <StarIcon /> : <StarBorderIcon />}
             </IconButton>
           </Grid>
           <Grid item xs={4}>
             <Zoom in={true} style={{ transitionDelay: "250ms" }}>
               <Avatar
                 alt="Dog Profile Image"
-                src={dog.avatar ? dog.avatar.src : undefined}
+                src={data.avatar ? data.avatar.src : undefined}
                 style={{
                   height: 100,
                   width: 100,
@@ -149,10 +170,9 @@ export const EditCase: FunctionComponent<{}> = (props) => {
               control={
                 <Switch
                   color="primary"
-                  value={dog.public}
-                  checked={dog.public}
-                  disabled={loading}
-                  onChange={handleDogChange("public")}
+                  value={data.public}
+                  checked={data.public}
+                  onChange={handleDataChange("public")}
                 />
               }
               label="Public"
@@ -164,9 +184,8 @@ export const EditCase: FunctionComponent<{}> = (props) => {
               label="Name"
               variant="outlined"
               fullWidth
-              value={dog.name}
-              disabled={loading}
-              onChange={handleDogChange("name")}
+              value={data.name}
+              onChange={handleDataChange("name")}
             />
           </Grid>
           <Grid item xs={6} sm={6} md={3}>
@@ -175,9 +194,8 @@ export const EditCase: FunctionComponent<{}> = (props) => {
               variant="outlined"
               type="number"
               fullWidth
-              value={dog.age}
-              disabled={loading}
-              onChange={handleDogChange("age", "number")}
+              value={data.age}
+              onChange={handleDataChange("age", "number")}
             />
           </Grid>
           <Grid item xs={6} sm={6} md={3}>
@@ -186,11 +204,11 @@ export const EditCase: FunctionComponent<{}> = (props) => {
               <Select
                 labelId="sex"
                 id="sex"
-                value={dog.sex}
+                value={data.sex}
                 onChange={handleSexChange}
               >
-                <MenuItem value={"male"}>Male</MenuItem>
-                <MenuItem value={"female"}>Female</MenuItem>
+                <MenuItem value={"Male"}>Male</MenuItem>
+                <MenuItem value={"Female"}>Female</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -200,46 +218,54 @@ export const EditCase: FunctionComponent<{}> = (props) => {
               <Select
                 labelId="status"
                 id="status"
-                value={dog.status}
+                value={data.status}
                 onChange={handleStatusChange}
               >
-                <MenuItem value={IDogStatus.Rescued}>Rescued</MenuItem>
-                <MenuItem value={IDogStatus.Hospitalized}>
+                <MenuItem value={CaseStatus.RESCUED}>Rescued</MenuItem>
+                <MenuItem value={CaseStatus.HOSPITALIZED}>
                   Hospitalized
                 </MenuItem>
-                <MenuItem value={IDogStatus.FosterHome}>Foster Home</MenuItem>
-                <MenuItem value={IDogStatus.Adopted}>Adopted</MenuItem>
-                <MenuItem value={IDogStatus.Deceased}>Deceased</MenuItem>
+                <MenuItem value={CaseStatus.FOSTER_HOME}>Foster Home</MenuItem>
+                <MenuItem value={CaseStatus.ADOPTED}>Adopted</MenuItem>
+                <MenuItem value={CaseStatus.DECEASED}>Deceased</MenuItem>
               </Select>
             </FormControl>
           </Grid>
+          <Zoom
+            in={data.status === CaseStatus.FOSTER_HOME}
+            unmountOnExit={true}
+          >
+            <Grid item xs={12}>
+              <FosterHomeSelect
+                id={data.fosterHomeId}
+                onChange={handleFosterHomeChange}
+              />
+            </Grid>
+          </Zoom>
           <Grid item xs={12}>
             <TextField
               label="Description"
               variant="outlined"
               fullWidth
               multiline
-              value={dog.description}
-              disabled={loading}
-              onChange={handleDogChange("description")}
+              value={data.description}
+              onChange={handleDataChange("description")}
             />
           </Grid>
           <Grid item xs={12}>
-            <CaseImages
-              dog={dog}
-              loading={loading}
-              onImagesChange={(images) => setDog({ ...dog, images })}
-              onSelectAvatar={(avatar) => setDog({ ...dog, avatar })}
-            />
+            {/* <CaseImages
+              dog={data}
+              onImagesChange={(images) => setData({ ...data, images })}
+              onSelectAvatar={(avatar) => setData({ ...data, avatar })}
+            /> */}
           </Grid>
 
-          <Zoom in={!loading}>
-            <Grid item xs={6} hidden={loading}>
+          <Zoom in={true}>
+            <Grid item xs={6}>
               <Button
                 variant="contained"
                 type="reset"
                 color="secondary"
-                disabled={loading}
                 style={{ width: "100%" }}
                 startIcon={<RotateRightIcon />}
               >
@@ -247,36 +273,23 @@ export const EditCase: FunctionComponent<{}> = (props) => {
               </Button>
             </Grid>
           </Zoom>
-          <Grid item xs={loading ? 12 : 6}>
-            <Button
-              variant="contained"
-              type="submit"
-              color="primary"
-              disabled={props.dog.status === Status.Fetching}
-              style={{ width: "100%" }}
-              startIcon={isNew ? <SendIcon /> : <SaveIcon />}
-            >
-              {loading
-                ? isNew
-                  ? "Saving"
-                  : "Updating"
-                : isNew
-                ? "Save"
-                : "Update"}
-            </Button>
-            <Fade
-              in={loading}
-              style={{
-                transitionDelay: loading ? "500ms" : "0ms",
-              }}
-            >
-              <LinearProgress color="primary" />
-            </Fade>
-          </Grid>
+          <Zoom in={true}>
+            <Grid item xs={6}>
+              <Button
+                variant="contained"
+                type="submit"
+                color="primary"
+                style={{ width: "100%" }}
+                startIcon={isNew ? <SendIcon /> : <SaveIcon />}
+              >
+                {isNew ? "Save" : "Update"}
+              </Button>
+            </Grid>
+          </Zoom>
         </Grid>
       </form>
     </Container>
-  ); */
+  );
 };
 
 export default EditCase;

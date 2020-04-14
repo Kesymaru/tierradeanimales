@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
-import { DOG_DETAILS_ROUTE } from "@app/case/routes";
+import { CASE_DETAILS_ROUTE } from "@app/case/routes";
 
 export const Cases: FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();

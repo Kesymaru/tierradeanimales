@@ -3,53 +3,49 @@ import EditIcon from "@material-ui/icons/Edit";
 
 import Route from "@core/models/route";
 import createRoute from "@core/utils/createRoute";
-import { DASHBOARD_ROUTE } from "@app/dashboard/routes";
+import { DASHBOARD_ROUTE, ADMIN_DASHBOARD_ROUTE } from "@app/dashboard/routes";
+import { AdminCases, EditCase, Cases, CaseDetails } from "@app/case/components";
 
-import AdminCase from "../components/AdminCases";
-import EditCase from "../components/EditCase";
-import Cases from "../components/Cases";
-import CaseDetails from "../components/CaseDetails";
-
-export const ADMIN_CASE_ROUTE: Route = createRoute({
-  name: "Dogs",
-  path: "/admin/dogs",
+export const ADMIN_CASES_ROUTE: Route = createRoute({
+  name: "Cases",
+  path: `${ADMIN_DASHBOARD_ROUTE.path}/cases`,
   auth: true,
-  component: AdminCase,
-  parent: DASHBOARD_ROUTE,
+  component: AdminCases,
+  parent: ADMIN_DASHBOARD_ROUTE,
   icon: PetsIcon,
 });
 
-export const ADMIN_CASE_EDIT_ROUTE: Route = createRoute({
-  name: "Edit Dog",
-  path: `${ADMIN_CASE_ROUTE.path}/:id`,
+export const ADMIN_EDIT_CASE_ROUTE: Route = createRoute({
+  name: "Edit Case",
+  path: `${ADMIN_CASES_ROUTE.path}/:id`,
   defaultParams: { id: "new" },
   auth: true,
   component: EditCase,
-  parent: ADMIN_CASE_ROUTE,
+  parent: ADMIN_CASES_ROUTE,
   icon: EditIcon,
 });
 
-export const DOG_ROUTE: Route = createRoute({
-  name: "Dogs",
-  path: `/dogs`,
+export const CASES_ROUTE: Route = createRoute({
+  name: "Cases",
+  path: `/cases`,
   component: Cases,
   parent: DASHBOARD_ROUTE,
   icon: PetsIcon,
 });
 
-export const DOG_DETAILS_ROUTE: Route = createRoute({
-  name: "Dog",
+export const CASE_DETAILS_ROUTE: Route = createRoute({
+  name: "Case Details",
   path: `/dogs/:id`,
   component: CaseDetails,
-  parent: DOG_ROUTE,
+  parent: CASES_ROUTE,
 });
 
-const CASES_ROUTES: Route[] = [
-  ADMIN_CASE_EDIT_ROUTE,
-  ADMIN_CASE_ROUTE,
+export const CASE_ROUTES: Array<Route> = [
+  ADMIN_EDIT_CASE_ROUTE,
+  ADMIN_CASES_ROUTE,
 
-  DOG_DETAILS_ROUTE,
-  DOG_ROUTE,
+  CASE_DETAILS_ROUTE,
+  CASES_ROUTE,
 ];
 
-export default CASES_ROUTES;
+export default CASE_ROUTES;

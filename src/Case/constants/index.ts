@@ -1,6 +1,6 @@
 import { Case, CaseType, CaseStatus } from "../models";
 
-export const InitCase: Case = {
+export const INIT_CASE: Case = {
   type: CaseType.DOG,
   sex: "Male",
   status: CaseStatus.RESCUED,
@@ -8,4 +8,7 @@ export const InitCase: Case = {
   age: 1,
   description: "",
   public: false,
+  fosterHomeId: "",
 };
+
+export default INIT_CASE;

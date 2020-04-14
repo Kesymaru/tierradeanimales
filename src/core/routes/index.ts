@@ -9,6 +9,7 @@ import NEWSLETTER_ROUTES from "@app/newsletter/routes";
 import { USER_ROUTES, ACCOUNT_ROUTE } from "@app/user/routes";
 import ADOPT_ROUTES from "@app/adopt/routes";
 import { FOSTER_HOME_ROUTES, FOSTER_HOMES_ROUTE } from "@app/fosterHome/routes";
+import { CASE_ROUTES } from "@app/case/routes";
 
 // ------------------------------------
 // 404 no match
@@ -40,6 +41,7 @@ export const ROUTES: Array<Route> = [
   ...USER_ROUTES,
   ...ADOPT_ROUTES,
   ...FOSTER_HOME_ROUTES,
+  ...CASE_ROUTES,
 
   NOT_FOUND_ROUTE,
 ];

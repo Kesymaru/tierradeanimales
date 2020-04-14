@@ -14,8 +14,6 @@ import Hidden from "@material-ui/core/Hidden";
 
 import PetsIcon from "@material-ui/icons/Pets";
 
-import { Case, InitCase } from "@app/case";
-
 export const CaseDetails: FunctionComponent<{}> = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
