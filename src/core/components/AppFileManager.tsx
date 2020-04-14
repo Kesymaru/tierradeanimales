@@ -68,6 +68,7 @@ export const AppFileManager: FunctionComponent<{}> = (props) => {
             <Checkbox
               checked={selected}
               inputProps={{ "aria-label": "primary checkbox" }}
+              color="primary"
             />
           }
           action={
