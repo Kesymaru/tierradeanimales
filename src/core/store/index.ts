@@ -36,6 +36,7 @@ export const RrfConfig: Partial<ReactReduxFirebaseConfig> = {
   userProfile: "users",
   useFirestoreForProfile: true,
   enableClaims: true,
+  enableLogging: true,
 };
 export const RrfProps: ReactReduxFirebaseProviderProps = {
   firebase,

@@ -1,3 +1,5 @@
+import File from "@core/models/file";
+
 export enum CaseType {
   DOG = "Dog",
   CAT = "Cat",
@@ -23,9 +25,9 @@ export interface Case {
   description: string;
   public: boolean;
   avatar?: any;
-  images?: any[]; // TODO populate images
   start?: boolean;
   fosterHomeId: string;
+  images?: Array<File>;
 }
 
 export default Case;

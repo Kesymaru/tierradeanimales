@@ -62,18 +62,23 @@ export const EditCase: FunctionComponent<{}> = (props) => {
     collection: COLLECTION,
     doc: id,
   });
-  const initData = useSelector<AppState, Case>((state) =>
+  const loadedData = useSelector<AppState, Case>((state) =>
     get(state, `firestore.data.${COLLECTION}.${id}`, null)
   );
   const [data, setData] = useState<Case>(INIT_CASE);
+  let handleSubmitFile: Function = () => {};
+
+  console.log("loadedData", loadedData);
 
   useEffect(() => {
-    if (!isNew && isLoaded(initData) && !isEmpty(initData)) setData(initData);
-  }, [isNew, initData]);
+    if (!isNew && isLoaded(loadedData) && !isEmpty(loadedData))
+      setData(loadedData);
+  }, [isNew, loadedData]);
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     try {
+      data.images = await handleSubmitFile();
       if (isNew) {
         await firestore.add(COLLECTION, data);
       } else {
@@ -82,12 +87,17 @@ export const EditCase: FunctionComponent<{}> = (props) => {
       dispatch(AddAlert({ message: "Success", color: "error" }));
       history.push(ADMIN_CASES_ROUTE.getPath());
     } catch (err) {
+      console.error(err);
       dispatch(AddAlert({ message: "Error", color: "error" }));
     }
   }
 
+  function handleFilesChanges(files: any) {
+    console.log("files change =>", files);
+  }
+
   function handleReset() {
-    setData(initData ? initData : INIT_CASE);
+    setData(loadedData ? loadedData : INIT_CASE);
   }
 
   function handleDataChange(key: keyof Case, type: string = "string") {
@@ -120,7 +130,7 @@ export const EditCase: FunctionComponent<{}> = (props) => {
     });
   }
 
-  return <AppFileManager />;
+  console.log("loaded case", data);
 
   return (
     <Container>
@@ -258,13 +268,13 @@ export const EditCase: FunctionComponent<{}> = (props) => {
             />
           </Grid>
           <Grid item xs={12}>
-            {/* <CaseImages
-              dog={data}
-              onImagesChange={(images) => setData({ ...data, images })}
-              onSelectAvatar={(avatar) => setData({ ...data, avatar })}
-            /> */}
+            <AppFileManager
+              collection={COLLECTION}
+              files={data.images}
+              setSubmit={(submitFile) => (handleSubmitFile = submitFile)}
+              onChange={(images) => setData({ ...data, images })}
+            />
           </Grid>
-
           <Zoom in={true}>
             <Grid item xs={6}>
               <Button
