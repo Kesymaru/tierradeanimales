@@ -4,11 +4,13 @@ import React, {
   FunctionComponent,
   MouseEvent,
   ChangeEvent,
+  KeyboardEvent,
 } from "react";
 import { useDropzone } from "react-dropzone";
 import { useFirebase } from "react-redux-firebase";
 import { v4 as uuid } from "uuid";
 import get from "lodash/get";
+import omit from "lodash/omit";
 import isFunction from "lodash/isFunction";
 
 import Grid from "@material-ui/core/Grid";
@@ -21,14 +23,20 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Menu from "@material-ui/core/Menu";
+import MenuList from "@material-ui/core/MenuList";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 import MenuItem from "@material-ui/core/MenuItem";
 import Toolbar from "@material-ui/core/Toolbar";
+import TextField from "@material-ui/core/TextField";
 import Zoom from "@material-ui/core/Zoom";
-import Slide from "@material-ui/core/Slide";
 import Grow from "@material-ui/core/Grow";
 
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import PublishIcon from "@material-ui/icons/Publish";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import CloseIcon from "@material-ui/icons/Close";
+import DoneIcon from "@material-ui/icons/Done";
 
 import File from "../models/file";
 
@@ -47,6 +55,7 @@ export const AppFileManager: FunctionComponent<AppFileManagerProps> = (
   const [files, setFiles] = useState<Array<File>>(props.files || []);
   const [deleted, setDeleted] = useState<Array<File>>([]);
   const [selected, setSelected] = useState<Array<string>>([]);
+  const [rename, setRename] = useState<object>({});
   const [menu, setMenu] = useState<{
     file: File | null;
     el: null | HTMLElement;
@@ -61,7 +70,6 @@ export const AppFileManager: FunctionComponent<AppFileManagerProps> = (
   });
 
   useEffect(() => {
-    console.log("component mount", props.files);
     if (isFunction(props.setSubmit)) {
       props.setSubmit(handleSubmit);
     }
@@ -137,13 +145,12 @@ export const AppFileManager: FunctionComponent<AppFileManagerProps> = (
   }
 
   async function deleteFile(file: File) {
-    console.log("delete file", file);
     URL.revokeObjectURL(file.preview);
     if (file.file) return null;
     return await firebase.storage().ref().child(file.path).delete();
   }
 
-  async function handleDeleteOne() {
+  async function handleDeleteFile() {
     try {
       if (menu.file) {
         if (autoUpdate) await deleteFile(menu.file);
@@ -180,7 +187,46 @@ export const AppFileManager: FunctionComponent<AppFileManagerProps> = (
     if (isFunction(props.onChange)) props.onChange(_files);
   }
 
-  console.log("manager", files);
+  function handleOpenRename(file: File | null) {
+    if (!file) return false;
+    if (get(rename, file.id, false)) setRename(omit(rename, file.id));
+    else setRename({ ...rename, [`${file.id}`]: file.name });
+    setMenu({
+      el: null,
+      file: null,
+    });
+  }
+
+  function handleRenameChange(file: File) {
+    return (event: ChangeEvent) => {
+      const name = get(event, "target.value", file.name);
+      if (name)
+        setRename({
+          ...rename,
+          [`${file.id}`]: name,
+        });
+    };
+  }
+
+  function handleRenameKeyPress(file: File) {
+    return (event: KeyboardEvent) => {
+      const key = get(event, "key", false);
+      if (key === "Enter") {
+        event.preventDefault();
+        handleRenameFile(file);
+      }
+    };
+  }
+
+  function handleRenameFile(file: File) {
+    const name = get(rename, file.id, false);
+    if (name) {
+      const _files = files.map((f) => (f.id === file.id ? { ...f, name } : f));
+      setFiles(_files);
+      if (isFunction(props.onChange)) props.onChange(_files);
+    }
+    setRename(omit(rename, file.id));
+  }
 
   return (
     <section {...getRootProps({ className: "dropzone" })}>
@@ -204,12 +250,7 @@ export const AppFileManager: FunctionComponent<AppFileManagerProps> = (
             </Button>
           </Box>
         </Grid>
-        <Grow
-          in={!!selected.length}
-          // direction="down"
-          mountOnEnter={true}
-          unmountOnExit={true}
-        >
+        <Grow in={!!selected.length} mountOnEnter={true} unmountOnExit={true}>
           <Grid item xs={12}>
             <Toolbar color="primary">
               {selected.length ? (
@@ -237,28 +278,76 @@ export const AppFileManager: FunctionComponent<AppFileManagerProps> = (
           open={Boolean(menu.el)}
           onClose={handleCloseMenu}
         >
-          <MenuItem onClick={handleDeleteOne}>Delete</MenuItem>
+          <MenuItem onClick={handleDeleteFile}>
+            <ListItemIcon>
+              <DeleteIcon fontSize="small" />
+            </ListItemIcon>
+            <Typography variant="inherit">Delete</Typography>
+          </MenuItem>
+          <MenuItem onClick={() => handleOpenRename(menu.file)}>
+            <ListItemIcon>
+              <EditIcon fontSize="small" />
+            </ListItemIcon>
+            <Typography variant="inherit">Raname</Typography>
+          </MenuItem>
         </Menu>
+        {/* Files cards */}
         {files.map((file) => (
           <Zoom in={!!file}>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
+            <Grid item xs={12} sm={6} md={4} lg={4}>
               <Card key={file.name} variant="outlined">
                 <CardHeader
-                  title={file.name}
+                  title={
+                    get(rename, file.id, false) ? (
+                      <TextField
+                        variant="standard"
+                        size="small"
+                        margin="none"
+                        defaultValue={file.name}
+                        autoFocus={true}
+                        fullWidth
+                        onChange={handleRenameChange(file)}
+                        onKeyPress={handleRenameKeyPress(file)}
+                      />
+                    ) : (
+                      file.name
+                    )
+                  }
                   avatar={
-                    <Checkbox
-                      inputProps={{ "aria-label": "primary checkbox" }}
-                      color="primary"
-                      onChange={handleSelect(file)}
-                    />
+                    get(rename, file.id, false) ? (
+                      <IconButton
+                        aria-label="settings"
+                        size="small"
+                        onClick={() => handleOpenRename(file)}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                    ) : (
+                      <Checkbox
+                        inputProps={{ "aria-label": "primary checkbox" }}
+                        color="primary"
+                        checked={selected.includes(file.id)}
+                        onChange={handleSelect(file)}
+                      />
+                    )
                   }
                   action={
-                    <IconButton
-                      aria-label="settings"
-                      onClick={handleOpenMenu(file)}
-                    >
-                      <MoreVertIcon />
-                    </IconButton>
+                    get(rename, file.id, false) ? (
+                      <IconButton
+                        aria-label="settings"
+                        size="small"
+                        onClick={() => handleRenameFile(file)}
+                      >
+                        <DoneIcon />
+                      </IconButton>
+                    ) : (
+                      <IconButton
+                        aria-label="settings"
+                        onClick={handleOpenMenu(file)}
+                      >
+                        <MoreVertIcon />
+                      </IconButton>
+                    )
                   }
                 />
                 <CardMedia
