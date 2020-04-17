@@ -9,7 +9,7 @@ import NEWSLETTER_ROUTES from "@app/newsletter/routes";
 import { USER_ROUTES, ACCOUNT_ROUTE } from "@app/user/routes";
 import ADOPT_ROUTES from "@app/adopt/routes";
 import { FOSTER_HOME_ROUTES, FOSTER_HOMES_ROUTE } from "@app/fosterHome/routes";
-import { CASE_ROUTES } from "@app/case/routes";
+import { CASE_ROUTES, ADMIN_CASES_ROUTE } from "@app/case/routes";
 
 // ------------------------------------
 // 404 no match
@@ -26,6 +26,7 @@ export const NOT_FOUND_ROUTE: Route = createRoute({
 export const NAVBAR_ROUTES: Array<Route> = [
   ACCOUNT_ROUTE,
   DASHBOARD_ROUTE,
+  ADMIN_CASES_ROUTE,
   FOSTER_HOMES_ROUTE,
   HOME_ROUTE,
 ];
