@@ -8,10 +8,12 @@ import { ChangeTitle } from "@core/actions/route";
 export interface AppTitleProps {
   title: string;
   prefix?: boolean;
-  children?: ReactElement;
+  children?: ReactElement | null;
 }
 
-export const AppTitle: FunctionComponent<AppTitleProps> = (props) => {
+export const AppTitle: FunctionComponent<AppTitleProps> = (
+  props
+): ReactElement => {
   useTitle(props.title);
   const route = useRoute();
   const dispatch = useDispatch();
@@ -21,8 +23,10 @@ export const AppTitle: FunctionComponent<AppTitleProps> = (props) => {
     dispatch(ChangeTitle(route));
   }
 
-  if (props.children) return props.children;
-  return <></>;
+  // if (props.children) return props.children;
+  return (
+    <React.Fragment>{props.children && props.children}</React.Fragment>
+  ) as ReactElement;
 };
 
 export default AppTitle;

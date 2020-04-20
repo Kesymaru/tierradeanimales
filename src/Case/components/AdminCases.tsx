@@ -40,7 +40,6 @@ const COLUMNS = [
     title: "Status",
     path: "status",
   },
-
   {
     title: "Public",
     path: "public",
