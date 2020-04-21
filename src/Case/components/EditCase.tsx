@@ -37,6 +37,7 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 import SendIcon from "@material-ui/icons/Send";
 import SaveIcon from "@material-ui/icons/Save";
 import RotateRightIcon from "@material-ui/icons/RotateRight";
+import FaceIcon from "@material-ui/icons/Face";
 
 import { AppState } from "@core/models";
 import { CollectionsConfig } from "@core/config";
@@ -47,7 +48,6 @@ import { Case, Sex, CaseStatus } from "../models";
 import INIT_CASE from "../constants";
 import { ADMIN_CASES_ROUTE } from "../routes";
 import FosterHomeSelect from "@app/fosterHome/components/FosterHomeSelect";
-import CaseImages from "../components/CaseImages";
 import AppFileManager from "@core/components/AppFileManager";
 
 const { case: COLLECTION } = CollectionsConfig;
@@ -163,7 +163,7 @@ export const EditCase: FunctionComponent<{}> = (props) => {
             <Zoom in={true} style={{ transitionDelay: "250ms" }}>
               <Avatar
                 alt="Dog Profile Image"
-                src={data.avatar ? data.avatar.src : undefined}
+                src={data.avatar ? data.avatar.preview : undefined}
                 style={{
                   height: 100,
                   width: 100,
@@ -273,6 +273,13 @@ export const EditCase: FunctionComponent<{}> = (props) => {
               files={data.images}
               setSubmit={(submitFile) => (handleSubmitFile = submitFile)}
               onChange={(images) => setData({ ...data, images })}
+              actions={[
+                {
+                  title: "Set Profile",
+                  icon: FaceIcon,
+                  onClick: (avatar) => setData({ ...data, avatar }),
+                },
+              ]}
             />
           </Grid>
           <Zoom in={true}>

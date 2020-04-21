@@ -5,6 +5,7 @@ import React, {
   MouseEvent,
   ChangeEvent,
   KeyboardEvent,
+  ComponentType,
 } from "react";
 import { useDropzone } from "react-dropzone";
 import { useFirebase } from "react-redux-firebase";
@@ -40,11 +41,18 @@ import DoneIcon from "@material-ui/icons/Done";
 
 import File from "../models/file";
 
+interface Action {
+  title: string;
+  icon: ComponentType<any>;
+  onClick: (file: File | null) => void;
+}
+
 export interface AppFileManagerProps {
   collection: string;
   setSubmit?: (handleSubmit: Function) => void;
   files?: Array<File>;
   onChange?: (files: Array<File>) => void;
+  actions?: Array<Action>;
 }
 
 export const AppFileManager: FunctionComponent<AppFileManagerProps> = (
@@ -290,6 +298,26 @@ export const AppFileManager: FunctionComponent<AppFileManagerProps> = (
             </ListItemIcon>
             <Typography variant="inherit">Raname</Typography>
           </MenuItem>
+          {props.actions
+            ? props.actions.map((action: Action) => (
+                <MenuItem
+                  key={action.title}
+                  onClick={() => {
+                    action.onClick(menu.file);
+                    handleCloseMenu();
+                  }}
+                >
+                  <ListItemIcon>
+                    {action.icon ? (
+                      <action.icon fontSize="small" />
+                    ) : (
+                      <EditIcon fontSize="small" />
+                    )}
+                  </ListItemIcon>
+                  <Typography variant="inherit">{action.title}</Typography>
+                </MenuItem>
+              ))
+            : null}
         </Menu>
         {/* Files cards */}
         {files.map((file) => (
