@@ -44,8 +44,8 @@ export const AppTable: FunctionComponent<AppTableProps> = (props) => {
       <Table>
         <TableHead>
           <TableRow>
-            {props.columns.map((column, index) => (
-              <TableCell key={index}>{column.title}</TableCell>
+            {props.columns.map((column: AppTableColumn, index: number) => (
+              <TableCell key={column.path}>{column.title}</TableCell>
             ))}
           </TableRow>
         </TableHead>

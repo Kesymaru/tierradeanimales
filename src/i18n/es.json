@@ -136,6 +136,7 @@
     "newsletter": {
       "title": "Boletin Informativo",
       "email": "Email",
+      "add": "Crear",
       "subscribe": {
         "title": "Suscribirse",
         "subtitle": "Ingrese email para suscribirse al boletin informativo",
@@ -149,6 +150,12 @@
         "success": "Desuscripción al boletin exitosa",
         "error": "Error al desuscribirse el boletin",
         "invalid": "Email invalido"
+      },
+      "errors": {
+        "empty": {
+          "title": "Error - Boletines Informativos",
+          "message": "No hay Boletines Informativos"
+        }
       }
     },
     "fosterHomes": {
