@@ -18,17 +18,16 @@ export interface AppTableColumn {
   default?: string;
 }
 
+export type AppTableColumns = Array<AppTableColumn>;
+
 export interface AppTableProps {
   title?: string;
-  columns: Array<AppTableColumn>;
+  columns: AppTableColumns;
   data: Array<any>;
-  loading?: boolean;
   onSelectItem?: (item: any, index: number) => void;
 }
 
 export const AppTable: FunctionComponent<AppTableProps> = (props) => {
-  if (props.loading) return <AppLoading loading={true} />;
-
   return (
     <Paper
       style={{ overflowX: "auto", marginRight: "auto", marginLeft: "auto" }}

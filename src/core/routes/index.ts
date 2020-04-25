@@ -6,7 +6,7 @@ import AUTH_ROUTES from "@app/auth/routes";
 import { DASHBOARD_ROUTES, DASHBOARD_ROUTE } from "@app/dashboard/routes";
 import { HOME_ROUTES, HOME_ROUTE } from "@app/home/routes";
 import NEWSLETTER_ROUTES from "@app/newsletter/routes";
-import { USER_ROUTES, ACCOUNT_ROUTE } from "@app/user/routes";
+import { USER_ROUTES, ADMIN_USERS_ROUTE } from "@app/user/routes";
 import ADOPT_ROUTES from "@app/adopt/routes";
 import { FOSTER_HOME_ROUTES, FOSTER_HOMES_ROUTE } from "@app/fosterHome/routes";
 import { CASE_ROUTES, ADMIN_CASES_ROUTE } from "@app/case/routes";
@@ -24,7 +24,7 @@ export const NOT_FOUND_ROUTE: Route = createRoute({
 // Navbar Routes
 // ------------------------------------
 export const NAVBAR_ROUTES: Array<Route> = [
-  ACCOUNT_ROUTE,
+  ADMIN_USERS_ROUTE,
   DASHBOARD_ROUTE,
   ADMIN_CASES_ROUTE,
   FOSTER_HOMES_ROUTE,
