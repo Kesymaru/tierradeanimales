@@ -8,6 +8,7 @@ import {
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/functions";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { connectRouter, routerMiddleware } from "connected-react-router";
@@ -73,4 +74,5 @@ export function configureStore(): Store {
 function initFirebaseServices() {
   firebase.initializeApp(FirebaseConfig);
   firebase.firestore();
+  firebase.functions();
 }
