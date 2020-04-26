@@ -17,9 +17,18 @@ export const addAdmin = functions.https.onCall((data, context) => {
 
 export const onCreateUser = functions.firestore
   .document("users/{userId}")
-  .onCreate((snap, context) => {
-    return snap.ref.set({ role: "user" }, { merge: true });
+  .onCreate(async (snap, context) => {
+    const email = snap.get("email");
+    const isAdmin = ADMIN_EMAILS.includes(email);
+    await setCustomClaims(email, isAdmin);
+    return snap.ref.set({ role: isAdmin ? "admin" : "user" }, { merge: true });
   });
+
+async function setCustomClaims(email: string, isAdmin: boolean): Promise<void> {
+  const user = await admin.auth().getUserByEmail(email);
+  if (user.customClaims && (user.customClaims as any).admin === true) return;
+  return admin.auth().setCustomUserClaims(user.uid, { admin: isAdmin });
+}
 
 async function grandAdminRole(email: string): Promise<void> {
   const user = await admin.auth().getUserByEmail(email);
