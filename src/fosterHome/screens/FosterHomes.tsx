@@ -62,11 +62,6 @@ export const FosterHomes: FunctionComponent<{}> = (props) => {
     get(state, `firestore.ordered.${COLLECTION}`, [])
   );
 
-  function onSelectItem(item: FosterHome, i: number) {
-    console.log("item", item, i);
-    history.push(EDIT_FOSTER_HOME_ROUTE.getPath({ id: item.id }));
-  }
-
   if (!isLoaded(homes)) return <AppLoading loading={true} />;
   if (isLoaded(homes) && isEmpty(homes)) {
     return (
@@ -96,7 +91,9 @@ export const FosterHomes: FunctionComponent<{}> = (props) => {
         columns={columns}
         data={homes}
         title={t("fosterHomes.title")}
-        onSelectItem={onSelectItem}
+        onSelect={(selected: Array<string>) =>
+          history.push(EDIT_FOSTER_HOME_ROUTE.getPath({ id: selected[0] }))
+        }
       >
         <Button
           variant="contained"

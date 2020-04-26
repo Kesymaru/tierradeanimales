@@ -83,8 +83,8 @@ export const AdminCases: FunctionComponent<{}> = () => {
         columns={COLUMNS}
         data={data}
         title="Data title"
-        onSelectItem={(item: Case, i: number) =>
-          history.push(ADMIN_EDIT_CASE_ROUTE.getPath({ id: item.id }))
+        onSelect={(selected: Array<string>) =>
+          history.push(ADMIN_EDIT_CASE_ROUTE.getPath({ id: selected[0] }))
         }
       >
         <Button
