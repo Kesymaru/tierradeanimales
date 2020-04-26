@@ -13,6 +13,7 @@ export interface Route {
   path: string;
   exact?: boolean;
   auth?: boolean;
+  admin?: boolean;
   component: FunctionComponent<any> | ComponentClass<any>;
   icon?: ComponentType<any>;
   parent?: Route;

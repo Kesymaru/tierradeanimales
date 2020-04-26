@@ -17,6 +17,7 @@ export const ADMIN_USERS_ROUTE: Route = createRoute({
   name: "Users",
   path: `${ADMIN_DASHBOARD_ROUTE.path}/users`,
   auth: true,
+  admin: true,
   component: AdminUsers,
   icon: GroupIcon,
   parent: ADMIN_DASHBOARD_ROUTE,
