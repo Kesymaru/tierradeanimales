@@ -1,9 +1,9 @@
 import Route from "@core/models/route";
 import createRoute from "@core/utils/createRoute";
 
-import SignUp from "../components/SignUp";
-import SignIn from "../components/SignIn";
-import ForgotPassword from "../components/ForgotPassword";
+import SignUp from "../screens/SignUp";
+import SignIn from "../screens/SignIn";
+import ForgotPassword from "../screens/ForgotPassword";
 
 // ------------------------------------
 // Sign Up

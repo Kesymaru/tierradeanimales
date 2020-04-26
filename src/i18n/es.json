@@ -53,11 +53,11 @@
     },
     "signIn": {
       "title": "Iniciar Session",
+      "with": "Iniciar session con",
       "email": "Email",
       "password": "Contraseña",
-      "remember": "Recordar session",
       "loading": "Iniciando session",
-      "forgotPassword": "Restablecer contraseña",
+      "forgotPassword": "¿Olvidaste la contraseña?",
       "signUp": "Crear Cuenta"
     },
     "signOut": {

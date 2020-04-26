@@ -4,6 +4,7 @@ export enum Providers {
   EMAIL = "Email",
   GOOGLE = "Google",
   FACEBOOK = "facebook",
+  APPLE = "Apple",
 }
 
 export interface GoogleCredentials {
@@ -12,7 +13,12 @@ export interface GoogleCredentials {
 }
 
 export interface FacebookCredentials {
-  provider: Providers.GOOGLE;
+  provider: Providers.FACEBOOK;
+  type: "popup | redirect";
+}
+
+export interface AppleCredentials {
+  provider: Providers.APPLE;
   type: "popup | redirect";
 }
 
@@ -25,6 +31,7 @@ export interface EmailCredentials {
 export type Credentials =
   | GoogleCredentials
   | FacebookCredentials
+  | AppleCredentials
   | EmailCredentials;
 
 export default Credentials;

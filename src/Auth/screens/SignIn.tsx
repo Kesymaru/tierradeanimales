@@ -26,32 +26,31 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
+import FacebookIcon from "@material-ui/icons/Facebook";
+import AppleIcon from "@material-ui/icons/Apple";
+
 import { AppState } from "@core/models";
 import { DASHBOARD_ROUTE } from "@app/dashboard";
 import INIT_EMAIL_CREDENTIALS from "../constants";
 import { FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE } from "../routes";
 import { Credentials, CreateUserCredentials } from "react-redux-firebase";
 
+import {
+  GoogleButton,
+  GoogleIcon,
+  FacebookButton,
+  AppleButton,
+} from "../components";
+
 const useStyles = makeStyles((theme: Theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+  container: {
+    marginTop: theme.spacing(10),
   },
   avatar: {
-    margin: theme.spacing(1),
+    margin: `${theme.spacing(1)}px auto`,
     backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 0),
-  },
-  grid: {
-    margin: theme.spacing(3, 0, 3),
+    width: 50,
+    height: 50,
   },
 }));
 
@@ -61,6 +60,10 @@ const google: Credentials = {
 };
 const facebook: Credentials = {
   provider: "facebook",
+  type: "popup",
+};
+const apple = {
+  provider: "apple",
   type: "popup",
 };
 
@@ -110,99 +113,126 @@ const SignIn: FunctionComponent<{}> = ({}) => {
 
   if (logged) return <Redirect to={DASHBOARD_ROUTE.path} />;
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" className={classes.container}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            {t("signIn.title")}
-          </Typography>
-          <Grid container>
-            <Grid xs={12}>
-              <Button
+        <form noValidate onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5" align="center">
+                {t("signIn.title")}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <GoogleButton
                 variant="outlined"
+                size="large"
                 fullWidth
+                startIcon={<GoogleIcon />}
                 onClick={() => signIn(google)}
               >
-                Google
-              </Button>
+                {t("signIn.with")} Google
+              </GoogleButton>
             </Grid>
-            <Grid xs={12}>
-              <Button
+            <Grid item xs={12}>
+              <FacebookButton
                 variant="outlined"
+                size="large"
                 fullWidth
+                startIcon={<FacebookIcon />}
                 onClick={() => signIn(facebook)}
               >
-                Facebook
-              </Button>
+                {t("signIn.with")} Facebook
+              </FacebookButton>
             </Grid>
-          </Grid>
-          <form className={classes.form} noValidate onSubmit={handleSubmit}>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              type="email"
-              label={t("signIn.email")}
-              name="email"
-              autoComplete="email"
-              autoFocus
-              value={data.email}
-              onChange={handleEmailChange}
-              disabled={loading}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label={t("signIn.password")}
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={data.password}
-              onChange={handlePasswordChange}
-              disabled={loading}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              disabled={!touched || loading}
-            >
-              {loading ? t("signIn.loading") : t("signIn.title")}
-            </Button>
-            {loading ? <LinearProgress color="primary" /> : null}
-            <Grid container className={classes.grid}>
-              <Grid item xs>
+            <Grid item xs={12}>
+              <AppleButton
+                variant="outlined"
+                size="large"
+                fullWidth
+                startIcon={<AppleIcon />}
+                onClick={() => signIn(facebook)}
+              >
+                {t("signIn.with")} Apple
+              </AppleButton>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography component="h1" variant="h5" align="center">
+                {t("signIn.with")} Email
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="email"
+                type="email"
+                label={t("signIn.email")}
+                name="email"
+                autoComplete="email"
+                autoFocus
+                value={data.email}
+                onChange={handleEmailChange}
+                disabled={loading}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password"
+                label={t("signIn.password")}
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={data.password}
+                onChange={handlePasswordChange}
+                disabled={loading}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                disabled={!touched || loading}
+              >
+                {loading ? t("signIn.loading") : t("signIn.title")}
+              </Button>
+              {loading ? <LinearProgress color="primary" /> : null}
+            </Grid>
+            <Grid item container spacing={2}>
+              <Grid item xs={12} sm={6}>
                 <Link
                   component={RouterLink}
-                  variant="body2"
+                  variant="body1"
                   to={FORGOT_PASSWORD_ROUTE.path}
                 >
                   {t("signIn.forgotPassword")}
                 </Link>
               </Grid>
-              <Grid item>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                style={{ textAlign: isMobile ? "left" : "right" }}
+              >
                 <Link
                   component={RouterLink}
-                  variant="body2"
+                  variant="body1"
                   to={SIGN_UP_ROUTE.path}
                 >
                   {t("signIn.signUp")}
                 </Link>
               </Grid>
             </Grid>
-          </form>
-        </div>
+          </Grid>
+        </form>
       </Container>
     </Container>
   );
