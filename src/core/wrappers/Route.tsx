@@ -11,7 +11,9 @@ interface RouteProps extends AppRoute {}
 
 const Route: FunctionComponent<RouteProps> = (route) => {
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);
-  const isAdmin = get(auth, "profile.token.claims.admin", false) as boolean;
+  const isAdmin = useSelector<AppState, boolean>(
+    (state) => !!get(state, "firebase.profile.token.claims.admin", false)
+  );
   const logged = isLoaded(auth) && !isEmpty(auth);
 
   function redirect(r: AppRoute = SIGN_IN_ROUTE) {
@@ -24,14 +26,6 @@ const Route: FunctionComponent<RouteProps> = (route) => {
       />
     );
   }
-  /* const redirect = (props: any) => (
-    <Redirect
-      to={{
-        pathname: SIGN_IN_ROUTE.getPath(),
-        state: { from: props.location },
-      }}
-    />
-  ); */
 
   let render = (props: any) => <route.component {...props} />;
   if (route.auth && !logged) render = redirect();
