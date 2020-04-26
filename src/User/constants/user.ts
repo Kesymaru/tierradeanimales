@@ -1,5 +1,5 @@
 import INIT_DATA from "@core/constants/data";
-import { AppTableColumns } from "@core/components/AppTable";
+import { TableColumns } from "@core/components/AppTable";
 
 import User from "../models/user";
 
@@ -10,7 +10,7 @@ export const INIT_USER: User = {
   email: "",
 };
 
-export const USERS_COLUMNS: AppTableColumns = [
+export const USERS_COLUMNS: TableColumns = [
   {
     title: "Role",
     path: "role",

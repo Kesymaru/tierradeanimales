@@ -4,14 +4,39 @@ import { useFirebase } from "react-redux-firebase";
 import pick from "lodash/pick";
 
 import Container from "@material-ui/core/Container";
+import EditIcon from "@material-ui/icons/Edit";
+import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 import { Screen } from "@core/wrappers";
 import { useData } from "@core/hooks";
-import { AppTable, AppTableColumns } from "@core/components";
+import { AppTable, TableActions } from "@core/components";
 import { AddAlert } from "@core/actions";
 
 import { UsersResults, User } from "../models";
 import { USERS_COLUMNS } from "../constants";
+
+const TABLE_ACTIONS: TableActions = [
+  /* {
+    title: "Edit",
+    icon: EditIcon,
+    disabled: (selected: Array<string>) => selected.length > 1,
+  }, */
+  {
+    title: "Delete",
+    icon: DeleteForeverIcon,
+    onClick: (users: UsersResults) => {
+      console.log("delete user", users);
+    },
+  },
+  {
+    title: "Set As Admin",
+    icon: SupervisorAccountIcon,
+    onClick: (selected: Array<string>) => {
+      console.log("set admin", selected);
+    },
+  },
+];
 
 export const AdminUser: FunctionComponent = () => {
   const firebase = useFirebase() as any;
@@ -19,7 +44,7 @@ export const AdminUser: FunctionComponent = () => {
   const dispatch = useDispatch();
   const { data, isLoaded, isEmpty } = useData<UsersResults>("users", []);
 
-  async function handleOnSelectItem(user: User, index: number) {
+  async function grandAdminRol(user: User) {
     console.log("firebase", addAdmin, firebase);
     try {
       const result = await addAdmin(pick(user, ["email"]));
@@ -46,9 +71,10 @@ export const AdminUser: FunctionComponent = () => {
     <Screen t="users" isLoaded={isLoaded} isEmpty={isEmpty}>
       <Container>
         <AppTable
+          title="Users"
           columns={USERS_COLUMNS}
           data={data}
-          onSelectItem={handleOnSelectItem}
+          actions={TABLE_ACTIONS}
         />
       </Container>
     </Screen>

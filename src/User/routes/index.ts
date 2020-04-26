@@ -1,10 +1,26 @@
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import GroupIcon from "@material-ui/icons/Group";
 
 import Route from "@core/models/route";
 import createRoute from "@core/utils/createRoute";
 import { DASHBOARD_ROUTE } from "@app/dashboard/routes";
 
+import { ADMIN_DASHBOARD_ROUTE } from "@app/dashboard";
+
 import Account from "../components/Account";
+import AdminUsers from "../screens/AdminUsers";
+
+// ------------------------------------
+// Admin Users
+// ------------------------------------
+export const ADMIN_USERS_ROUTE: Route = createRoute({
+  name: "Users",
+  path: `${ADMIN_DASHBOARD_ROUTE.path}/users`,
+  auth: true,
+  component: AdminUsers,
+  icon: GroupIcon,
+  parent: ADMIN_DASHBOARD_ROUTE,
+});
 
 // ------------------------------------
 // Account
@@ -18,6 +34,6 @@ export const ACCOUNT_ROUTE: Route = createRoute({
   parent: DASHBOARD_ROUTE,
 });
 
-export const USER_ROUTES: Route[] = [ACCOUNT_ROUTE];
+export const USER_ROUTES: Route[] = [ADMIN_USERS_ROUTE, ACCOUNT_ROUTE];
 
 export default USER_ROUTES;
