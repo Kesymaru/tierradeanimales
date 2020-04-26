@@ -16,6 +16,8 @@ export const DASHBOARD_ROUTE: Route = createRoute({
 export const ADMIN_DASHBOARD_ROUTE: Route = createRoute({
   name: "Dashboard",
   path: "/admin",
+  auth: true,
+  admin: true,
   exact: true,
   component: Dashboard,
 });

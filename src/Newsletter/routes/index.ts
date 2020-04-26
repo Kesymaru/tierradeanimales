@@ -11,6 +11,8 @@ export const ADMIN_NEWSLETTERS: Route = createRoute({
   name: "Newsletters",
   path: `${ADMIN_DASHBOARD_ROUTE.path}/newsletters`,
   component: AdminNewsletter,
+  auth: true,
+  admin: true,
   parent: ADMIN_DASHBOARD_ROUTE,
 });
 

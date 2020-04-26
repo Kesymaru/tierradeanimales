@@ -3,10 +3,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { useSelector } from "react-redux";
 import { isLoaded } from "react-redux-firebase";
 
-import Container from "@material-ui/core/Container";
-import LinearProgress from "@material-ui/core/LinearProgress";
-
-import Router from "../../wrappers/Router";
+import Router from "@core/wrappers/Router";
 import Route from "@core/models/route";
 import { AppHistory } from "@core/store";
 import {
@@ -15,11 +12,11 @@ import {
   Navbar,
   ScrollTop,
   Copyright,
+  AppAlert,
 } from "@core/components";
 import { ROUTES } from "@core/routes";
 import { HOME_ROUTE } from "@app/home";
 import AppState from "@core/models/store";
-import AppAlert from "./AppAlert";
 
 const HIDE_ROUTES: Array<Route> = [HOME_ROUTE];
 const anchorId: string = "back-to-top-anchor";
