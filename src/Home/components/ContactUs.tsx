@@ -1,12 +1,8 @@
-import React, {
-  ChangeEvent,
-  FormEvent,
-  FunctionComponent,
-  useState,
-} from "react";
+import React, { FunctionComponent } from "react";
 import { useDispatch } from "react-redux";
 import { useFirestore } from "react-redux-firebase";
 import { useTranslation } from "react-i18next";
+import { useForm } from "react-hook-form";
 
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -26,7 +22,6 @@ import MessageIcon from "@material-ui/icons/Message";
 
 import { AddAlert } from "@core/actions/alert";
 import Contact from "../models";
-import INIT_CONTACT from "../constants";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,12 +36,11 @@ export const ContactUs: FunctionComponent<{}> = () => {
   const dispatch = useDispatch();
   const firestore = useFirestore();
   const { t } = useTranslation();
-  const [contact, setContact] = useState<Contact>(INIT_CONTACT);
+  const { register, handleSubmit, errors, reset } = useForm<Contact>();
 
-  async function handleSubmit(event: FormEvent) {
-    event.preventDefault();
+  async function onSubmit(data: Contact) {
     try {
-      await firestore.add("contact", contact);
+      await firestore.add("contact", data);
       dispatch(
         AddAlert({
           color: "success",
@@ -63,22 +57,12 @@ export const ContactUs: FunctionComponent<{}> = () => {
     }
   }
 
-  function handleReset() {
-    setContact(INIT_CONTACT);
-  }
-
-  function handleChange(field: keyof Contact) {
-    return (event: ChangeEvent<HTMLInputElement>) =>
-      setContact({ ...contact, [`${field}`]: event.target.value });
-  }
-
   return (
     <Container maxWidth="md">
       <form
-        noValidate
         className={classes.form}
-        onSubmit={handleSubmit}
-        onReset={handleReset}
+        onSubmit={handleSubmit(onSubmit)}
+        onReset={() => reset()}
       >
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -87,6 +71,8 @@ export const ContactUs: FunctionComponent<{}> = () => {
           <Grid item xs={12} md={6} lg={4}>
             <TextField
               label={t("contact.name")}
+              type="text"
+              name="name"
               placeholder={t("contact.name")}
               variant="outlined"
               fullWidth
@@ -97,13 +83,17 @@ export const ContactUs: FunctionComponent<{}> = () => {
                   </InputAdornment>
                 ),
               }}
-              value={contact.name}
-              onChange={handleChange("name")}
+              inputRef={register({
+                required: true,
+              })}
+              error={!!errors.name}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <TextField
               label={t("contact.phone")}
+              type="phone"
+              name="phone"
               placeholder={t("contact.phone")}
               variant="outlined"
               fullWidth
@@ -114,13 +104,17 @@ export const ContactUs: FunctionComponent<{}> = () => {
                   </InputAdornment>
                 ),
               }}
-              value={contact.phone}
-              onChange={handleChange("phone")}
+              inputRef={register({
+                required: true,
+              })}
+              error={!!errors.phone}
             />
           </Grid>
           <Grid item xs={12} md={12} lg={4}>
             <TextField
               label={t("contact.email")}
+              type="email"
+              name="email"
               placeholder={t("contact.email")}
               variant="outlined"
               fullWidth
@@ -131,13 +125,17 @@ export const ContactUs: FunctionComponent<{}> = () => {
                   </InputAdornment>
                 ),
               }}
-              value={contact.email}
-              onChange={handleChange("email")}
+              inputRef={register({
+                required: true,
+              })}
+              error={!!errors.email}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               label={t("contact.message")}
+              type="text"
+              name="message"
               placeholder={t("contact.message")}
               variant="outlined"
               fullWidth
@@ -149,8 +147,11 @@ export const ContactUs: FunctionComponent<{}> = () => {
                   </InputAdornment>
                 ),
               }}
-              value={contact.message}
-              onChange={handleChange("message")}
+              inputRef={register({
+                required: true,
+                minLength: 3,
+              })}
+              error={!!errors.message}
             />
           </Grid>
           <Grid container item spacing={2}>
