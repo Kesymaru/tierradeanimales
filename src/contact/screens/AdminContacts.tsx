@@ -10,7 +10,7 @@ import { ContactResults } from "../models";
 import { CONTACT_COLUMNS } from "../contants";
 
 export const AdminContacts: FunctionComponent = (props) => {
-  const { data, isLoaded, isEmpty } = useData<ContactResults>("contacts", []);
+  const { data, isLoaded, isEmpty } = useData<ContactResults>("contact", []);
 
   return (
     <Screen t={"contact"} isLoaded={isLoaded} isEmpty={isEmpty}>

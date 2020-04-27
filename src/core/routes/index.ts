@@ -10,7 +10,7 @@ import { USER_ROUTES, ADMIN_USERS_ROUTE } from "@app/user/routes";
 import ADOPT_ROUTES from "@app/adopt/routes";
 import { FOSTER_HOME_ROUTES, FOSTER_HOMES_ROUTE } from "@app/fosterHome/routes";
 import { CASE_ROUTES, ADMIN_CASES_ROUTE } from "@app/case/routes";
-import CONTACT_ROUTES from "@app/contact/routes";
+import { CONTACT_ROUTES, ADMIN_CONTACTS_ROUTE } from "@app/contact/routes";
 
 // ------------------------------------
 // 404 no match
@@ -29,6 +29,7 @@ export const NAVBAR_ROUTES: Array<Route> = [
   DASHBOARD_ROUTE,
   ADMIN_CASES_ROUTE,
   FOSTER_HOMES_ROUTE,
+  ADMIN_CONTACTS_ROUTE,
   HOME_ROUTE,
 ];
 
@@ -54,5 +55,6 @@ export * from "@app/dashboard/routes";
 export * from "@app/home/routes";
 export * from "@app/newsletter/routes";
 export * from "@app/user/routes";
+export * from "@app/contact/routes";
 
 export default ROUTES;
