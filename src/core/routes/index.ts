@@ -10,6 +10,7 @@ import { USER_ROUTES, ADMIN_USERS_ROUTE } from "@app/user/routes";
 import ADOPT_ROUTES from "@app/adopt/routes";
 import { FOSTER_HOME_ROUTES, FOSTER_HOMES_ROUTE } from "@app/fosterHome/routes";
 import { CASE_ROUTES, ADMIN_CASES_ROUTE } from "@app/case/routes";
+import CONTACT_ROUTES from "@app/contact/routes";
 
 // ------------------------------------
 // 404 no match
@@ -43,6 +44,7 @@ export const ROUTES: Array<Route> = [
   ...ADOPT_ROUTES,
   ...FOSTER_HOME_ROUTES,
   ...CASE_ROUTES,
+  ...CONTACT_ROUTES,
 
   NOT_FOUND_ROUTE,
 ];
