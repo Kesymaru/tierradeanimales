@@ -10,7 +10,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 import { Screen } from "@core/wrappers";
 import { useData } from "@core/hooks";
-import { AppTable, TableActions } from "@core/components";
+import { AppTable, TableActions, TableButtons } from "@core/components";
 import { AddAlert } from "@core/actions";
 
 import { UsersResults, User } from "../models";
@@ -35,6 +35,13 @@ const TABLE_ACTIONS: TableActions = [
     onClick: (selected: Array<string>) => {
       console.log("set admin", selected);
     },
+  },
+];
+
+const TABLE_BUTTONS: TableButtons = [
+  {
+    title: "Add",
+    onClick: () => console.log("add"),
   },
 ];
 
@@ -75,6 +82,7 @@ export const AdminUser: FunctionComponent = () => {
           columns={USERS_COLUMNS}
           data={data}
           actions={TABLE_ACTIONS}
+          buttons={TABLE_BUTTONS}
         />
       </Container>
     </Screen>

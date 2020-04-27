@@ -11,7 +11,7 @@ import pick from "lodash/pick";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 
-import { AppTableToolbar } from "./AppTableToolbar";
+import { AppTableToolbar, TableButtons } from "./AppTableToolbar";
 import { AppTableHeader, TableColumns } from "./AppTableHeader";
 import { TableActions } from "./AppTableActions";
 import AppTableBody from "./AppTableBody";
@@ -21,6 +21,7 @@ export interface AppTableProps {
   columns: TableColumns;
   data: Array<any>;
   actions?: TableActions;
+  buttons?: TableButtons;
   onSelect?: (items: Array<any>) => void;
 }
 
@@ -46,12 +47,14 @@ export const AppTable: FunctionComponent<AppTableProps> = (props) => {
     <Paper
       style={{ overflowX: "auto", marginRight: "auto", marginLeft: "auto" }}
     >
-      <AppTableToolbar
-        title={props.title}
-        selected={selected}
-        actions={props.actions}
-      />
       <Table>
+        <AppTableToolbar
+          title={props.title}
+          selected={selected}
+          columns={props.columns}
+          actions={props.actions}
+          buttons={props.buttons}
+        />
         <AppTableHeader
           selected={selected}
           data={props.data}
@@ -73,4 +76,5 @@ export const AppTable: FunctionComponent<AppTableProps> = (props) => {
 
 export * from "./AppTableHeader";
 export * from "./AppTableActions";
+export * from "./AppTableToolbar";
 export default AppTable;

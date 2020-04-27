@@ -7,10 +7,8 @@
       "date": "Fecha",
       "goBack": "Regresar",
       "errors": {
-        "string.min": "{#label} debe ser de al menos {#limit} caracteres",
-        "string.empty": "{#label} no puede estar vacio",
-        "string.email": "{#label} debe ser un email valido",
-        "number.base": "{#label} debe ser un numero valido"
+        "empty": "No existen datos",
+        "emptyMessage": "Aun no existen datos"
       }
     },
     "home": {
@@ -50,6 +48,15 @@
       "success": "Mensaje de contacto enviado exitosamente",
       "_error": "Error sending contact message",
       "error": "Error enviando el mensaje de contacto"
+    },
+    "contacts": {
+      "title": "Contactos",
+      "errors": {
+        "empty": {
+          "title": "Error: Contactos",
+          "message": "No hay Contactos"
+        }
+      }
     },
     "signIn": {
       "title": "Iniciar Session",
@@ -153,7 +160,7 @@
       },
       "errors": {
         "empty": {
-          "title": "Error - Boletines Informativos",
+          "title": "Error: Boletines Informativos",
           "message": "No hay Boletines Informativos"
         }
       }

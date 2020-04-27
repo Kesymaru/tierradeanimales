@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import { useTranslation } from "react-i18next";
 
 import Container from "@material-ui/core/Container";
 
@@ -10,12 +11,17 @@ import { ContactResults } from "../models";
 import { CONTACT_COLUMNS } from "../contants";
 
 export const AdminContacts: FunctionComponent = (props) => {
-  const { data, isLoaded, isEmpty } = useData<ContactResults>("contact", []);
+  const { t } = useTranslation();
+  const { data, isLoaded, isEmpty } = useData<ContactResults>("contacts", []);
 
   return (
-    <Screen t={"contact"} isLoaded={isLoaded} isEmpty={isEmpty}>
+    <Screen t={"contacts"} isLoaded={isLoaded} isEmpty={isEmpty}>
       <Container>
-        <AppTable title="Contacts" columns={CONTACT_COLUMNS} data={data} />
+        <AppTable
+          title={t("contacts.title")}
+          columns={CONTACT_COLUMNS}
+          data={data}
+        />
       </Container>
     </Screen>
   );

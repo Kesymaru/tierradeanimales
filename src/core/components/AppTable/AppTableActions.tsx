@@ -87,7 +87,7 @@ export const AppTableActions: FunctionComponent<AppTableActionsProps> = (
       color="primary"
       ref={anchorRef}
       aria-label="split button"
-      size="medium"
+      size="small"
       disabled={props.selected.length <= 0}
     >
       <Tooltip title={action.title}>
