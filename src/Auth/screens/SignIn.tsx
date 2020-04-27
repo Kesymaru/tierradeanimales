@@ -7,6 +7,7 @@ import React, {
 import { useSelector } from "react-redux";
 import { useFirebase, isEmpty, isLoaded } from "react-redux-firebase";
 import { useTranslation } from "react-i18next";
+import { useForm } from "react-hook-form";
 import { Link as RouterLink, Redirect } from "react-router-dom";
 import get from "lodash/get";
 
@@ -25,6 +26,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Divider from "@material-ui/core/Divider";
 
 import FacebookIcon from "@material-ui/icons/Facebook";
 import AppleIcon from "@material-ui/icons/Apple";
@@ -73,12 +75,12 @@ const SignIn: FunctionComponent<{}> = ({}) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { register, handleSubmit } = useForm();
   const [data, _setData] = useState<CreateUserCredentials>(
     INIT_EMAIL_CREDENTIALS
   );
   const [touched, setTouched] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);
   const logged = isLoaded(auth) && !isEmpty(auth);
 
@@ -88,8 +90,9 @@ const SignIn: FunctionComponent<{}> = ({}) => {
     facebook.type = google.type = "popup";
   }
 
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault();
+  function onSubmit() {
+    console.log("on submit");
+    // event.preventDefault();
     setLoading(true);
     signIn(data);
   }
@@ -115,7 +118,7 @@ const SignIn: FunctionComponent<{}> = ({}) => {
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Container component="main" maxWidth="xs">
-        <form noValidate onSubmit={handleSubmit}>
+        <form noValidate onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Avatar className={classes.avatar}>
@@ -133,6 +136,7 @@ const SignIn: FunctionComponent<{}> = ({}) => {
                 startIcon={<GoogleIcon />}
                 onClick={() => signIn(google)}
               >
+                <Divider orientation="vertical" flexItem />
                 {t("signIn.with")} Google
               </GoogleButton>
             </Grid>
@@ -144,10 +148,11 @@ const SignIn: FunctionComponent<{}> = ({}) => {
                 startIcon={<FacebookIcon />}
                 onClick={() => signIn(facebook)}
               >
+                <Divider orientation="vertical" flexItem />
                 {t("signIn.with")} Facebook
               </FacebookButton>
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <AppleButton
                 variant="outlined"
                 size="large"
@@ -155,8 +160,12 @@ const SignIn: FunctionComponent<{}> = ({}) => {
                 startIcon={<AppleIcon />}
                 onClick={() => signIn(facebook)}
               >
+                <Divider orientation="vertical" flexItem />
                 {t("signIn.with")} Apple
               </AppleButton>
+            </Grid> */}
+            <Grid item xs={12}>
+              <Divider />
             </Grid>
             <Grid item xs={12}>
               <Typography component="h1" variant="h5" align="center">
@@ -177,6 +186,7 @@ const SignIn: FunctionComponent<{}> = ({}) => {
                 value={data.email}
                 onChange={handleEmailChange}
                 disabled={loading}
+                inputRef={register}
               />
             </Grid>
             <Grid item xs={12}>
@@ -192,6 +202,7 @@ const SignIn: FunctionComponent<{}> = ({}) => {
                 value={data.password}
                 onChange={handlePasswordChange}
                 disabled={loading}
+                inputRef={register}
               />
             </Grid>
             <Grid item xs={12}>
@@ -200,11 +211,15 @@ const SignIn: FunctionComponent<{}> = ({}) => {
                 fullWidth
                 variant="contained"
                 color="primary"
-                disabled={!touched || loading}
+                disabled={!touched || loading || !data.email || !data.password}
               >
                 {loading ? t("signIn.loading") : t("signIn.title")}
               </Button>
               {loading ? <LinearProgress color="primary" /> : null}
+              <Divider />
+            </Grid>
+            <Grid item xs={12}>
+              <Divider />
             </Grid>
             <Grid item container spacing={2}>
               <Grid item xs={12} sm={6}>

@@ -16,17 +16,27 @@ export const GoogleButton = withStyles({
     "&:hover": {
       backgroundColor: COLORS.BLUE,
       boxShadow: "none",
+      "& .MuiButton-endIcon": {
+        display: "flex",
+      },
     },
     "&:active": {
       backgroundColor: COLORS.BLUE,
       boxShadow: "none",
+      "& .MuiButton-endIcon": {
+        display: "flex",
+      },
+    },
+    "& .MuiDivider-root": {
+      marginRight: 16,
+      backgroundColor: COLORS.WHITE,
     },
   },
   label: {
     justifyContent: "flex-start",
   },
   startIcon: {
-    marginRight: 35,
+    marginRight: 16,
   },
 })(MaterialButton);
 
