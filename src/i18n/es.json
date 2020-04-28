@@ -6,6 +6,12 @@
       "reset": "Limpiar",
       "date": "Fecha",
       "goBack": "Regresar",
+      "selected": "Selecionado",
+      "table": "Tabla",
+      "changeAction": "Cambiar Acción",
+      "add": "Crear",
+      "edit": "Editar",
+      "delete": "Eliminar",
       "errors": {
         "empty": "No existen datos",
         "emptyMessage": "Aun no existen datos"
@@ -184,6 +190,10 @@
         "add": "Casa Cuna creada",
         "update": "Casa Cuna actualizada"
       }
+    },
+    "users": {
+      "title": "Usuarios",
+      "setAsAdmin": "Cambiar a Admin"
     }
   }
 }

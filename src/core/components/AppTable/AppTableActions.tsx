@@ -5,6 +5,7 @@ import React, {
   useRef,
   MouseEvent,
 } from "react";
+import { useTranslation } from "react-i18next";
 
 import Paper from "@material-ui/core/Paper";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -17,11 +18,13 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Typography from "@material-ui/core/Typography";
+import { PropTypes } from "@material-ui/core";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import EditIcon from "@material-ui/icons/Edit";
 
 export interface TableAction {
   title: string;
+  color?: PropTypes.Color;
   icon?: ComponentType<any>;
   onClick?: (items: Array<any>) => void;
   disabled?: (items: Array<any>) => boolean;
@@ -36,6 +39,7 @@ interface AppTableActionsProps {
 export const AppTableActions: FunctionComponent<AppTableActionsProps> = (
   props
 ) => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState<boolean>(false);
   const [action, setAction] = useState<TableAction>(props.actions[0]);
   const anchorRef = useRef<HTMLDivElement>(null);
@@ -74,7 +78,7 @@ export const AppTableActions: FunctionComponent<AppTableActionsProps> = (
                 <EditIcon fontSize="small" />
               )}
             </ListItemIcon>
-            <Typography variant="inherit">{item.title}</Typography>
+            <Typography variant="inherit">{t(item.title)}</Typography>
           </MenuItem>
         ))}
       </MenuList>
@@ -86,30 +90,33 @@ export const AppTableActions: FunctionComponent<AppTableActionsProps> = (
       variant="outlined"
       color="primary"
       ref={anchorRef}
-      aria-label="split button"
       size="small"
       disabled={props.selected.length <= 0}
     >
-      <Tooltip title={action.title}>
+      <Tooltip title={t(action.title)}>
         <Button
           onClick={() => action.onClick && action.onClick(props.selected)}
           startIcon={action.icon ? <action.icon /> : undefined}
+          color={action.color ? action.color : "default"}
           disabled={action.disabled ? action.disabled(props.selected) : false}
         >
-          {action.title}
+          {t(action.title)}
         </Button>
       </Tooltip>
-      <Button
-        color="primary"
-        size="small"
-        aria-controls={open ? "split-button-menu" : undefined}
-        aria-expanded={open ? "true" : undefined}
-        aria-label="select merge strategy"
-        aria-haspopup="menu"
-        onClick={handleToggle}
-      >
-        <ArrowDropDownIcon />
-      </Button>
+      <Tooltip title={t("app.changeAction")}>
+        <Button
+          color="primary"
+          size="small"
+          aria-controls={open ? "split-button-menu" : undefined}
+          aria-expanded={open ? "true" : undefined}
+          aria-label="select merge strategy"
+          aria-haspopup="menu"
+          onClick={handleToggle}
+        >
+          <ArrowDropDownIcon />
+        </Button>
+      </Tooltip>
+
       <Popper
         open={open}
         anchorEl={anchorRef.current}
