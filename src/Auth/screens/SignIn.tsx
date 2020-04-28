@@ -1,22 +1,18 @@
-import React, {
-  ChangeEvent,
-  FormEvent,
-  FunctionComponent,
-  useState,
-} from "react";
+import React, { FunctionComponent, useState } from "react";
 import { useSelector } from "react-redux";
-import { useFirebase, isEmpty, isLoaded } from "react-redux-firebase";
+import {
+  useFirebase,
+  isEmpty,
+  isLoaded,
+  CreateUserCredentials,
+} from "react-redux-firebase";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { Link as RouterLink, Redirect } from "react-router-dom";
-import get from "lodash/get";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import Checkbox from "@material-ui/core/Checkbox";
 import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Link from "@material-ui/core/Link";
@@ -28,21 +24,11 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Divider from "@material-ui/core/Divider";
 
-import FacebookIcon from "@material-ui/icons/Facebook";
-import AppleIcon from "@material-ui/icons/Apple";
-
 import { AppState } from "@core/models";
 import { DASHBOARD_ROUTE } from "@app/dashboard";
-import INIT_EMAIL_CREDENTIALS from "../constants";
-import { FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE } from "../routes";
-import { Credentials, CreateUserCredentials } from "react-redux-firebase";
 
-import {
-  GoogleButton,
-  GoogleIcon,
-  FacebookButton,
-  AppleButton,
-} from "../components";
+import { FORGOT_PASSWORD_ROUTE, SIGN_UP_ROUTE } from "../routes";
+import { AuthProviders } from "../components";
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -56,69 +42,32 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const google: Credentials = {
-  provider: "google",
-  type: "popup",
-};
-const facebook: Credentials = {
-  provider: "facebook",
-  type: "popup",
-};
-const apple = {
-  provider: "apple",
-  type: "popup",
-};
-
-const SignIn: FunctionComponent<{}> = ({}) => {
+const SignIn: FunctionComponent = () => {
   const classes = useStyles();
   const firebase = useFirebase();
   const { t } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const { register, handleSubmit } = useForm();
-  const [data, _setData] = useState<CreateUserCredentials>(
-    INIT_EMAIL_CREDENTIALS
-  );
-  const [touched, setTouched] = useState<boolean>(false);
+  const { register, handleSubmit, errors } = useForm<CreateUserCredentials>();
   const [loading, setLoading] = useState<boolean>(false);
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);
   const logged = isLoaded(auth) && !isEmpty(auth);
 
-  if (isMobile) {
-    facebook.type = google.type = "redirect";
-  } else {
-    facebook.type = google.type = "popup";
-  }
-
-  function onSubmit() {
-    console.log("on submit");
-    // event.preventDefault();
+  async function onSubmit(data: CreateUserCredentials) {
     setLoading(true);
-    signIn(data);
-  }
-
-  function setData(value: CreateUserCredentials) {
-    _setData(value);
-    setTouched(true);
-  }
-
-  function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
-    setData({ ...data, email: get(event, "target.value", data.email) });
-  }
-
-  function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
-    setData({ ...data, password: get(event, "target.value", data.password) });
-  }
-
-  function signIn(credentials: Credentials) {
-    firebase.login(credentials);
+    try {
+      await firebase.login(data);
+    } catch (err) {
+      console.error("error", err);
+      setLoading(false);
+    }
   }
 
   if (logged) return <Redirect to={DASHBOARD_ROUTE.path} />;
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Container component="main" maxWidth="xs">
-        <form noValidate onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Avatar className={classes.avatar}>
@@ -128,42 +77,9 @@ const SignIn: FunctionComponent<{}> = ({}) => {
                 {t("signIn.title")}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
-              <GoogleButton
-                variant="outlined"
-                size="large"
-                fullWidth
-                startIcon={<GoogleIcon />}
-                onClick={() => signIn(google)}
-              >
-                <Divider orientation="vertical" flexItem />
-                {t("signIn.with")} Google
-              </GoogleButton>
-            </Grid>
-            <Grid item xs={12}>
-              <FacebookButton
-                variant="outlined"
-                size="large"
-                fullWidth
-                startIcon={<FacebookIcon />}
-                onClick={() => signIn(facebook)}
-              >
-                <Divider orientation="vertical" flexItem />
-                {t("signIn.with")} Facebook
-              </FacebookButton>
-            </Grid>
-            {/* <Grid item xs={12}>
-              <AppleButton
-                variant="outlined"
-                size="large"
-                fullWidth
-                startIcon={<AppleIcon />}
-                onClick={() => signIn(facebook)}
-              >
-                <Divider orientation="vertical" flexItem />
-                {t("signIn.with")} Apple
-              </AppleButton>
-            </Grid> */}
+
+            <AuthProviders with={t("signIn.with")} />
+
             <Grid item xs={12}>
               <Divider />
             </Grid>
@@ -183,10 +99,11 @@ const SignIn: FunctionComponent<{}> = ({}) => {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                value={data.email}
-                onChange={handleEmailChange}
                 disabled={loading}
-                inputRef={register}
+                inputRef={register({
+                  required: true,
+                })}
+                error={!!errors.email}
               />
             </Grid>
             <Grid item xs={12}>
@@ -199,10 +116,11 @@ const SignIn: FunctionComponent<{}> = ({}) => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                value={data.password}
-                onChange={handlePasswordChange}
                 disabled={loading}
-                inputRef={register}
+                inputRef={register({
+                  required: true,
+                })}
+                error={!!errors.password}
               />
             </Grid>
             <Grid item xs={12}>
@@ -211,7 +129,7 @@ const SignIn: FunctionComponent<{}> = ({}) => {
                 fullWidth
                 variant="contained"
                 color="primary"
-                disabled={!touched || loading || !data.email || !data.password}
+                disabled={!errors || loading}
               >
                 {loading ? t("signIn.loading") : t("signIn.title")}
               </Button>

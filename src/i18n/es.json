@@ -80,7 +80,23 @@
       "password": "Contraseña",
       "loading": "Iniciando session",
       "forgotPassword": "¿Olvidaste la contraseña?",
-      "signUp": "Crear Cuenta"
+      "signUp": "Crear Cuenta",
+      "errors": {
+        "auth": {
+          "title": "Error",
+          "message": "Email o contraseña invalida"
+        }
+      }
+    },
+    "signUp": {
+      "title": "Crear Cuenta",
+      "with": "Crear cuenta con",
+      "firstName": "Nombre",
+      "lastName": "Apellidos",
+      "email": "Email",
+      "password": "Contraseña",
+      "terms": "He leido los terminos y condiciones de usu",
+      "alreadyHaveAccount": "¿Ya tienes una cuenta? Inicia Session"
     },
     "signOut": {
       "title": "Cerrar Session"

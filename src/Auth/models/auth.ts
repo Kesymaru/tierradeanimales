@@ -25,7 +25,6 @@ export interface AppleCredentials {
 export interface EmailCredentials {
   email: string;
   password: string;
-  remember?: boolean;
 }
 
 export type Credentials =
