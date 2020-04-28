@@ -1,3 +1,5 @@
+import ContactsIcon from "@material-ui/icons/Contacts";
+
 import createRoute from "@core/utils/createRoute";
 import Route from "@core/models/route";
 
@@ -9,6 +11,7 @@ export const ADMIN_CONTACTS_ROUTE: Route = createRoute({
   path: `${ADMIN_DASHBOARD_ROUTE.path}/contacts`,
   auth: true,
   admin: true,
+  icon: ContactsIcon,
   component: AdminContacts,
   parent: ADMIN_DASHBOARD_ROUTE,
 });

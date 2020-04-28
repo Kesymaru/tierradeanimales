@@ -68,7 +68,7 @@
       "errors": {
         "empty": {
           "title": "Error: Contactos",
-          "message": "No hay Contactos"
+          "message": "Aun no hay Contactos enviados"
         }
       }
     },

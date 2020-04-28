@@ -8,7 +8,7 @@ import { Screen } from "@core/wrappers";
 import { AppTable } from "@core/components";
 
 import { ContactResults } from "../models";
-import { CONTACT_COLUMNS } from "../contants";
+import { CONTACT_COLUMNS } from "../constants";
 
 export const AdminContacts: FunctionComponent = (props) => {
   const { t } = useTranslation();

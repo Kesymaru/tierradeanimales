@@ -21,30 +21,9 @@ import { AppTitle, AppTable, AppLoading, AppInfo } from "@core/components";
 
 import { ADMIN_EDIT_CASE_ROUTE } from "../routes";
 import Case from "../models";
+import { CASE_COLUMNS } from "../constants";
 
 const { case: COLLECTION } = CollectionsConfig;
-const COLUMNS = [
-  {
-    title: "Name",
-    path: "name",
-  },
-  {
-    title: "Type",
-    path: "type",
-  },
-  {
-    title: "Sex",
-    path: "sex",
-  },
-  {
-    title: "Status",
-    path: "status",
-  },
-  {
-    title: "Public",
-    path: "public",
-  },
-];
 
 export const AdminCases: FunctionComponent<{}> = () => {
   const history = useHistory();
@@ -78,9 +57,9 @@ export const AdminCases: FunctionComponent<{}> = () => {
 
   return (
     <Container>
-      <AppTitle title="Casos" />
+      <AppTitle title={t("cases.title")} />
       <AppTable
-        columns={COLUMNS}
+        columns={CASE_COLUMNS}
         data={data}
         title="Data title"
         onSelect={(selected: Array<string>) =>

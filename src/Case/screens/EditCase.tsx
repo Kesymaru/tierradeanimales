@@ -45,7 +45,7 @@ import useId from "@core/hooks/useId";
 import { AddAlert } from "@core/actions/alert";
 
 import { Case, Sex, CaseStatus } from "../models";
-import INIT_CASE from "../constants";
+import { INIT_CASE } from "../constants";
 import { ADMIN_CASES_ROUTE } from "../routes";
 import FosterHomeSelect from "@app/fosterHome/components/FosterHomeSelect";
 import AppFileManager from "@core/components/AppFileManager";
