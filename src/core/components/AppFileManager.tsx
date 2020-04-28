@@ -7,6 +7,7 @@ import React, {
   KeyboardEvent,
   ComponentType,
 } from "react";
+import { useTranslation } from "react-i18next";
 import { useDropzone } from "react-dropzone";
 import { useFirebase } from "react-redux-firebase";
 import { v4 as uuid } from "uuid";
@@ -24,7 +25,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Menu from "@material-ui/core/Menu";
-import MenuList from "@material-ui/core/MenuList";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import MenuItem from "@material-ui/core/MenuItem";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -48,6 +48,8 @@ interface Action {
 }
 
 export interface AppFileManagerProps {
+  title?: string;
+  accept: string | Array<string>;
   collection: string;
   setSubmit?: (handleSubmit: Function) => void;
   files?: Array<File>;
@@ -60,6 +62,7 @@ export const AppFileManager: FunctionComponent<AppFileManagerProps> = (
 ) => {
   const firebase = useFirebase();
   const autoUpdate = !isFunction(props.setSubmit);
+  const { t } = useTranslation();
   const [files, setFiles] = useState<Array<File>>(props.files || []);
   const [deleted, setDeleted] = useState<Array<File>>([]);
   const [selected, setSelected] = useState<Array<string>>([]);
@@ -72,7 +75,7 @@ export const AppFileManager: FunctionComponent<AppFileManagerProps> = (
     el: null,
   });
   const { getRootProps, getInputProps, open } = useDropzone({
-    accept: "image/*",
+    accept: props.accept,
     noClick: true,
     onDrop,
   });
@@ -242,7 +245,9 @@ export const AppFileManager: FunctionComponent<AppFileManagerProps> = (
         <Grid item xs={12}>
           <input {...getInputProps()} />
           <Typography variant="body1" align="center">
-            Drag 'n' drop some files here, or click to select files
+            {props.title
+              ? props.title
+              : `Drag 'n' drop some files here, or click to select files`}
           </Typography>
         </Grid>
         <Grid xs={12}>
@@ -254,7 +259,7 @@ export const AppFileManager: FunctionComponent<AppFileManagerProps> = (
               startIcon={<PublishIcon />}
               style={{ width: 150 }}
             >
-              Upload
+              {t("app.upload")}
             </Button>
           </Box>
         </Grid>

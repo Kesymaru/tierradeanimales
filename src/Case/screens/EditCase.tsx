@@ -68,8 +68,6 @@ export const EditCase: FunctionComponent<{}> = (props) => {
   const [data, setData] = useState<Case>(INIT_CASE);
   let handleSubmitFile: Function = () => {};
 
-  console.log("loadedData", loadedData);
-
   useEffect(() => {
     if (!isNew && isLoaded(loadedData) && !isEmpty(loadedData))
       setData(loadedData);
@@ -129,8 +127,6 @@ export const EditCase: FunctionComponent<{}> = (props) => {
       fosterHomeId: id,
     });
   }
-
-  console.log("loaded case", data);
 
   return (
     <Container>
@@ -269,6 +265,8 @@ export const EditCase: FunctionComponent<{}> = (props) => {
           </Grid>
           <Grid item xs={12}>
             <AppFileManager
+              title={t("case.dragNdrop")}
+              accept={"image/*"}
               collection={COLLECTION}
               files={data.images}
               setSubmit={(submitFile) => (handleSubmitFile = submitFile)}

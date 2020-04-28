@@ -4,6 +4,7 @@ import { useFirebase } from "react-redux-firebase";
 import pick from "lodash/pick";
 
 import Container from "@material-ui/core/Container";
+import PersonIcon from "@material-ui/icons/Person";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 
 import { Screen } from "@core/wrappers";
@@ -24,6 +25,14 @@ export const AdminUser: FunctionComponent = () => {
     {
       ...TABLE_ACTIONS[1],
       onClick: deleteUsers,
+    },
+    {
+      title: "users.setAsUser",
+      color: "default",
+      icon: PersonIcon,
+      onClick: (selected: Array<string>) => {
+        console.log("set user", selected);
+      },
     },
     {
       title: "users.setAsAdmin",

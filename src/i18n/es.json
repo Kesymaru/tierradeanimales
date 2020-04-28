@@ -12,6 +12,7 @@
       "add": "Crear",
       "edit": "Editar",
       "delete": "Eliminar",
+      "upload": "Cargar",
       "errors": {
         "empty": "No existen datos",
         "emptyMessage": "Aun no existen datos"
@@ -211,7 +212,12 @@
     },
     "users": {
       "title": "Usuarios",
-      "setAsAdmin": "Cambiar a Admin"
+      "setAsUser": "Degradar a Usuario",
+      "setAsAdmin": "Promover a Admin"
+    },
+    "case": {
+      "title": "Caso",
+      "dragNdrop": "Arrastre aqui o selecciones images para cargar."
     }
   }
 }
