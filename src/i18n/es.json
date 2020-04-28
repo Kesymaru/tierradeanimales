@@ -50,10 +50,18 @@
       "email": "Email",
       "phone": "Telefono",
       "message": "Mensaje",
-      "_success": "Contact message send successfully",
-      "success": "Mensaje de contacto enviado exitosamente",
-      "_error": "Error sending contact message",
-      "error": "Error enviando el mensaje de contacto"
+      "success": {
+        "add": {
+          "title": "Exito",
+          "message": "Se ha enviado la informacion de contacto exitosamente"
+        }
+      },
+      "errors": {
+        "add": {
+          "title": "Error",
+          "message": "Ocurrio un problema enviando la informacion de contacto"
+        }
+      }
     },
     "contacts": {
       "title": "Contactos",
@@ -172,10 +180,12 @@
       }
     },
     "fosterHomes": {
-      "title": "Casa Cunas",
+      "title": "Casas Cunas",
       "errors": {
-        "empty": "No existen Casas Cuna",
-        "emptyMessage": "Intenta creando una casa cuna nueva"
+        "empty": {
+          "title": "Error: Casas Cunas",
+          "message": "Aun no hay Casas Cunas, intente creando una nueva"
+        }
       }
     },
     "fosterHome": {
@@ -183,12 +193,20 @@
       "edit": "Editar Casa Cuna",
       "add": "Crear Casa Cuna",
       "errors": {
-        "empty": "Error: Casa Cuna",
-        "emptyMessage": "No fue posible cargar la casa cuna solicitada"
+        "empty": {
+          "title": "Error: Casa Cuna",
+          "message": "No fue posible cargar la Casa Cuna solicitada"
+        }
       },
       "success": {
-        "add": "Casa Cuna creada",
-        "update": "Casa Cuna actualizada"
+        "add": {
+          "title": "Casa Cuna creada",
+          "message": "Nueva Casa Cuna creada exitosamente"
+        },
+        "update": {
+          "title": "Casa Cuna actualizada",
+          "message": "Casa Cuna actualizada exitosamente"
+        }
       }
     },
     "users": {

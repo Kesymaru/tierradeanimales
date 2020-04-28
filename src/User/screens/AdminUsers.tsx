@@ -10,7 +10,7 @@ import { Screen } from "@core/wrappers";
 import { useData } from "@core/hooks";
 import { AppTable, TableActions, TableButtons } from "@core/components";
 import { AddAlert } from "@core/actions";
-import { TABLE_ACTIONS, TABLE_BUTTONS } from "@core/constants";
+import { TABLE_ACTIONS } from "@core/constants";
 
 import { UsersResults, User } from "../models";
 import { USERS_COLUMNS } from "../constants";
@@ -70,7 +70,6 @@ export const AdminUser: FunctionComponent = () => {
           columns={USERS_COLUMNS}
           data={data}
           actions={tableActions}
-          buttons={TABLE_BUTTONS}
         />
       </Container>
     </Screen>

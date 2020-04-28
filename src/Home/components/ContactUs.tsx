@@ -11,7 +11,6 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Tooltip from "@material-ui/core/Tooltip";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import SendIcon from "@material-ui/icons/Send";
@@ -23,16 +22,7 @@ import MessageIcon from "@material-ui/icons/Message";
 import { AddAlert } from "@core/actions/alert";
 import Contact from "../models";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    form: {
-      margin: "40px 0",
-    },
-  })
-);
-
 export const ContactUs: FunctionComponent<{}> = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const firestore = useFirestore();
   const { t } = useTranslation();
@@ -44,14 +34,14 @@ export const ContactUs: FunctionComponent<{}> = () => {
       dispatch(
         AddAlert({
           color: "success",
-          message: t("contact.success"),
+          message: t("contact.success.add.message"),
         })
       );
     } catch (err) {
       dispatch(
         AddAlert({
           color: "error",
-          message: t("contact.error"),
+          message: t("contact.errors.add.message"),
         })
       );
     }
@@ -60,9 +50,9 @@ export const ContactUs: FunctionComponent<{}> = () => {
   return (
     <Container maxWidth="md">
       <form
-        className={classes.form}
         onSubmit={handleSubmit(onSubmit)}
         onReset={() => reset()}
+        style={{ margin: "40px 0" }}
       >
         <Grid container spacing={2}>
           <Grid item xs={12}>
