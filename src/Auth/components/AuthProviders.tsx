@@ -4,6 +4,7 @@ import {
   Credentials,
   CreateUserCredentials,
 } from "react-redux-firebase";
+import { useHistory } from "react-router-dom";
 
 import Grid from "@material-ui/core/Grid";
 import useTheme from "@material-ui/core/styles/useTheme";
@@ -12,6 +13,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Divider from "@material-ui/core/Divider";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import AppleIcon from "@material-ui/icons/Apple";
+
+import { DASHBOARD_ROUTE } from "@core/routes";
 
 import GoogleButton from "./GoogleButton";
 import GoogleIcon from "./GoogleIcon";
@@ -38,6 +41,7 @@ export interface AuthProvidersProps {
 export const AuthProviders: FunctionComponent<AuthProvidersProps> = (props) => {
   const firebase = useFirebase();
   const theme = useTheme();
+  const history = useHistory();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   if (isMobile) {
     facebook.type = google.type = "redirect";
@@ -45,8 +49,13 @@ export const AuthProviders: FunctionComponent<AuthProvidersProps> = (props) => {
     facebook.type = google.type = "popup";
   }
 
-  function signIn(credentials: Credentials) {
-    firebase.login(credentials);
+  async function signIn(credentials: Credentials) {
+    try {
+      await firebase.login(credentials);
+      history.push(DASHBOARD_ROUTE.getPath());
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
