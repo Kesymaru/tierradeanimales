@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useFirebase, isLoaded } from "react-redux-firebase";
+import { useFirebase } from "react-redux-firebase";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
 
@@ -14,7 +14,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
 import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";

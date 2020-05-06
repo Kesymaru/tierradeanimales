@@ -46,6 +46,7 @@ export const AdminUser: FunctionComponent = () => {
 
   function deleteUsers(selected: Array<string>) {
     console.log("delete user -> selected", selected);
+
   }
 
   async function setAsAdmin(user: User) {

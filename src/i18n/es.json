@@ -14,8 +14,10 @@
       "delete": "Eliminar",
       "upload": "Cargar",
       "errors": {
-        "empty": "No existen datos",
-        "emptyMessage": "Aun no existen datos"
+        "empty": {
+          "title": "No existen datos",
+          "message": "Aun no existen datos"
+        }
       }
     },
     "home": {
@@ -196,36 +198,6 @@
         }
       }
     },
-    "fosterHomes": {
-      "title": "Casas Cunas",
-      "errors": {
-        "empty": {
-          "title": "Error: Casas Cunas",
-          "message": "Aun no hay Casas Cunas, intente creando una nueva"
-        }
-      }
-    },
-    "fosterHome": {
-      "title": "Casa Cuna",
-      "edit": "Editar Casa Cuna",
-      "add": "Crear Casa Cuna",
-      "errors": {
-        "empty": {
-          "title": "Error: Casa Cuna",
-          "message": "No fue posible cargar la Casa Cuna solicitada"
-        }
-      },
-      "success": {
-        "add": {
-          "title": "Casa Cuna creada",
-          "message": "Nueva Casa Cuna creada exitosamente"
-        },
-        "update": {
-          "title": "Casa Cuna actualizada",
-          "message": "Casa Cuna actualizada exitosamente"
-        }
-      }
-    },
     "users": {
       "title": "Usuarios",
       "setAsUser": "Degradar a Usuario",
@@ -234,6 +206,18 @@
     "case": {
       "title": "Caso",
       "dragNdrop": "Arrastre aqui o selecciones images para cargar."
+    },
+    "cases": {
+      "title": "Casos"
+    },
+    "adopt": {
+      "title": "Adoptar",
+      "errors": {
+        "empty": {
+          "title": "No hay animales para adoptar",
+          "message": "Afortunadamente todos nuestros animales han sido adoptados o aun no hay nuevos en adopcion"
+        }
+      }
     }
   }
 }

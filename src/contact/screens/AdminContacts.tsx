@@ -12,7 +12,7 @@ import { CONTACT_COLUMNS } from "../constants";
 
 export const AdminContacts: FunctionComponent = (props) => {
   const { t } = useTranslation();
-  const { data, isLoaded, isEmpty } = useData<ContactResults>("contacts", []);
+  const { data, isLoaded, isEmpty } = useData<ContactResults>("contact", []);
 
   return (
     <Screen t={"contacts"} isLoaded={isLoaded} isEmpty={isEmpty}>

@@ -10,7 +10,18 @@ import get from "lodash/get";
 import AppState from "@core/models/store";
 import useId from "./useId";
 
-export function useData<T>(path: string, initData: T) {
+export function useData<T>(
+  path: string,
+  initData: T
+): {
+  isNew: boolean;
+  isLoaded: boolean;
+  isEmpty: boolean;
+  id: string | undefined;
+  data: T;
+  setData: Function;
+  resetData: Function;
+} {
   console.log("load path", path);
 
   const { isNew, id } = useId();

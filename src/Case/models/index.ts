@@ -1,4 +1,4 @@
-import File from "@core/models/file";
+import { File, Data } from "@core/models";
 
 export enum CaseType {
   DOG = "Dog",
@@ -24,10 +24,12 @@ export interface Case {
   age: number;
   description: string;
   public: boolean;
-  avatar?: any;
+  avatar?: File | null;
   start?: boolean;
   fosterHomeId: string;
   images?: Array<File>;
 }
+
+export type CaseResults = Array<Case>;
 
 export default Case;
