@@ -18,6 +18,7 @@ export interface CollectionsConfiguration {
   fosterHome: string;
   newsletter: string;
   user: string;
+  contact: string;
 }
 
 export default FirebaseConfiguration;

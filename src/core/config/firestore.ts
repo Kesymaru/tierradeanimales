@@ -5,6 +5,7 @@ export const CollectionsConfig: CollectionsConfiguration = {
   fosterHome: "fosterHome",
   newsletter: "newsletter",
   user: "user",
+  contact: "contact",
 };
 
 export default CollectionsConfig;
