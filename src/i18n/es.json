@@ -218,6 +218,21 @@
           "message": "Afortunadamente todos nuestros animales han sido adoptados o aun no hay nuevos en adopcion"
         }
       }
+    },
+    "fosterHome": {
+      "title": "Casa Cuna",
+      "add": "Crear Casa Cuna",
+      "edit": "Editar Casa Cuna"
+    },
+    "forsterHomes": {
+      "title": "Casas Cuna",
+      "add": "Crear Casa Cuna",
+      "errors": {
+        "empty": {
+          "title": "No hay casas cunas",
+          "message": "Aun no existen casas cunas registradas"
+        }
+      }
     }
   }
 }

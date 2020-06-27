@@ -9,8 +9,15 @@ export interface FirebaseConfiguration {
   measurementId?: string;
 }
 
-export interface CollectionsConfiguration {
+/* export interface CollectionsConfiguration {
   [key: string]: string;
+} */
+
+export interface CollectionsConfiguration {
+  case: string;
+  fosterHome: string;
+  newsletter: string;
+  user: string;
 }
 
 export default FirebaseConfiguration;

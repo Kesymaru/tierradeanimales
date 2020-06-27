@@ -34,7 +34,7 @@ export const Screen: FunctionComponent<ScreenProps> = (props): ReactElement => {
           <Button
             variant="contained"
             color="primary"
-            // onClick={() => history.push(ADMIN_EDIT_CASE_ROUTE.getPath())}
+            onClick={props.onAdd}
             startIcon={<AddIcon />}
           >
             {t(`${props.t}.add`)}

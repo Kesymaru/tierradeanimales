@@ -19,7 +19,9 @@ import { EDIT_FOSTER_HOME_ROUTE } from "../routes";
 import { AppState } from "@core/models";
 import { AppLoading, AppInfo } from "@core/components";
 
-const { fosterHome: COLLECTION } = CollectionsConfig;
+import { Screen } from "@core/wrappers";
+import { useData } from "@core/hooks";
+
 const columns = [
   {
     title: "Name",
@@ -54,7 +56,7 @@ const columns = [
 export const FosterHomes: FunctionComponent<{}> = (props) => {
   const history = useHistory();
   const { t } = useTranslation();
-  useFirestoreConnect({
+  /* useFirestoreConnect({
     collection: COLLECTION,
     limit: 10,
   });
@@ -80,30 +82,42 @@ export const FosterHomes: FunctionComponent<{}> = (props) => {
         </Button>
       </AppInfo>
     );
+  } */
+
+  const { data, isLoaded, isEmpty } = useData(CollectionsConfig.fosterHome, []);
+
+  function onAdd() {
+    history.push(EDIT_FOSTER_HOME_ROUTE.getPath());
   }
 
   return (
-    <Container
-      style={{ overflowX: "auto", marginRight: "auto", marginLeft: "auto" }}
+    <Screen
+      t="forsterHomes"
+      isLoaded={isLoaded}
+      isEmpty={isEmpty}
+      onAdd={onAdd}
     >
-      <AppTitle title={t("fosterHomes.title")} />
-      <AppTable
-        columns={columns}
-        data={homes}
-        title={t("fosterHomes.title")}
-        onSelect={(selected: Array<string>) =>
-          history.push(EDIT_FOSTER_HOME_ROUTE.getPath({ id: selected[0] }))
-        }
+      <Container
+        style={{ overflowX: "auto", marginRight: "auto", marginLeft: "auto" }}
       >
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => history.push(EDIT_FOSTER_HOME_ROUTE.getPath())}
+        <AppTable
+          columns={columns}
+          data={data}
+          title={t("fosterHomes.title")}
+          onSelect={(selected: Array<string>) =>
+            history.push(EDIT_FOSTER_HOME_ROUTE.getPath({ id: selected[0] }))
+          }
         >
-          {t("fosterHome.add")}
-        </Button>
-      </AppTable>
-    </Container>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => history.push(EDIT_FOSTER_HOME_ROUTE.getPath())}
+          >
+            {t("fosterHome.add")}
+          </Button>
+        </AppTable>
+      </Container>
+    </Screen>
   );
 };
 
