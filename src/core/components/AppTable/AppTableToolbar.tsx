@@ -77,6 +77,7 @@ export const AppTableToolbar: FunctionComponent<AppTableToolbarProps> = (
                               startIcon={
                                 button.icon ? <button.icon /> : undefined
                               }
+                              onClick={button.onClick}
                             >
                               {button.title}
                             </Button>

@@ -208,7 +208,8 @@
       "dragNdrop": "Arrastre aqui o selecciones images para cargar."
     },
     "cases": {
-      "title": "Casos"
+      "title": "Casos",
+      "add": "Crear Caso"
     },
     "adopt": {
       "title": "Adoptar",

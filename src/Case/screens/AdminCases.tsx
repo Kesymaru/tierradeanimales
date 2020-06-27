@@ -1,34 +1,35 @@
-import React, {
-  FunctionComponent,
-  useEffect,
-  useState,
-  ChangeEvent,
-} from "react";
+import React, { FunctionComponent } from "react";
 import { useSelector } from "react-redux";
 import { useFirestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import get from "lodash/get";
 
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 
 import AddIcon from "@material-ui/icons/Add";
 
-import { AppState } from "@core/models";
+import { Screen } from "@core/wrappers";
+import { useData } from "@core/hooks";
+import { RouteParam } from "@core/models";
 import { CollectionsConfig } from "@core/config";
-import { AppTitle, AppTable, AppLoading, AppInfo } from "@core/components";
+import { AppTable, TableButtons } from "@core/components";
 
 import { ADMIN_EDIT_CASE_ROUTE } from "../routes";
-import Case from "../models";
 import { CASE_COLUMNS } from "../constants";
-
-const { case: COLLECTION } = CollectionsConfig;
 
 export const AdminCases: FunctionComponent<{}> = () => {
   const history = useHistory();
   const { t } = useTranslation();
-  useFirestoreConnect({
+  const buttons: TableButtons = [
+    {
+      title: t("cases.add"),
+      color: "primary",
+      onClick: edit,
+    },
+  ];
+
+  /* useFirestoreConnect({
     collection: COLLECTION,
   });
   const data = useSelector<AppState, Array<Case>>((state) =>
@@ -53,29 +54,26 @@ export const AdminCases: FunctionComponent<{}> = () => {
         </Button>
       </AppInfo>
     );
+  } */
+
+  const { data, isLoaded, isEmpty } = useData(CollectionsConfig.case, []);
+
+  function edit(params?: RouteParam) {
+    history.push(ADMIN_EDIT_CASE_ROUTE.getPath(params));
   }
 
   return (
-    <Container>
-      <AppTitle title={t("cases.title")} />
-      <AppTable
-        columns={CASE_COLUMNS}
-        data={data}
-        title="Data title"
-        onSelect={(selected: Array<string>) =>
-          history.push(ADMIN_EDIT_CASE_ROUTE.getPath({ id: selected[0] }))
-        }
-      >
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => history.push(ADMIN_EDIT_CASE_ROUTE.getPath())}
-          startIcon={<AddIcon />}
-        >
-          {t("case.add")}
-        </Button>
-      </AppTable>
-    </Container>
+    <Screen t="cases" isLoaded={isLoaded} isEmpty={isEmpty}>
+      <Container>
+        <AppTable
+          columns={CASE_COLUMNS}
+          data={data}
+          title={t("cases.title")}
+          buttons={buttons}
+          onSelect={(selected: Array<string>) => edit({ id: selected[0] })}
+        ></AppTable>
+      </Container>
+    </Screen>
   );
 };
 
