@@ -10,10 +10,7 @@ import get from "lodash/get";
 import AppState from "@core/models/store";
 import useId from "./useId";
 
-export function useData<T>(
-  path: string,
-  initData: T
-): {
+interface useDataResult<T> {
   isNew: boolean;
   isLoaded: boolean;
   isEmpty: boolean;
@@ -21,9 +18,9 @@ export function useData<T>(
   data: T;
   setData: Function;
   resetData: Function;
-} {
-  console.log("load path", path);
+}
 
+export function useData<T>(path: string, initData: T): useDataResult<T> {
   const { isNew, id } = useId();
   useFirestoreConnect({
     collection: path,
@@ -53,7 +50,7 @@ export function useData<T>(
     data,
     setData,
     resetData,
-  };
+  } as useDataResult<T>;
 }
 
 export default useData;

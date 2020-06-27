@@ -1,4 +1,5 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent } from "react";
+import { useHistory } from "react-router-dom";
 
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -13,11 +14,21 @@ import Button from "@material-ui/core/Button";
 
 import { Screen } from "@core/wrappers";
 import { useData } from "@core/hooks";
+import { CollectionsConfig } from "@core/config";
 
 import { Case, CaseResults } from "@app/case";
+import { ADOPT_DETAIL_ROUTE } from "../routes";
 
-export const AdoptForm: FunctionComponent = () => {
-  const { data, isLoaded, isEmpty } = useData<CaseResults>("case", []);
+export const Adopt: FunctionComponent = () => {
+  const history = useHistory();
+  const { data, isLoaded, isEmpty } = useData<CaseResults>(
+    CollectionsConfig.case,
+    []
+  );
+
+  function onSelect(item: Case) {
+    history.push(ADOPT_DETAIL_ROUTE.getPath({ id: item.id }));
+  }
 
   return (
     <Screen t="adopt" isLoaded={isLoaded} isEmpty={isEmpty}>
@@ -25,7 +36,7 @@ export const AdoptForm: FunctionComponent = () => {
         <Grid container spacing={2}>
           {data.map((item: Case) => (
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Card>
+              <Card onClick={() => onSelect(item)}>
                 <CardActionArea>
                   <CardMedia
                     image={item.avatar?.preview}
@@ -62,4 +73,4 @@ export const AdoptForm: FunctionComponent = () => {
   );
 };
 
-export default AdoptForm;
+export default Adopt;
