@@ -1,26 +1,17 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { FunctionComponent } from "react";
 import { useHistory } from "react-router-dom";
-import { useFirestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { useTranslation } from "react-i18next";
-import get from "lodash/get";
 
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
-
-import AddIcon from "@material-ui/icons/Add";
-
-import AppTitle from "@core/components/AppTitle";
-import AppTable from "@core/components/AppTable";
+import AppTable, { TableButtons } from "@core/components/AppTable";
 
 import CollectionsConfig from "@core/config/firestore";
-import FosterHome from "../models/fosterHome";
-import { EDIT_FOSTER_HOME_ROUTE } from "../routes";
-import { AppState } from "@core/models";
-import { AppLoading, AppInfo } from "@core/components";
-
+import { RouteParam } from "@core/models";
 import { Screen } from "@core/wrappers";
 import { useData } from "@core/hooks";
+import FosterHome from "../models/fosterHome";
+import { EDIT_FOSTER_HOME_ROUTE } from "../routes";
 
 const columns = [
   {
@@ -56,66 +47,34 @@ const columns = [
 export const FosterHomes: FunctionComponent<{}> = (props) => {
   const history = useHistory();
   const { t } = useTranslation();
-  /* useFirestoreConnect({
-    collection: COLLECTION,
-    limit: 10,
-  });
-  const homes = useSelector<AppState, Array<FosterHome>>((state) =>
-    get(state, `firestore.ordered.${COLLECTION}`, [])
-  );
-
-  if (!isLoaded(homes)) return <AppLoading loading={true} />;
-  if (isLoaded(homes) && isEmpty(homes)) {
-    return (
-      <AppInfo
-        title={t("fosterHomes.errors.empty")}
-        message={t("fosterHomes.errors.emptyMessage")}
-        color="warning"
-      >
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => history.push(EDIT_FOSTER_HOME_ROUTE.getPath())}
-          startIcon={<AddIcon />}
-        >
-          {t("fosterHome.add")}
-        </Button>
-      </AppInfo>
-    );
-  } */
-
   const { data, isLoaded, isEmpty } = useData(CollectionsConfig.fosterHome, []);
+  const buttons: TableButtons = [
+    {
+      title: t("fosterHomes.add"),
+      color: "primary",
+      onClick: onEdit,
+    },
+  ];
 
-  function onAdd() {
-    history.push(EDIT_FOSTER_HOME_ROUTE.getPath());
+  function onEdit(params?: RouteParam) {
+    history.push(EDIT_FOSTER_HOME_ROUTE.getPath(params));
   }
 
   return (
     <Screen
-      t="forsterHomes"
+      t="fosterHomes"
       isLoaded={isLoaded}
       isEmpty={isEmpty}
-      onAdd={onAdd}
+      onAdd={onEdit}
     >
-      <Container
-        style={{ overflowX: "auto", marginRight: "auto", marginLeft: "auto" }}
-      >
+      <Container>
         <AppTable
           columns={columns}
           data={data}
           title={t("fosterHomes.title")}
-          onSelect={(selected: Array<string>) =>
-            history.push(EDIT_FOSTER_HOME_ROUTE.getPath({ id: selected[0] }))
-          }
-        >
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => history.push(EDIT_FOSTER_HOME_ROUTE.getPath())}
-          >
-            {t("fosterHome.add")}
-          </Button>
-        </AppTable>
+          buttons={buttons}
+          onSelect={(selected: Array<string>) => onEdit({ id: selected[0] })}
+        ></AppTable>
       </Container>
     </Screen>
   );
