@@ -8,7 +8,7 @@ import { DASHBOARD_ROUTE } from "@app/dashboard/routes";
 import { ADMIN_DASHBOARD_ROUTE } from "@app/dashboard";
 
 import Account from "../components/Account";
-import AdminUsers from "../screens/AdminUsers";
+import { AdminUsers, UserProfile } from "../screens";
 
 // ------------------------------------
 // Admin Users
@@ -20,6 +20,17 @@ export const ADMIN_USERS_ROUTE: Route = createRoute({
   admin: true,
   component: AdminUsers,
   icon: GroupIcon,
+  parent: ADMIN_DASHBOARD_ROUTE,
+});
+
+// ------------------------------------
+// User profile
+// ------------------------------------
+export const USER_PROFILE_ROUTE: Route = createRoute({
+  name: "Profile",
+  path: `${ADMIN_DASHBOARD_ROUTE.path}/profile`,
+  auth: true,
+  component: UserProfile,
   parent: ADMIN_DASHBOARD_ROUTE,
 });
 
