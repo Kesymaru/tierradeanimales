@@ -12,13 +12,15 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
-import { AppState } from "@core/models";
+import { useAuth } from "@core/hooks";
+import { ACCOUNT_ROUTE } from "../routes";
 import { SIGN_IN_ROUTE } from "@app/auth";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     userMenu: {
       padding: "20px 0 0 0",
+      cursor: "pointer",
     },
     avatar: {
       height: 90,
@@ -31,20 +33,24 @@ const useStyles = makeStyles((theme: Theme) =>
 export const UserMenu: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const firebase = useFirebase();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const history = useHistory();
-  const auth = useSelector<AppState, any>((state) => state.firebase.auth);
-  const logged = isLoaded(auth) && !isEmpty(auth);
+  const { auth, logged } = useAuth();
 
   async function logout() {
     await firebase.logout();
-    history.push(SIGN_IN_ROUTE.path);
+    history.push(SIGN_IN_ROUTE.getPath());
   }
 
   return (
     <Box className={classes.userMenu}>
       <Avatar
         className={classes.avatar}
+        onClick={() =>
+          logged
+            ? history.push(ACCOUNT_ROUTE.getPath())
+            : history.push(SIGN_IN_ROUTE.getPath())
+        }
         src={logged ? auth.photoURL : undefined}
       >
         {!logged ? <LockOutlinedIcon /> : null}
