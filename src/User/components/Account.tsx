@@ -20,16 +20,16 @@ import CloseIcon from "@material-ui/icons/Close";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import { AppState } from "@core/models";
+import { useAuth } from "@core/hooks";
 import User from "../models/user";
 import INIT_USER from "../constants/user";
 
 export const Account: FunctionComponent<{}> = (props) => {
-  const dispatch = useDispatch();
   const [touched, setTouched] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(INIT_USER);
   const [password, setPassword] = useState<string>("");
   const fileInput = useRef<HTMLInputElement>(null);
-  const auth = useSelector<AppState, any>((state) => state.firebase.auth);
+  const { auth, logged } = useAuth();
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -92,8 +92,9 @@ export const Account: FunctionComponent<{}> = (props) => {
                   margin: "0 auto",
                 }}
                 onClick={clickFileUpload}
+                src={logged ? auth.photoURL : undefined}
               >
-                <AccountCircleIcon />
+                {!logged ? <AccountCircleIcon /> : null}
               </Avatar>
             </Zoom>
           </Grid>

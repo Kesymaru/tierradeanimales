@@ -16,7 +16,7 @@ import { TABLE_ACTIONS } from "@core/constants";
 import { UsersResults, User } from "../models";
 import { USERS_COLUMNS } from "../constants";
 
-export const AdminUser: FunctionComponent = () => {
+export const AdminUsers: FunctionComponent = () => {
   const firebase = useFirebase() as any;
   const addAdmin = firebase.functions().httpsCallable("addAdmin") as Function;
   const dispatch = useDispatch();
@@ -46,7 +46,6 @@ export const AdminUser: FunctionComponent = () => {
 
   function deleteUsers(selected: Array<string>) {
     console.log("delete user -> selected", selected);
-
   }
 
   async function setAsAdmin(user: User) {
@@ -86,4 +85,4 @@ export const AdminUser: FunctionComponent = () => {
   );
 };
 
-export default AdminUser;
+export default AdminUsers;

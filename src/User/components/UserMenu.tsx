@@ -32,8 +32,8 @@ export const UserMenu: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const firebase = useFirebase();
   const { t, i18n } = useTranslation();
-  const auth = useSelector<AppState, any>((state) => state.firebase.auth);
   const history = useHistory();
+  const auth = useSelector<AppState, any>((state) => state.firebase.auth);
   const logged = isLoaded(auth) && !isEmpty(auth);
 
   async function logout() {

@@ -1,24 +1,28 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
+import { AppState } from "@core/models";
 import { Screen } from "@core/wrappers";
+import { useAuth } from "@core/hooks";
 
 export const UserProfile: FunctionComponent<{}> = () => {
   const history = useHistory();
   const { t } = useTranslation();
+  const { auth } = useAuth();
 
   return (
-    <Screen t="profile">
+    <Screen t="profile" isLoaded={true} isEmpty={false}>
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={12}></Grid>
           <Grid item xs={12}>
-            <Typography variant="h2">Name</Typography>
+            <Typography variant="h2">{auth.displayName}}</Typography>
           </Grid>
           <Grid container>
             <Grid item xs={12}>

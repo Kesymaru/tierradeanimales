@@ -1,3 +1,4 @@
+export * from "./useAuth";
 export * from "./useData";
 export * from "./useId";
 export * from "./useRoute";
