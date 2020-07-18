@@ -10,7 +10,6 @@ import {
 } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 
-import { AppState } from "@core/models";
 import { NavbarMenu } from "@core/components";
 
 const drawerWidth = 240;
@@ -34,8 +33,6 @@ export interface NavbarProps {
 export const Navbar: FunctionComponent<NavbarProps> = (props) => {
   const classes = useStyles();
   const theme = useTheme();
-  const auth = useSelector<AppState, any>((state) => state.firebase.auth);
-  const logged = isLoaded(auth) && !isEmpty(auth);
 
   return (
     <nav aria-label="menu navbar">

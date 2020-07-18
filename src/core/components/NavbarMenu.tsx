@@ -13,7 +13,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import Route from "@core/models/route";
 import { NAVBAR_ROUTES } from "@core/routes";
 import { UserMenu } from "@app/user/components";
-import { AppState } from "@core/models";
+import { useAuth } from "@core/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,32 +27,40 @@ export interface NavbarMenuProps {
 }
 
 export const NavbarMenu: FunctionComponent<NavbarMenuProps> = (props) => {
-  const classes = useStyles();
   const history = useHistory();
-  const auth = useSelector<AppState, any>((state) => state.firebase.auth);
-  const logged = auth.isLoaded && !auth.isEmpty;
+  const { logged, role } = useAuth();
 
   function goTo(route: Route) {
     history.push(route.path);
   }
 
+  function renderRoutes(routes: Array<Route>) {
+    return routes.map((route, index) => (
+      <ListItem button key={index} onClick={() => goTo(route)}>
+        <ListItemIcon>
+          {route.icon ? <route.icon /> : <InboxIcon />}
+        </ListItemIcon>
+        <ListItemText primary={route.name} />
+      </ListItem>
+    ));
+  }
+
   return (
     <div>
       <UserMenu />
-      {NAVBAR_ROUTES.length && <Divider />}
+      <Divider />
       <List>
-        {NAVBAR_ROUTES.filter((route) => (route.auth ? logged : true)).map(
-          (route, index) => (
-            <ListItem button key={index} onClick={() => goTo(route)}>
-              <ListItemIcon>
-                {route.icon ? <route.icon /> : <InboxIcon />}
-              </ListItemIcon>
-              <ListItemText primary={route.name} />
-            </ListItem>
-          )
+        {renderRoutes(
+          NAVBAR_ROUTES.filter((route) => {
+            if (route.auth && route.admin) return logged && role === "admin";
+            return route.auth ? logged : false;
+          })
+        )}
+        <Divider />
+        {renderRoutes(
+          NAVBAR_ROUTES.filter((route) => !route.auth && !route.admin)
         )}
       </List>
-      {NAVBAR_ROUTES.length && <Divider />}
     </div>
   );
 };

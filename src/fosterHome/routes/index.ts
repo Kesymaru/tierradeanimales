@@ -10,6 +10,7 @@ export const FOSTER_HOMES_ROUTE = createRoute({
   name: "Foster Homes",
   path: "/fosterHomes",
   auth: true,
+  admin: true,
   component: FosterHomes,
   parent: ADMIN_DASHBOARD_ROUTE,
   icon: HouseIcon,
