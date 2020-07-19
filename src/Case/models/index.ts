@@ -17,7 +17,7 @@ export enum CaseStatus {
 
 export interface CaseBio {
   title: string;
-  date: string;
+  date: Date;
   description: string;
   files?: Array<File>;
 }

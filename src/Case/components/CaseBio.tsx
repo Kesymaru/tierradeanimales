@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
+import { Moment } from "moment";
 
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
@@ -14,8 +15,10 @@ import Zoom from "@material-ui/core/Zoom";
 import Box from "@material-ui/core/Box";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
+import Divider from "@material-ui/core/Divider";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
+import { DatePicker, KeyboardDatePicker } from "@material-ui/pickers";
 
 import { AppFileManager } from "@core/components";
 import { CaseBio as ICaseBio } from "../models";
@@ -50,23 +53,35 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
     };
   }
 
-  function handleChange(index: number, field: keyof ICaseBio) {
-    return (event: ChangeEvent<HTMLInputElement>) => {
-      const item = data[index] ? { ...data[index] } : null;
-      if (!item) return;
+  function _updateItem(index: number, field: keyof ICaseBio, value: any) {
+    if (!value) return;
 
-      item[field] = get(event, "target.value", item[field]);
-      const _data = (data || []).map((d, i) => (i === index ? item : d));
+    const item = data[index] ? { ...data[index] } : null;
+    if (!item) return;
 
-      setData(_data);
-      if (props.onChange) props.onChange(_data);
-    };
+    item[field] = value;
+    const _data = data.map((d, i) => (i === index ? item : d));
+
+    setData(_data);
+    if (props.onChange) props.onChange(_data);
+  }
+
+  function handleChange(
+    index: number,
+    field: keyof ICaseBio
+  ): (event: ChangeEvent<HTMLInputElement>) => void {
+    return (event: ChangeEvent<HTMLInputElement>) =>
+      _updateItem(index, field, get(event, "target.value", null));
+  }
+
+  function handleDateChange(index: number) {
+    return (date: Moment | null) => _updateItem(index, "date", date?.toDate());
   }
 
   return (
     <Grid container spacing={2}>
       <Grid item>
-        <Typography variant="h2">{t("case.bio.title")}</Typography>
+        <Typography variant="h4">{t("case.bio.title")}</Typography>
       </Grid>
       <Grid item>
         <Tooltip title={t("case.bio.add")}>
@@ -75,8 +90,8 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
           </IconButton>
         </Tooltip>
       </Grid>
-      {data &&
-        data.map((bio: ICaseBio, index: number) => (
+      <Grid item xs={12}>
+        {data.map((bio: ICaseBio, index: number) => (
           <Zoom in={true} unmountOnExit={true} key={index}>
             <Grid container spacing={2}>
               <Grid item xs={2} sm={1}>
@@ -106,14 +121,16 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    <TextField
+                    <KeyboardDatePicker
                       label={t("case.bio.date")}
-                      variant="outlined"
-                      fullWidth
-                      multiline
-                      disabled={props.disabled}
+                      id="date-picker-inline"
+                      disableToolbar
+                      variant="inline"
+                      inputVariant="outlined"
+                      format={t("app.dateFormat")}
+                      margin="normal"
                       value={bio.date}
-                      onChange={handleChange(index, "date")}
+                      onChange={handleDateChange(index)}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -129,19 +146,22 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
                   </Grid>
                   <Grid item xs={12}>
                     <AppFileManager
-                      title={"Files for " + (bio.title ? bio.title : "Blog")}
-                      message={"Select or Drag and Drop images or PDF files"}
+                      title={t("case.bio.upload.title")}
+                      message={t("case.bio.upload.message")}
                       accept={["image/*", "application/pdf"]}
                       collection={"blogs_test"}
                       files={bio.files}
                     />
                   </Grid>
-                  <Grid item xs={12}></Grid>
                 </Grid>
+              </Grid>
+              <Grid item xs={12}>
+                <Divider />
               </Grid>
             </Grid>
           </Zoom>
         ))}
+      </Grid>
     </Grid>
   );
 };

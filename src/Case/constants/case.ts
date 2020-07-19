@@ -6,7 +6,7 @@ import { Case, CaseBio, CaseType, CaseStatus } from "../models";
 export const INIT_CASE_BIO: CaseBio = {
   title: "",
   description: "",
-  date: "",
+  date: new Date(),
 };
 
 export const INIT_CASE: Case = {

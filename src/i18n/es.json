@@ -18,6 +18,7 @@
       "sex": "Sexo",
       "male": "Masculino",
       "female": "Femenino",
+      "dateFormat": "DD/MM/YYYY",
       "errors": {
         "empty": {
           "title": "No existen datos",
@@ -226,7 +227,11 @@
         "delete": "Eliminar Bio",
         "name": "Titulo",
         "date": "Fecha",
-        "description": "Descripcion biografica"
+        "description": "Descripcion biografica",
+        "upload": {
+          "title": "Archivos para la biografia",
+          "message": "Seleccione o arrastre images o PDF"
+        }
       }
     },
     "cases": {
