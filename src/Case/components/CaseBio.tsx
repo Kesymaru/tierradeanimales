@@ -109,7 +109,7 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
               </Grid>
               <Grid item xs={10} sm={11}>
                 <Grid container spacing={2}>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       label={t("case.bio.name")}
                       variant="outlined"
@@ -120,7 +120,7 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
                       onChange={handleChange(index, "title")}
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} sm={6}>
                     <KeyboardDatePicker
                       label={t("case.bio.date")}
                       id="date-picker-inline"
