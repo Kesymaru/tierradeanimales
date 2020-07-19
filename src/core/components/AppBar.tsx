@@ -53,8 +53,6 @@ export const AppBar: FunctionComponent<AppBarProps> = (props) => {
   const routes = useRoutes(ROUTES);
   const state = useSelector<AppState, RouteState>((state) => state.route);
 
-  console.log("app bar route", state);
-
   function getName(route: Route): string {
     const name = t(route.name);
     return route.path === get(state, "current.path")

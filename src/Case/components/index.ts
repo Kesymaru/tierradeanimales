@@ -1,1 +1,1 @@
-export * from "./CaseBlogs";
+export * from "./CaseBio";

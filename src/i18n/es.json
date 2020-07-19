@@ -13,6 +13,9 @@
       "edit": "Editar",
       "delete": "Eliminar",
       "upload": "Cargar",
+      "sex": "Sexo",
+      "male": "Masculino",
+      "female": "Femenino",
       "errors": {
         "empty": {
           "title": "No existen datos",
@@ -205,7 +208,24 @@
     },
     "case": {
       "title": "Caso",
-      "dragNdrop": "Arrastre aqui o selecciones images para cargar."
+      "dragNdrop": "Arrastre aqui o selecciones images para cargar.",
+      "name": "Nombre",
+      "age": "Edad",
+      "status": "Estado",
+      "description": "Descripcion del caso",
+      "rescued": "Rescatado",
+      "hospitalized": "Hospitalizado",
+      "fosterHome": "Casa Cuna",
+      "adopted": "Adoptado",
+      "deceased": "Fallecido",
+      "bio": {
+        "title": "Biografia",
+        "add": "Agregar Bio",
+        "delete": "Eliminar Bio",
+        "name": "Titulo",
+        "date": "Fecha",
+        "description": "Descripcion biografica"
+      }
     },
     "cases": {
       "title": "Casos",

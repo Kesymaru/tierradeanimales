@@ -5,6 +5,7 @@ import React, {
   MouseEvent,
   ChangeEvent,
 } from "react";
+import { useTranslation } from "react-i18next";
 import get from "lodash/get";
 
 import Grid from "@material-ui/core/Grid";
@@ -28,6 +29,7 @@ export interface CaseBioProps {
 }
 
 export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
+  const { t } = useTranslation();
   const [data, setData] = useState<Array<ICaseBio>>([]);
 
   useEffect(() => {
@@ -64,10 +66,10 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item>
-        <Typography variant="h3">Case Bio</Typography>
+        <Typography variant="h3">{t("case.bio.title")}</Typography>
       </Grid>
       <Grid item>
-        <Tooltip title="Add Blog">
+        <Tooltip title={t("case.bio.add")}>
           <IconButton onClick={handleAdd}>
             <AddIcon />
           </IconButton>
@@ -82,7 +84,7 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
                 flexDirection="reverse-row"
                 alignContent="flex-end"
               >
-                <Tooltip title="Remove Blog">
+                <Tooltip title={t("case.bio.delete")}>
                   <IconButton onClick={handleDelete(index)}>
                     <RemoveIcon />
                   </IconButton>
@@ -93,7 +95,7 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   <TextField
-                    label="Title"
+                    label={t("case.bio.name")}
                     variant="outlined"
                     fullWidth
                     multiline
@@ -104,7 +106,7 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    label="Date"
+                    label={t("case.bio.date")}
                     variant="outlined"
                     fullWidth
                     multiline
@@ -115,7 +117,7 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    label="Description"
+                    label={t("case.bio.description")}
                     variant="outlined"
                     fullWidth
                     multiline

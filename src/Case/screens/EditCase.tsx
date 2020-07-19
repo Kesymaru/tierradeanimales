@@ -91,10 +91,6 @@ export const EditCase: FunctionComponent<{}> = (props) => {
     }
   }
 
-  function handleFilesChanges(files: any) {
-    console.log("files change =>", files);
-  }
-
   function handleReset() {
     setData(loadedData ? loadedData : INIT_CASE);
   }
@@ -193,7 +189,7 @@ export const EditCase: FunctionComponent<{}> = (props) => {
           </Grid>
           <Grid item xs={6} sm={6} md={3}>
             <TextField
-              label="Name"
+              label={t("case.name")}
               variant="outlined"
               fullWidth
               value={data.name}
@@ -202,7 +198,7 @@ export const EditCase: FunctionComponent<{}> = (props) => {
           </Grid>
           <Grid item xs={6} sm={6} md={3}>
             <TextField
-              label="Age"
+              label={t("case.age")}
               variant="outlined"
               type="number"
               fullWidth
@@ -212,34 +208,42 @@ export const EditCase: FunctionComponent<{}> = (props) => {
           </Grid>
           <Grid item xs={6} sm={6} md={3}>
             <FormControl variant="outlined" style={{ display: "flex" }}>
-              <InputLabel id="sex">Sex</InputLabel>
+              <InputLabel id="sex">{t("app.sex")}</InputLabel>
               <Select
                 labelId="sex"
                 id="sex"
                 value={data.sex}
                 onChange={handleSexChange}
               >
-                <MenuItem value={"Male"}>Male</MenuItem>
-                <MenuItem value={"Female"}>Female</MenuItem>
+                <MenuItem value={"Male"}>{t("app.male")}</MenuItem>
+                <MenuItem value={"Female"}>{t("app.female")}</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={6} sm={6} md={3}>
             <FormControl variant="outlined" style={{ display: "flex" }}>
-              <InputLabel id="status">Status</InputLabel>
+              <InputLabel id="status">{t("case.status")}</InputLabel>
               <Select
                 labelId="status"
                 id="status"
                 value={data.status}
                 onChange={handleStatusChange}
               >
-                <MenuItem value={CaseStatus.RESCUED}>Rescued</MenuItem>
-                <MenuItem value={CaseStatus.HOSPITALIZED}>
-                  Hospitalized
+                <MenuItem value={CaseStatus.RESCUED}>
+                  {t("case.rescued")}
                 </MenuItem>
-                <MenuItem value={CaseStatus.FOSTER_HOME}>Foster Home</MenuItem>
-                <MenuItem value={CaseStatus.ADOPTED}>Adopted</MenuItem>
-                <MenuItem value={CaseStatus.DECEASED}>Deceased</MenuItem>
+                <MenuItem value={CaseStatus.HOSPITALIZED}>
+                  {t("case.hospitalized")}
+                </MenuItem>
+                <MenuItem value={CaseStatus.FOSTER_HOME}>
+                  {t("case.fosterHome")}
+                </MenuItem>
+                <MenuItem value={CaseStatus.ADOPTED}>
+                  {t("case.adopted")}
+                </MenuItem>
+                <MenuItem value={CaseStatus.DECEASED}>
+                  {t("case.deceased")}
+                </MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -256,7 +260,7 @@ export const EditCase: FunctionComponent<{}> = (props) => {
           </Zoom>
           <Grid item xs={12}>
             <TextField
-              label="Description"
+              label={t("case.description")}
               variant="outlined"
               fullWidth
               multiline
