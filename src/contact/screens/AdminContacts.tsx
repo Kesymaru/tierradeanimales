@@ -23,7 +23,6 @@ export const AdminContacts: FunctionComponent = (props) => {
   }
 
   function onSelect(selected: Array<string>) {
-    console.log("selected", selected);
     onEdit({ id: selected.pop() });
   }
 

@@ -59,8 +59,6 @@ export const FosterHomeSelect: FunctionComponent<FosterHomeSelectProps> = (
     if (props.onChange && home) props.onChange(home.id || "");
   }
 
-  console.log("foster homes", selected, data);
-
   return (
     <>
       <Autocomplete

@@ -25,8 +25,6 @@ export const DetailAdopt: FunctionComponent<{}> = () => {
     INIT_CASE
   );
 
-  console.log("data", data);
-
   return (
     <Screen t="adopt" isLoaded={isLoaded} isEmpty={isEmpty}>
       <Container>

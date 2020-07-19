@@ -5,7 +5,6 @@ import React, {
   useState,
 } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useFirebase } from "react-redux-firebase";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
@@ -23,7 +22,7 @@ import Divider from "@material-ui/core/Divider";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
-import { AppState } from "@app/core/models";
+import { useAuth } from "@core/hooks";
 import { User, INIT_USER } from "@app/user";
 import { SIGN_IN_ROUTE } from "../routes";
 
@@ -58,13 +57,11 @@ const SignUp: FunctionComponent<{}> = () => {
   const { t } = useTranslation();
   const classes = useStyles();
   const firebase = useFirebase();
-  const auth = useSelector<AppState, any>((state) => state.firebase.auth);
+  const { auth } = useAuth();
 
   const [user, setUser] = useState<User>(INIT_USER);
   const [password, setPassword] = useState<string>("");
   const [terms, setTerms] = useState<boolean>(false);
-
-  console.log("auth", auth);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
