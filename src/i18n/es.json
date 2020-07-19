@@ -3,7 +3,9 @@
     "app": {
       "changeLanguage": "Cambiar de Idioma",
       "submit": "Enviar",
+      "save": "Guardar",
       "reset": "Limpiar",
+      "update": "Actualizar",
       "date": "Fecha",
       "goBack": "Regresar",
       "selected": "Selecionado",

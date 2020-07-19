@@ -297,7 +297,7 @@ export const EditCase: FunctionComponent<{}> = (props) => {
                 style={{ width: "100%" }}
                 startIcon={<RotateRightIcon />}
               >
-                Reset
+                {t("app.reset")}
               </Button>
             </Grid>
           </Zoom>
@@ -310,7 +310,7 @@ export const EditCase: FunctionComponent<{}> = (props) => {
                 style={{ width: "100%" }}
                 startIcon={isNew ? <SendIcon /> : <SaveIcon />}
               >
-                {isNew ? "Save" : "Update"}
+                {t(isNew ? "app.save" : "app.update")}
               </Button>
             </Grid>
           </Zoom>

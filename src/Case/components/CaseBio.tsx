@@ -23,7 +23,7 @@ import { INIT_CASE_BIO } from "../constants";
 import { Typography } from "@material-ui/core";
 
 export interface CaseBioProps {
-  data: Array<ICaseBio>;
+  data: Array<ICaseBio> | undefined;
   disabled?: boolean;
   onChange?: (contacts: Array<ICaseBio>) => void;
 }
@@ -33,7 +33,7 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
   const [data, setData] = useState<Array<ICaseBio>>([]);
 
   useEffect(() => {
-    setData(props.data);
+    setData(props.data || []);
   }, [props]);
 
   function handleAdd(event: MouseEvent<HTMLButtonElement>) {
@@ -56,7 +56,7 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
       if (!item) return;
 
       item[field] = get(event, "target.value", item[field]);
-      const _data = data.map((d, i) => (i === index ? item : d));
+      const _data = (data || []).map((d, i) => (i === index ? item : d));
 
       setData(_data);
       if (props.onChange) props.onChange(_data);
@@ -66,7 +66,7 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item>
-        <Typography variant="h3">{t("case.bio.title")}</Typography>
+        <Typography variant="h2">{t("case.bio.title")}</Typography>
       </Grid>
       <Grid item>
         <Tooltip title={t("case.bio.add")}>
@@ -75,72 +75,73 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
           </IconButton>
         </Tooltip>
       </Grid>
-      {data.map((item: ICaseBio, index: number) => (
-        <Zoom in={true} unmountOnExit={true} key={index}>
-          <Grid container spacing={2}>
-            <Grid item xs={2} sm={1}>
-              <Box
-                display="flex"
-                flexDirection="reverse-row"
-                alignContent="flex-end"
-              >
-                <Tooltip title={t("case.bio.delete")}>
-                  <IconButton onClick={handleDelete(index)}>
-                    <RemoveIcon />
-                  </IconButton>
-                </Tooltip>
-              </Box>
-            </Grid>
-            <Grid item xs={10} sm={11}>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <TextField
-                    label={t("case.bio.name")}
-                    variant="outlined"
-                    fullWidth
-                    multiline
-                    disabled={props.disabled}
-                    value={item.title}
-                    onChange={handleChange(index, "title")}
-                  />
+      {data &&
+        data.map((bio: ICaseBio, index: number) => (
+          <Zoom in={true} unmountOnExit={true} key={index}>
+            <Grid container spacing={2}>
+              <Grid item xs={2} sm={1}>
+                <Box
+                  display="flex"
+                  flexDirection="reverse-row"
+                  alignContent="flex-end"
+                >
+                  <Tooltip title={t("case.bio.delete")}>
+                    <IconButton onClick={handleDelete(index)}>
+                      <RemoveIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Box>
+              </Grid>
+              <Grid item xs={10} sm={11}>
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <TextField
+                      label={t("case.bio.name")}
+                      variant="outlined"
+                      fullWidth
+                      multiline
+                      disabled={props.disabled}
+                      value={bio.title}
+                      onChange={handleChange(index, "title")}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      label={t("case.bio.date")}
+                      variant="outlined"
+                      fullWidth
+                      multiline
+                      disabled={props.disabled}
+                      value={bio.date}
+                      onChange={handleChange(index, "date")}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      label={t("case.bio.description")}
+                      variant="outlined"
+                      fullWidth
+                      multiline
+                      disabled={props.disabled}
+                      value={bio.description}
+                      onChange={handleChange(index, "description")}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <AppFileManager
+                      title={"Files for " + (bio.title ? bio.title : "Blog")}
+                      message={"Select or Drag and Drop images or PDF files"}
+                      accept={["image/*", "application/pdf"]}
+                      collection={"blogs_test"}
+                      files={bio.files}
+                    />
+                  </Grid>
+                  <Grid item xs={12}></Grid>
                 </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    label={t("case.bio.date")}
-                    variant="outlined"
-                    fullWidth
-                    multiline
-                    disabled={props.disabled}
-                    value={item.date}
-                    onChange={handleChange(index, "date")}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    label={t("case.bio.description")}
-                    variant="outlined"
-                    fullWidth
-                    multiline
-                    disabled={props.disabled}
-                    value={item.description}
-                    onChange={handleChange(index, "description")}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <AppFileManager
-                    title={"Files for " + (item.title ? item.title : "Blog")}
-                    message={"Select or Drag and Drop images or PDF files"}
-                    accept={["image/*", "application/pdf"]}
-                    collection={"blogs_test"}
-                    files={item.files}
-                  />
-                </Grid>
-                <Grid item xs={12}></Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Zoom>
-      ))}
+          </Zoom>
+        ))}
     </Grid>
   );
 };
