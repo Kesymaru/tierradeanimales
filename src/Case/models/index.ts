@@ -15,7 +15,14 @@ export enum CaseStatus {
   DECEASED = "Deceased",
 }
 
-export interface Case {
+export interface CaseBio {
+  title: string;
+  date: string;
+  description: string;
+  files?: Array<File>;
+}
+
+export interface Case extends Data {
   id?: string;
   type: CaseType;
   sex: Sex;
@@ -28,6 +35,7 @@ export interface Case {
   start?: boolean;
   fosterHomeId: string;
   images?: Array<File>;
+  bio: Array<CaseBio>;
 }
 
 export type CaseResults = Array<Case>;

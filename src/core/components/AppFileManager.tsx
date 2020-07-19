@@ -49,12 +49,14 @@ interface Action {
 
 export interface AppFileManagerProps {
   title?: string;
+  message?: string;
   accept: string | Array<string>;
   collection: string;
   setSubmit?: (handleSubmit: Function) => void;
   files?: Array<File>;
   onChange?: (files: Array<File>) => void;
   actions?: Array<Action>;
+  buttonTitle?: string;
 }
 
 export const AppFileManager: FunctionComponent<AppFileManagerProps> = (
@@ -244,13 +246,18 @@ export const AppFileManager: FunctionComponent<AppFileManagerProps> = (
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <input {...getInputProps()} />
-          <Typography variant="body1" align="center">
-            {props.title
-              ? props.title
-              : `Drag 'n' drop some files here, or click to select files`}
-          </Typography>
+          {props.title && (
+            <Typography variant="body1" align="center">
+              {props.title}
+            </Typography>
+          )}
+          {props.message && (
+            <Typography variant="body1" align="center">
+              {props.message}
+            </Typography>
+          )}
         </Grid>
-        <Grid xs={12}>
+        <Grid xs={12} style={{ marginBottom: 10 }}>
           <Box display="flex" flexDirection="column" alignItems="center">
             <Button
               variant="outlined"
@@ -259,7 +266,7 @@ export const AppFileManager: FunctionComponent<AppFileManagerProps> = (
               startIcon={<PublishIcon />}
               style={{ width: 150 }}
             >
-              {t("app.upload")}
+              {props.buttonTitle ? props.buttonTitle : t("app.upload")}
             </Button>
           </Box>
         </Grid>

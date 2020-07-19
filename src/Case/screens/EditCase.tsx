@@ -49,6 +49,7 @@ import { INIT_CASE } from "../constants";
 import { ADMIN_CASES_ROUTE } from "../routes";
 import FosterHomeSelect from "@app/fosterHome/components/FosterHomeSelect";
 import AppFileManager from "@core/components/AppFileManager";
+import { CaseBio } from "../components";
 
 const { case: COLLECTION } = CollectionsConfig;
 
@@ -279,6 +280,9 @@ export const EditCase: FunctionComponent<{}> = (props) => {
                 },
               ]}
             />
+          </Grid>
+          <Grid item xs={12}>
+            <CaseBio data={data.bio} />
           </Grid>
           <Zoom in={true}>
             <Grid item xs={6}>

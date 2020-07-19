@@ -12,3 +12,4 @@ export * from "./NavbarMenu";
 export * from "./NavbarMenu";
 export * from "./NotFound";
 export * from "./ScrollTop";
+export * from "./AppFileManager";

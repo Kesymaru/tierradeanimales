@@ -1,8 +1,16 @@
+import { INIT_DATA } from "@core/constants";
 import { TableColumns } from "@core/components/AppTable";
 
-import { Case, CaseType, CaseStatus } from "../models";
+import { Case, CaseBio, CaseType, CaseStatus } from "../models";
+
+export const INIT_CASE_BIO: CaseBio = {
+  title: "",
+  description: "",
+  date: "",
+};
 
 export const INIT_CASE: Case = {
+  ...INIT_DATA,
   type: CaseType.DOG,
   sex: "Male",
   status: CaseStatus.RESCUED,
@@ -11,6 +19,7 @@ export const INIT_CASE: Case = {
   description: "",
   public: false,
   fosterHomeId: "",
+  bio: [],
 };
 
 export const CASE_COLUMNS: TableColumns = [
