@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
   useFirestoreConnect,
+  useFirestore,
   isLoaded as _isLoaded,
   isEmpty as _isEmpty,
 } from "react-redux-firebase";
@@ -18,10 +19,19 @@ interface useDataResult<T> {
   data: T;
   setData: Function;
   resetData: Function;
+  saveOrUpdate: () => Promise<saveOrUpdateResult<T>>;
+}
+
+interface saveOrUpdateResult<T> {
+  data: T;
+  id: string | undefined;
+  path: string;
+  isNew: boolean;
 }
 
 export function useData<T>(path: string, initData: T): useDataResult<T> {
   const { isNew, id } = useId();
+  const firestore = useFirestore();
   useFirestoreConnect({
     collection: path,
     doc: id,
@@ -42,6 +52,25 @@ export function useData<T>(path: string, initData: T): useDataResult<T> {
     setData(id ? _data : initData);
   }
 
+  async function saveOrUpdate(): Promise<saveOrUpdateResult<T>> {
+    console.log("save or update", isNew, id, data);
+
+    try {
+      if (isNew) {
+        firestore.add(path, data);
+      } else firestore.update(`${path}/${id}`, data);
+    } catch (err) {
+      console.log("Error: save or update", err);
+    }
+
+    return {
+      data,
+      id,
+      path,
+      isNew,
+    };
+  }
+
   return {
     isNew,
     isLoaded,
@@ -50,6 +79,7 @@ export function useData<T>(path: string, initData: T): useDataResult<T> {
     data,
     setData,
     resetData,
+    saveOrUpdate,
   } as useDataResult<T>;
 }
 

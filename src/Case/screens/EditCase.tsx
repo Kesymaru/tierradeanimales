@@ -42,6 +42,7 @@ import FaceIcon from "@material-ui/icons/Face";
 import { AppState } from "@core/models";
 import { CollectionsConfig } from "@core/config";
 import useId from "@core/hooks/useId";
+import { useData } from "@core/hooks";
 import { AddAlert } from "@core/actions/alert";
 
 import { Case, Sex, CaseStatus } from "../models";
@@ -66,8 +67,13 @@ export const EditCase: FunctionComponent<{}> = (props) => {
   const loadedData = useSelector<AppState, Case>((state) =>
     get(state, `firestore.data.${COLLECTION}.${id}`, null)
   );
-  const [data, setData] = useState<Case>(INIT_CASE);
+  // const [data, setData] = useState<Case>(INIT_CASE);
   let handleSubmitFile: Function = () => {};
+
+  const { data, setData, resetData, saveOrUpdate } = useData<Case>(
+    COLLECTION,
+    INIT_CASE
+  );
 
   useEffect(() => {
     if (!isNew && isLoaded(loadedData) && !isEmpty(loadedData))
@@ -77,16 +83,15 @@ export const EditCase: FunctionComponent<{}> = (props) => {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     try {
-      data.images = await handleSubmitFile();
-      if (isNew) {
-        await firestore.add(COLLECTION, data);
-      } else {
-        await firestore.update(`${COLLECTION}/${id}`, data);
-      }
-      dispatch(AddAlert({ message: "Success", color: "error" }));
+      // const images = await handleSubmitFile();
+      // console.log("data images");
+      // setData({ ...data, images });
+
+      const result = await saveOrUpdate();
+      const message = t(`case.messages.${result.isNew ? "new" : "update"}`);
+      dispatch(AddAlert({ message, color: "success" }));
       history.push(ADMIN_CASES_ROUTE.getPath());
     } catch (err) {
-      console.error(err);
       dispatch(AddAlert({ message: "Error", color: "error" }));
     }
   }
@@ -286,7 +291,13 @@ export const EditCase: FunctionComponent<{}> = (props) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <CaseBio data={data.bio} />
+            <CaseBio
+              data={data.bio}
+              onChange={(bio) => {
+                console.log("on change for bios", bio);
+                setData({ ...data, bio });
+              }}
+            />
           </Grid>
           <Zoom in={true}>
             <Grid item xs={6}>

@@ -232,6 +232,10 @@
           "title": "Archivos para la biografia",
           "message": "Seleccione o arrastre images o PDF"
         }
+      },
+      "messages": {
+        "new": "Caso creado correctamente",
+        "update": "Caso actualizado correctamente"
       }
     },
     "cases": {

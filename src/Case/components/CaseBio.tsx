@@ -18,22 +18,23 @@ import IconButton from "@material-ui/core/IconButton";
 import Divider from "@material-ui/core/Divider";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
-import { DatePicker, KeyboardDatePicker } from "@material-ui/pickers";
-
-import { AppFileManager } from "@core/components";
-import { CaseBio as ICaseBio } from "../models";
-import { INIT_CASE_BIO } from "../constants";
 import { Typography } from "@material-ui/core";
+import { KeyboardDatePicker } from "@material-ui/pickers";
+
+import { CollectionsConfig } from "@core/config";
+import { AppFileManager } from "@core/components";
+import { CaseBio as ICaseBio, CaseBioResults } from "../models";
+import { INIT_CASE_BIO } from "../constants";
 
 export interface CaseBioProps {
-  data: Array<ICaseBio> | undefined;
+  data: CaseBioResults | undefined;
   disabled?: boolean;
-  onChange?: (contacts: Array<ICaseBio>) => void;
+  onChange?: (bio: CaseBioResults) => void;
 }
 
 export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
   const { t } = useTranslation();
-  const [data, setData] = useState<Array<ICaseBio>>([]);
+  const [data, setData] = useState<CaseBioResults>([]);
 
   useEffect(() => {
     setData(props.data || []);
@@ -85,7 +86,7 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
       </Grid>
       <Grid item>
         <Tooltip title={t("case.bio.add")}>
-          <IconButton onClick={handleAdd}>
+          <IconButton onClick={handleAdd} disabled={props.disabled}>
             <AddIcon />
           </IconButton>
         </Tooltip>
@@ -101,7 +102,10 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
                   alignContent="flex-end"
                 >
                   <Tooltip title={t("case.bio.delete")}>
-                    <IconButton onClick={handleDelete(index)}>
+                    <IconButton
+                      onClick={handleDelete(index)}
+                      disabled={props.disabled}
+                    >
                       <RemoveIcon />
                     </IconButton>
                   </Tooltip>
@@ -132,6 +136,7 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
                       value={bio.date}
                       onChange={handleDateChange(index)}
                       style={{ marginTop: 0 }}
+                      disabled={props.disabled}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -150,7 +155,7 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
                       title={t("case.bio.upload.title")}
                       message={t("case.bio.upload.message")}
                       accept={["image/*", "application/pdf"]}
-                      collection={"blogs_test"}
+                      collection={CollectionsConfig.case}
                       files={bio.files}
                     />
                   </Grid>

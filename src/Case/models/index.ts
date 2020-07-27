@@ -22,6 +22,8 @@ export interface CaseBio {
   files?: Array<File>;
 }
 
+export type CaseBioResults = Array<CaseBio>;
+
 export interface Case extends Data {
   id?: string;
   type: CaseType;
@@ -35,7 +37,7 @@ export interface Case extends Data {
   start?: boolean;
   fosterHomeId: string;
   images?: Array<File>;
-  bio: Array<CaseBio>;
+  bio: CaseBioResults;
 }
 
 export type CaseResults = Array<Case>;
