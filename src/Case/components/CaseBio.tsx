@@ -131,6 +131,7 @@ export const CaseBio: FunctionComponent<CaseBioProps> = (props) => {
                       margin="normal"
                       value={bio.date}
                       onChange={handleDateChange(index)}
+                      style={{ marginTop: 0 }}
                     />
                   </Grid>
                   <Grid item xs={12}>
