@@ -3,6 +3,11 @@ import { useTranslation } from "react-i18next";
 
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import EmailIcon from "@material-ui/icons/Email";
+import MessageIcon from "@material-ui/icons/Message";
+import PhoneIcon from "@material-ui/icons/Phone";
 
 import { Screen } from "@core/wrappers";
 import { CollectionsConfig } from "@core/config";
@@ -21,20 +26,23 @@ export const DetailsContact: FunctionComponent<{}> = (props) => {
   return (
     <Screen t="contact" isLoaded={isLoaded} isEmpty={isEmpty}>
       <Container>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            Name: {data.name}
+        <Paper variant="outlined">
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <AccountBoxIcon /> Name: {data.name}
+            </Grid>
+            <Grid item xs={12}>
+              <EmailIcon /> Email:{" "}
+              <a href={`mailto:${data.email}`}>{data.email}</a>
+            </Grid>
+            <Grid item xs={12}>
+              <MessageIcon /> Phone: {data.phone}
+            </Grid>
+            <Grid item xs={12}>
+              <PhoneIcon /> Message: {data.message}
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            Email: {data.email}
-          </Grid>
-          <Grid item xs={12}>
-            Phone: {data.phone}
-          </Grid>
-          <Grid item xs={12}>
-            Message: {data.message}
-          </Grid>
-        </Grid>
+        </Paper>
       </Container>
     </Screen>
   );
