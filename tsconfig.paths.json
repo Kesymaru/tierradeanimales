@@ -2,9 +2,35 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@core/*": ["src/core/*"],
-      "@app/*": ["src/*"],
-      "@public/*": ["public/*"]
+      "@components": ["src/components/index"],
+      "@components/*": ["src/components/*"],
+
+      "@config": ["src/config/index"],
+      "@config/*": ["src/config/*"],
+
+      "@constants": ["src/constants/index"],
+      "@constants/*": ["src/constants/*"],
+
+      "@hooks": ["src/hooks/index"],
+      "@hooks/*": ["src/hooks/*"],
+
+      "@models": ["src/models/index"],
+      "@models/*": ["src/models/*"],
+
+      "@routes": ["src/routes/index"],
+      "@routes/*": ["src/routes/*"],
+
+      "@screens": ["src/screens/index"],
+      "@screens/*": ["src/screens/*"],
+
+      "@state": ["src/state/index"],
+      "@state/*": ["src/state/*"],
+
+      "@utils": ["src/utils/index"],
+      "@utils/*": ["src/utils/*"],
+
+      "@wrappers": ["src/wrappers/index"],
+      "@wrappers/*": ["src/wrappers/*"]
     }
   }
 }
