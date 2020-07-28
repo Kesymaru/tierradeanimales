@@ -2,11 +2,13 @@ import ContactsIcon from "@material-ui/icons/Contacts";
 
 import createRoute from "@utils/createRoute";
 import Route from "@models/route";
+import { AdminContacts, DetailsContact } from "@screens/contactUs";
 import { ADMIN_DASHBOARD_ROUTE } from "./dashboard";
-import { AdminContacts, DetailsContact } from "@screens";
+
+console.log("contact us component", AdminContacts);
 
 export const ADMIN_CONTACTS_ROUTE: Route = createRoute({
-  name: "Contacts",
+  name: "Contacts Us",
   path: `${ADMIN_DASHBOARD_ROUTE.path}/contacts`,
   auth: true,
   admin: true,
@@ -16,7 +18,7 @@ export const ADMIN_CONTACTS_ROUTE: Route = createRoute({
 });
 
 export const ADMIN_DETAILS_CONTACT_ROUTE: Route = createRoute({
-  name: "Contats Details",
+  name: "Contats Us Details",
   path: `${ADMIN_CONTACTS_ROUTE.path}/:id`,
   defaultParams: {},
   auth: true,

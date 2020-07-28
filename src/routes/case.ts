@@ -3,8 +3,8 @@ import EditIcon from "@material-ui/icons/Edit";
 
 import Route from "@models/route";
 import createRoute from "@utils/createRoute";
-import { ADMIN_DASHBOARD_ROUTE } from "@routes/dashboard";
-import { AdminCases, EditCase } from "@screens";
+import { AdminCases, EditCase } from "@screens/case";
+import { ADMIN_DASHBOARD_ROUTE } from "./dashboard";
 
 export const ADMIN_CASES_ROUTE: Route = createRoute({
   name: "Cases",

@@ -1,15 +1,10 @@
 import React, { FunctionComponent } from "react";
-import { useSelector } from "react-redux";
-import { useFirestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import Container from "@material-ui/core/Container";
-import Button from "@material-ui/core/Button";
 
-import AddIcon from "@material-ui/icons/Add";
-
-import { Screen } from "@wrappers";
+import Screen from "@wrappers/Screen";
 import { useData } from "@hooks";
 import { RouteParam } from "@models";
 import { CollectionsConfig } from "@config";
@@ -27,34 +22,6 @@ export const AdminCases: FunctionComponent<{}> = () => {
       onClick: edit,
     },
   ];
-
-  /* useFirestoreConnect({
-    collection: COLLECTION,
-  });
-  const data = useSelector<AppState, Array<Case>>((state) =>
-    get(state, `firestore.ordered.${COLLECTION}`)
-  );
-
-  if (!isLoaded(data)) return <AppLoading loading={true} />;
-  if (isLoaded(data) && isEmpty(data)) {
-    return (
-      <AppInfo
-        title={t("cases.errors.empty")}
-        message={t("cases.errors.emptyMessage")}
-        color="warning"
-      >
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => history.push(ADMIN_EDIT_CASE_ROUTE.getPath())}
-          startIcon={<AddIcon />}
-        >
-          {t("case.add")}
-        </Button>
-      </AppInfo>
-    );
-  } */
-
   const { data, isLoaded, isEmpty } = useData(CollectionsConfig.case, []);
 
   function edit(params?: RouteParam) {

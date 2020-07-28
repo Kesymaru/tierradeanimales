@@ -9,6 +9,8 @@ interface RouterProps {
 }
 
 const Router: FunctionComponent<RouterProps> = (props) => {
+  console.log("router", props);
+
   return (
     <Switch>
       {props.routes.map((route: Route, i: number) => (

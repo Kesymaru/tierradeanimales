@@ -5,11 +5,11 @@ import { isLoaded, isEmpty } from "react-redux-firebase";
 import get from "lodash/get";
 
 import { Route as AppRoute, AppState } from "@models";
-import { SIGN_IN_ROUTE, DASHBOARD_ROUTE } from "@routes";
+import { SIGN_IN_ROUTE, DASHBOARD_ROUTE, NOT_FOUND_ROUTE } from "@routes";
 
 interface RouteProps extends AppRoute {}
 
-const Route: FunctionComponent<RouteProps> = (route) => {
+const Route: FunctionComponent<RouteProps> = (route: AppRoute) => {
   const auth = useSelector<AppState, any>((state) => state.firebase.auth);
   const isAdmin = useSelector<AppState, boolean>(
     (state) => !!get(state, "firebase.profile.token.claims.admin", false)

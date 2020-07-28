@@ -1,6 +1,6 @@
 import Route from "@models/route";
 import createRoute from "@utils/createRoute";
-import ForgotPassword from "@screens/ForgotPassword";
+import ForgotPassword from "@screens/auth/ForgotPassword";
 
 // ------------------------------------
 // Forgot Password

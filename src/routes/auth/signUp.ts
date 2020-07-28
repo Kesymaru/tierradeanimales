@@ -1,6 +1,6 @@
 import Route from "@models/route";
 import createRoute from "@utils/createRoute";
-import SignUp from "@screens/SignUp";
+import SignUp from "@screens/auth/SignUp";
 
 // ------------------------------------
 // Sign Up
