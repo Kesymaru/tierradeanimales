@@ -4,7 +4,6 @@ import React, {
   FunctionComponent,
   MouseEvent,
   useEffect,
-  useState,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -43,13 +42,13 @@ import { AppState, Case, Sex, CaseStatus } from "@models";
 import { CollectionsConfig } from "@config";
 import { useId, useData } from "@hooks";
 import { AddAlert } from "@state/actions/alert";
-import { INIT_CASE } from "@constants";
+import INIT_CASE from "@constants/case";
 import { ADMIN_CASES_ROUTE } from "@routes/case";
 import { FosterHomeSelect, AppFileManager, CaseBio } from "@components";
 
 const { case: COLLECTION } = CollectionsConfig;
 
-export const EditCase: FunctionComponent<{}> = (props) => {
+export const EditCase: FunctionComponent<{}> = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { t } = useTranslation();

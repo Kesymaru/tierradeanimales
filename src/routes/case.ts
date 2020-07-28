@@ -4,7 +4,11 @@ import EditIcon from "@material-ui/icons/Edit";
 import Route from "@models/route";
 import createRoute from "@utils/createRoute";
 import { AdminCases, EditCase } from "@screens/case";
+// import AdminCases from "@screens/case/AdminCases";
+// import EditCase from "@screens/case/EditCase";
 import { ADMIN_DASHBOARD_ROUTE } from "./dashboard";
+
+console.log("components", AdminCases, EditCase);
 
 export const ADMIN_CASES_ROUTE: Route = createRoute({
   name: "Cases",

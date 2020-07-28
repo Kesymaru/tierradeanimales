@@ -12,9 +12,8 @@ import PhoneIcon from "@material-ui/icons/Phone";
 import { Screen } from "@wrappers";
 import { CollectionsConfig } from "@config";
 import { useData } from "@hooks";
-
-import { Contact } from "../models";
-import { INIT_CONTACT } from "../constants";
+import { Contact } from "@models";
+import { INIT_CONTACT } from "@constants";
 
 export const DetailsContact: FunctionComponent<{}> = (props) => {
   const { t } = useTranslation();
