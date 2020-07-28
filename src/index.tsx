@@ -9,9 +9,7 @@ import "./index.css";
 import "./i18n";
 import * as serviceWorker from "./serviceWorker";
 
-// import { App, AppStore, RrfProps } from "@/App";
-// import App from "@app/components/App";
-import { App } from "@components";
+import App from "@components/App";
 import { AppStore, RrfProps } from "@state";
 
 const AppRoot: FunctionComponent = () => (
