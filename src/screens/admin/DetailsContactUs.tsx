@@ -15,7 +15,7 @@ import { useData } from "@hooks";
 import { Contact } from "@models";
 import { INIT_CONTACT } from "@constants";
 
-export const DetailsContact: FunctionComponent<{}> = (props) => {
+export const DetailsContactUs: FunctionComponent<{}> = (props) => {
   const { t } = useTranslation();
   const { data, isLoaded, isEmpty } = useData<Contact>(
     CollectionsConfig.contact,
@@ -47,4 +47,4 @@ export const DetailsContact: FunctionComponent<{}> = (props) => {
   );
 };
 
-export default DetailsContact;
+export default DetailsContactUs;

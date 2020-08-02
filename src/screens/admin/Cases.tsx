@@ -9,10 +9,10 @@ import { useData } from "@hooks";
 import { RouteParam } from "@models";
 import { CollectionsConfig } from "@config";
 import { AppTable, TableButtons } from "@components";
-import { ADMIN_EDIT_CASE_ROUTE } from "@routes/case";
+import { EDIT_CASE_ROUTE } from "@routes/admin/cases";
 import { CASE_COLUMNS } from "@constants";
 
-export const AdminCases: FunctionComponent<{}> = () => {
+export const Cases: FunctionComponent<{}> = () => {
   const history = useHistory();
   const { t } = useTranslation();
   const buttons: TableButtons = [
@@ -25,7 +25,7 @@ export const AdminCases: FunctionComponent<{}> = () => {
   const { data, isLoaded, isEmpty } = useData(CollectionsConfig.case, []);
 
   function edit(params?: RouteParam) {
-    history.push(ADMIN_EDIT_CASE_ROUTE.getPath(params));
+    history.push(EDIT_CASE_ROUTE.getPath(params));
   }
 
   return (
@@ -43,4 +43,4 @@ export const AdminCases: FunctionComponent<{}> = () => {
   );
 };
 
-export default AdminCases;
+export default Cases;

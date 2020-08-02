@@ -16,7 +16,7 @@ import { Screen } from "@wrappers";
 import { useData } from "@hooks";
 import { CollectionsConfig } from "@config";
 import { Case, CaseResults } from "@models/case";
-import { ADOPT_DETAIL_ROUTE } from "@routes";
+import { DETAILS_ADOPT_ROUTE } from "@routes";
 
 export const Adopt: FunctionComponent = () => {
   const history = useHistory();
@@ -26,7 +26,7 @@ export const Adopt: FunctionComponent = () => {
   );
 
   function onSelect(item: Case) {
-    history.push(ADOPT_DETAIL_ROUTE.getPath({ id: item.id }));
+    history.push(DETAILS_ADOPT_ROUTE.getPath({ id: item.id }));
   }
 
   return (

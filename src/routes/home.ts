@@ -15,6 +15,4 @@ export const HOME_ROUTE: Route = createRoute({
   icon: HomeIcon,
 });
 
-export const HOME_ROUTES: Route[] = [HOME_ROUTE];
-
-export default HOME_ROUTES;
+export default HOME_ROUTE;

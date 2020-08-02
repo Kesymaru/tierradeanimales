@@ -6,10 +6,10 @@ import Screen from "@wrappers/Screen";
 import { CollectionsConfig } from "@config/firestore";
 import { AppTable } from "@components";
 import useData from "@hooks/useData";
-import { Newsletter } from "@models/newsletter";
+import { NewsletterResults } from "@models/newsletter";
 
-export const AdminNewsletter: FunctionComponent<{}> = (props) => {
-  const { data, isLoaded, isEmpty } = useData<Array<Newsletter>>(
+export const Newsletter: FunctionComponent<{}> = (props) => {
+  const { data, isLoaded, isEmpty } = useData<NewsletterResults>(
     CollectionsConfig.newsletter,
     []
   );
@@ -27,4 +27,4 @@ export const AdminNewsletter: FunctionComponent<{}> = (props) => {
   );
 };
 
-export default AdminNewsletter;
+export default Newsletter;

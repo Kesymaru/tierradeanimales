@@ -22,6 +22,8 @@ export interface Route {
   getName?: () => string;
 }
 
+export type Routes = Array<Route>;
+
 export interface CreateRoute extends Omit<Route, "getPath" | "exact" | "auth"> {
   exact?: boolean;
   auth?: boolean;

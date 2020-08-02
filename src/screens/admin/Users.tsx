@@ -14,7 +14,7 @@ import { AddAlert } from "@state/actions";
 import { TABLE_ACTIONS, USERS_COLUMNS } from "@constants";
 import { UsersResults, User } from "@models";
 
-export const AdminUsers: FunctionComponent = () => {
+export const Users: FunctionComponent = () => {
   const firebase = useFirebase() as any;
   const addAdmin = firebase.functions().httpsCallable("addAdmin") as Function;
   const dispatch = useDispatch();
@@ -83,4 +83,4 @@ export const AdminUsers: FunctionComponent = () => {
   );
 };
 
-export default AdminUsers;
+export default Users;

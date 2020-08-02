@@ -34,7 +34,7 @@ import CollectionsConfig from "@config/firestore";
 import AppState from "@models/store";
 import useId from "@hooks/useId";
 import FosterHome from "@models/fosterHome";
-import { FOSTER_HOMES_ROUTE, EDIT_FOSTER_HOME_ROUTE } from "@routes";
+import { FOSTER_HOMES_ROUTE, EDIT_FOSTER_HOME_ROUTE } from "@routes/admin";
 import INIT_HOME from "@constants/fosterHome";
 import { AppTitle, AppLoading, AppInfo } from "@components";
 import Address from "@components/Address";

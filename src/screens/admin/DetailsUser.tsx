@@ -11,7 +11,7 @@ import { AppState } from "@models";
 import { Screen } from "@wrappers";
 import { useAuth } from "@hooks";
 
-export const UserProfile: FunctionComponent<{}> = () => {
+export const DetailsUser: FunctionComponent<{}> = () => {
   const history = useHistory();
   const { t } = useTranslation();
   const { auth } = useAuth();
@@ -38,4 +38,4 @@ export const UserProfile: FunctionComponent<{}> = () => {
   );
 };
 
-export default UserProfile;
+export default DetailsUser;

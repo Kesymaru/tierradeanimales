@@ -7,6 +7,8 @@ export interface Newsletter {
   createdAt: firebase.firestore.FieldValue;
 }
 
+export type NewsletterResults = Array<Newsletter>;
+
 export interface NewsletterState {
   newsletters: Array<Newsletter>;
 }

@@ -43,7 +43,7 @@ import { CollectionsConfig } from "@config";
 import { useId, useData } from "@hooks";
 import { AddAlert } from "@state/actions/alert";
 import INIT_CASE from "@constants/case";
-import { ADMIN_CASES_ROUTE } from "@routes/case";
+import { CASES_ROUTE } from "@routes/admin/cases";
 import { FosterHomeSelect, AppFileManager, CaseBio } from "@components";
 
 const { case: COLLECTION } = CollectionsConfig;
@@ -84,7 +84,7 @@ export const EditCase: FunctionComponent<{}> = () => {
       const result = await saveOrUpdate();
       const message = t(`case.messages.${result.isNew ? "new" : "update"}`);
       dispatch(AddAlert({ message, color: "success" }));
-      history.push(ADMIN_CASES_ROUTE.getPath());
+      history.push(CASES_ROUTE.getPath());
     } catch (err) {
       dispatch(AddAlert({ message: "Error", color: "error" }));
     }

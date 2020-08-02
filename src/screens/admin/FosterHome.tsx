@@ -11,7 +11,7 @@ import { RouteParam } from "@models";
 import { Screen } from "@wrappers";
 import { useData } from "@hooks";
 import FosterHome from "@models/fosterHome";
-import { EDIT_FOSTER_HOME_ROUTE } from "@routes";
+import { EDIT_FOSTER_HOME_ROUTE } from "@routes/admin";
 
 const columns = [
   {

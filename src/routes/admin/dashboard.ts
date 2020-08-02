@@ -6,8 +6,9 @@ import Dashboard from "@screens/Dashboard";
 
 export const DASHBOARD_ROUTE: Route = createRoute({
   name: "Dashboard",
-  path: "/dashboard",
+  path: "/admin",
   auth: true,
+  admin: true,
   exact: true,
   component: Dashboard,
   icon: DashboardIcon,
